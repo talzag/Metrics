@@ -6,9 +6,12 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
+@import HealthKit;
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
+
+@property (strong) HKHealthStore *healthStore;
 
 @end
 
@@ -17,6 +20,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.healthStore = [[HKHealthStore alloc] init];
+    [self requestHealthSharingAuthorization];
+    
     return YES;
 }
 
@@ -47,5 +54,121 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)requestHealthSharingAuthorization {
+    [self.healthStore requestAuthorizationToShareTypes:nil
+                                             readTypes:[self healthTypesToRead]
+                                            completion:^(BOOL success, NSError * _Nullable error) {
+                                                if (!success) {
+                                                    NSLog(@"ERROR: %@", error.localizedDescription);
+                                                    abort();
+                                                }
+                                            }];
+}
+
+- (NSSet *)healthTypesToRead {
+    NSArray *types = @[
+                       // Body Measurements
+                       HKQuantityTypeIdentifierBodyMassIndex,
+                       HKQuantityTypeIdentifierBodyFatPercentage,
+                       HKQuantityTypeIdentifierHeight,
+                       HKQuantityTypeIdentifierBodyMass,
+                       HKQuantityTypeIdentifierLeanBodyMass,
+                       
+                       // Fitness
+                       HKQuantityTypeIdentifierStepCount,
+                       HKQuantityTypeIdentifierDistanceWalkingRunning,
+                       HKQuantityTypeIdentifierDistanceCycling,
+                       HKQuantityTypeIdentifierDistanceWheelchair,
+                       HKQuantityTypeIdentifierBasalEnergyBurned,
+                       HKQuantityTypeIdentifierActiveEnergyBurned,
+                       HKQuantityTypeIdentifierFlightsClimbed,
+                       HKQuantityTypeIdentifierNikeFuel,
+                       HKQuantityTypeIdentifierAppleExerciseTime,
+                       HKQuantityTypeIdentifierPushCount,
+                       HKQuantityTypeIdentifierDistanceSwimming,
+                       HKQuantityTypeIdentifierSwimmingStrokeCount,
+                       
+                       // Vitals
+                       HKQuantityTypeIdentifierHeartRate,
+                       HKQuantityTypeIdentifierBodyTemperature,
+                       HKQuantityTypeIdentifierBasalBodyTemperature,
+                       HKQuantityTypeIdentifierBloodPressureSystolic,
+                       HKQuantityTypeIdentifierBloodPressureDiastolic,
+                       HKQuantityTypeIdentifierRespiratoryRate,
+                       
+                       // Results
+                       HKQuantityTypeIdentifierOxygenSaturation,
+                       HKQuantityTypeIdentifierPeripheralPerfusionIndex,
+                       HKQuantityTypeIdentifierBloodGlucose,
+                       HKQuantityTypeIdentifierNumberOfTimesFallen,
+                       HKQuantityTypeIdentifierElectrodermalActivity,
+                       HKQuantityTypeIdentifierInhalerUsage,
+                       HKQuantityTypeIdentifierBloodAlcoholContent,
+                       HKQuantityTypeIdentifierForcedVitalCapacity, 
+                       HKQuantityTypeIdentifierForcedExpiratoryVolume1, 
+                       HKQuantityTypeIdentifierPeakExpiratoryFlowRate,
+                       
+                       // Nutrition
+                       HKQuantityTypeIdentifierDietaryFatTotal,
+                       HKQuantityTypeIdentifierDietaryFatPolyunsaturated,
+                       HKQuantityTypeIdentifierDietaryFatMonounsaturated,
+                       HKQuantityTypeIdentifierDietaryFatSaturated,
+                       HKQuantityTypeIdentifierDietaryCholesterol,
+                       HKQuantityTypeIdentifierDietarySodium,
+                       HKQuantityTypeIdentifierDietaryCarbohydrates,
+                       HKQuantityTypeIdentifierDietaryFiber,
+                       HKQuantityTypeIdentifierDietarySugar,
+                       HKQuantityTypeIdentifierDietaryEnergyConsumed,
+                       HKQuantityTypeIdentifierDietaryProtein,
+                       HKQuantityTypeIdentifierDietaryVitaminA,
+                       HKQuantityTypeIdentifierDietaryVitaminB6,
+                       HKQuantityTypeIdentifierDietaryVitaminB12,
+                       HKQuantityTypeIdentifierDietaryVitaminC,
+                       HKQuantityTypeIdentifierDietaryVitaminD,
+                       HKQuantityTypeIdentifierDietaryVitaminE,
+                       HKQuantityTypeIdentifierDietaryVitaminK,
+                       HKQuantityTypeIdentifierDietaryCalcium,
+                       HKQuantityTypeIdentifierDietaryIron,
+                       HKQuantityTypeIdentifierDietaryThiamin,
+                       HKQuantityTypeIdentifierDietaryRiboflavin,
+                       HKQuantityTypeIdentifierDietaryNiacin,
+                       HKQuantityTypeIdentifierDietaryFolate,
+                       HKQuantityTypeIdentifierDietaryBiotin,
+                       HKQuantityTypeIdentifierDietaryPantothenicAcid,
+                       HKQuantityTypeIdentifierDietaryPhosphorus,
+                       HKQuantityTypeIdentifierDietaryIodine,
+                       HKQuantityTypeIdentifierDietaryMagnesium,
+                       HKQuantityTypeIdentifierDietaryZinc,
+                       HKQuantityTypeIdentifierDietarySelenium,
+                       HKQuantityTypeIdentifierDietaryCopper,
+                       HKQuantityTypeIdentifierDietaryManganese,
+                       HKQuantityTypeIdentifierDietaryChromium,
+                       HKQuantityTypeIdentifierDietaryMolybdenum,
+                       HKQuantityTypeIdentifierDietaryChloride,
+                       HKQuantityTypeIdentifierDietaryPotassium,
+                       HKQuantityTypeIdentifierDietaryCaffeine,
+                       HKQuantityTypeIdentifierDietaryWater,
+                       HKQuantityTypeIdentifierUVExposure,
+                       HKQuantityTypeIdentifierDietaryEnergyConsumed,
+                       HKQuantityTypeIdentifierBasalEnergyBurned,
+                       HKQuantityTypeIdentifierActiveEnergyBurned
+                       
+//                       HKCategoryTypeIdentifierSleepAnalysis,
+//                       HKCategoryTypeIdentifierAppleStandHour,
+//                       HKCategoryTypeIdentifierCervicalMucusQuality,
+//                       HKCategoryTypeIdentifierOvulationTestResult,
+//                       HKCategoryTypeIdentifierMenstrualFlow,
+//                       HKCategoryTypeIdentifierIntermenstrualBleeding,
+//                       HKCategoryTypeIdentifierSexualActivity,
+//                       HKCategoryTypeIdentifierMindfulSession
+                       ];
+    
+    NSMutableSet *readTypes = [NSMutableSet set];
+    for (HKQuantityTypeIdentifier ident in types) {
+        [readTypes addObject:[HKObjectType quantityTypeForIdentifier:ident]];
+    }
+    
+    return [NSSet setWithSet:readTypes];
+}
 
 @end

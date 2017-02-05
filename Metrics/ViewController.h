@@ -6,9 +6,12 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import HealthKit;
+@import UIKit;
 
 @interface ViewController : UIViewController
+
+@property (strong) HKHealthStore *healthStore;
 
 
 @end

@@ -24,6 +24,13 @@
 		E3784BB61E46494E005F87BC /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784BB51E46494E005F87BC /* NotificationController.m */; };
 		E3784BB91E46494E005F87BC /* ComplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784BB81E46494E005F87BC /* ComplicationController.m */; };
 		E3784BBB1E46494E005F87BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3784BBA1E46494E005F87BC /* Assets.xcassets */; };
+		E3784BD21E466189005F87BC /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784BD11E466189005F87BC /* GraphView.m */; };
+		E3784BDC1E4684F8005F87BC /* MetricsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E3784BDA1E4684F8005F87BC /* MetricsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E3784BDF1E4684F8005F87BC /* MetricsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3784BD81E4684F8005F87BC /* MetricsKit.framework */; };
+		E3784BE01E4684F8005F87BC /* MetricsKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3784BD81E4684F8005F87BC /* MetricsKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E3784BE91E4684FD005F87BC /* MetricsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E3784BDA1E4684F8005F87BC /* MetricsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E3784BF61E46CF66005F87BC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3784BF51E46CF66005F87BC /* HealthKit.framework */; };
+		E3784BFA1E46D018005F87BC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3784BF91E46D018005F87BC /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +62,13 @@
 			remoteGlobalIDString = E3784BA61E46494E005F87BC;
 			remoteInfo = "Metrics WatchKit Extension";
 		};
+		E3784BDD1E4684F8005F87BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E3784B631E46494D005F87BC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E3784BD71E4684F8005F87BC;
+			remoteInfo = MetricsKit;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -78,6 +92,17 @@
 				E3784B991E46494E005F87BC /* Metrics WatchKit App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3784BE41E4684F8005F87BC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E3784BE01E4684F8005F87BC /* MetricsKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -115,6 +140,17 @@
 		E3784BB81E46494E005F87BC /* ComplicationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComplicationController.m; sourceTree = "<group>"; };
 		E3784BBA1E46494E005F87BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3784BBC1E46494E005F87BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3784BD01E466189005F87BC /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
+		E3784BD11E466189005F87BC /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
+		E3784BD81E4684F8005F87BC /* MetricsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MetricsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3784BDA1E4684F8005F87BC /* MetricsKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetricsKit.h; sourceTree = "<group>"; };
+		E3784BDB1E4684F8005F87BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3784BEE1E4684FD005F87BC /* MetricsKit watchOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "MetricsKit watchOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3784BEF1E4684FD005F87BC /* MetricsKit copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MetricsKit copy-Info.plist"; path = "/Users/dstrokis/Developer/Metrics/MetricsKit copy-Info.plist"; sourceTree = "<absolute>"; };
+		E3784BF51E46CF66005F87BC /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		E3784BF71E46CF66005F87BC /* Metrics.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Metrics.entitlements; sourceTree = "<group>"; };
+		E3784BF81E46D017005F87BC /* Metrics WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Metrics WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		E3784BF91E46D018005F87BC /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.1.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +158,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3784BDF1E4684F8005F87BC /* MetricsKit.framework in Frameworks */,
+				E3784BF61E46CF66005F87BC /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +181,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3784BFA1E46D018005F87BC /* HealthKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3784BD41E4684F8005F87BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3784BE71E4684FD005F87BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,7 +210,10 @@
 				E3784B921E46494E005F87BC /* MetricsUITests */,
 				E3784B9C1E46494E005F87BC /* Metrics WatchKit App */,
 				E3784BAB1E46494E005F87BC /* Metrics WatchKit Extension */,
+				E3784BD91E4684F8005F87BC /* MetricsKit */,
 				E3784B6C1E46494D005F87BC /* Products */,
+				E3784BEF1E4684FD005F87BC /* MetricsKit copy-Info.plist */,
+				E3784BF41E46CF66005F87BC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -169,6 +225,8 @@
 				E3784B8F1E46494E005F87BC /* MetricsUITests.xctest */,
 				E3784B981E46494E005F87BC /* Metrics WatchKit App.app */,
 				E3784BA71E46494E005F87BC /* Metrics WatchKit Extension.appex */,
+				E3784BD81E4684F8005F87BC /* MetricsKit.framework */,
+				E3784BEE1E4684FD005F87BC /* MetricsKit watchOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -176,11 +234,14 @@
 		E3784B6D1E46494D005F87BC /* Metrics */ = {
 			isa = PBXGroup;
 			children = (
+				E3784BF71E46CF66005F87BC /* Metrics.entitlements */,
 				E3784B711E46494D005F87BC /* AppDelegate.h */,
 				E3784B721E46494D005F87BC /* AppDelegate.m */,
 				E3784B741E46494D005F87BC /* ViewController.h */,
 				E3784B751E46494D005F87BC /* ViewController.m */,
 				E3784B771E46494D005F87BC /* Main.storyboard */,
+				E3784BD01E466189005F87BC /* GraphView.h */,
+				E3784BD11E466189005F87BC /* GraphView.m */,
 				E3784B7A1E46494D005F87BC /* Assets.xcassets */,
 				E3784B7C1E46494D005F87BC /* LaunchScreen.storyboard */,
 				E3784B7F1E46494D005F87BC /* Info.plist */,
@@ -228,6 +289,7 @@
 		E3784BAB1E46494E005F87BC /* Metrics WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				E3784BF81E46D017005F87BC /* Metrics WatchKit Extension.entitlements */,
 				E3784BAE1E46494E005F87BC /* InterfaceController.h */,
 				E3784BAF1E46494E005F87BC /* InterfaceController.m */,
 				E3784BB11E46494E005F87BC /* ExtensionDelegate.h */,
@@ -251,7 +313,44 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E3784BD91E4684F8005F87BC /* MetricsKit */ = {
+			isa = PBXGroup;
+			children = (
+				E3784BDA1E4684F8005F87BC /* MetricsKit.h */,
+				E3784BDB1E4684F8005F87BC /* Info.plist */,
+			);
+			path = MetricsKit;
+			sourceTree = "<group>";
+		};
+		E3784BF41E46CF66005F87BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E3784BF91E46D018005F87BC /* HealthKit.framework */,
+				E3784BF51E46CF66005F87BC /* HealthKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		E3784BD51E4684F8005F87BC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3784BDC1E4684F8005F87BC /* MetricsKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3784BE81E4684FD005F87BC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3784BE91E4684FD005F87BC /* MetricsKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		E3784B6A1E46494D005F87BC /* Metrics */ = {
@@ -262,11 +361,13 @@
 				E3784B681E46494D005F87BC /* Frameworks */,
 				E3784B691E46494D005F87BC /* Resources */,
 				E3784BC61E46494E005F87BC /* Embed Watch Content */,
+				E3784BE41E4684F8005F87BC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				E3784B9B1E46494E005F87BC /* PBXTargetDependency */,
+				E3784BDE1E4684F8005F87BC /* PBXTargetDependency */,
 			);
 			name = Metrics;
 			productName = Metrics;
@@ -343,6 +444,42 @@
 			productReference = E3784BA71E46494E005F87BC /* Metrics WatchKit Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
+		E3784BD71E4684F8005F87BC /* MetricsKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E3784BE11E4684F8005F87BC /* Build configuration list for PBXNativeTarget "MetricsKit" */;
+			buildPhases = (
+				E3784BD31E4684F8005F87BC /* Sources */,
+				E3784BD41E4684F8005F87BC /* Frameworks */,
+				E3784BD51E4684F8005F87BC /* Headers */,
+				E3784BD61E4684F8005F87BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MetricsKit;
+			productName = MetricsKit;
+			productReference = E3784BD81E4684F8005F87BC /* MetricsKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E3784BE51E4684FD005F87BC /* MetricsKit watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E3784BEB1E4684FD005F87BC /* Build configuration list for PBXNativeTarget "MetricsKit watchOS" */;
+			buildPhases = (
+				E3784BE61E4684FD005F87BC /* Sources */,
+				E3784BE71E4684FD005F87BC /* Frameworks */,
+				E3784BE81E4684FD005F87BC /* Headers */,
+				E3784BEA1E4684FD005F87BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MetricsKit watchOS";
+			productName = MetricsKit;
+			productReference = E3784BEE1E4684FD005F87BC /* MetricsKit watchOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -356,6 +493,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = SWP5WTP5JJ;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 					E3784B831E46494E005F87BC = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -378,6 +520,19 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = SWP5WTP5JJ;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.HealthKit.watchos = {
+								enabled = 1;
+							};
+						};
+					};
+					E3784BD71E4684F8005F87BC = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = SWP5WTP5JJ;
+						ProvisioningStyle = Automatic;
+					};
+					E3784BE51E4684FD005F87BC = {
+						DevelopmentTeam = SWP5WTP5JJ;
 					};
 				};
 			};
@@ -399,6 +554,8 @@
 				E3784B8E1E46494E005F87BC /* MetricsUITests */,
 				E3784B971E46494E005F87BC /* Metrics WatchKit App */,
 				E3784BA61E46494E005F87BC /* Metrics WatchKit Extension */,
+				E3784BD71E4684F8005F87BC /* MetricsKit */,
+				E3784BE51E4684FD005F87BC /* MetricsKit watchOS */,
 			);
 		};
 /* End PBXProject section */
@@ -445,6 +602,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E3784BD61E4684F8005F87BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3784BEA1E4684FD005F87BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -455,6 +626,7 @@
 				E3784B761E46494D005F87BC /* ViewController.m in Sources */,
 				E3784B731E46494D005F87BC /* AppDelegate.m in Sources */,
 				E3784B701E46494D005F87BC /* main.m in Sources */,
+				E3784BD21E466189005F87BC /* GraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +657,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E3784BD31E4684F8005F87BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3784BE61E4684FD005F87BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -507,6 +693,11 @@
 			isa = PBXTargetDependency;
 			target = E3784BA61E46494E005F87BC /* Metrics WatchKit Extension */;
 			targetProxy = E3784BA91E46494E005F87BC /* PBXContainerItemProxy */;
+		};
+		E3784BDE1E4684F8005F87BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E3784BD71E4684F8005F87BC /* MetricsKit */;
+			targetProxy = E3784BDD1E4684F8005F87BC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -630,6 +821,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "Metrics WatchKit Extension/Metrics WatchKit Extension.entitlements";
 				DEVELOPMENT_TEAM = SWP5WTP5JJ;
 				INFOPLIST_FILE = "Metrics WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -646,6 +838,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "Metrics WatchKit Extension/Metrics WatchKit Extension.entitlements";
 				DEVELOPMENT_TEAM = SWP5WTP5JJ;
 				INFOPLIST_FILE = "Metrics WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -694,11 +887,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = Metrics/Metrics.entitlements;
 				DEVELOPMENT_TEAM = SWP5WTP5JJ;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_PEDANTIC = YES;
 				INFOPLIST_FILE = Metrics/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.Metrics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 			};
 			name = Debug;
 		};
@@ -706,11 +906,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = Metrics/Metrics.entitlements;
 				DEVELOPMENT_TEAM = SWP5WTP5JJ;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_PEDANTIC = YES;
 				INFOPLIST_FILE = Metrics/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.Metrics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = NO;
 			};
 			name = Release;
 		};
@@ -761,6 +968,94 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.MetricsUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = Metrics;
+			};
+			name = Release;
+		};
+		E3784BE21E4684F8005F87BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = SWP5WTP5JJ;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = MetricsKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.MetricsKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E3784BE31E4684F8005F87BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = SWP5WTP5JJ;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = MetricsKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.MetricsKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E3784BEC1E4684FD005F87BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = SWP5WTP5JJ;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "MetricsKit copy-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.MetricsKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E3784BED1E4684FD005F87BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = SWP5WTP5JJ;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "MetricsKit copy-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.MetricsKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -815,6 +1110,23 @@
 				E3784BCF1E46494E005F87BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+		};
+		E3784BE11E4684F8005F87BC /* Build configuration list for PBXNativeTarget "MetricsKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E3784BE21E4684F8005F87BC /* Debug */,
+				E3784BE31E4684F8005F87BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E3784BEB1E4684FD005F87BC /* Build configuration list for PBXNativeTarget "MetricsKit watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E3784BEC1E4684FD005F87BC /* Debug */,
+				E3784BED1E4684FD005F87BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
