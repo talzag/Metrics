@@ -6,17 +6,19 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import "GraphView.h"
-IB_DESIGNABLE
+#import "MTSGraphView.h"
 
-@interface GraphView ()
+@interface MTSGraphView ()
 
 @property (nonatomic) BOOL needsDataPointsDisplay;
-@property (weak) IBOutlet UILabel *noDataPointsLabel;
+
+@property NSUInteger graphTopMargin;
+@property NSUInteger graphBottomMargin;
+@property NSUInteger graphLeftRightMargin;
 
 @end
 
-@implementation GraphView
+@implementation MTSGraphView
 
 - (instancetype)init {
     self = [super init];
@@ -25,7 +27,8 @@ IB_DESIGNABLE
         _bottomColor = [UIColor blueColor];
         _needsDataPointsDisplay = NO;
         _dataPoints = [NSArray array];
-        [_noDataPointsLabel setAlpha:1.0];
+        _graphTopMargin = _graphBottomMargin = 30.0;
+        _graphLeftRightMargin = 20.0;
     }
     return  self;
 }
@@ -37,7 +40,8 @@ IB_DESIGNABLE
         _bottomColor = [UIColor blueColor];
         _needsDataPointsDisplay = NO;
         _dataPoints = [NSArray array];
-        [_noDataPointsLabel setAlpha:1.0];
+        _graphTopMargin = _graphBottomMargin = 30.0;
+        _graphLeftRightMargin = 20.0;
     }
     return self;
 }
@@ -49,21 +53,19 @@ IB_DESIGNABLE
         _bottomColor = [UIColor blueColor];
         _needsDataPointsDisplay = NO;
         _dataPoints = [NSArray array];
-        [_noDataPointsLabel setAlpha:1.0];
+        _graphTopMargin = _graphBottomMargin = 30.0;
+        _graphLeftRightMargin = 20.0;
     }
     return self;
 }
 
-- (void)setDataPoints:(NSArray<NSNumber *> *)dataPoints {
+- (void)setDataPoints:(NSArray<NSArray<id> *> *)dataPoints {
     _dataPoints = dataPoints;
     
-    _needsDataPointsDisplay = [_dataPoints count] > 0;
+//    _needsDataPointsDisplay = [[_dataPoints objectForKey:@"x"] count] + [[_dataPoints objectForKey:@"y"] count] > 0;
     
-    UILabel *refNoDataPointsLabel = _noDataPointsLabel;
     if (_needsDataPointsDisplay) {
-        [refNoDataPointsLabel setAlpha:0.0];
-    } else {
-        [refNoDataPointsLabel setAlpha:1.0];
+        [self setNeedsDisplay];
     }
 }
 
@@ -86,27 +88,30 @@ IB_DESIGNABLE
     CGGradientRelease(gradient);
     
     if (!_needsDataPointsDisplay || [_dataPoints count] == 0) {
-        [_noDataPointsLabel setAlpha:0.0];
         return;
     }
     _needsDataPointsDisplay = NO;
     
+    
     [[UIColor whiteColor] set];
-    
-    UIBezierPath *linePath = [UIBezierPath bezierPath];
-    [linePath setLineWidth:3.0];
-    
-    CGPoint startingPoint = CGPointMake([self pointOnXAxisForColumn:0 inRect:rect],
-                                        [self pointOnYAxis:_dataPoints[0] inRect:rect]);
-    [linePath moveToPoint:startingPoint];
-    
-    for (int i = 1; i < [_dataPoints count]; i++) {
-        CGPoint point = CGPointMake([self pointOnXAxisForColumn:i inRect:rect],
-                                    [self pointOnYAxis:_dataPoints[i] inRect:rect]);
-        [linePath addLineToPoint:point];
+    for (NSArray *points in [self dataPoints]) {
+        UIBezierPath *path = [UIBezierPath bezierPath];
+        [path setLineWidth:3.0];
+        CGPoint startingPoint = CGPointMake([self pointOnXAxisForColumn:0 inRect:rect],
+                                            [self pointOnYAxis:points[0] inDataSet:points inRect:rect]);
+        [path moveToPoint:startingPoint];
+        
+        for (int i = 1; i < [points count]; i++) {
+            CGPoint point = CGPointMake([self pointOnXAxisForColumn:i inRect:rect],
+                                        [self pointOnYAxis:points[i] inDataSet:points inRect:rect]);
+            [path addLineToPoint:point];
+        }
+        [path stroke];
     }
-    
-    [linePath stroke];
+}
+
+- (CGFloat) xAxisColumnWidthForNumberOfDataPoints: (NSUInteger)numberOfDataPoints {
+    return (self.frame.size.width - ([self graphLeftRightMargin] * 2)) / numberOfDataPoints;
 }
 
 - (CGFloat)pointOnXAxisForColumn:(NSInteger)column inRect: (CGRect)rect {
@@ -122,7 +127,7 @@ IB_DESIGNABLE
     return point;
 }
 
-- (CGFloat)pointOnYAxis: (NSNumber *)point inRect: (CGRect)rect {
+- (CGFloat)pointOnYAxis: (NSNumber *)point inDataSet: (NSArray *)dataPoints inRect: (CGRect)rect {
     CGFloat scaledPoint;
     
     const CGFloat topBorder = 50.0;
@@ -130,14 +135,14 @@ IB_DESIGNABLE
     const CGFloat graphHeight = rect.size.height - topBorder - bottomBorder;
     
     NSNumber *maxPoint;
-    for (int i = 0; i < [_dataPoints count]; i++) {
-        NSNumber *num = _dataPoints[i];
+    for (int i = 0; i < [dataPoints count]; i++) {
+        NSNumber *num = dataPoints[i];
         if (i == 0) {
             maxPoint = num;
             continue;
         }
         
-        NSNumber *prev = _dataPoints[i - 1];
+        NSNumber *prev = dataPoints[i - 1];
         maxPoint = [prev compare:num] == NSOrderedAscending ? num : prev;
     }
     
