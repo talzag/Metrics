@@ -12,9 +12,9 @@
 
 @property (nonatomic) BOOL needsDataPointsDisplay;
 
-@property NSUInteger graphTopMargin;
-@property NSUInteger graphBottomMargin;
-@property NSUInteger graphLeftRightMargin;
+@property NSUInteger graphTopMarginPercent;
+@property NSUInteger graphBottomMarginPercent;
+@property NSUInteger graphLeftRightMarginPercent;
 
 @end
 
@@ -27,8 +27,8 @@
         _bottomColor = [UIColor blueColor];
         _needsDataPointsDisplay = NO;
         _dataPoints = [NSArray array];
-        _graphTopMargin = _graphBottomMargin = 30.0;
-        _graphLeftRightMargin = 20.0;
+        _graphTopMarginPercent = _graphBottomMarginPercent = 0.15;
+        _graphLeftRightMarginPercent = 0.05;
     }
     return  self;
 }
@@ -40,8 +40,8 @@
         _bottomColor = [UIColor blueColor];
         _needsDataPointsDisplay = NO;
         _dataPoints = [NSArray array];
-        _graphTopMargin = _graphBottomMargin = 30.0;
-        _graphLeftRightMargin = 20.0;
+        _graphTopMarginPercent = _graphBottomMarginPercent = 0.15;
+        _graphLeftRightMarginPercent = 0.05;
     }
     return self;
 }
@@ -53,8 +53,8 @@
         _bottomColor = [UIColor blueColor];
         _needsDataPointsDisplay = NO;
         _dataPoints = [NSArray array];
-        _graphTopMargin = _graphBottomMargin = 30.0;
-        _graphLeftRightMargin = 20.0;
+        _graphTopMarginPercent = _graphBottomMarginPercent = 0.15;
+        _graphLeftRightMarginPercent = 0.05;
     }
     return self;
 }
@@ -69,30 +69,45 @@
     }
 }
 
+- (void)drawBackgroundInRect:(CGRect)rect withContext:(CGContextRef)context {
+    if ([_topColor isEqual:_bottomColor] && ![_topColor isEqual:[UIColor clearColor]]) {
+        [_topColor setFill];
+        CGContextFillRect(context, rect);
+    } else {
+        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+        NSArray *colors = @[(id)[_topColor CGColor], (id)[_bottomColor CGColor]];
+        
+        CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)colors, NULL);
+        CGPoint startPoint = CGPointZero;
+        CGPoint endpoint = CGPointMake(0.0, rect.size.height);
+        
+        CGContextDrawLinearGradient(context, gradient, startPoint, endpoint, kCGGradientDrawsBeforeStartLocation);
+        
+        CGColorSpaceRelease(colorSpace);
+        CGGradientRelease(gradient);
+    }
+}
+
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
+    // Add rounded corners clip
     UIBezierPath *clipPath = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:25.0];
     [clipPath addClip];
     
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    NSArray *colors = @[(id)[_topColor CGColor], (id)[_bottomColor CGColor]];
+    // Draw gradient
+    CGContextSaveGState(context);
+    [self drawBackgroundInRect:rect withContext:context];
+    CGContextRestoreGState(context);
     
-    CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)colors, NULL);
-    CGPoint startPoint = CGPointZero;
-    CGPoint endpoint = CGPointMake(0.0, rect.size.height);
-    
-    CGContextDrawLinearGradient(context, gradient, startPoint, endpoint, kCGGradientDrawsBeforeStartLocation);
-    
-    CGColorSpaceRelease(colorSpace);
-    CGGradientRelease(gradient);
-    
+    // Return early if there's no points to plot
     if (!_needsDataPointsDisplay || [_dataPoints count] == 0) {
         return;
     }
     _needsDataPointsDisplay = NO;
     
-    
+    // Draw graph
+#pragma mark - TODO: Change to color of the lines
     [[UIColor whiteColor] set];
     for (NSArray *points in [self dataPoints]) {
         UIBezierPath *path = [UIBezierPath bezierPath];
@@ -111,7 +126,7 @@
 }
 
 - (CGFloat) xAxisColumnWidthForNumberOfDataPoints: (NSUInteger)numberOfDataPoints {
-    return (self.frame.size.width - ([self graphLeftRightMargin] * 2)) / numberOfDataPoints;
+    return (self.frame.size.width - ([self graphLeftRightMarginPercent] * 2)) / numberOfDataPoints;
 }
 
 - (CGFloat)pointOnXAxisForColumn:(NSInteger)column inRect: (CGRect)rect {
