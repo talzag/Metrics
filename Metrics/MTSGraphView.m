@@ -174,17 +174,41 @@
     CGFloat startX = [self actualGraphLeftRightMargin];
     CGFloat endX = rect.size.width - [self actualGraphLeftRightMargin];
 
-    [linePath moveToPoint:CGPointMake(startX, self.actualGraphTopMargin)];
-    [linePath moveToPoint:CGPointMake(endX, self.actualGraphTopMargin)];
+    // Draw main lines
+    CGPoint topStartPoint = CGPointMake(startX, self.actualGraphTopMargin);
+    CGPoint topEndPoint = CGPointMake(endX, self.actualGraphTopMargin);
+    [linePath moveToPoint:topStartPoint];
+    [linePath addLineToPoint:topEndPoint];
     
-    [linePath moveToPoint:CGPointMake(startX, rect.size.height / 2.0)];
-    [linePath moveToPoint:CGPointMake(endX, rect.size.height / 2.0)];
+    CGPoint midStartPoint = CGPointMake(startX, rect.size.height / 2.0);
+    CGPoint midEndPoint = CGPointMake(endX, rect.size.height / 2.0);
+    [linePath moveToPoint:midStartPoint];
+    [linePath addLineToPoint:midEndPoint];
     
-    [linePath moveToPoint:CGPointMake(startX, self.actualGraphBottomMargin)];
-    [linePath moveToPoint:CGPointMake(endX, self.actualGraphBottomMargin)];
+    
+    CGPoint bottomStartPoint = CGPointMake(startX, self.actualGraphBottomMargin);
+    CGPoint bottomEndPoint = CGPointMake(endX, self.actualGraphBottomMargin);
+    [linePath moveToPoint:bottomStartPoint];
+    [linePath addLineToPoint:bottomEndPoint];
     
     [[UIColor colorWithWhite:1.0 alpha:0.5] setStroke];
     [linePath setLineWidth:1.0];
+    [linePath stroke];
+    
+    
+    // Draw intermediate lines
+    CGPoint upperIntermediateStartPoint = CGPointMake(startX, (self.actualGraphTopMargin - midStartPoint.y) / 2.0);
+    CGPoint upperIntermediateEndPoint = CGPointMake(endX, (self.actualGraphTopMargin - midStartPoint.y) / 2.0);
+    [linePath moveToPoint:upperIntermediateStartPoint];
+    [linePath addLineToPoint:upperIntermediateEndPoint];
+    
+    CGPoint lowerIntermediateStartPoint = CGPointMake(startX, (midStartPoint.y - self.actualGraphBottomMargin) / 2.0);
+    CGPoint lowerIntermediateEndPoint = CGPointMake(endX, (midStartPoint.y - self.actualGraphBottomMargin) / 2.0);
+    [linePath moveToPoint:lowerIntermediateStartPoint];
+    [linePath addLineToPoint:lowerIntermediateEndPoint];
+    
+    const CGFloat dashes[] = { 5.0, 5.0 };
+    [linePath setLineDash:dashes count:2 phase:0];
     [linePath stroke];
 }
 
@@ -206,11 +230,12 @@
     }
     _needsDataPointsDisplay = NO;
     
+    // Draw graph lines
     CGContextSaveGState(context);
     [self drawGraphLinesinRect:rect withContext:context];
     CGContextRestoreGState(context);
     
-    // Draw graph
+    // Plot data points
     CGContextSaveGState(context);
     [self plotDataPoints:_dataPoints onGraphInRect:rect withContext:context];
     CGContextRestoreGState(context);
