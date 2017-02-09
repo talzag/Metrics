@@ -16,6 +16,10 @@
 @property NSUInteger graphBottomMarginPercent;
 @property NSUInteger graphLeftRightMarginPercent;
 
+@property (readonly) CGFloat actualGraphTopMargin;
+@property (readonly) CGFloat actualGraphBottomMargin;
+@property (readonly) CGFloat actualGraphLeftRightMargin;
+
 @end
 
 @implementation MTSGraphView
@@ -62,11 +66,23 @@
 - (void)setDataPoints:(NSArray<NSArray<id> *> *)dataPoints {
     _dataPoints = dataPoints;
     
-//    _needsDataPointsDisplay = [[_dataPoints objectForKey:@"x"] count] + [[_dataPoints objectForKey:@"y"] count] > 0;
+    _needsDataPointsDisplay = [_dataPoints count] > 0;
     
     if (_needsDataPointsDisplay) {
         [self setNeedsDisplay];
     }
+}
+
+- (CGFloat)actualGraphTopMargin {
+    return self.bounds.size.height * _graphTopMarginPercent;
+}
+
+- (CGFloat)actualGraphBottomMargin {
+    return self.bounds.size.height * _graphBottomMarginPercent;
+}
+
+- (CGFloat)actualGraphLeftRightMargin {
+    return self.bounds.size.width * _graphLeftRightMarginPercent;
 }
 
 - (void)drawBackgroundInRect:(CGRect)rect withContext:(CGContextRef)context {
@@ -88,43 +104,7 @@
     }
 }
 
-- (void)drawRect:(CGRect)rect {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    // Add rounded corners clip
-    UIBezierPath *clipPath = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:25.0];
-    [clipPath addClip];
-    
-    // Draw gradient
-    CGContextSaveGState(context);
-    [self drawBackgroundInRect:rect withContext:context];
-    CGContextRestoreGState(context);
-    
-    // Return early if there's no points to plot
-    if (!_needsDataPointsDisplay || [_dataPoints count] == 0) {
-        return;
-    }
-    _needsDataPointsDisplay = NO;
-    
-    // Draw graph
-#pragma mark - TODO: Change to color of the lines
-    [[UIColor whiteColor] set];
-    for (NSArray *points in [self dataPoints]) {
-        UIBezierPath *path = [UIBezierPath bezierPath];
-        [path setLineWidth:3.0];
-        CGPoint startingPoint = CGPointMake([self pointOnXAxisForColumn:0 inRect:rect],
-                                            [self pointOnYAxis:points[0] inDataSet:points inRect:rect]);
-        [path moveToPoint:startingPoint];
-        
-        for (int i = 1; i < [points count]; i++) {
-            CGPoint point = CGPointMake([self pointOnXAxisForColumn:i inRect:rect],
-                                        [self pointOnYAxis:points[i] inDataSet:points inRect:rect]);
-            [path addLineToPoint:point];
-        }
-        [path stroke];
-    }
-}
-
+/*
 - (CGFloat) xAxisColumnWidthForNumberOfDataPoints: (NSUInteger)numberOfDataPoints {
     return (self.frame.size.width - ([self graphLeftRightMarginPercent] * 2)) / numberOfDataPoints;
 }
@@ -165,6 +145,75 @@
     scaledPoint = graphHeight + topBorder - scaledPoint;
     
     return scaledPoint;
+}
+*/
+
+- (void)plotDataPoints:(NSArray *)dataPoints onGraphInRect:(CGRect)rect withContext:(CGContextRef)context {
+
+//    for (NSArray *points in dataPoints) {
+//        UIBezierPath *path = [UIBezierPath bezierPath];
+//        [path setLineWidth:3.0];
+//        
+//        CGPoint startingPoint = CGPointMake([self pointOnXAxisForColumn:0 inRect:rect],
+//                                            [self pointOnYAxis:points[0] inDataSet:points inRect:rect]);
+//        [path moveToPoint:startingPoint];
+//        
+//        for (int i = 1; i < [points count]; i++) {
+//            CGPoint point = CGPointMake([self pointOnXAxisForColumn:i inRect:rect],
+//                                        [self pointOnYAxis:points[i] inDataSet:points inRect:rect]);
+//            [path addLineToPoint:point];
+//        }
+//        
+//        [path stroke];
+//    }
+}
+
+- (void)drawGraphLinesinRect:(CGRect)rect withContext:(CGContextRef)context {
+    UIBezierPath *linePath = [UIBezierPath bezierPath];
+    
+    CGFloat startX = [self actualGraphLeftRightMargin];
+    CGFloat endX = rect.size.width - [self actualGraphLeftRightMargin];
+
+    [linePath moveToPoint:CGPointMake(startX, self.actualGraphTopMargin)];
+    [linePath moveToPoint:CGPointMake(endX, self.actualGraphTopMargin)];
+    
+    [linePath moveToPoint:CGPointMake(startX, rect.size.height / 2.0)];
+    [linePath moveToPoint:CGPointMake(endX, rect.size.height / 2.0)];
+    
+    [linePath moveToPoint:CGPointMake(startX, self.actualGraphBottomMargin)];
+    [linePath moveToPoint:CGPointMake(endX, self.actualGraphBottomMargin)];
+    
+    [[UIColor colorWithWhite:1.0 alpha:0.5] setStroke];
+    [linePath setLineWidth:1.0];
+    [linePath stroke];
+}
+
+- (void)drawRect:(CGRect)rect {
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // Add rounded corners clip
+    UIBezierPath *clipPath = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:25.0];
+    [clipPath addClip];
+    
+    // Draw gradient
+    CGContextSaveGState(context);
+    [self drawBackgroundInRect:rect withContext:context];
+    CGContextRestoreGState(context);
+    
+    // Return early if there's no points to plot
+    if (!_needsDataPointsDisplay || [_dataPoints count] == 0) {
+        return;
+    }
+    _needsDataPointsDisplay = NO;
+    
+    CGContextSaveGState(context);
+    [self drawGraphLinesinRect:rect withContext:context];
+    CGContextRestoreGState(context);
+    
+    // Draw graph
+    CGContextSaveGState(context);
+    [self plotDataPoints:_dataPoints onGraphInRect:rect withContext:context];
+    CGContextRestoreGState(context);
 }
 
 @end
