@@ -7,6 +7,7 @@
 //
 
 #import "MTSGraphView.h"
+#import "MTSGraph.h"
 
 @interface MTSGraphView ()
 
@@ -16,6 +17,8 @@
 @property (nonatomic) CGFloat graphBottomMarginPercent;
 @property (nonatomic) CGFloat graphLeftRightMarginPercent;
 
+@property (readonly) CGFloat actualGraphHeight;
+@property (readonly) CGFloat actualGraphWidth;
 @property (readonly) CGFloat actualGraphTopMargin;
 @property (readonly) CGFloat actualGraphBottomMargin;
 @property (readonly) CGFloat actualGraphLeftRightMargin;
@@ -88,6 +91,14 @@
     return self.bounds.size.width * _graphLeftRightMarginPercent;
 }
 
+- (CGFloat)actualGraphHeight {
+    return self.bounds.size.height - self.actualGraphBottomMargin;
+}
+
+- (CGFloat)actualGraphWidth {
+    return self.bounds.size.width - self.actualGraphLeftRightMargin * 2.0;
+}
+
 - (void)drawBackgroundInRect:(CGRect)rect withContext:(CGContextRef)context {
     if ([_topColor isEqual:_bottomColor] && ![_topColor isEqual:[UIColor clearColor]]) {
         [_topColor setFill];
@@ -107,26 +118,59 @@
     }
 }
 
-- (void)plotDataPoints:(NSArray *)dataPoints onGraphInRect:(CGRect)rect withContext:(CGContextRef)context {
-    
-    
+- (CGFloat)columnWidthForArraySize:(NSInteger)numberOfElements {
+    CGFloat graphWidth = self.bounds.size.width - self.actualGraphLeftRightMargin * 2.0;
+    numberOfElements--;
+    return graphWidth / numberOfElements;
+}
 
-//    for (NSArray *points in dataPoints) {
-//        UIBezierPath *path = [UIBezierPath bezierPath];
-//        [path setLineWidth:3.0];
-//        
-//        CGPoint startingPoint = CGPointMake([self pointOnXAxisForColumn:0 inRect:rect],
-//                                            [self pointOnYAxis:points[0] inDataSet:points inRect:rect]);
-//        [path moveToPoint:startingPoint];
-//        
-//        for (int i = 1; i < [points count]; i++) {
-//            CGPoint point = CGPointMake([self pointOnXAxisForColumn:i inRect:rect],
-//                                        [self pointOnYAxis:points[i] inDataSet:points inRect:rect]);
-//            [path addLineToPoint:point];
-//        }
-//        
-//        [path stroke];
-//    }
+- (CGFloat)positionOnXAxisForValueAtIndex:(int)index fromArrayOfSize:(NSInteger)size {
+    return [self columnWidthForArraySize:size] * index + self.actualGraphLeftRightMargin;
+}
+
+- (CGFloat)positionOnYAxisForValue:(CGFloat)value scaledForMaxValue:(CGFloat)maxValue {
+    CGFloat height = self.actualGraphHeight - self.actualGraphTopMargin;
+    CGFloat ratio = value / maxValue;
+    return self.actualGraphHeight - ratio * height;
+}
+
+- (void)plotDataPoints:(NSArray<NSDictionary<NSString *,id> *> *)dataPoints onGraphInRect:(CGRect)rect withContext:(CGContextRef)context {
+    CGFloat maxValue = 0.0;
+    for (NSDictionary <NSString *, id> *data in dataPoints) {
+        NSArray *values = [data objectForKey:MTSGraphDataPointsKey];
+        for (NSNumber *value in values) {
+            double floatValue = [value doubleValue];
+            maxValue = floatValue > maxValue ? floatValue : maxValue;
+        }
+    }
+    
+    
+    UIBezierPath *graphLine = [UIBezierPath bezierPath];
+    graphLine.lineWidth = 2.0;
+    
+    for (NSDictionary <NSString *, id> *data in dataPoints) {
+        NSArray *values = [data objectForKey:MTSGraphDataPointsKey];
+        UIColor *lineColor = [data objectForKey:MTSGraphLineColorKey];
+        
+        NSInteger size = values.count;
+        CGFloat startX = [self positionOnXAxisForValueAtIndex:0 fromArrayOfSize:size];
+        CGFloat startY = [self positionOnYAxisForValue:[[values firstObject] doubleValue] scaledForMaxValue:maxValue];
+        CGPoint startingPoint = CGPointMake(startX, startY);
+        [graphLine moveToPoint:startingPoint];
+        
+        for (int i = 1; i < size; i++) {
+            CGFloat x = [self positionOnXAxisForValueAtIndex:i fromArrayOfSize:size];
+            CGFloat y = [self positionOnYAxisForValue:[values[i] doubleValue] scaledForMaxValue:maxValue];
+            CGPoint point = CGPointMake(x, y);
+            [graphLine addLineToPoint:point];
+        }
+        
+        
+        [lineColor setStroke];
+        [graphLine stroke];
+        
+        [graphLine removeAllPoints];
+    }
 }
 
 - (void)drawGraphLinesinRect:(CGRect)rect withContext:(CGContextRef)context {

@@ -31,6 +31,7 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
                          MTSGraphLineColorKey: [UIColor whiteColor],
                          MTSGraphDataPointsKey: [NSArray arrayWithObjects: @25, @50, @75, @100, @50, @63, @42, nil]
                          };
+    
     self.graphs = [NSArray arrayWithObject:graph];
 }
 
@@ -58,7 +59,14 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
     cell.graphView.titleLabel.text = graph.title;
     cell.graphView.xAxisTitle = graph.xAxisTitle;
     cell.graphView.yAxisTitle = graph.yAxisTitle;
-    cell.graphView.dataPoints = @[graph.dataPoints];
+    cell.graphView.dataPoints = @[@{
+                                      MTSGraphLineColorKey: [UIColor whiteColor],
+                                      MTSGraphDataPointsKey: [NSArray arrayWithObjects: @25, @50, @75, @100, @50, @63, @42, nil]
+                                  },@{
+                                      MTSGraphLineColorKey: [UIColor greenColor],
+                                      MTSGraphDataPointsKey: [NSArray arrayWithObjects: @12, @85, @37, @2, @74, @3, @78, nil]
+                                  }]
+    ;
     cell.graphView.topColor = [UIColor orangeColor];
     cell.graphView.bottomColor = [UIColor redColor];
     
