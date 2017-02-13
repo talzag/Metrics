@@ -12,9 +12,9 @@
 
 @property (nonatomic) BOOL needsDataPointsDisplay;
 
-@property NSUInteger graphTopMarginPercent;
-@property NSUInteger graphBottomMarginPercent;
-@property NSUInteger graphLeftRightMarginPercent;
+@property (nonatomic) CGFloat graphTopMarginPercent;
+@property (nonatomic) CGFloat graphBottomMarginPercent;
+@property (nonatomic) CGFloat graphLeftRightMarginPercent;
 
 @property (readonly) CGFloat actualGraphTopMargin;
 @property (readonly) CGFloat actualGraphBottomMargin;
@@ -33,6 +33,7 @@
         _dataPoints = [NSArray array];
         _graphTopMarginPercent = _graphBottomMarginPercent = 0.15;
         _graphLeftRightMarginPercent = 0.05;
+        _drawIntermediateLines = YES;
     }
     return  self;
 }
@@ -46,6 +47,7 @@
         _dataPoints = [NSArray array];
         _graphTopMarginPercent = _graphBottomMarginPercent = 0.15;
         _graphLeftRightMarginPercent = 0.05;
+        _drawIntermediateLines = YES;
     }
     return self;
 }
@@ -59,11 +61,12 @@
         _dataPoints = [NSArray array];
         _graphTopMarginPercent = _graphBottomMarginPercent = 0.15;
         _graphLeftRightMarginPercent = 0.05;
+        _drawIntermediateLines = YES;
     }
     return self;
 }
 
-- (void)setDataPoints:(NSArray<NSArray<id> *> *)dataPoints {
+- (void)setDataPoints:(NSArray<NSDictionary<NSString *,id> *> *)dataPoints {
     _dataPoints = dataPoints;
     
     _needsDataPointsDisplay = [_dataPoints count] > 0;
@@ -104,51 +107,9 @@
     }
 }
 
-/*
-- (CGFloat) xAxisColumnWidthForNumberOfDataPoints: (NSUInteger)numberOfDataPoints {
-    return (self.frame.size.width - ([self graphLeftRightMarginPercent] * 2)) / numberOfDataPoints;
-}
-
-- (CGFloat)pointOnXAxisForColumn:(NSInteger)column inRect: (CGRect)rect {
-    CGFloat point;
-    
-    const CGFloat margin = 20.0;
-    
-    CGFloat spacer = rect.size.width - (margin * 2.0 - 4);
-    spacer /= [_dataPoints count] - 1;
-    point = spacer * column;
-    point += margin + 2.0;
-    
-    return point;
-}
-
-- (CGFloat)pointOnYAxis: (NSNumber *)point inDataSet: (NSArray *)dataPoints inRect: (CGRect)rect {
-    CGFloat scaledPoint;
-    
-    const CGFloat topBorder = 50.0;
-    const CGFloat bottomBorder = 50.0;
-    const CGFloat graphHeight = rect.size.height - topBorder - bottomBorder;
-    
-    NSNumber *maxPoint;
-    for (int i = 0; i < [dataPoints count]; i++) {
-        NSNumber *num = dataPoints[i];
-        if (i == 0) {
-            maxPoint = num;
-            continue;
-        }
-        
-        NSNumber *prev = dataPoints[i - 1];
-        maxPoint = [prev compare:num] == NSOrderedAscending ? num : prev;
-    }
-    
-    scaledPoint = [point doubleValue] / [maxPoint doubleValue] * graphHeight;
-    scaledPoint = graphHeight + topBorder - scaledPoint;
-    
-    return scaledPoint;
-}
-*/
-
 - (void)plotDataPoints:(NSArray *)dataPoints onGraphInRect:(CGRect)rect withContext:(CGContextRef)context {
+    
+    
 
 //    for (NSArray *points in dataPoints) {
 //        UIBezierPath *path = [UIBezierPath bezierPath];
@@ -170,6 +131,8 @@
 
 - (void)drawGraphLinesinRect:(CGRect)rect withContext:(CGContextRef)context {
     UIBezierPath *linePath = [UIBezierPath bezierPath];
+    [linePath setLineWidth:1.0];
+    [[UIColor whiteColor] setStroke];
     
     CGFloat startX = [self actualGraphLeftRightMargin];
     CGFloat endX = rect.size.width - [self actualGraphLeftRightMargin];
@@ -185,29 +148,32 @@
     [linePath moveToPoint:midStartPoint];
     [linePath addLineToPoint:midEndPoint];
     
-    
-    CGPoint bottomStartPoint = CGPointMake(startX, self.actualGraphBottomMargin);
-    CGPoint bottomEndPoint = CGPointMake(endX, self.actualGraphBottomMargin);
+    CGPoint bottomStartPoint = CGPointMake(startX, rect.size.height - self.actualGraphBottomMargin);
+    CGPoint bottomEndPoint = CGPointMake(endX, rect.size.height - self.actualGraphBottomMargin);
     [linePath moveToPoint:bottomStartPoint];
     [linePath addLineToPoint:bottomEndPoint];
     
-    [[UIColor colorWithWhite:1.0 alpha:0.5] setStroke];
-    [linePath setLineWidth:1.0];
     [linePath stroke];
     
+    if (!self.drawIntermediateLines) {
+        return;
+    }
     
     // Draw intermediate lines
-    CGPoint upperIntermediateStartPoint = CGPointMake(startX, (self.actualGraphTopMargin - midStartPoint.y) / 2.0);
-    CGPoint upperIntermediateEndPoint = CGPointMake(endX, (self.actualGraphTopMargin - midStartPoint.y) / 2.0);
+    CGFloat upperMidY = midStartPoint.y * 0.5 + self.actualGraphTopMargin / 2.0;
+    CGPoint upperIntermediateStartPoint = CGPointMake(startX, upperMidY);
+    CGPoint upperIntermediateEndPoint = CGPointMake(endX, upperMidY);
     [linePath moveToPoint:upperIntermediateStartPoint];
     [linePath addLineToPoint:upperIntermediateEndPoint];
     
-    CGPoint lowerIntermediateStartPoint = CGPointMake(startX, (midStartPoint.y - self.actualGraphBottomMargin) / 2.0);
-    CGPoint lowerIntermediateEndPoint = CGPointMake(endX, (midStartPoint.y - self.actualGraphBottomMargin) / 2.0);
+    CGFloat lowerMidY = midStartPoint.y * 1.5 - self.actualGraphTopMargin / 2.0;
+    CGPoint lowerIntermediateStartPoint = CGPointMake(startX, lowerMidY);
+    CGPoint lowerIntermediateEndPoint = CGPointMake(endX, lowerMidY);
     [linePath moveToPoint:lowerIntermediateStartPoint];
     [linePath addLineToPoint:lowerIntermediateEndPoint];
     
-    const CGFloat dashes[] = { 5.0, 5.0 };
+    [[UIColor colorWithWhite:1.0 alpha:0.65] setStroke];
+    const CGFloat dashes[] = { 6.0, 5.0 };
     [linePath setLineDash:dashes count:2 phase:0];
     [linePath stroke];
 }
@@ -224,16 +190,17 @@
     [self drawBackgroundInRect:rect withContext:context];
     CGContextRestoreGState(context);
     
+    // Draw graph lines
+    CGContextSaveGState(context);
+    [self drawGraphLinesinRect:rect withContext:context];
+    CGContextRestoreGState(context);
+    
     // Return early if there's no points to plot
     if (!_needsDataPointsDisplay || [_dataPoints count] == 0) {
         return;
     }
     _needsDataPointsDisplay = NO;
     
-    // Draw graph lines
-    CGContextSaveGState(context);
-    [self drawGraphLinesinRect:rect withContext:context];
-    CGContextRestoreGState(context);
     
     // Plot data points
     CGContextSaveGState(context);

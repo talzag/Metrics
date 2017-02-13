@@ -11,6 +11,6 @@
 
 @interface MTSGraphCollectionViewCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet MTSGraphView *graphView;
+@property (nonatomic) IBOutlet MTSGraphView *graphView;
 
 @end

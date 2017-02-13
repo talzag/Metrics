@@ -8,21 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *MTSGraphLineColorKey;
+extern NSString *MTSGraphDataPointsKey;
+
 @interface MTSGraph : NSObject
 
 @property NSString *title;
+@property NSString *xAxisTitle;
+@property NSString *yAxisTitle;
+@property NSString *xAxisLabels;
 @property NSDictionary <NSString *, id>*dataPoints;
-
-/*
- Data compared over time, in this case across a week
- 
- @"y": @["M", "T", "W", "T", "F"]
- 
- Data set 1:
- @"x1": @[ 5,   1,   2,   3,   1]
- 
- Data set 2:
- @"x2": @[ 1,   1,   2,   3,   5]
- */
 
 @end

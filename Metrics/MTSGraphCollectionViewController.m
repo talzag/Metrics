@@ -23,10 +23,15 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Register cell classes
-    [self.collectionView registerClass:[MTSGraphCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
-    // Do any additional setup after loading the view.
+    MTSGraph *graph = [MTSGraph new];
+    graph.title = @"Test graph";
+    graph.xAxisTitle = @"X Axis";
+    graph.yAxisTitle = @"Y Axis";
+    graph.dataPoints = @{
+                         MTSGraphLineColorKey: [UIColor whiteColor],
+                         MTSGraphDataPointsKey: [NSArray arrayWithObjects: @25, @50, @75, @100, @50, @63, @42, nil]
+                         };
+    self.graphs = [NSArray arrayWithObject:graph];
 }
 
 #pragma mark - Navigation
@@ -50,7 +55,12 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
     MTSGraphCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     MTSGraph *graph = [self.graphs objectAtIndex:[indexPath row]];
-    [cell.graphView.titleLabel setText:[graph title]];
+    cell.graphView.titleLabel.text = graph.title;
+    cell.graphView.xAxisTitle = graph.xAxisTitle;
+    cell.graphView.yAxisTitle = graph.yAxisTitle;
+    cell.graphView.dataPoints = @[graph.dataPoints];
+    cell.graphView.topColor = [UIColor orangeColor];
+    cell.graphView.bottomColor = [UIColor redColor];
     
     return cell;
 }
@@ -71,35 +81,35 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
 }
 */
 
-#pragma mark HealthKit
-
-- (void)queryHealthStore:(HKHealthStore * _Nonnull)healthStore
-         forQuantityType:(HKQuantityTypeIdentifier _Nonnull)typeIdentifier
-                fromDate:(NSDate * _Nonnull)startDate
-                  toDate:(NSDate * _Nonnull)endDate
-  usingCompletionHandler:(void (^)(NSArray <HKSample *>*samples)) completionHandler {
-    NSPredicate *predicate = [HKSampleQuery predicateForSamplesWithStartDate:startDate
-                                                                     endDate:endDate
-                                                                     options:HKQueryOptionStrictEndDate];
-
-    HKSampleType *sampleType = [HKSampleType quantityTypeForIdentifier:typeIdentifier];
-
-    HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:sampleType
-                                                           predicate:predicate
-                                                               limit:HKObjectQueryNoLimit
-                                                     sortDescriptors:nil
-                                                      resultsHandler:^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error) {
-                                                          if (!results) {
-                                                              NSLog(@"Error executing query: %@", error.localizedDescription);
-                                                              return;
-                                                          }
-
-                                                          NSLog(@"Number of samples: %lu", [results count]);
-                                                          completionHandler(results);
-                                                      }];
-
-    [self.healthStore executeQuery:query];
-}
+//#pragma mark HealthKit
+//
+//- (void)queryHealthStore:(HKHealthStore * _Nonnull)healthStore
+//         forQuantityType:(HKQuantityTypeIdentifier _Nonnull)typeIdentifier
+//                fromDate:(NSDate * _Nonnull)startDate
+//                  toDate:(NSDate * _Nonnull)endDate
+//  usingCompletionHandler:(void (^)(NSArray <HKSample *>*samples)) completionHandler {
+//    NSPredicate *predicate = [HKSampleQuery predicateForSamplesWithStartDate:startDate
+//                                                                     endDate:endDate
+//                                                                     options:HKQueryOptionStrictEndDate];
+//
+//    HKSampleType *sampleType = [HKSampleType quantityTypeForIdentifier:typeIdentifier];
+//
+//    HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:sampleType
+//                                                           predicate:predicate
+//                                                               limit:HKObjectQueryNoLimit
+//                                                     sortDescriptors:nil
+//                                                      resultsHandler:^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error) {
+//                                                          if (!results) {
+//                                                              NSLog(@"Error executing query: %@", error.localizedDescription);
+//                                                              return;
+//                                                          }
+//
+//                                                          NSLog(@"Number of samples: %lu", [results count]);
+//                                                          completionHandler(results);
+//                                                      }];
+//
+//    [self.healthStore executeQuery:query];
+//}
 
 
 @end

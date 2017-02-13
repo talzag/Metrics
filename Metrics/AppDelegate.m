@@ -28,6 +28,7 @@
 }
 
 - (void)requestHealthSharingAuthorization {
+    __weak AppDelegate *weakSelf = self;
     [self.healthStore requestAuthorizationToShareTypes:nil
                                              readTypes:[self healthTypesToRead]
                                             completion:^(BOOL success, NSError * _Nullable error) {
@@ -36,9 +37,11 @@
                                                     abort();
                                                 }
                                                 
-                                                UINavigationController *navController = (UINavigationController *)[self.window rootViewController];
+                                                AppDelegate *delegate = weakSelf;
+                                                
+                                                UINavigationController *navController = (UINavigationController *)[delegate.window rootViewController];
                                                 MTSGraphCollectionViewController *graphViewController = (MTSGraphCollectionViewController *)[[navController viewControllers] firstObject];
-                                                [graphViewController setHealthStore:[self healthStore]];
+                                                graphViewController.healthStore = delegate.healthStore;
                                             }];
 }
 

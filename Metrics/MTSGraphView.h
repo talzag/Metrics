@@ -11,10 +11,13 @@
 IB_DESIGNABLE
 @interface MTSGraphView : UIView
 
-@property (strong, nonatomic) NSArray *dataPoints;
+@property (nonatomic) NSString *yAxisTitle;
+@property (nonatomic) NSString *xAxisTitle;
+@property (nonatomic) NSArray <NSDictionary <NSString *, id> *> *dataPoints;
 
-@property (strong, nonatomic) IBInspectable UIColor *topColor;
-@property (strong, nonatomic) IBInspectable UIColor *bottomColor;
+@property (nonatomic) BOOL drawIntermediateLines;
+@property (nonatomic) IBInspectable UIColor *topColor;
+@property (nonatomic) IBInspectable UIColor *bottomColor;
 @property (weak) IBOutlet UILabel *titleLabel;
 
 @end

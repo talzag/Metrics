@@ -8,11 +8,9 @@
 
 #import "MTSGraph.h"
 
+NSString *MTSGraphLineColorKey = @"com.dstrokis.Mtrcs.lineColor";
+NSString *MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
+
 @implementation MTSGraph
-
-// x axis data
-
-
-// y axis data
 
 @end
