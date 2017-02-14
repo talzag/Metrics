@@ -13,7 +13,7 @@
         <scene sceneID="Up1-YC-XiG">
             <objects>
                 <collectionViewController id="v24-g4-tJE" customClass="MTSGraphCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="LCb-2u-12c">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="LCb-2u-12c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -64,6 +64,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="graphView" destination="pL8-GS-UlC" id="q8c-A2-wkq"/>
+                                    <segue destination="Zui-Cp-atU" kind="show" identifier="Show Graph" id="xHC-Ep-ykI"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -73,12 +74,64 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="My Graphs" id="d8X-eg-NmD">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="oBR-wh-wRR"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="oBR-wh-wRR">
+                            <connections>
+                                <segue destination="mV6-Xv-G42" kind="presentation" identifier="Create Graph" id="av2-Qd-HZo"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7UM-yp-x0P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="650.39999999999998" y="43.628185907046479"/>
+        </scene>
+        <!--New Graph-->
+        <scene sceneID="U0l-6L-rtt">
+            <objects>
+                <viewController id="pz1-3e-uPs" customClass="MTSGraphCreationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ufd-Z9-Pfs"/>
+                        <viewControllerLayoutGuide type="bottom" id="NQK-ES-Van"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="po5-W9-zBJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Graph" id="yEV-ys-aNf">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="kDS-de-1ee">
+                            <connections>
+                                <action selector="cancel:" destination="pz1-3e-uPs" id="bhJ-f3-Uyz"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="vwS-Go-Otu">
+                            <connections>
+                                <action selector="done:" destination="pz1-3e-uPs" id="xwR-rV-yYs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yyL-bS-fXw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2624.8000000000002" y="-743.47826086956525"/>
+        </scene>
+        <!--Graph View Controller-->
+        <scene sceneID="Nfx-EA-oAZ">
+            <objects>
+                <viewController id="Zui-Cp-atU" customClass="MTSGraphViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iTf-i0-9ae"/>
+                        <viewControllerLayoutGuide type="bottom" id="5oC-SP-hbc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gCO-Ei-OIi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T8Q-og-5tv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1686" y="44"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IZ6-jz-NyJ">
@@ -96,7 +149,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TmM-ul-j5G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-287.19999999999999" y="45.42728635682159"/>
+            <point key="canvasLocation" x="-231" y="44"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="atd-TE-L2j">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mV6-Xv-G42" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CFn-3H-LUC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="pz1-3e-uPs" kind="relationship" relationship="rootViewController" id="Vuj-Q1-2ed"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P5X-OQ-2Ek" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1685.5999999999999" y="-743.47826086956525"/>
         </scene>
     </scenes>
 </document>

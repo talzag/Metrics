@@ -30,13 +30,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _topColor = [UIColor cyanColor];
-        _bottomColor = [UIColor blueColor];
-        _needsDataPointsDisplay = NO;
-        _dataPoints = [NSArray array];
-        _graphTopMarginPercent = _graphBottomMarginPercent = 0.15;
-        _graphLeftRightMarginPercent = 0.05;
-        _drawIntermediateLines = YES;
+        [self initalizeValues];
     }
     return  self;
 }
@@ -44,13 +38,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _topColor = [UIColor cyanColor];
-        _bottomColor = [UIColor blueColor];
-        _needsDataPointsDisplay = NO;
-        _dataPoints = [NSArray array];
-        _graphTopMarginPercent = _graphBottomMarginPercent = 0.15;
-        _graphLeftRightMarginPercent = 0.05;
-        _drawIntermediateLines = YES;
+        [self initalizeValues];
     }
     return self;
 }
@@ -58,15 +46,19 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        _topColor = [UIColor cyanColor];
-        _bottomColor = [UIColor blueColor];
-        _needsDataPointsDisplay = NO;
-        _dataPoints = [NSArray array];
-        _graphTopMarginPercent = _graphBottomMarginPercent = 0.15;
-        _graphLeftRightMarginPercent = 0.05;
-        _drawIntermediateLines = YES;
+        [self initalizeValues];
     }
     return self;
+}
+
+- (void)initalizeValues {
+    _topColor = [UIColor cyanColor];
+    _bottomColor = [UIColor blueColor];
+    _needsDataPointsDisplay = NO;
+    _dataPoints = [NSArray array];
+    _graphTopMarginPercent = _graphBottomMarginPercent = 0.15;
+    _graphLeftRightMarginPercent = 0.05;
+    _drawIntermediateLines = YES;
 }
 
 - (void)setDataPoints:(NSArray<NSDictionary<NSString *,id> *> *)dataPoints {

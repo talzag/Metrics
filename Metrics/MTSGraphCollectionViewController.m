@@ -8,6 +8,7 @@
 
 #import "MTSGraphCollectionViewController.h"
 #import "MTSGraphCollectionViewCell.h"
+#import "MTSGraphViewController.h"
 #import "MTSGraph.h"
 
 @interface MTSGraphCollectionViewController ()
@@ -37,13 +38,13 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
 
 #pragma mark - Navigation
 
-/*
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"Show Graph"]) {
+        MTSGraphViewController *destination = (MTSGraphViewController *)[segue destinationViewController];
+        destination.navigationItem.title = ((MTSGraphCollectionViewCell *) sender).graphView.titleLabel.text;
+    }
 }
-*/
 
 #pragma mark <UICollectionViewDataSource>
 
