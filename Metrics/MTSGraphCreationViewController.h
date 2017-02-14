@@ -10,4 +10,8 @@
 
 @interface MTSGraphCreationViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *graphTitleTextField;
+@property (weak, nonatomic) IBOutlet UITextField *startDateTextField;
+@property (weak, nonatomic) IBOutlet UITextField *endDateTextField;
+
 @end
