@@ -130,6 +130,7 @@
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4B3-pC-XUU">
                                                 <rect key="frame" x="86" y="0.0" width="257" height="30"/>
                                                 <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                             </textField>
                                         </subviews>
@@ -242,12 +243,46 @@
                     <view key="view" contentMode="scaleToFill" id="gCO-Ei-OIi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OWA-Qo-s3p" customClass="MTSGraphView">
+                                <rect key="frame" x="16" y="72" width="343" height="183"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quC-JA-y1R">
+                                        <rect key="frame" x="8" y="8" width="315" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="Ibe-zF-9J0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="quC-JA-y1R" firstAttribute="top" secondItem="OWA-Qo-s3p" secondAttribute="top" constant="8" id="ChU-ew-hxg"/>
+                                    <constraint firstItem="quC-JA-y1R" firstAttribute="leading" secondItem="OWA-Qo-s3p" secondAttribute="leading" constant="8" id="M1h-HX-MRT"/>
+                                    <constraint firstAttribute="trailing" secondItem="quC-JA-y1R" secondAttribute="trailing" constant="20" symbolic="YES" id="xAX-s4-E6x"/>
+                                    <constraint firstAttribute="height" constant="183" id="xsk-Hg-w8u"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="titleLabel" destination="quC-JA-y1R" id="k9C-jE-D67"/>
+                                </connections>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OWA-Qo-s3p" firstAttribute="leading" secondItem="gCO-Ei-OIi" secondAttribute="leadingMargin" id="1Po-ka-bnq"/>
+                            <constraint firstItem="OWA-Qo-s3p" firstAttribute="top" secondItem="iTf-i0-9ae" secondAttribute="bottom" constant="8" id="P9o-XB-UnU"/>
+                            <constraint firstItem="OWA-Qo-s3p" firstAttribute="trailing" secondItem="gCO-Ei-OIi" secondAttribute="trailingMargin" id="zik-Eh-rBk"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="graphView" destination="OWA-Qo-s3p" id="DJf-Pg-E5R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8Q-og-5tv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1686" y="44"/>
+            <point key="canvasLocation" x="1685.5999999999999" y="43.628185907046479"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IZ6-jz-NyJ">

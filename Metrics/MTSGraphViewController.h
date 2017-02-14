@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MTSGraphView.h"
+@import HealthKit;
 
 @interface MTSGraphViewController : UIViewController
+
+@property HKHealthStore *healthStore;
+@property (weak, nonatomic) IBOutlet MTSGraphView *graphView;
 
 @end
