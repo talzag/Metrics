@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E30A6F081E5CAB2D0018F32E /* Metrics.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E30A6F061E5CAB2D0018F32E /* Metrics.xcdatamodeld */; };
 		E3336E681E52918300AD0BC2 /* MTSGraphCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */; };
 		E3336E6B1E5291FC00AD0BC2 /* MTSGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E6A1E5291FC00AD0BC2 /* MTSGraphViewController.m */; };
 		E3784B701E46494D005F87BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784B6F1E46494D005F87BC /* main.m */; };
@@ -34,7 +35,6 @@
 		E3784BFA1E46D018005F87BC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3784BF91E46D018005F87BC /* HealthKit.framework */; };
 		E3784C031E47DBBB005F87BC /* MTSGraphCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784C021E47DBBB005F87BC /* MTSGraphCollectionViewController.m */; };
 		E3784C061E47DC0E005F87BC /* MTSGraphCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784C051E47DC0E005F87BC /* MTSGraphCollectionViewCell.m */; };
-		E3784C091E47E2D5005F87BC /* MTSGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784C081E47E2D5005F87BC /* MTSGraph.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +112,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E30A6F071E5CAB2D0018F32E /* Metrics.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Metrics.xcdatamodel; sourceTree = "<group>"; };
 		E3336E661E52918300AD0BC2 /* MTSGraphCreationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraphCreationViewController.h; sourceTree = "<group>"; };
 		E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphCreationViewController.m; sourceTree = "<group>"; };
 		E3336E691E5291FC00AD0BC2 /* MTSGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraphViewController.h; sourceTree = "<group>"; };
@@ -161,8 +162,6 @@
 		E3784C021E47DBBB005F87BC /* MTSGraphCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphCollectionViewController.m; sourceTree = "<group>"; };
 		E3784C041E47DC0E005F87BC /* MTSGraphCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraphCollectionViewCell.h; sourceTree = "<group>"; };
 		E3784C051E47DC0E005F87BC /* MTSGraphCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphCollectionViewCell.m; sourceTree = "<group>"; };
-		E3784C071E47E2D5005F87BC /* MTSGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraph.h; sourceTree = "<group>"; };
-		E3784C081E47E2D5005F87BC /* MTSGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraph.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,14 +257,13 @@
 				E3336E6A1E5291FC00AD0BC2 /* MTSGraphViewController.m */,
 				E3336E661E52918300AD0BC2 /* MTSGraphCreationViewController.h */,
 				E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */,
-				E3784C071E47E2D5005F87BC /* MTSGraph.h */,
-				E3784C081E47E2D5005F87BC /* MTSGraph.m */,
 				E3784BD01E466189005F87BC /* MTSGraphView.h */,
 				E3784BD11E466189005F87BC /* MTSGraphView.m */,
 				E3784B7A1E46494D005F87BC /* Assets.xcassets */,
 				E3784B7C1E46494D005F87BC /* LaunchScreen.storyboard */,
 				E3784B7F1E46494D005F87BC /* Info.plist */,
 				E3784B6E1E46494D005F87BC /* Supporting Files */,
+				E30A6F061E5CAB2D0018F32E /* Metrics.xcdatamodeld */,
 			);
 			path = Metrics;
 			sourceTree = "<group>";
@@ -646,11 +644,11 @@
 				E3336E6B1E5291FC00AD0BC2 /* MTSGraphViewController.m in Sources */,
 				E3784C061E47DC0E005F87BC /* MTSGraphCollectionViewCell.m in Sources */,
 				E3784B731E46494D005F87BC /* AppDelegate.m in Sources */,
+				E30A6F081E5CAB2D0018F32E /* Metrics.xcdatamodeld in Sources */,
 				E3784B701E46494D005F87BC /* main.m in Sources */,
 				E3336E681E52918300AD0BC2 /* MTSGraphCreationViewController.m in Sources */,
 				E3784BD21E466189005F87BC /* MTSGraphView.m in Sources */,
 				E3784C031E47DBBB005F87BC /* MTSGraphCollectionViewController.m in Sources */,
-				E3784C091E47E2D5005F87BC /* MTSGraph.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1159,6 +1157,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E30A6F061E5CAB2D0018F32E /* Metrics.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E30A6F071E5CAB2D0018F32E /* Metrics.xcdatamodel */,
+			);
+			currentVersion = E30A6F071E5CAB2D0018F32E /* Metrics.xcdatamodel */;
+			path = Metrics.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E3784B631E46494D005F87BC /* Project object */;
 }
