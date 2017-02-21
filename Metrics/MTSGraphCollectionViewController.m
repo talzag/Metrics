@@ -24,20 +24,15 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    MTSGraph *graph = [MTSGraph new];
-    graph.title = @"Test graph";
-    graph.xAxisTitle = @"X Axis";
-    graph.yAxisTitle = @"Y Axis";
-    graph.dataPoints = @[@{
-                             MTSGraphLineColorKey: [UIColor whiteColor],
-                             MTSGraphDataPointsKey: [NSArray arrayWithObjects: @25, @50, @75, @100, @50, @63, @42, nil]
-                         },
-                         @{
-                             MTSGraphLineColorKey: [UIColor blackColor],
-                             MTSGraphDataPointsKey: [NSArray arrayWithObjects: @20, @30, @45, @10, @70, @23, @2, nil]
-                         }];
+    NSFetchRequest *request = [MTSGraph fetchRequest];
+    NSError *error;
+    NSArray *graphs = [self.managedObjectContext executeFetchRequest:request error:&error];
     
-    self.graphs = [NSArray arrayWithObject:graph];
+    if (graphs == nil) {
+        NSLog(@"Error fetching graphs: %@", error.localizedDescription);
+    }
+    
+    self.graphs = graphs;
 }
 
 #pragma mark - Navigation
@@ -64,7 +59,7 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
     cell.graphView.titleLabel.text = graph.title;
     cell.graphView.xAxisTitle = graph.xAxisTitle;
     cell.graphView.yAxisTitle = graph.yAxisTitle;
-    cell.graphView.dataPoints = graph.dataPoints;
+//    cell.graphView.dataPoints = graph.dataPoints;
 
     cell.graphView.topColor = [UIColor orangeColor];
     cell.graphView.bottomColor = [UIColor redColor];

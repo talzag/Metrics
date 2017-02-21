@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @import HealthKit;
+@import CoreData;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -15,6 +16,11 @@
 
 @property (nonatomic) NSArray <HKQuantityTypeIdentifier>*quantityTypeIdentifiers;
 @property (nonatomic) NSArray <HKCategoryTypeIdentifier>*categoryTypeIdentifiers;
+
+@property (readonly, strong) NSPersistentContainer *persistentContainer;
+
+- (void)saveContext;
+
 
 @end
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16E154a" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
-    <entity name="MTSGraph" representedClassName="MTSGraph" syncable="YES" codeGenerationType="class">
-        <attribute name="dataPoints" optional="YES" attributeType="Transformable" syncable="YES"/>
+    <entity name="MTSGraph" representedClassName="MTSGraph" syncable="YES">
+        <attribute name="dataPoints" optional="YES" attributeType="Transformable" valueTransformerName="MTSDataPointsTransformer" customClassName="NSArray" syncable="YES"/>
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="title" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="xAxisLabels" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="xAxisTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="yAxisTitle" optional="YES" attributeType="String" syncable="YES"/>

@@ -1,13 +1,13 @@
 //
-//  MTSGraph+CoreDataClass.m
+//  MTSDataPointsTransformer.h
 //  Metrics
 //
 //  Created by Daniel Strokis on 2/21/17.
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import "MTSGraph+CoreDataClass.h"
+#import <Foundation/Foundation.h>
 
-@implementation MTSGraph
+@interface MTSDataPointsTransformer : NSValueTransformer
 
 @end

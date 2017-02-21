@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @import HealthKit;
+@import CoreData;
 
 @interface MTSGraphCollectionViewController : UICollectionViewController
 
 @property (strong) HKHealthStore *healthStore;
+@property (strong) NSManagedObjectContext *managedObjectContext;
 
 @end
