@@ -17,6 +17,6 @@ extern NSString *MTSGraphDataPointsKey;
 @property NSString *xAxisTitle;
 @property NSString *yAxisTitle;
 @property NSString *xAxisLabels;
-@property NSDictionary <NSString *, id>*dataPoints;
+@property NSArray <NSDictionary <NSString *, id> *> *dataPoints;
 
 @end

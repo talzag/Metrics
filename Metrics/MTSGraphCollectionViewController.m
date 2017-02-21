@@ -28,10 +28,14 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
     graph.title = @"Test graph";
     graph.xAxisTitle = @"X Axis";
     graph.yAxisTitle = @"Y Axis";
-    graph.dataPoints = @{
-                         MTSGraphLineColorKey: [UIColor whiteColor],
-                         MTSGraphDataPointsKey: [NSArray arrayWithObjects: @25, @50, @75, @100, @50, @63, @42, nil]
-                         };
+    graph.dataPoints = @[@{
+                             MTSGraphLineColorKey: [UIColor whiteColor],
+                             MTSGraphDataPointsKey: [NSArray arrayWithObjects: @25, @50, @75, @100, @50, @63, @42, nil]
+                         },
+                         @{
+                             MTSGraphLineColorKey: [UIColor blackColor],
+                             MTSGraphDataPointsKey: [NSArray arrayWithObjects: @20, @30, @45, @10, @70, @23, @2, nil]
+                         }];
     
     self.graphs = [NSArray arrayWithObject:graph];
 }
@@ -60,14 +64,8 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
     cell.graphView.titleLabel.text = graph.title;
     cell.graphView.xAxisTitle = graph.xAxisTitle;
     cell.graphView.yAxisTitle = graph.yAxisTitle;
-    cell.graphView.dataPoints = @[@{
-                                      MTSGraphLineColorKey: [UIColor whiteColor],
-                                      MTSGraphDataPointsKey: [NSArray arrayWithObjects: @25, @50, @75, @100, @50, @63, @42, nil]
-                                  },@{
-                                      MTSGraphLineColorKey: [UIColor greenColor],
-                                      MTSGraphDataPointsKey: [NSArray arrayWithObjects: @12, @85, @37, @2, @74, @3, @78, nil]
-                                  }]
-    ;
+    cell.graphView.dataPoints = graph.dataPoints;
+
     cell.graphView.topColor = [UIColor orangeColor];
     cell.graphView.bottomColor = [UIColor redColor];
     

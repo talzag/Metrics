@@ -6,8 +6,6 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-@import HealthKit;
-
 #import "AppDelegate.h"
 #import "MTSGraphCollectionViewController.h"
 
@@ -45,7 +43,7 @@
                                             }];
 }
 
-- (NSSet *)healthTypesToRead {
+- (NSArray <HKQuantityTypeIdentifier>*)quantityTypeIdentifiers {
     NSArray *quantityTypes = @[
                                // Body Measurements
                                HKQuantityTypeIdentifierBodyMassIndex,
@@ -84,8 +82,8 @@
                                HKQuantityTypeIdentifierElectrodermalActivity,
                                HKQuantityTypeIdentifierInhalerUsage,
                                HKQuantityTypeIdentifierBloodAlcoholContent,
-                               HKQuantityTypeIdentifierForcedVitalCapacity, 
-                               HKQuantityTypeIdentifierForcedExpiratoryVolume1, 
+                               HKQuantityTypeIdentifierForcedVitalCapacity,
+                               HKQuantityTypeIdentifierForcedExpiratoryVolume1,
                                HKQuantityTypeIdentifierPeakExpiratoryFlowRate,
                                
                                // Nutrition
@@ -133,7 +131,10 @@
                                HKQuantityTypeIdentifierBasalEnergyBurned,
                                HKQuantityTypeIdentifierActiveEnergyBurned
                                ];
-    
+    return quantityTypes;
+}
+
+- (NSArray <HKCategoryTypeIdentifier>*)categoryTypeIdentifiers {
     NSArray *categoryTypes = @[
                                HKCategoryTypeIdentifierSleepAnalysis,
                                HKCategoryTypeIdentifierAppleStandHour,
@@ -145,13 +146,17 @@
                                HKCategoryTypeIdentifierMindfulSession
                                ];
     
+    return categoryTypes;
+}
+
+- (NSSet *)healthTypesToRead {
     NSMutableSet *readTypes = [NSMutableSet set];
     
-    for (HKQuantityTypeIdentifier ident in quantityTypes) {
+    for (HKQuantityTypeIdentifier ident in self.quantityTypeIdentifiers) {
         [readTypes addObject:[HKObjectType quantityTypeForIdentifier:ident]];
     }
     
-    for (HKCategoryTypeIdentifier ident in categoryTypes) {
+    for (HKCategoryTypeIdentifier ident in self.categoryTypeIdentifiers) {
         [readTypes addObject:[HKObjectType categoryTypeForIdentifier:ident]];
     }
     
