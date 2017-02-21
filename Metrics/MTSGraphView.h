@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-//extern NSString *MTSGraphLineColorKey;
-//extern NSString *MTSGraphDataPointsKey;
-//NSString *MTSGraphLineColorKey = @"com.dstrokis.Mtrcs.lineColor";
-//NSString *MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
+extern NSString *MTSGraphLineColorKey;
+extern NSString *MTSGraphDataPointsKey;
 
 IB_DESIGNABLE
 @interface MTSGraphView : UIView

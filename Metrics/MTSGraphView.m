@@ -7,7 +7,10 @@
 //
 
 #import "MTSGraphView.h"
-#import "MTSGraph.h"
+#import "MTSGraph+CoreDataProperties.h"
+
+NSString *MTSGraphLineColorKey = @"com.dstrokis.Mtrcs.lineColor";
+NSString *MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
 
 @interface MTSGraphView ()
 
