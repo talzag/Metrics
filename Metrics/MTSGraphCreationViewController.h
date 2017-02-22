@@ -7,11 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MTSGraph+CoreDataProperties.h"
+@import HealthKit;
 
 @interface MTSGraphCreationViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *graphTitleTextField;
 @property (weak, nonatomic) IBOutlet UITextField *startDateTextField;
 @property (weak, nonatomic) IBOutlet UITextField *endDateTextField;
+
+@property NSDictionary <NSString *, HKQuantityTypeIdentifier>*quantityTypeIdentifiers;
+@property (readonly) NSSet *selectedHealthMetrics;
 
 @end

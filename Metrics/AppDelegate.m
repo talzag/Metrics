@@ -25,6 +25,7 @@
     UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
     MTSGraphCollectionViewController *graphsViewController = (MTSGraphCollectionViewController *)navController.viewControllers.firstObject;
     graphsViewController.managedObjectContext = self.persistentContainer.viewContext;
+    graphsViewController.quantityTypeIdentifiers = self.quantityTypeIdentifiers;
     
     return YES;
 }
@@ -47,122 +48,120 @@
                                             }];
 }
 
-- (NSArray <HKQuantityTypeIdentifier>*)quantityTypeIdentifiers {
-    NSArray *quantityTypes = @[
-                               // Body Measurements
-                               HKQuantityTypeIdentifierBodyMassIndex,
-                               HKQuantityTypeIdentifierBodyFatPercentage,
-                               HKQuantityTypeIdentifierHeight,
-                               HKQuantityTypeIdentifierBodyMass,
-                               HKQuantityTypeIdentifierLeanBodyMass,
-                               
-                               // Fitness
-                               HKQuantityTypeIdentifierStepCount,
-                               HKQuantityTypeIdentifierDistanceWalkingRunning,
-                               HKQuantityTypeIdentifierDistanceCycling,
-                               HKQuantityTypeIdentifierDistanceWheelchair,
-                               HKQuantityTypeIdentifierBasalEnergyBurned,
-                               HKQuantityTypeIdentifierActiveEnergyBurned,
-                               HKQuantityTypeIdentifierFlightsClimbed,
-                               HKQuantityTypeIdentifierNikeFuel,
-                               HKQuantityTypeIdentifierAppleExerciseTime,
-                               HKQuantityTypeIdentifierPushCount,
-                               HKQuantityTypeIdentifierDistanceSwimming,
-                               HKQuantityTypeIdentifierSwimmingStrokeCount,
-                               
-                               // Vitals
-                               HKQuantityTypeIdentifierHeartRate,
-                               HKQuantityTypeIdentifierBodyTemperature,
-                               HKQuantityTypeIdentifierBasalBodyTemperature,
-                               HKQuantityTypeIdentifierBloodPressureSystolic,
-                               HKQuantityTypeIdentifierBloodPressureDiastolic,
-                               HKQuantityTypeIdentifierRespiratoryRate,
-                               
-                               // Results
-                               HKQuantityTypeIdentifierOxygenSaturation,
-                               HKQuantityTypeIdentifierPeripheralPerfusionIndex,
-                               HKQuantityTypeIdentifierBloodGlucose,
-                               HKQuantityTypeIdentifierNumberOfTimesFallen,
-                               HKQuantityTypeIdentifierElectrodermalActivity,
-                               HKQuantityTypeIdentifierInhalerUsage,
-                               HKQuantityTypeIdentifierBloodAlcoholContent,
-                               HKQuantityTypeIdentifierForcedVitalCapacity,
-                               HKQuantityTypeIdentifierForcedExpiratoryVolume1,
-                               HKQuantityTypeIdentifierPeakExpiratoryFlowRate,
-                               
-                               // Nutrition
-                               HKQuantityTypeIdentifierDietaryFatTotal,
-                               HKQuantityTypeIdentifierDietaryFatPolyunsaturated,
-                               HKQuantityTypeIdentifierDietaryFatMonounsaturated,
-                               HKQuantityTypeIdentifierDietaryFatSaturated,
-                               HKQuantityTypeIdentifierDietaryCholesterol,
-                               HKQuantityTypeIdentifierDietarySodium,
-                               HKQuantityTypeIdentifierDietaryCarbohydrates,
-                               HKQuantityTypeIdentifierDietaryFiber,
-                               HKQuantityTypeIdentifierDietarySugar,
-                               HKQuantityTypeIdentifierDietaryEnergyConsumed,
-                               HKQuantityTypeIdentifierDietaryProtein,
-                               HKQuantityTypeIdentifierDietaryVitaminA,
-                               HKQuantityTypeIdentifierDietaryVitaminB6,
-                               HKQuantityTypeIdentifierDietaryVitaminB12,
-                               HKQuantityTypeIdentifierDietaryVitaminC,
-                               HKQuantityTypeIdentifierDietaryVitaminD,
-                               HKQuantityTypeIdentifierDietaryVitaminE,
-                               HKQuantityTypeIdentifierDietaryVitaminK,
-                               HKQuantityTypeIdentifierDietaryCalcium,
-                               HKQuantityTypeIdentifierDietaryIron,
-                               HKQuantityTypeIdentifierDietaryThiamin,
-                               HKQuantityTypeIdentifierDietaryRiboflavin,
-                               HKQuantityTypeIdentifierDietaryNiacin,
-                               HKQuantityTypeIdentifierDietaryFolate,
-                               HKQuantityTypeIdentifierDietaryBiotin,
-                               HKQuantityTypeIdentifierDietaryPantothenicAcid,
-                               HKQuantityTypeIdentifierDietaryPhosphorus,
-                               HKQuantityTypeIdentifierDietaryIodine,
-                               HKQuantityTypeIdentifierDietaryMagnesium,
-                               HKQuantityTypeIdentifierDietaryZinc,
-                               HKQuantityTypeIdentifierDietarySelenium,
-                               HKQuantityTypeIdentifierDietaryCopper,
-                               HKQuantityTypeIdentifierDietaryManganese,
-                               HKQuantityTypeIdentifierDietaryChromium,
-                               HKQuantityTypeIdentifierDietaryMolybdenum,
-                               HKQuantityTypeIdentifierDietaryChloride,
-                               HKQuantityTypeIdentifierDietaryPotassium,
-                               HKQuantityTypeIdentifierDietaryCaffeine,
-                               HKQuantityTypeIdentifierDietaryWater,
-                               HKQuantityTypeIdentifierUVExposure,
-                               HKQuantityTypeIdentifierDietaryEnergyConsumed,
-                               HKQuantityTypeIdentifierBasalEnergyBurned,
-                               HKQuantityTypeIdentifierActiveEnergyBurned
-                               ];
+- (NSDictionary <NSString *, HKQuantityTypeIdentifier>*)quantityTypeIdentifiers {
+    NSDictionary *quantityTypes = @{
+                                   // Body Measurements
+                                   @"Body Mass Index": HKQuantityTypeIdentifierBodyMassIndex,
+                                   @"Body Fat Percentage": HKQuantityTypeIdentifierBodyFatPercentage,
+                                   @"Height": HKQuantityTypeIdentifierHeight,
+                                   @"Body Mass": HKQuantityTypeIdentifierBodyMass,
+                                   @"Lean Body Mass": HKQuantityTypeIdentifierLeanBodyMass,
+                                   
+                                   // Fitness
+                                   @"Step Count": HKQuantityTypeIdentifierStepCount,
+                                   @"Walking/Running Distance": HKQuantityTypeIdentifierDistanceWalkingRunning,
+                                   @"Cycling Distance": HKQuantityTypeIdentifierDistanceCycling,
+                                   @"Wheelchair Distance": HKQuantityTypeIdentifierDistanceWheelchair,
+                                   @"Base Energy Burned": HKQuantityTypeIdentifierBasalEnergyBurned,
+                                   @"Active Energy Burned": HKQuantityTypeIdentifierActiveEnergyBurned,
+                                   @"Flights Climbed": HKQuantityTypeIdentifierFlightsClimbed,
+                                   @"Nike Fuel": HKQuantityTypeIdentifierNikeFuel,
+                                   @"Exercise Time": HKQuantityTypeIdentifierAppleExerciseTime,
+                                   @"Wheelchair Pushes": HKQuantityTypeIdentifierPushCount,
+                                   @"Swimming Distance": HKQuantityTypeIdentifierDistanceSwimming,
+                                   @"Swimming Stroke Count": HKQuantityTypeIdentifierSwimmingStrokeCount,
+                                   
+                                   // Vitals
+                                   @"Heart Rate": HKQuantityTypeIdentifierHeartRate,
+                                   @"Body Temperature": HKQuantityTypeIdentifierBodyTemperature,
+                                   @"Base Body Temperature": HKQuantityTypeIdentifierBasalBodyTemperature,
+                                   @"Systolic Blood Pressure": HKQuantityTypeIdentifierBloodPressureSystolic,
+                                   @"Diastolic Blood Pressure": HKQuantityTypeIdentifierBloodPressureDiastolic,
+                                   @"Respiratory Rate": HKQuantityTypeIdentifierRespiratoryRate,
+                                   
+                                   // Results
+                                   @"Oxygen Saturation": HKQuantityTypeIdentifierOxygenSaturation,
+                                   @"Peripheral Perfusion Index": HKQuantityTypeIdentifierPeripheralPerfusionIndex,
+                                   @"Blood Glucose": HKQuantityTypeIdentifierBloodGlucose,
+                                   @"Number of Times Fallen": HKQuantityTypeIdentifierNumberOfTimesFallen,
+                                   @"Electrodermal Activity": HKQuantityTypeIdentifierElectrodermalActivity,
+                                   @"Inhaler Usage": HKQuantityTypeIdentifierInhalerUsage,
+                                   @"Blood Alcohol Content": HKQuantityTypeIdentifierBloodAlcoholContent,
+                                   @"Forced Vital Capacity": HKQuantityTypeIdentifierForcedVitalCapacity,
+                                   @"Forced Expiratory Volume": HKQuantityTypeIdentifierForcedExpiratoryVolume1,
+                                   @"Peak Expiratory Flow Rate": HKQuantityTypeIdentifierPeakExpiratoryFlowRate,
+                                   
+                                   // Nutrition
+                                   @"Total Fat": HKQuantityTypeIdentifierDietaryFatTotal,
+                                   @"Polyunsaturated Fat": HKQuantityTypeIdentifierDietaryFatPolyunsaturated,
+                                   @"Monounstaurated Fat": HKQuantityTypeIdentifierDietaryFatMonounsaturated,
+                                   @"Saturated Fat": HKQuantityTypeIdentifierDietaryFatSaturated,
+                                   @"Cholesterol": HKQuantityTypeIdentifierDietaryCholesterol,
+                                   @"Sodium": HKQuantityTypeIdentifierDietarySodium,
+                                   @"Carbohydrates": HKQuantityTypeIdentifierDietaryCarbohydrates,
+                                   @"Fiber": HKQuantityTypeIdentifierDietaryFiber,
+                                   @"Sugar": HKQuantityTypeIdentifierDietarySugar,
+                                   @"Calories Eaten": HKQuantityTypeIdentifierDietaryEnergyConsumed,
+                                   @"Protein": HKQuantityTypeIdentifierDietaryProtein,
+                                   @"Vitamin A": HKQuantityTypeIdentifierDietaryVitaminA,
+                                   @"Vitamin B6": HKQuantityTypeIdentifierDietaryVitaminB6,
+                                   @"Vitamin B12": HKQuantityTypeIdentifierDietaryVitaminB12,
+                                   @"Vitamin C": HKQuantityTypeIdentifierDietaryVitaminC,
+                                   @"Vitamin D": HKQuantityTypeIdentifierDietaryVitaminD,
+                                   @"Vitamin E": HKQuantityTypeIdentifierDietaryVitaminE,
+                                   @"Vitamin K": HKQuantityTypeIdentifierDietaryVitaminK,
+                                   @"Calcium": HKQuantityTypeIdentifierDietaryCalcium,
+                                   @"Iron": HKQuantityTypeIdentifierDietaryIron,
+                                   @"Thiamin": HKQuantityTypeIdentifierDietaryThiamin,
+                                   @"Riboflavin": HKQuantityTypeIdentifierDietaryRiboflavin,
+                                   @"Niacin": HKQuantityTypeIdentifierDietaryNiacin,
+                                   @"Folate": HKQuantityTypeIdentifierDietaryFolate,
+                                   @"Biotin": HKQuantityTypeIdentifierDietaryBiotin,
+                                   @"Pantothenic Acid": HKQuantityTypeIdentifierDietaryPantothenicAcid,
+                                   @"Phosphorus": HKQuantityTypeIdentifierDietaryPhosphorus,
+                                   @"Iodine": HKQuantityTypeIdentifierDietaryIodine,
+                                   @"Magnesium": HKQuantityTypeIdentifierDietaryMagnesium,
+                                   @"Zinc": HKQuantityTypeIdentifierDietaryZinc,
+                                   @"Selenium": HKQuantityTypeIdentifierDietarySelenium,
+                                   @"Copper": HKQuantityTypeIdentifierDietaryCopper,
+                                   @"Manganese": HKQuantityTypeIdentifierDietaryManganese,
+                                   @"Chromium": HKQuantityTypeIdentifierDietaryChromium,
+                                   @"Molybdenum": HKQuantityTypeIdentifierDietaryMolybdenum,
+                                   @"Chloride": HKQuantityTypeIdentifierDietaryChloride,
+                                   @"Potassium": HKQuantityTypeIdentifierDietaryPotassium,
+                                   @"Caffeine": HKQuantityTypeIdentifierDietaryCaffeine,
+                                   @"Water": HKQuantityTypeIdentifierDietaryWater,
+                                   @"UV Exposure": HKQuantityTypeIdentifierUVExposure
+                                   };
     return quantityTypes;
 }
 
-- (NSArray <HKCategoryTypeIdentifier>*)categoryTypeIdentifiers {
-    NSArray *categoryTypes = @[
-                               HKCategoryTypeIdentifierSleepAnalysis,
-                               HKCategoryTypeIdentifierAppleStandHour,
-                               HKCategoryTypeIdentifierCervicalMucusQuality,
-                               HKCategoryTypeIdentifierOvulationTestResult,
-                               HKCategoryTypeIdentifierMenstrualFlow,
-                               HKCategoryTypeIdentifierIntermenstrualBleeding,
-                               HKCategoryTypeIdentifierSexualActivity,
-                               HKCategoryTypeIdentifierMindfulSession
-                               ];
-    
-    return categoryTypes;
-}
+//- (NSArray <HKCategoryTypeIdentifier>*)categoryTypeIdentifiers {
+//    NSArray *categoryTypes = @[
+//                               HKCategoryTypeIdentifierSleepAnalysis,
+//                               HKCategoryTypeIdentifierAppleStandHour,
+//                               HKCategoryTypeIdentifierCervicalMucusQuality,
+//                               HKCategoryTypeIdentifierOvulationTestResult,
+//                               HKCategoryTypeIdentifierMenstrualFlow,
+//                               HKCategoryTypeIdentifierIntermenstrualBleeding,
+//                               HKCategoryTypeIdentifierSexualActivity,
+//                               HKCategoryTypeIdentifierMindfulSession
+//                               ];
+//    
+//    return categoryTypes;
+//}
 
 - (NSSet *)healthTypesToRead {
     NSMutableSet *readTypes = [NSMutableSet set];
     
-    for (HKQuantityTypeIdentifier ident in self.quantityTypeIdentifiers) {
-        [readTypes addObject:[HKObjectType quantityTypeForIdentifier:ident]];
-    }
+    [self.quantityTypeIdentifiers enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, HKQuantityTypeIdentifier  _Nonnull obj, BOOL * _Nonnull stop) {
+        [readTypes addObject:[HKObjectType quantityTypeForIdentifier:obj]];
+    }];
     
-    for (HKCategoryTypeIdentifier ident in self.categoryTypeIdentifiers) {
-        [readTypes addObject:[HKObjectType categoryTypeForIdentifier:ident]];
-    }
+    
+//    for (HKCategoryTypeIdentifier ident in self.categoryTypeIdentifiers) {
+//        [readTypes addObject:[HKObjectType categoryTypeForIdentifier:ident]];
+//    }
     
     return [NSSet setWithSet:readTypes];
 }
@@ -172,15 +171,11 @@
 @synthesize persistentContainer = _persistentContainer;
 
 - (NSPersistentContainer *)persistentContainer {
-    // The persistent container for the application. This implementation creates and returns a container, having loaded the store for the application to it.
     @synchronized (self) {
         if (_persistentContainer == nil) {
             _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"Metrics"];
             [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
                 if (error != nil) {
-                    // Replace this implementation with code to handle the error appropriately.
-                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                    
                     /*
                      Typical reasons for an error here include:
                      * The parent directory does not exist, cannot be created, or disallows writing.
@@ -190,7 +185,9 @@
                      Check the error message to determine what the actual problem was.
                      */
                     NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+#if DEBUG
                     abort();
+#endif
                 }
             }];
         }
@@ -205,10 +202,10 @@
     NSManagedObjectContext *context = self.persistentContainer.viewContext;
     NSError *error = nil;
     if ([context hasChanges] && ![context save:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
         NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+#if DEBUG
         abort();
+#endif
     }
 }
 

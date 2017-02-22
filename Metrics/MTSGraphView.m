@@ -54,8 +54,8 @@ NSString *MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
 }
 
 - (void)initalizeValues {
-    _topColor = [UIColor cyanColor];
-    _bottomColor = [UIColor blueColor];
+    _topColor = [UIColor whiteColor];
+    _bottomColor = [UIColor whiteColor];
     _needsDataPointsDisplay = NO;
     _dataPoints = [NSArray array];
     _graphTopMarginPercent = _graphBottomMarginPercent = 0.15;
@@ -170,7 +170,7 @@ NSString *MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
 - (void)drawGraphLinesinRect:(CGRect)rect withContext:(CGContextRef)context {
     UIBezierPath *linePath = [UIBezierPath bezierPath];
     [linePath setLineWidth:1.0];
-    [[UIColor whiteColor] setStroke];
+    [[UIColor grayColor] setStroke];
     
     CGFloat startX = [self actualGraphLeftRightMargin];
     CGFloat endX = rect.size.width - [self actualGraphLeftRightMargin];
@@ -210,7 +210,7 @@ NSString *MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
     [linePath moveToPoint:lowerIntermediateStartPoint];
     [linePath addLineToPoint:lowerIntermediateEndPoint];
     
-    [[UIColor colorWithWhite:1.0 alpha:0.65] setStroke];
+    [[UIColor colorWithWhite:0.5 alpha:0.65] setStroke];
     const CGFloat dashes[] = { 6.0, 5.0 };
     [linePath setLineDash:dashes count:2 phase:0];
     [linePath stroke];

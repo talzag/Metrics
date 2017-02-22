@@ -9,6 +9,7 @@
 #import "MTSGraphCollectionViewController.h"
 #import "MTSGraphCollectionViewCell.h"
 #import "MTSGraphViewController.h"
+#import "MTSGraphCreationViewController.h"
 #import "MTSGraph+CoreDataProperties.h"
 
 @interface MTSGraphCollectionViewController ()
@@ -37,11 +38,14 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"Show Graph"]) {
         MTSGraphViewController *destination = (MTSGraphViewController *)[segue destinationViewController];
         destination.navigationItem.title = ((MTSGraphCollectionViewCell *) sender).graphView.titleLabel.text;
+    } else if ([segue.identifier isEqualToString:@"Create Graph"]) {
+        UINavigationController *navController = (UINavigationController *)[segue destinationViewController];
+        MTSGraphCreationViewController *destination = (MTSGraphCreationViewController *)navController.viewControllers.firstObject;
+        destination.quantityTypeIdentifiers = self.quantityTypeIdentifiers;
     }
 }
 
@@ -59,10 +63,7 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
     cell.graphView.titleLabel.text = graph.title;
     cell.graphView.xAxisTitle = graph.xAxisTitle;
     cell.graphView.yAxisTitle = graph.yAxisTitle;
-//    cell.graphView.dataPoints = graph.dataPoints;
-
-    cell.graphView.topColor = [UIColor orangeColor];
-    cell.graphView.bottomColor = [UIColor redColor];
+    cell.graphView.dataPoints = graph.dataPoints;
     
     return cell;
 }

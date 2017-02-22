@@ -13,7 +13,8 @@
 
 @interface MTSGraphCollectionViewController : UICollectionViewController
 
-@property (strong) HKHealthStore *healthStore;
-@property (strong) NSManagedObjectContext *managedObjectContext;
+@property HKHealthStore *healthStore;
+@property NSManagedObjectContext *managedObjectContext;
+@property NSDictionary <NSString *, HKQuantityTypeIdentifier>*quantityTypeIdentifiers;
 
 @end
