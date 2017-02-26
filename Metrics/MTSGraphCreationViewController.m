@@ -18,7 +18,6 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
 @property (strong, nonatomic) NSMutableSet <HKQuantityTypeIdentifier>*selectedHealthTypes;
 
 @property (nonatomic) UIView *datePickerContainer;
-@property NSDate *defaultStartDate;
 @property (nonatomic) NSDateFormatter *dateFormatter;
 @property UITextField *activeTextField;
 
@@ -34,6 +33,16 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
     }];
     
     self.selectedHealthTypes = [NSMutableSet set];
+    
+    NSDate *date = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
+    
+    NSDate *today = [calendar dateFromComponents:components];
+    NSDate *yesterday = [calendar dateByAddingUnit:NSCalendarUnitDay value:-1 toDate:today options:NSCalendarWrapComponents];
+    
+    self.startDateTextField.text = [self.dateFormatter stringFromDate:yesterday];
+    self.endDateTextField.text = [self.dateFormatter stringFromDate:today];
     
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter addObserver:self
@@ -51,6 +60,7 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
 
 - (void)viewDidDisappear:(BOOL)animated {
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+    
     [super viewDidDisappear:animated];
 }
 
