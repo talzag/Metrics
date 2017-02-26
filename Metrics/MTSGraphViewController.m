@@ -9,6 +9,8 @@
 #import "MTSGraphViewController.h"
 
 @interface MTSGraphViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *startDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *endDateLabel;
 
 @end
 
@@ -16,7 +18,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.navigationItem.title = self.graph.title;
+    // TODO: Use NSDateFormatter here
+    self.startDateLabel.text = self.graph.startDate.description;
+    self.endDateLabel.text = self.graph.endDate.description;
 }
 
 - (void)didReceiveMemoryWarning {

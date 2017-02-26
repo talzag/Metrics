@@ -18,8 +18,12 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
 @property (strong, nonatomic) NSMutableSet <HKQuantityTypeIdentifier>*selectedHealthTypes;
 
 @property (nonatomic) UIView *datePickerContainer;
+@property (nonatomic) UIDatePicker *datePicker;
 @property (nonatomic) NSDateFormatter *dateFormatter;
 @property UITextField *activeTextField;
+
+@property NSDate *startDate;
+@property NSDate *endDate;
 
 @end
 
@@ -38,11 +42,11 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
     
-    NSDate *today = [calendar dateFromComponents:components];
-    NSDate *yesterday = [calendar dateByAddingUnit:NSCalendarUnitDay value:-1 toDate:today options:NSCalendarWrapComponents];
+    self.endDate = [calendar dateFromComponents:components];
+    self.startDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:-1 toDate:self.endDate options:NSCalendarWrapComponents];
     
-    self.startDateTextField.text = [self.dateFormatter stringFromDate:yesterday];
-    self.endDateTextField.text = [self.dateFormatter stringFromDate:today];
+    self.startDateTextField.text = [self.dateFormatter stringFromDate:self.startDate];
+    self.endDateTextField.text = [self.dateFormatter stringFromDate:self.endDate];
     
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter addObserver:self
@@ -64,8 +68,10 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
     [super viewDidDisappear:animated];
 }
 
-- (IBAction)done:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    self.graph.title = self.graphTitleTextField.text;
+    self.graph.startDate = self.startDate;
+    self.graph.endDate = self.endDate;
 }
 
 - (IBAction)cancel:(id)sender {
@@ -84,7 +90,10 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
 // FIXME: Need to take into account that a users' device could rotate & adjust picker container size/frame accordingly
 - (UIView *)datePickerContainer {
     if (!_datePickerContainer) {
-        CGRect frame = CGRectMake(0, CGRectGetMaxY(self.view.frame), self.view.frame.size.width, self.view.frame.size.height * 0.4);
+        CGRect frame = CGRectMake(0,
+                                  CGRectGetMaxY(self.view.frame),
+                                  self.view.frame.size.width,
+                                  self.view.frame.size.height * 0.4);
         
         _datePickerContainer = [[UIView alloc] initWithFrame:frame];
         _datePickerContainer.backgroundColor = [UIColor whiteColor];
@@ -108,17 +117,19 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
         UIColor *defaultTintColor = doneButton.tintColor;
         [doneButton setTintColor:[UIColor whiteColor]];
         
-        UIDatePicker *picker = [[UIDatePicker alloc] init];
-        picker.datePickerMode = UIDatePickerModeDate;
-        picker.maximumDate = [NSDate date];
-        // TODO: Set minimum health store query date as picker.minimumDate
+        _datePicker = [[UIDatePicker alloc] init];
+        _datePicker.datePickerMode = UIDatePickerModeDate;
+        _datePicker.maximumDate = [NSDate date];
         
-        [stackView addArrangedSubview:picker];
-        [picker.leadingAnchor constraintEqualToAnchor:stackViewMargins.leadingAnchor].active = YES;
-        [picker.trailingAnchor constraintEqualToAnchor:stackViewMargins.trailingAnchor].active = YES;
-        [picker addTarget:self action:@selector(datePickerDidChangeValue:) forControlEvents:UIControlEventValueChanged];
+        [stackView addArrangedSubview:_datePicker];
+        [_datePicker.leadingAnchor constraintEqualToAnchor:stackViewMargins.leadingAnchor].active = YES;
+        [_datePicker.trailingAnchor constraintEqualToAnchor:stackViewMargins.trailingAnchor].active = YES;
+        [_datePicker addTarget:self action:@selector(datePickerDidChangeValue:) forControlEvents:UIControlEventValueChanged];
         
-        CGRect barFrame = CGRectMake(0, 0, _datePickerContainer.frame.size.width, doneButton.intrinsicContentSize.height);
+        CGRect barFrame = CGRectMake(0,
+                                     0,
+                                     _datePickerContainer.frame.size.width,
+                                     doneButton.intrinsicContentSize.height);
         UIView *bar = [[UIView alloc] initWithFrame:barFrame];
         
         // Set background to default tint color here
@@ -130,6 +141,12 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
         [self.view addSubview:_datePickerContainer];
     }
     
+    if ([self.activeTextField isEqual:self.endDateTextField]) {
+        _datePicker.minimumDate = self.startDate;
+    } else {
+        _datePicker.minimumDate = nil;
+    }
+    
     return _datePickerContainer;
 }
 
@@ -137,6 +154,12 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
     NSDate *selectedDate = sender.date;
     NSString *formattedDate = [self.dateFormatter stringFromDate:selectedDate];
     self.activeTextField.text = formattedDate;
+    
+    if ([self.activeTextField isEqual:self.startDateTextField]) {
+        self.startDate = selectedDate;
+    } else if ([self.activeTextField isEqual:self.endDateTextField]) {
+        self.endDate = selectedDate;
+    }
 }
 
 - (void)deviceOrientationDidChange:(NSNotification *)notification {
@@ -158,7 +181,10 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
 
 - (void)dismissDatePickerContainer:(UIView *)picker {
     [UIView animateWithDuration:0.25 animations:^{
-        self.datePickerContainer.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame), self.view.frame.size.width, self.view.frame.size.height / 3.0);
+        self.datePickerContainer.frame = CGRectMake(0,
+                                                    CGRectGetMaxY(self.view.frame),
+                                                    self.view.frame.size.width,
+                                                    self.view.frame.size.height / 3.0);
     }];
 }
 
@@ -212,8 +238,16 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
     } else {
         self.activeTextField = textField;
         
+        if (self.graphTitleTextField.isFirstResponder) {
+            [self.graphTitleTextField resignFirstResponder];
+        }
+        
         CGFloat yOffset = CGRectGetMaxY(self.view.frame) - self.datePickerContainer.frame.size.height;
-        CGRect newFrame = CGRectMake(0, yOffset, self.datePickerContainer.frame.size.width, self.datePickerContainer.frame.size.height);
+        CGRect newFrame = CGRectMake(0,
+                                     yOffset,
+                                     self.datePickerContainer.frame.size.width,
+                                     self.datePickerContainer.frame.size.height);
+        
         [self displayDatePickerContainerWithFrame:newFrame];
         
         return NO;
@@ -222,6 +256,8 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    self.activeTextField = self.startDateTextField;
+    
     return YES;
 }
 

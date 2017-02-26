@@ -21,6 +21,5 @@ IB_DESIGNABLE
 @property (nonatomic) BOOL drawIntermediateLines;
 @property (nonatomic) IBInspectable UIColor *topColor;
 @property (nonatomic) IBInspectable UIColor *bottomColor;
-@property (weak) IBOutlet UILabel *titleLabel;
 
 @end

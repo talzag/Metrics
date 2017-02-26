@@ -11,6 +11,7 @@
 
 @interface MTSGraphCollectionViewCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *graphTitleLabel;
 @property (nonatomic) IBOutlet MTSGraphView *graphView;
 
 @end

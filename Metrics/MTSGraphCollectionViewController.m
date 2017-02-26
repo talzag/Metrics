@@ -41,11 +41,36 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"Show Graph"]) {
         MTSGraphViewController *destination = (MTSGraphViewController *)[segue destinationViewController];
-        destination.navigationItem.title = ((MTSGraphCollectionViewCell *) sender).graphView.titleLabel.text;
+        
+        MTSGraphCollectionViewCell *cell = (MTSGraphCollectionViewCell *) sender;
+        NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+        destination.graph = self.graphs[indexPath.row];
+        
     } else if ([segue.identifier isEqualToString:@"Create Graph"]) {
         UINavigationController *navController = (UINavigationController *)[segue destinationViewController];
         MTSGraphCreationViewController *destination = (MTSGraphCreationViewController *)navController.viewControllers.firstObject;
         destination.quantityTypeIdentifiers = self.quantityTypeIdentifiers;
+        
+        MTSGraph *graph = [NSEntityDescription insertNewObjectForEntityForName:[MTSGraph entity].name
+                                                        inManagedObjectContext:self.managedObjectContext];
+        destination.graph = graph;
+    }
+}
+
+- (IBAction)exitFromGraphCreationScene:(UIStoryboardSegue *)segue {
+    MTSGraphCreationViewController *source = (MTSGraphCreationViewController *)segue.sourceViewController;
+    MTSGraph *graph = source.graph;
+    self.graphs = [self.graphs arrayByAddingObject:graph];
+    
+    [self.collectionView reloadData];
+        
+    if (!self.managedObjectContext.hasChanges) {
+        return;
+    }
+    
+    NSError *error;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"%@", error.debugDescription);
     }
 }
 
@@ -60,7 +85,7 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
     MTSGraphCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     MTSGraph *graph = [self.graphs objectAtIndex:[indexPath row]];
-    cell.graphView.titleLabel.text = graph.title;
+    cell.graphTitleLabel.text = graph.title;
     cell.graphView.xAxisTitle = graph.xAxisTitle;
     cell.graphView.yAxisTitle = graph.yAxisTitle;
     cell.graphView.dataPoints = graph.dataPoints;
