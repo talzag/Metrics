@@ -17,6 +17,5 @@
 @property (weak, nonatomic) IBOutlet UITextField *endDateTextField;
 
 @property NSDictionary <NSString *, HKQuantityTypeIdentifier>*quantityTypeIdentifiers;
-@property (readonly) NSSet *selectedHealthMetrics;
 
 @end
