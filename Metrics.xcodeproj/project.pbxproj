@@ -11,6 +11,7 @@
 		E30A6F551E5CFEAF0018F32E /* MTSGraph+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E30A6F521E5CFEAF0018F32E /* MTSGraph+CoreDataClass.m */; };
 		E30A6F561E5CFEAF0018F32E /* MTSGraph+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E30A6F541E5CFEAF0018F32E /* MTSGraph+CoreDataProperties.m */; };
 		E30A6F591E5D00210018F32E /* MTSDataPointsTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E30A6F581E5D00210018F32E /* MTSDataPointsTransformer.m */; };
+		E30AD5DA1E63C31800546103 /* MTSGraph+HKQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = E30AD5D91E63C31800546103 /* MTSGraph+HKQuery.m */; };
 		E3336E681E52918300AD0BC2 /* MTSGraphCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */; };
 		E3336E6B1E5291FC00AD0BC2 /* MTSGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E6A1E5291FC00AD0BC2 /* MTSGraphViewController.m */; };
 		E3784B701E46494D005F87BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784B6F1E46494D005F87BC /* main.m */; };
@@ -123,6 +124,8 @@
 		E30A6F541E5CFEAF0018F32E /* MTSGraph+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTSGraph+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E30A6F571E5D00210018F32E /* MTSDataPointsTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSDataPointsTransformer.h; sourceTree = "<group>"; };
 		E30A6F581E5D00210018F32E /* MTSDataPointsTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSDataPointsTransformer.m; sourceTree = "<group>"; };
+		E30AD5D81E63C31800546103 /* MTSGraph+HKQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTSGraph+HKQuery.h"; sourceTree = "<group>"; };
+		E30AD5D91E63C31800546103 /* MTSGraph+HKQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTSGraph+HKQuery.m"; sourceTree = "<group>"; };
 		E3336E661E52918300AD0BC2 /* MTSGraphCreationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraphCreationViewController.h; sourceTree = "<group>"; };
 		E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphCreationViewController.m; sourceTree = "<group>"; };
 		E3336E691E5291FC00AD0BC2 /* MTSGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraphViewController.h; sourceTree = "<group>"; };
@@ -278,6 +281,8 @@
 				E30A6F521E5CFEAF0018F32E /* MTSGraph+CoreDataClass.m */,
 				E30A6F531E5CFEAF0018F32E /* MTSGraph+CoreDataProperties.h */,
 				E30A6F541E5CFEAF0018F32E /* MTSGraph+CoreDataProperties.m */,
+				E30AD5D81E63C31800546103 /* MTSGraph+HKQuery.h */,
+				E30AD5D91E63C31800546103 /* MTSGraph+HKQuery.m */,
 				E30A6F571E5D00210018F32E /* MTSDataPointsTransformer.h */,
 				E30A6F581E5D00210018F32E /* MTSDataPointsTransformer.m */,
 				E30A6F061E5CAB2D0018F32E /* Metrics.xcdatamodeld */,
@@ -666,6 +671,7 @@
 				E30A6F551E5CFEAF0018F32E /* MTSGraph+CoreDataClass.m in Sources */,
 				E3784B731E46494D005F87BC /* AppDelegate.m in Sources */,
 				E30A6F081E5CAB2D0018F32E /* Metrics.xcdatamodeld in Sources */,
+				E30AD5DA1E63C31800546103 /* MTSGraph+HKQuery.m in Sources */,
 				E3784B701E46494D005F87BC /* main.m in Sources */,
 				E3336E681E52918300AD0BC2 /* MTSGraphCreationViewController.m in Sources */,
 				E3784BD21E466189005F87BC /* MTSGraphView.m in Sources */,

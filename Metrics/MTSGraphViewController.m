@@ -40,35 +40,4 @@
 }
 */
 
-#pragma mark HealthKit
-
-- (void)queryHealthStore:(HKHealthStore * _Nonnull)healthStore
-         forQuantityType:(HKQuantityTypeIdentifier _Nonnull)typeIdentifier
-                fromDate:(NSDate * _Nonnull)startDate
-                  toDate:(NSDate * _Nonnull)endDate
-  usingCompletionHandler:(void (^)(NSArray <HKSample *>*samples)) completionHandler {
-    NSPredicate *predicate = [HKSampleQuery predicateForSamplesWithStartDate:startDate
-                                                                     endDate:endDate
-                                                                     options:HKQueryOptionStrictEndDate];
-
-    HKSampleType *sampleType = [HKSampleType quantityTypeForIdentifier:typeIdentifier];
-
-    HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:sampleType
-                                                           predicate:predicate
-                                                               limit:HKObjectQueryNoLimit
-                                                     sortDescriptors:nil
-                                                      resultsHandler:^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error) {
-                                                          if (!results) {
-                                                              NSLog(@"Error executing query: %@", error.localizedDescription);
-                                                              return;
-                                                          }
-
-                                                          NSLog(@"Number of samples: %lu", [results count]);
-                                                          completionHandler(results);
-                                                      }];
-
-    [self.healthStore executeQuery:query];
-}
-
-
 @end
