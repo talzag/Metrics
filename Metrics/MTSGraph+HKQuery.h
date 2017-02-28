@@ -12,6 +12,6 @@
 
 @interface MTSGraph (HKQuery)
 
-- (void)populateGraphDataByQueryingHealthStore:(HKHealthStore * _Nonnull)healthStore;
+- (void)populateGraphDataByQueryingHealthStore:(HKHealthStore *)healthStore;
 
 @end

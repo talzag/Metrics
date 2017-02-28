@@ -26,11 +26,12 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
     [super viewDidLoad];
     
     NSFetchRequest *request = [MTSGraph fetchRequest];
+    
     NSError *error;
     NSArray *graphs = [self.managedObjectContext executeFetchRequest:request error:&error];
     
     if (graphs == nil) {
-        NSLog(@"Error fetching graphs: %@", error.localizedDescription);
+        NSLog(@"Error fetching graphs: %@", error.debugDescription);
     }
     
     self.graphs = graphs;
@@ -41,6 +42,7 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"Show Graph"]) {
         MTSGraphViewController *destination = (MTSGraphViewController *)[segue destinationViewController];
+        destination.healthStore = self.healthStore;
         
         MTSGraphCollectionViewCell *cell = (MTSGraphCollectionViewCell *) sender;
         NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];

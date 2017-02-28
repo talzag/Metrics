@@ -2,7 +2,7 @@
 //  MTSGraph+CoreDataProperties.m
 //  Metrics
 //
-//  Created by Daniel Strokis on 2/21/17.
+//  Created by Daniel Strokis on 2/28/17.
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
@@ -14,12 +14,13 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"MTSGraph"];
 }
 
-@dynamic title;
-@dynamic yAxisTitle;
-@dynamic xAxisTitle;
 @dynamic dataPoints;
-@dynamic startDate;
 @dynamic endDate;
+@dynamic startDate;
+@dynamic title;
 @dynamic xAxisLabels;
+@dynamic xAxisTitle;
+@dynamic yAxisTitle;
+@dynamic healthTypes;
 
 @end

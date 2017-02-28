@@ -39,6 +39,7 @@
 		E3784BFA1E46D018005F87BC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3784BF91E46D018005F87BC /* HealthKit.framework */; };
 		E3784C031E47DBBB005F87BC /* MTSGraphCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784C021E47DBBB005F87BC /* MTSGraphCollectionViewController.m */; };
 		E3784C061E47DC0E005F87BC /* MTSGraphCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784C051E47DC0E005F87BC /* MTSGraphCollectionViewCell.m */; };
+		E397F9141E662F1800EF0649 /* MTSHealthTypeTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E397F9131E662F1800EF0649 /* MTSHealthTypeTransformer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +176,8 @@
 		E3784C021E47DBBB005F87BC /* MTSGraphCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphCollectionViewController.m; sourceTree = "<group>"; };
 		E3784C041E47DC0E005F87BC /* MTSGraphCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraphCollectionViewCell.h; sourceTree = "<group>"; };
 		E3784C051E47DC0E005F87BC /* MTSGraphCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphCollectionViewCell.m; sourceTree = "<group>"; };
+		E397F9121E662F1800EF0649 /* MTSHealthTypeTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSHealthTypeTransformer.h; sourceTree = "<group>"; };
+		E397F9131E662F1800EF0649 /* MTSHealthTypeTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSHealthTypeTransformer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +288,8 @@
 				E30AD5D91E63C31800546103 /* MTSGraph+HKQuery.m */,
 				E30A6F571E5D00210018F32E /* MTSDataPointsTransformer.h */,
 				E30A6F581E5D00210018F32E /* MTSDataPointsTransformer.m */,
+				E397F9121E662F1800EF0649 /* MTSHealthTypeTransformer.h */,
+				E397F9131E662F1800EF0649 /* MTSHealthTypeTransformer.m */,
 				E30A6F061E5CAB2D0018F32E /* Metrics.xcdatamodeld */,
 			);
 			path = Metrics;
@@ -670,6 +675,7 @@
 				E3784C061E47DC0E005F87BC /* MTSGraphCollectionViewCell.m in Sources */,
 				E30A6F551E5CFEAF0018F32E /* MTSGraph+CoreDataClass.m in Sources */,
 				E3784B731E46494D005F87BC /* AppDelegate.m in Sources */,
+				E397F9141E662F1800EF0649 /* MTSHealthTypeTransformer.m in Sources */,
 				E30A6F081E5CAB2D0018F32E /* Metrics.xcdatamodeld in Sources */,
 				E30AD5DA1E63C31800546103 /* MTSGraph+HKQuery.m in Sources */,
 				E3784B701E46494D005F87BC /* main.m in Sources */,

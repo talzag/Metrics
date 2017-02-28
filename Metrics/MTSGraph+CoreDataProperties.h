@@ -2,7 +2,7 @@
 //  MTSGraph+CoreDataProperties.h
 //  Metrics
 //
-//  Created by Daniel Strokis on 2/21/17.
+//  Created by Daniel Strokis on 2/28/17.
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
@@ -15,13 +15,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<MTSGraph *> *)fetchRequest;
 
-@property (nullable, nonatomic, copy) NSString *title;
-@property (nullable, nonatomic, copy) NSString *yAxisTitle;
-@property (nullable, nonatomic, copy) NSString *xAxisTitle;
 @property (nullable, nonatomic, retain) NSArray *dataPoints;
-@property (nullable, nonatomic, copy) NSDate *startDate;
 @property (nullable, nonatomic, copy) NSDate *endDate;
+@property (nullable, nonatomic, copy) NSDate *startDate;
+@property (nullable, nonatomic, copy) NSString *title;
 @property (nullable, nonatomic, copy) NSString *xAxisLabels;
+@property (nullable, nonatomic, copy) NSString *xAxisTitle;
+@property (nullable, nonatomic, copy) NSString *yAxisTitle;
+@property (nullable, nonatomic, retain) NSSet *healthTypes;
 
 @end
 

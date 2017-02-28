@@ -10,8 +10,15 @@
 
 @implementation MTSGraph (HKQuery)
 
-- (void)populateGraphDataByQueryingHealthStore:(HKHealthStore *)healthStore {
-    
+- (void)populateGraphDataByQueryingHealthStore:(HKHealthStore * _Nonnull)healthStore {
+    for (id ident in self.healthTypes) {
+        if ([ident isKindOfClass:[NSString class]]) {
+            [self queryHealthStore:healthStore forQuantityType:(HKQuantityTypeIdentifier)ident fromDate:self.startDate toDate:self.endDate usingCompletionHandler:^(NSArray<__kindof HKSample *> * _Nullable samples) {
+                NSLog(@"Finished querying for %@", ident);
+            }];
+        }
+        
+    }
 }
 
 - (void)queryHealthStore:(HKHealthStore * _Nonnull)healthStore
