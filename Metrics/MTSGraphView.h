@@ -16,7 +16,7 @@ IB_DESIGNABLE
 
 @property (nonatomic) NSString *yAxisTitle;
 @property (nonatomic) NSString *xAxisTitle;
-@property (nonatomic) NSArray <NSDictionary <NSString *, id> *> *dataPoints;
+@property (nonatomic) NSSet <NSDictionary <NSString *, id> *> *dataPoints;
 
 @property (nonatomic) BOOL drawIntermediateLines;
 @property (nonatomic) IBInspectable UIColor *topColor;

@@ -26,6 +26,7 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
     [super viewDidLoad];
     
     NSFetchRequest *request = [MTSGraph fetchRequest];
+    request.fetchBatchSize = 15;
     
     NSError *error;
     NSArray *graphs = [self.managedObjectContext executeFetchRequest:request error:&error];

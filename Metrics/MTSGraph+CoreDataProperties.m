@@ -16,11 +16,12 @@
 
 @dynamic dataPoints;
 @dynamic endDate;
+@dynamic quantityHealthTypeIdentifiers;
 @dynamic startDate;
 @dynamic title;
 @dynamic xAxisLabels;
 @dynamic xAxisTitle;
 @dynamic yAxisTitle;
-@dynamic healthTypes;
+@dynamic categoryHealthTypeIdentifiers;
 
 @end

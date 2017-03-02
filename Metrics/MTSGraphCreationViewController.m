@@ -72,7 +72,7 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
     self.graph.title = self.graphTitleTextField.text;
     self.graph.startDate = self.startDate;
     self.graph.endDate = self.endDate;
-    self.graph.healthTypes = [NSSet setWithSet:self.selectedHealthTypes];
+    self.graph.quantityHealthTypeIdentifiers = [NSSet setWithSet:self.selectedHealthTypes];
 }
 
 - (IBAction)cancel:(id)sender {

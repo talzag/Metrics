@@ -24,6 +24,7 @@
     // TODO: Use NSDateFormatter here
     self.startDateLabel.text = self.graph.startDate.description;
     self.endDateLabel.text = self.graph.endDate.description;
+    self.graphView.dataPoints = self.graph.dataPoints;
     
     [self.graph populateGraphDataByQueryingHealthStore:self.healthStore];
 }

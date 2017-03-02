@@ -57,13 +57,13 @@ NSString *MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
     _topColor = [UIColor whiteColor];
     _bottomColor = [UIColor whiteColor];
     _needsDataPointsDisplay = NO;
-    _dataPoints = [NSArray array];
+    _dataPoints = [NSSet set];
     _graphTopMarginPercent = _graphBottomMarginPercent = 0.15;
     _graphLeftRightMarginPercent = 0.05;
     _drawIntermediateLines = YES;
 }
 
-- (void)setDataPoints:(NSArray<NSDictionary<NSString *,id> *> *)dataPoints {
+- (void)setDataPoints:(NSSet<NSDictionary<NSString *,id> *> *)dataPoints {
     _dataPoints = dataPoints;
     
     _needsDataPointsDisplay = [_dataPoints count] > 0;
@@ -115,7 +115,11 @@ NSString *MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
 - (CGFloat)columnWidthForArraySize:(NSInteger)numberOfElements {
     CGFloat graphWidth = self.bounds.size.width - self.actualGraphLeftRightMargin * 2.0;
     numberOfElements--;
-    return graphWidth / numberOfElements;
+    if (numberOfElements) {
+        return graphWidth / numberOfElements;
+    } else {
+        return graphWidth;
+    }
 }
 
 - (CGFloat)positionOnXAxisForValueAtIndex:(int)index fromArrayOfSize:(NSInteger)size {
@@ -128,7 +132,7 @@ NSString *MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
     return self.actualGraphHeight - ratio * height;
 }
 
-- (void)plotDataPoints:(NSArray<NSDictionary<NSString *,id> *> *)dataPoints onGraphInRect:(CGRect)rect withContext:(CGContextRef)context {
+- (void)plotDataPoints:(NSSet<NSDictionary<NSString *,id> *> *)dataPoints onGraphInRect:(CGRect)rect withContext:(CGContextRef)context {
     CGFloat maxValue = 0.0;
     for (NSDictionary <NSString *, id> *data in dataPoints) {
         NSArray *values = [data objectForKey:MTSGraphDataPointsKey];

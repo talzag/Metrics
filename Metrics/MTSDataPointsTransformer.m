@@ -16,7 +16,7 @@
 
 
 + (Class)transformedValueClass {
-    return [NSArray class];
+    return [NSSet class];
 }
 
 
