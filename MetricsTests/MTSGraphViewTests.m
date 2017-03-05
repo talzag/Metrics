@@ -41,53 +41,69 @@
 }
 
 - (void)testDrawIntermediateLines {
-    
+    XCTAssertTrue([[self graphView] drawIntermediateLines], @"Default value for drawIntermediateLines should be YES");
 }
 
 - (void)testTopColor {
-    
+    XCTAssertEqual([UIColor whiteColor], [[self graphView] topColor], @"Default value for topColor should be [UIColor whiteColor]");
 }
 
 - (void)testBottomColor {
-    
+    XCTAssertEqual([UIColor whiteColor], [[self graphView] bottomColor], @"Default value for bottomColor should be [UIColor whiteColor]");
 }
 
 - (void)testGraphTopMarginPercent {
-    
+    XCTAssertEqual(0.15, [[self graphView] graphTopMarginPercent], @"Default value for graphTopMarginPercent should be 0.15");
 }
 
 - (void)testGraphBottomMarginPercent {
-    
+    XCTAssertEqual(0.15, [[self graphView] graphBottomMarginPercent], @"Default value for graphBottomMarginPercent should be 0.15");
 }
 
 - (void)testGraphLeftRightMarginPercent {
-    
-}
-
-- (void)testActualGraphHeight {
-    
-}
-
-- (void)testActualGraphWidth {
-    
+    XCTAssertEqual(0.05, [[self graphView] graphLeftRightMarginPercent], @"Default value for graphLeftRightMarginPercent should be 0.05");
 }
 
 - (void)testActualGraphTopMargin {
-    
+    // 200 * 0.15 = 30
+    XCTAssertEqual(30, [[self graphView] actualGraphTopMargin], @"Default value for actualGraphTopMargin should be 30");
 }
 
 - (void)testActualGraphBottomMargin {
-    
+    // 200 * 0.15 = 30
+    XCTAssertEqual(30, [[self graphView] actualGraphBottomMargin], @"Default value for actualGraphBottomMargin should be 30");
+}
+
+- (void)testActualGraphHeight {
+    // 200 - 30 = 170
+    XCTAssertEqual(170, [[self graphView] actualGraphHeight], @"Default value for actualGraphHeight should be 170");
 }
 
 - (void)testActualGraphLeftRightMargin {
+    // 300 * 0.05 = 15
+    XCTAssertEqual(15, [[self graphView] actualGraphLeftRightMargin], @"Default value for actualGraphLeftRightMargin should be 15");
+}
+
+- (void)testActualGraphWidth {
+    // 300 - 30 = 270
+    XCTAssertEqual(270, [[self graphView] actualGraphWidth], @"Default value for actualGraphWidth should be 270");
+}
+
+- (void)XtestColumnWidth {
     
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
+- (void)XtestPositionOnXAxis {
+    
+}
+
+- (void)XtestPositionOnYAxis {
+    
+}
+
+- (void)XtestGraphDrawingPerformance {
     [self measureBlock:^{
-        // Put the code you want to measure the time of here.
+    
     }];
 }
 
