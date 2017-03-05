@@ -14,6 +14,7 @@
 		E30AD5DA1E63C31800546103 /* MTSGraph+HKQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = E30AD5D91E63C31800546103 /* MTSGraph+HKQuery.m */; };
 		E3336E681E52918300AD0BC2 /* MTSGraphCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */; };
 		E3336E6B1E5291FC00AD0BC2 /* MTSGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E6A1E5291FC00AD0BC2 /* MTSGraphViewController.m */; };
+		E37362211E6B9D240072DFBC /* MTSGraphViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E37362201E6B9D240072DFBC /* MTSGraphViewTests.m */; };
 		E3784B701E46494D005F87BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784B6F1E46494D005F87BC /* main.m */; };
 		E3784B731E46494D005F87BC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784B721E46494D005F87BC /* AppDelegate.m */; };
 		E3784B791E46494D005F87BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3784B771E46494D005F87BC /* Main.storyboard */; };
@@ -131,6 +132,8 @@
 		E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphCreationViewController.m; sourceTree = "<group>"; };
 		E3336E691E5291FC00AD0BC2 /* MTSGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraphViewController.h; sourceTree = "<group>"; };
 		E3336E6A1E5291FC00AD0BC2 /* MTSGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphViewController.m; sourceTree = "<group>"; };
+		E37362201E6B9D240072DFBC /* MTSGraphViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphViewTests.m; sourceTree = "<group>"; };
+		E37362221E6BA3B70072DFBC /* MTSGraphView+Methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTSGraphView+Methods.h"; sourceTree = "<group>"; };
 		E3784B6B1E46494D005F87BC /* Metrics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Metrics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3784B6F1E46494D005F87BC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E3784B711E46494D005F87BC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -274,6 +277,7 @@
 				E3336E6A1E5291FC00AD0BC2 /* MTSGraphViewController.m */,
 				E3336E661E52918300AD0BC2 /* MTSGraphCreationViewController.h */,
 				E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */,
+				E37362221E6BA3B70072DFBC /* MTSGraphView+Methods.h */,
 				E3784BD01E466189005F87BC /* MTSGraphView.h */,
 				E3784BD11E466189005F87BC /* MTSGraphView.m */,
 				E3784B7A1E46494D005F87BC /* Assets.xcassets */,
@@ -308,6 +312,7 @@
 			children = (
 				E3784B881E46494E005F87BC /* MetricsTests.m */,
 				E3784B8A1E46494E005F87BC /* Info.plist */,
+				E37362201E6B9D240072DFBC /* MTSGraphViewTests.m */,
 			);
 			path = MetricsTests;
 			sourceTree = "<group>";
@@ -689,6 +694,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E37362211E6B9D240072DFBC /* MTSGraphViewTests.m in Sources */,
 				E3784B891E46494E005F87BC /* MetricsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

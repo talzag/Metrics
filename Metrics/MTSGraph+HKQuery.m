@@ -98,15 +98,19 @@
     
     HKCategoryType *sampleType = [HKSampleType categoryTypeForIdentifier:typeIdentifier];
     
-    HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:sampleType predicate:predicate limit:HKObjectQueryNoLimit sortDescriptors:nil resultsHandler:^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error) {
-        if (!results) {
-            NSLog(@"Error executing query: %@", error.localizedDescription);
-            return;
-        }
-        
-        NSLog(@"Number of samples: %lu", [results count]);
-        completionHandler(results);
-    }];
+    HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:sampleType
+                                                           predicate:predicate
+                                                               limit:HKObjectQueryNoLimit
+                                                     sortDescriptors:nil
+                                                      resultsHandler:^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error) {
+                                                        if (!results) {
+                                                            NSLog(@"Error executing query: %@", error.localizedDescription);
+                                                            return;
+                                                        }
+                                                        
+                                                        NSLog(@"Number of samples: %lu", [results count]);
+                                                        completionHandler(results);
+                                                    }];
     
     [healthStore executeQuery:query];
 }

@@ -7,25 +7,10 @@
 //
 
 #import "MTSGraphView.h"
+#import "MTSGraphView+Methods.h"
 
 NSString *MTSGraphLineColorKey = @"com.dstrokis.Mtrcs.lineColor";
 NSString *MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
-
-@interface MTSGraphView ()
-
-@property (nonatomic) BOOL needsDataPointsDisplay;
-
-@property (nonatomic) CGFloat graphTopMarginPercent;
-@property (nonatomic) CGFloat graphBottomMarginPercent;
-@property (nonatomic) CGFloat graphLeftRightMarginPercent;
-
-@property (readonly) CGFloat actualGraphHeight;
-@property (readonly) CGFloat actualGraphWidth;
-@property (readonly) CGFloat actualGraphTopMargin;
-@property (readonly) CGFloat actualGraphBottomMargin;
-@property (readonly) CGFloat actualGraphLeftRightMargin;
-
-@end
 
 @implementation MTSGraphView
 
