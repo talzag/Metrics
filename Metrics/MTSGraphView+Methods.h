@@ -22,4 +22,8 @@
 @property (readonly) CGFloat actualGraphBottomMargin;
 @property (readonly) CGFloat actualGraphLeftRightMargin;
 
+- (CGFloat)columnWidthForArraySize:(NSInteger)numberOfElements;
+- (CGFloat)positionOnXAxisForValueAtIndex:(int)index fromArrayOfSize:(NSInteger)size;
+- (CGFloat)positionOnYAxisForValue:(CGFloat)value scaledForMaxValue:(CGFloat)maxValue;
+
 @end

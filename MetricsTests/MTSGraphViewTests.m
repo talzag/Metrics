@@ -16,6 +16,9 @@
 
 @end
 
+/**
+ These tests are really just for me to make sure that my math is correct.
+ */
 @implementation MTSGraphViewTests
 
 - (void)setUp {
@@ -38,30 +41,6 @@
     [self setTestData:nil];
     
     [super tearDown];
-}
-
-- (void)testDrawIntermediateLines {
-    XCTAssertTrue([[self graphView] drawIntermediateLines], @"Default value for drawIntermediateLines should be YES");
-}
-
-- (void)testTopColor {
-    XCTAssertEqual([UIColor whiteColor], [[self graphView] topColor], @"Default value for topColor should be [UIColor whiteColor]");
-}
-
-- (void)testBottomColor {
-    XCTAssertEqual([UIColor whiteColor], [[self graphView] bottomColor], @"Default value for bottomColor should be [UIColor whiteColor]");
-}
-
-- (void)testGraphTopMarginPercent {
-    XCTAssertEqual(0.15, [[self graphView] graphTopMarginPercent], @"Default value for graphTopMarginPercent should be 0.15");
-}
-
-- (void)testGraphBottomMarginPercent {
-    XCTAssertEqual(0.15, [[self graphView] graphBottomMarginPercent], @"Default value for graphBottomMarginPercent should be 0.15");
-}
-
-- (void)testGraphLeftRightMarginPercent {
-    XCTAssertEqual(0.05, [[self graphView] graphLeftRightMarginPercent], @"Default value for graphLeftRightMarginPercent should be 0.05");
 }
 
 - (void)testActualGraphTopMargin {
@@ -89,21 +68,31 @@
     XCTAssertEqual(270, [[self graphView] actualGraphWidth], @"Default value for actualGraphWidth should be 270");
 }
 
-- (void)XtestColumnWidth {
+- (void)testColumnWidth {
+    // 300 - 15 * 2 = 270
+    XCTAssertEqual(270, [[self graphView] columnWidthForArraySize:0]);
+    
+    // 300 - 15 * 2 = 270 / 1 = 270
+    XCTAssertEqual(270, [[self graphView] columnWidthForArraySize:1]);
+    
+    // 300 - 15 * 2 = 270 / 2 = 135
+    XCTAssertEqual(135, [[self graphView] columnWidthForArraySize:2]);
+    
+    // 300 - 15 * 2 = 270 / 3 = 90
+    XCTAssertEqual(90, [[self graphView] columnWidthForArraySize:3]);
+}
+
+- (void)testPositionOnXAxis {
     
 }
 
-- (void)XtestPositionOnXAxis {
+- (void)testPositionOnYAxis {
     
 }
 
-- (void)XtestPositionOnYAxis {
-    
-}
-
-- (void)XtestGraphDrawingPerformance {
+- (void)testGraphDrawingPerformance {
     [self measureBlock:^{
-    
+        
     }];
 }
 

@@ -99,7 +99,7 @@ NSString *MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
 
 - (CGFloat)columnWidthForArraySize:(NSInteger)numberOfElements {
     CGFloat graphWidth = self.bounds.size.width - self.actualGraphLeftRightMargin * 2.0;
-    numberOfElements--;
+//    numberOfElements--;
     if (numberOfElements) {
         return graphWidth / numberOfElements;
     } else {
