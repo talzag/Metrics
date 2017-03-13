@@ -10,6 +10,7 @@
 
 extern NSString *MTSGraphLineColorKey;
 extern NSString *MTSGraphDataPointsKey;
+extern NSString *MTSGraphDataIdentifierKey;
 
 IB_DESIGNABLE
 @interface MTSGraphView : UIView

@@ -48,6 +48,7 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
         MTSGraphCollectionViewCell *cell = (MTSGraphCollectionViewCell *) sender;
         NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
         destination.graph = self.graphs[indexPath.row];
+        destination.quantityTypeIdentifiers = self.quantityTypeIdentifiers;
         
     } else if ([segue.identifier isEqualToString:@"Create Graph"]) {
         UINavigationController *navController = (UINavigationController *)[segue destinationViewController];

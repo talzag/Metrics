@@ -11,6 +11,7 @@
 
 NSString *MTSGraphLineColorKey = @"com.dstrokis.Mtrcs.lineColor";
 NSString *MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
+NSString *MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-identifier";
 
 @implementation MTSGraphView
 

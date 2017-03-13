@@ -28,14 +28,11 @@
                 
                 NSDictionary *graphLine = @{
                                             MTSGraphLineColorKey: [UIColor blueColor],
-                                            MTSGraphDataPointsKey: [NSArray arrayWithArray:dataPoints]
+                                            MTSGraphDataPointsKey: [NSArray arrayWithArray:dataPoints],
+                                            MTSGraphDataIdentifierKey: samples.firstObject.sampleType.identifier
                                             };
                 
-                if (self.dataPoints) {
-                    self.dataPoints = [self.dataPoints setByAddingObject:graphLine];
-                } else {
-                    self.dataPoints = [NSSet setWithObject:graphLine];
-                }
+                self.dataPoints = [NSSet setWithObject:graphLine];
                 
                 NSError *error;
                 if (![self.managedObjectContext save:&error]) {

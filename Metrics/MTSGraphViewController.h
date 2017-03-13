@@ -16,5 +16,6 @@
 @property HKHealthStore *healthStore;
 @property MTSGraph *graph;
 @property (weak, nonatomic) IBOutlet MTSGraphView *graphView;
+@property NSDictionary <NSString *, HKQuantityTypeIdentifier>*quantityTypeIdentifiers;
 
 @end
