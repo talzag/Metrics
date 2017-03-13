@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MTSGraph+CoreDataProperties.h"
 #import "MTSGraphView.h"
+#import "MTSGraph+CoreDataClass.h"
 @import HealthKit;
 
-@interface MTSGraphViewController : UIViewController
+@interface MTSGraphViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property HKHealthStore *healthStore;
 @property MTSGraph *graph;

@@ -7,8 +7,11 @@
 //
 
 #import <XCTest/XCTest.h>
+@import CoreData;
 
 @interface MetricsTests : XCTestCase
+
+@property NSManagedObjectContext *managedObjectContext;
 
 @end
 

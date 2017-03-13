@@ -19,7 +19,6 @@
                           fromDate:self.startDate
                             toDate:self.endDate
             usingCompletionHandler:^(NSArray<__kindof HKSample *> * _Nullable samples) {
-                NSLog(@"Finished querying for %@", ident);
                 
                 NSMutableArray *dataPoints = [NSMutableArray array];
                 for (HKQuantitySample *sample in samples) {
@@ -68,7 +67,7 @@
                                                                      endDate:endDate
                                                                      options:HKQueryOptionNone];
     
-    HKSampleType *sampleType = [HKSampleType quantityTypeForIdentifier:typeIdentifier];
+    HKQuantityType *sampleType = [HKSampleType quantityTypeForIdentifier:typeIdentifier];
     
     HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:sampleType
                                                            predicate:predicate
@@ -80,7 +79,6 @@
                                                               return;
                                                           }
                                                           
-                                                          NSLog(@"Number of samples: %lu", [results count]);
                                                           completionHandler(results);
                                                       }];
     
@@ -108,7 +106,6 @@
                                                             return;
                                                         }
                                                         
-                                                        NSLog(@"Number of samples: %lu", [results count]);
                                                         completionHandler(results);
                                                     }];
     

@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E30A6F081E5CAB2D0018F32E /* Metrics.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E30A6F061E5CAB2D0018F32E /* Metrics.xcdatamodeld */; };
-		E30A6F551E5CFEAF0018F32E /* MTSGraph+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E30A6F521E5CFEAF0018F32E /* MTSGraph+CoreDataClass.m */; };
-		E30A6F561E5CFEAF0018F32E /* MTSGraph+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E30A6F541E5CFEAF0018F32E /* MTSGraph+CoreDataProperties.m */; };
 		E30A6F591E5D00210018F32E /* MTSDataPointsTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E30A6F581E5D00210018F32E /* MTSDataPointsTransformer.m */; };
 		E30AD5DA1E63C31800546103 /* MTSGraph+HKQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = E30AD5D91E63C31800546103 /* MTSGraph+HKQuery.m */; };
 		E3336E681E52918300AD0BC2 /* MTSGraphCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */; };
@@ -120,10 +118,6 @@
 /* Begin PBXFileReference section */
 		E30A6F071E5CAB2D0018F32E /* Metrics.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Metrics.xcdatamodel; sourceTree = "<group>"; };
 		E30A6F091E5CAC240018F32E /* Metrics-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Metrics-Bridging-Header.h"; sourceTree = "<group>"; };
-		E30A6F511E5CFEAF0018F32E /* MTSGraph+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTSGraph+CoreDataClass.h"; sourceTree = "<group>"; };
-		E30A6F521E5CFEAF0018F32E /* MTSGraph+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTSGraph+CoreDataClass.m"; sourceTree = "<group>"; };
-		E30A6F531E5CFEAF0018F32E /* MTSGraph+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTSGraph+CoreDataProperties.h"; sourceTree = "<group>"; };
-		E30A6F541E5CFEAF0018F32E /* MTSGraph+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTSGraph+CoreDataProperties.m"; sourceTree = "<group>"; };
 		E30A6F571E5D00210018F32E /* MTSDataPointsTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSDataPointsTransformer.h; sourceTree = "<group>"; };
 		E30A6F581E5D00210018F32E /* MTSDataPointsTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSDataPointsTransformer.m; sourceTree = "<group>"; };
 		E30AD5D81E63C31800546103 /* MTSGraph+HKQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTSGraph+HKQuery.h"; sourceTree = "<group>"; };
@@ -284,10 +278,6 @@
 				E3784B7C1E46494D005F87BC /* LaunchScreen.storyboard */,
 				E3784B7F1E46494D005F87BC /* Info.plist */,
 				E3784B6E1E46494D005F87BC /* Supporting Files */,
-				E30A6F511E5CFEAF0018F32E /* MTSGraph+CoreDataClass.h */,
-				E30A6F521E5CFEAF0018F32E /* MTSGraph+CoreDataClass.m */,
-				E30A6F531E5CFEAF0018F32E /* MTSGraph+CoreDataProperties.h */,
-				E30A6F541E5CFEAF0018F32E /* MTSGraph+CoreDataProperties.m */,
 				E30AD5D81E63C31800546103 /* MTSGraph+HKQuery.h */,
 				E30AD5D91E63C31800546103 /* MTSGraph+HKQuery.m */,
 				E30A6F571E5D00210018F32E /* MTSDataPointsTransformer.h */,
@@ -584,6 +574,7 @@
 					};
 					E3784BE51E4684FD005F87BC = {
 						DevelopmentTeam = SWP5WTP5JJ;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -676,9 +667,7 @@
 			files = (
 				E30A6F591E5D00210018F32E /* MTSDataPointsTransformer.m in Sources */,
 				E3336E6B1E5291FC00AD0BC2 /* MTSGraphViewController.m in Sources */,
-				E30A6F561E5CFEAF0018F32E /* MTSGraph+CoreDataProperties.m in Sources */,
 				E3784C061E47DC0E005F87BC /* MTSGraphCollectionViewCell.m in Sources */,
-				E30A6F551E5CFEAF0018F32E /* MTSGraph+CoreDataClass.m in Sources */,
 				E3784B731E46494D005F87BC /* AppDelegate.m in Sources */,
 				E397F9141E662F1800EF0649 /* MTSHealthTypeTransformer.m in Sources */,
 				E30A6F081E5CAB2D0018F32E /* Metrics.xcdatamodeld in Sources */,
@@ -1086,7 +1075,9 @@
 		E3784BEC1E4684FD005F87BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = SWP5WTP5JJ;
@@ -1098,6 +1089,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.MetricsKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos3.1;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1108,7 +1100,9 @@
 		E3784BED1E4684FD005F87BC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = SWP5WTP5JJ;
@@ -1120,6 +1114,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.MetricsKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos3.1;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";

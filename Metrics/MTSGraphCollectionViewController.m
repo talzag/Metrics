@@ -10,7 +10,7 @@
 #import "MTSGraphCollectionViewCell.h"
 #import "MTSGraphViewController.h"
 #import "MTSGraphCreationViewController.h"
-#import "MTSGraph+CoreDataProperties.h"
+#import "MTSGraph+CoreDataClass.h"
 
 @interface MTSGraphCollectionViewController ()
 

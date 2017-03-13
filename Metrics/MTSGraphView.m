@@ -14,14 +14,6 @@ NSString *MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
 
 @implementation MTSGraphView
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [self initalizeValues];
-    }
-    return  self;
-}
-
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -78,6 +70,29 @@ NSString *MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
     return self.bounds.size.width - self.actualGraphLeftRightMargin * 2.0;
 }
 
+- (CGFloat)columnWidthForArraySize:(NSUInteger)numberOfElements {
+    CGFloat graphWidth = self.bounds.size.width - self.actualGraphLeftRightMargin * 2.0;
+    if (numberOfElements) {
+        return graphWidth / numberOfElements;
+    } else {
+        return graphWidth;
+    }
+}
+
+- (CGFloat)positionOnXAxisForValueAtIndex:(int)index fromArrayOfSize:(NSInteger)size {
+    return [self columnWidthForArraySize:size] * index + self.actualGraphLeftRightMargin;
+}
+
+- (CGFloat)positionOnYAxisForValue:(CGFloat)value scaledForMaxValue:(CGFloat)maxValue {
+    if (!value || !maxValue) {
+        return 0;
+    }
+    
+    CGFloat height = self.actualGraphHeight - self.actualGraphTopMargin;
+    CGFloat ratio = value / maxValue;
+    return self.actualGraphHeight - ratio * height;
+}
+
 - (void)drawBackgroundInRect:(CGRect)rect withContext:(CGContextRef)context {
     if ([_topColor isEqual:_bottomColor] && ![_topColor isEqual:[UIColor clearColor]]) {
         [_topColor setFill];
@@ -95,26 +110,6 @@ NSString *MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
         CGColorSpaceRelease(colorSpace);
         CGGradientRelease(gradient);
     }
-}
-
-- (CGFloat)columnWidthForArraySize:(NSInteger)numberOfElements {
-    CGFloat graphWidth = self.bounds.size.width - self.actualGraphLeftRightMargin * 2.0;
-//    numberOfElements--;
-    if (numberOfElements) {
-        return graphWidth / numberOfElements;
-    } else {
-        return graphWidth;
-    }
-}
-
-- (CGFloat)positionOnXAxisForValueAtIndex:(int)index fromArrayOfSize:(NSInteger)size {
-    return [self columnWidthForArraySize:size] * index + self.actualGraphLeftRightMargin;
-}
-
-- (CGFloat)positionOnYAxisForValue:(CGFloat)value scaledForMaxValue:(CGFloat)maxValue {
-    CGFloat height = self.actualGraphHeight - self.actualGraphTopMargin;
-    CGFloat ratio = value / maxValue;
-    return self.actualGraphHeight - ratio * height;
 }
 
 - (void)plotDataPoints:(NSSet<NSDictionary<NSString *,id> *> *)dataPoints onGraphInRect:(CGRect)rect withContext:(CGContextRef)context {

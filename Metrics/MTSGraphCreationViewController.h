@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MTSGraph+CoreDataProperties.h"
+#import "MTSGraph+CoreDataClass.h"
+
 @import HealthKit;
 
 @interface MTSGraphCreationViewController : UIViewController
