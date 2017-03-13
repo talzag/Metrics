@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 @import CoreData;
+@import HealthKit;
 
 #import "MTSGraph+CoreDataClass.h"
 #import "MTSGraphView.h"
@@ -35,7 +36,7 @@
 - (NSPersistentStoreCoordinator *)coordinator {
     if (!_coordinator) {
         NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self model]];
-        [coordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:nil]
+        [coordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:nil];
         
         _coordinator = coordinator;
     }
@@ -63,7 +64,7 @@
     [super tearDown];
 }
 
-- (void)testThatGraphDataIsTransformedCorrectly {
+- (void)testThatGraphDataIsSaved {
     NSDictionary *data = @{
                            MTSGraphLineColorKey: [UIColor blueColor],
                            MTSGraphDataPointsKey: @[@25, @50, @75, @100, @50, @75, @25]
@@ -71,25 +72,42 @@
     NSSet *dataPoints = [NSSet setWithObject:data];
     
     MTSGraph *graph = [[MTSGraph alloc] initWithContext:[self managedObjectContext]];
-    XCTAssertNotNil(graph);
-    
     graph.dataPoints = dataPoints;
+    
     [[self managedObjectContext] save:nil];
     
     NSManagedObjectID *graphID = [graph objectID];
-    graph = nil;
-    
     MTSGraph *copy = [[self managedObjectContext] objectWithID:graphID];
-    
     NSSet *savedDataPoints = [copy dataPoints];
     NSDictionary *savedData = [savedDataPoints anyObject];
     
+    UIColor *originalColor = [data objectForKey:MTSGraphLineColorKey];
     UIColor *color = [savedData objectForKey:MTSGraphLineColorKey];
-    XCTAssertEqualObjects(color, [UIColor blueColor]);
+    XCTAssertEqualObjects(color, originalColor);
     
     NSArray *original = [data objectForKey:MTSGraphDataPointsKey];
     NSArray *points = [savedData objectForKey:MTSGraphDataPointsKey];
     XCTAssertEqualObjects(points, original);
+}
+
+- (void)testThatGraphHealthIdentifiersAreSaved {
+    NSSet *quantityIdents = [NSSet setWithObjects:HKQuantityTypeIdentifierDietaryWater, HKQuantityTypeIdentifierActiveEnergyBurned, nil];
+    NSSet *categoryIdents = [NSSet setWithObjects:HKCategoryTypeIdentifierSleepAnalysis, nil];
+    
+    MTSGraph *graph = [[MTSGraph alloc] initWithContext:[self managedObjectContext]];
+    [graph setQuantityHealthTypeIdentifiers:quantityIdents];
+    [graph setCategoryHealthTypeIdentifiers: categoryIdents];
+    
+    [[self managedObjectContext] save:nil];
+    
+    NSManagedObjectID *graphID = [graph objectID];
+    MTSGraph *copy = [[self managedObjectContext] objectWithID:graphID];
+    
+    NSSet* copyQuantityIdents = [copy quantityHealthTypeIdentifiers];
+    XCTAssertEqualObjects(quantityIdents, copyQuantityIdents);
+    
+    NSSet* copyCategoryIdents = [graph categoryHealthTypeIdentifiers];
+    XCTAssertEqualObjects(categoryIdents, copyCategoryIdents);
 }
 
 @end
