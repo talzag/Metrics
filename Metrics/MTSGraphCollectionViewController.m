@@ -54,8 +54,7 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
         MTSGraphCreationViewController *destination = (MTSGraphCreationViewController *)navController.viewControllers.firstObject;
         destination.quantityTypeIdentifiers = self.quantityTypeIdentifiers;
         
-        MTSGraph *graph = [NSEntityDescription insertNewObjectForEntityForName:[MTSGraph entity].name
-                                                        inManagedObjectContext:self.managedObjectContext];
+        MTSGraph *graph = [[MTSGraph alloc] initWithContext:self.managedObjectContext];
         destination.graph = graph;
     }
 }
@@ -78,7 +77,6 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
 }
 
 #pragma mark <UICollectionViewDataSource>
-
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [self.graphs count];

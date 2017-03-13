@@ -10,6 +10,7 @@
 		E30A6F081E5CAB2D0018F32E /* Metrics.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E30A6F061E5CAB2D0018F32E /* Metrics.xcdatamodeld */; };
 		E30A6F591E5D00210018F32E /* MTSDataPointsTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E30A6F581E5D00210018F32E /* MTSDataPointsTransformer.m */; };
 		E30AD5DA1E63C31800546103 /* MTSGraph+HKQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = E30AD5D91E63C31800546103 /* MTSGraph+HKQuery.m */; };
+		E314D9001E761C50007AC00B /* Metrics.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E30A6F061E5CAB2D0018F32E /* Metrics.xcdatamodeld */; };
 		E3336E681E52918300AD0BC2 /* MTSGraphCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */; };
 		E3336E6B1E5291FC00AD0BC2 /* MTSGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E6A1E5291FC00AD0BC2 /* MTSGraphViewController.m */; };
 		E37362211E6B9D240072DFBC /* MTSGraphViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E37362201E6B9D240072DFBC /* MTSGraphViewTests.m */; };
@@ -683,6 +684,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E314D9001E761C50007AC00B /* Metrics.xcdatamodeld in Sources */,
 				E37362211E6B9D240072DFBC /* MTSGraphViewTests.m in Sources */,
 				E3784B891E46494E005F87BC /* MetricsTests.m in Sources */,
 			);
