@@ -31,7 +31,8 @@
 
 - (NSManagedObjectModel *)model {
     if (!_model) {
-        NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Metrics" withExtension:@"momd"];
+        NSBundle *metricsKit = [NSBundle bundleWithIdentifier:@"com.dstrokis.MetricsKit"];
+        NSURL *modelURL = [metricsKit URLForResource:@"Metrics" withExtension:@"momd"];
         NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
         _model = model;
     }
