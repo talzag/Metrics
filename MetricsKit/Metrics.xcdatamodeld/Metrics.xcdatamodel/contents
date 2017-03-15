@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16E183b" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="1.0">
-    <entity name="MTSGraph" representedClassName="MTSGraph" syncable="YES" codeGenerationType="class">
+    <entity name="MTSGraph" representedClassName="MTSGraph" syncable="YES">
         <attribute name="categoryHealthTypeIdentifiers" optional="YES" attributeType="Transformable" valueTransformerName="MTSHealthTypeTransformer" customClassName="NSSet" syncable="YES"/>
         <attribute name="dataPoints" optional="YES" attributeType="Transformable" valueTransformerName="MTSDataPointsTransformer" customClassName="NSSet" syncable="YES"/>
         <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
