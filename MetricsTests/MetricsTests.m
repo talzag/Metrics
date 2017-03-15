@@ -10,8 +10,7 @@
 @import CoreData;
 @import HealthKit;
 
-#import "MTSGraph+CoreDataClass.h"
-#import "MTSGraphView.h"
+#import "MetricsKit.h"
 
 @interface MetricsTests : XCTestCase
 

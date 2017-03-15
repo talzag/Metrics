@@ -24,15 +24,15 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>MetricsKit copy.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
-		</dict>
-		<key>MetricsKit.xcscheme</key>
+		<key>MetricsKit iOS.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>4</integer>
+		</dict>
+		<key>MetricsKitTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -63,6 +63,11 @@
 			<true/>
 		</dict>
 		<key>E3784BE51E4684FD005F87BC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E38AE1871E78E798001ABE40</key>
 		<dict>
 			<key>primary</key>
 			<true/>
