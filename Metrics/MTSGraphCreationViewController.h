@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MTSGraph+CoreDataClass.h"
+#import <MetricsKit/MetricsKit.h>
 
 @import HealthKit;
 

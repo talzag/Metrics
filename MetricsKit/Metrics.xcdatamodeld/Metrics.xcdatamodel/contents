@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16E183b" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="1.0">
+    <entity name="MTSGraph" representedClassName="MTSGraph" syncable="YES" codeGenerationType="class">
+        <attribute name="categoryHealthTypeIdentifiers" optional="YES" attributeType="Transformable" valueTransformerName="MTSHealthTypeTransformer" customClassName="NSSet" syncable="YES"/>
+        <attribute name="dataPoints" optional="YES" attributeType="Transformable" valueTransformerName="MTSDataPointsTransformer" customClassName="NSSet" syncable="YES"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="quantityHealthTypeIdentifiers" optional="YES" attributeType="Transformable" valueTransformerName="MTSHealthTypeTransformer" customClassName="NSSet" syncable="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="xAxisLabels" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="xAxisTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="yAxisTitle" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="MTSGraph" positionX="-63" positionY="-18" width="128" height="180"/>
+    </elements>
+</model>

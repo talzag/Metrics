@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <HealthKit/HealthKit.h>
-#import "MTSGraph+CoreDataClass.h"
+#import "MTSGraph+CoreDataProperties.h"
 
 @interface MTSGraph (HKQuery)
 

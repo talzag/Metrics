@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MetricsKit/MetricsKit.h>
 
 @import HealthKit;
 @import CoreData;

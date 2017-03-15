@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MTSGraphView.h"
-#import "MTSGraph+CoreDataClass.h"
+#import <MetricsKit/MetricsKit.h>
+
 @import HealthKit;
 
 @interface MTSGraphViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>

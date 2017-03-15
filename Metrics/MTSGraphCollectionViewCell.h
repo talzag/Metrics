@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MTSGraphView.h"
+#import <MetricsKit/MetricsKit.h>
 
 @interface MTSGraphCollectionViewCell : UICollectionViewCell
 

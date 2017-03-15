@@ -7,7 +7,6 @@
 //
 
 #import "MTSGraphViewController.h"
-#import "MTSGraph+HKQuery.h"
 
 @interface MTSGraphViewController ()
 

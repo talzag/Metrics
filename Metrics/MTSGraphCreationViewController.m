@@ -7,7 +7,6 @@
 //
 
 #import "MTSGraphCreationViewController.h"
-@import HealthKit;
 
 static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
 
