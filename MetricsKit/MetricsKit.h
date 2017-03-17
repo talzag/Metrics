@@ -18,3 +18,5 @@ FOUNDATION_EXPORT const unsigned char MetricsKitVersionString[];
 
 #import <MetricsKit/MTSGraphView.h>
 #import <MetricsKit/MTSGraph.h>
+#import <MetricsKit/MTSHealthData.h>
+#import <MetricsKit/MTSHealthDataCoordinator.h>

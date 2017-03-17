@@ -11,7 +11,13 @@
         <attribute name="xAxisTitle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="yAxisTitle" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="MTSHealthData" representedClassName="MTSHealthData" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="label" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="MTSGraph" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="MTSGraph" positionX="-308" positionY="81" width="128" height="180"/>
+        <element name="MTSHealthData" positionX="-63" positionY="54" width="128" height="90"/>
     </elements>
 </model>

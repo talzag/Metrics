@@ -48,6 +48,8 @@
                                             }];
 }
 
+// TODO: Move these to MetricsKit
+
 - (NSDictionary <NSString *, HKQuantityTypeIdentifier>*)quantityTypeIdentifiers {
     NSDictionary *quantityTypes = @{
                                    // Body Measurements
