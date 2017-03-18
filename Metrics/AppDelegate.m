@@ -25,7 +25,6 @@
     UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
     MTSGraphCollectionViewController *graphsViewController = (MTSGraphCollectionViewController *)navController.viewControllers.firstObject;
     graphsViewController.managedObjectContext = self.persistentContainer.viewContext;
-    graphsViewController.quantityTypeIdentifiers = self.quantityTypeIdentifiers;
     
     return YES;
 }
@@ -138,32 +137,12 @@
     return quantityTypes;
 }
 
-//- (NSArray <HKCategoryTypeIdentifier>*)categoryTypeIdentifiers {
-//    NSArray *categoryTypes = @[
-//                               HKCategoryTypeIdentifierSleepAnalysis,
-//                               HKCategoryTypeIdentifierAppleStandHour,
-//                               HKCategoryTypeIdentifierCervicalMucusQuality,
-//                               HKCategoryTypeIdentifierOvulationTestResult,
-//                               HKCategoryTypeIdentifierMenstrualFlow,
-//                               HKCategoryTypeIdentifierIntermenstrualBleeding,
-//                               HKCategoryTypeIdentifierSexualActivity,
-//                               HKCategoryTypeIdentifierMindfulSession
-//                               ];
-//    
-//    return categoryTypes;
-//}
-
 - (NSSet *)healthTypesToRead {
     NSMutableSet *readTypes = [NSMutableSet set];
     
     [self.quantityTypeIdentifiers enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, HKQuantityTypeIdentifier  _Nonnull obj, BOOL * _Nonnull stop) {
         [readTypes addObject:[HKObjectType quantityTypeForIdentifier:obj]];
     }];
-    
-    
-//    for (HKCategoryTypeIdentifier ident in self.categoryTypeIdentifiers) {
-//        [readTypes addObject:[HKObjectType categoryTypeForIdentifier:ident]];
-//    }
     
     return [NSSet setWithSet:readTypes];
 }
@@ -175,17 +154,11 @@
 - (NSPersistentContainer *)persistentContainer {
     @synchronized (self) {
         if (_persistentContainer == nil) {
-            _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"Metrics"];
+            NSURL *modelURL = [[NSBundle bundleWithIdentifier:@"com.dstrokis.MetricsKit"] URLForResource:@"Metrics" withExtension:@"momd"];
+            NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+            _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"Metrics" managedObjectModel:model];
             [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
                 if (error != nil) {
-                    /*
-                     Typical reasons for an error here include:
-                     * The parent directory does not exist, cannot be created, or disallows writing.
-                     * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                     * The device is out of space.
-                     * The store could not be migrated to the current model version.
-                     Check the error message to determine what the actual problem was.
-                     */
                     NSLog(@"Unresolved error %@, %@", error, error.userInfo);
 #if DEBUG
                     abort();

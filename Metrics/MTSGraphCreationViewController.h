@@ -6,7 +6,8 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+
 #import <MetricsKit/MetricsKit.h>
 
 @import HealthKit;

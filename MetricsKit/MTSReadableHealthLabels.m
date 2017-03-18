@@ -107,3 +107,18 @@ NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSResultsIdentifiers(void)
             @"UV Exposure": HKQuantityTypeIdentifierUVExposure
             };
 }
+
+//- (NSArray <HKCategoryTypeIdentifier>*)categoryTypeIdentifiers {
+//    NSArray *categoryTypes = @[
+//                               HKCategoryTypeIdentifierSleepAnalysis,
+//                               HKCategoryTypeIdentifierAppleStandHour,
+//                               HKCategoryTypeIdentifierCervicalMucusQuality,
+//                               HKCategoryTypeIdentifierOvulationTestResult,
+//                               HKCategoryTypeIdentifierMenstrualFlow,
+//                               HKCategoryTypeIdentifierIntermenstrualBleeding,
+//                               HKCategoryTypeIdentifierSexualActivity,
+//                               HKCategoryTypeIdentifierMindfulSession
+//                               ];
+//
+//    return categoryTypes;
+//}
