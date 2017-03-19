@@ -85,4 +85,17 @@
     XCTAssertEqualObjects((NSSet *)reversed, dataPoints);
 }
 
+- (void)testDataTransformingPerformance {
+    MTSHealthTypeTransformer *transformer = [MTSHealthTypeTransformer new];
+    
+    [self measureBlock:^{
+        id transformed = [transformer transformedValue:[NSSet setWithObjects:
+                                                        HKQuantityTypeIdentifierDietaryEnergyConsumed,
+                                                        HKQuantityTypeIdentifierActiveEnergyBurned,
+                                                        HKQuantityTypeIdentifierBasalEnergyBurned, nil]];
+        
+        [transformer reverseTransformedValue:transformed];
+    }];
+}
+
 @end

@@ -73,9 +73,12 @@
     XCTAssertEqualObjects((NSSet *)reversed, dataPoints);
 }
 
-- (void)PENDING_testDataTransformingPerformance {
+- (void)testDataTransformingPerformance {
+    MTSDataPointsTransformer *transformer = [MTSDataPointsTransformer new];
+    
     [self measureBlock:^{
-        
+        id transformed = [transformer transformedValue:[NSSet setWithObjects:@25, @50, @47, @123, nil]];
+        [transformer reverseTransformedValue:transformed];
     }];
 }
 
