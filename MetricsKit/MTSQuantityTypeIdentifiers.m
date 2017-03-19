@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <HealthKit/HealthKit.h>
-#import "MTSReadableHealthLabels.h"
+#import "MTSQuantityTypeIdentifiers.h"
 
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSNutritionIdentifiers(void) {
+NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeIdentifiers(void) {
     return @{
              @"Total Fat": HKQuantityTypeIdentifierDietaryFatTotal,
              @"Polyunsaturated Fat": HKQuantityTypeIdentifierDietaryFatPolyunsaturated,
@@ -50,22 +50,12 @@ NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSNutritionIdentifiers(voi
              @"Chloride": HKQuantityTypeIdentifierDietaryChloride,
              @"Potassium": HKQuantityTypeIdentifierDietaryPotassium,
              @"Caffeine": HKQuantityTypeIdentifierDietaryCaffeine,
-             @"Water": HKQuantityTypeIdentifierDietaryWater
-             };
-}
-
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSBodyMeasurementIdentifiers(void) {
-    return @{
+             @"Water": HKQuantityTypeIdentifierDietaryWater,
              @"Body Mass Index": HKQuantityTypeIdentifierBodyMassIndex,
              @"Body Fat Percentage": HKQuantityTypeIdentifierBodyFatPercentage,
              @"Body Mass": HKQuantityTypeIdentifierBodyMass,
              @"Lean Body Mass": HKQuantityTypeIdentifierLeanBodyMass,
-             @"Height": HKQuantityTypeIdentifierHeight
-             };
-}
-
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSFitnessIdentifiers(void) {
-    return @{
+             @"Height": HKQuantityTypeIdentifierHeight,
              @"Base Energy Burned": HKQuantityTypeIdentifierBasalEnergyBurned,
              @"Active Energy Burned": HKQuantityTypeIdentifierActiveEnergyBurned,
              @"Step Count": HKQuantityTypeIdentifierStepCount,
@@ -77,35 +67,25 @@ NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSFitnessIdentifiers(void)
              @"Wheelchair Pushes": HKQuantityTypeIdentifierPushCount,
              @"Swimming Distance": HKQuantityTypeIdentifierDistanceSwimming,
              @"Swimming Stroke Count": HKQuantityTypeIdentifierSwimmingStrokeCount,
-             @"Nike Fuel": HKQuantityTypeIdentifierNikeFuel
-             };
-}
-
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSVitalsIdentifiers(void) {
-    return @{
+             @"Nike Fuel": HKQuantityTypeIdentifierNikeFuel,
              @"Heart Rate": HKQuantityTypeIdentifierHeartRate,
              @"Body Temperature": HKQuantityTypeIdentifierBodyTemperature,
              @"Base Body Temperature": HKQuantityTypeIdentifierBasalBodyTemperature,
              @"Systolic Blood Pressure": HKQuantityTypeIdentifierBloodPressureSystolic,
              @"Diastolic Blood Pressure": HKQuantityTypeIdentifierBloodPressureDiastolic,
-             @"Respiratory Rate": HKQuantityTypeIdentifierRespiratoryRate
+             @"Respiratory Rate": HKQuantityTypeIdentifierRespiratoryRate,
+             @"Oxygen Saturation": HKQuantityTypeIdentifierOxygenSaturation,
+             @"Peripheral Perfusion Index": HKQuantityTypeIdentifierPeripheralPerfusionIndex,
+             @"Blood Glucose": HKQuantityTypeIdentifierBloodGlucose,
+             @"Number of Times Fallen": HKQuantityTypeIdentifierNumberOfTimesFallen,
+             @"Electrodermal Activity": HKQuantityTypeIdentifierElectrodermalActivity,
+             @"Inhaler Usage": HKQuantityTypeIdentifierInhalerUsage,
+             @"Blood Alcohol Content": HKQuantityTypeIdentifierBloodAlcoholContent,
+             @"Forced Vital Capacity": HKQuantityTypeIdentifierForcedVitalCapacity,
+             @"Forced Expiratory Volume": HKQuantityTypeIdentifierForcedExpiratoryVolume1,
+             @"Peak Expiratory Flow Rate": HKQuantityTypeIdentifierPeakExpiratoryFlowRate,
+             @"UV Exposure": HKQuantityTypeIdentifierUVExposure
              };
-}
-
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSResultsIdentifiers(void) {
-    return @{
-            @"Oxygen Saturation": HKQuantityTypeIdentifierOxygenSaturation,
-            @"Peripheral Perfusion Index": HKQuantityTypeIdentifierPeripheralPerfusionIndex,
-            @"Blood Glucose": HKQuantityTypeIdentifierBloodGlucose,
-            @"Number of Times Fallen": HKQuantityTypeIdentifierNumberOfTimesFallen,
-            @"Electrodermal Activity": HKQuantityTypeIdentifierElectrodermalActivity,
-            @"Inhaler Usage": HKQuantityTypeIdentifierInhalerUsage,
-            @"Blood Alcohol Content": HKQuantityTypeIdentifierBloodAlcoholContent,
-            @"Forced Vital Capacity": HKQuantityTypeIdentifierForcedVitalCapacity,
-            @"Forced Expiratory Volume": HKQuantityTypeIdentifierForcedExpiratoryVolume1,
-            @"Peak Expiratory Flow Rate": HKQuantityTypeIdentifierPeakExpiratoryFlowRate,
-            @"UV Exposure": HKQuantityTypeIdentifierUVExposure
-            };
 }
 
 //- (NSArray <HKCategoryTypeIdentifier>*)categoryTypeIdentifiers {

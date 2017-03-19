@@ -9,12 +9,7 @@
 /* Begin PBXBuildFile section */
 		E3336E681E52918300AD0BC2 /* MTSGraphCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */; };
 		E3336E6B1E5291FC00AD0BC2 /* MTSGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E6A1E5291FC00AD0BC2 /* MTSGraphViewController.m */; };
-		E3594A3D1E7C600100494BDC /* MTSHealthData+CoreDataClass.h in Headers */ = {isa = PBXBuildFile; fileRef = E3594A391E7C600100494BDC /* MTSHealthData+CoreDataClass.h */; };
-		E3594A3E1E7C600100494BDC /* MTSHealthData+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E3594A3A1E7C600100494BDC /* MTSHealthData+CoreDataClass.m */; };
-		E3594A3F1E7C600100494BDC /* MTSHealthData+CoreDataProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = E3594A3B1E7C600100494BDC /* MTSHealthData+CoreDataProperties.h */; };
-		E3594A401E7C600100494BDC /* MTSHealthData+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E3594A3C1E7C600100494BDC /* MTSHealthData+CoreDataProperties.m */; };
-		E3594A421E7C8C1D00494BDC /* MTSReadableHealthLabels.h in Headers */ = {isa = PBXBuildFile; fileRef = E3594A411E7C8C1D00494BDC /* MTSReadableHealthLabels.h */; };
-		E3594A441E7C8D3500494BDC /* MTSHealthData.h in Headers */ = {isa = PBXBuildFile; fileRef = E3594A431E7C8D3500494BDC /* MTSHealthData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E3594A421E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = E3594A411E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h */; };
 		E3784B701E46494D005F87BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784B6F1E46494D005F87BC /* main.m */; };
 		E3784B731E46494D005F87BC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784B721E46494D005F87BC /* AppDelegate.m */; };
 		E3784B791E46494D005F87BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3784B771E46494D005F87BC /* Main.storyboard */; };
@@ -62,7 +57,7 @@
 		E38AE1BC1E7A3444001ABE40 /* MTSHealthDataCoordinator.h in Headers */ = {isa = PBXBuildFile; fileRef = E38AE1BA1E7A3444001ABE40 /* MTSHealthDataCoordinator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E38AE1BD1E7A3445001ABE40 /* MTSHealthDataCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1BB1E7A3444001ABE40 /* MTSHealthDataCoordinator.m */; };
 		E38AE1BF1E7A3497001ABE40 /* MTSHealthDataCoordinatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1BE1E7A3497001ABE40 /* MTSHealthDataCoordinatorTests.m */; };
-		E38AE1C51E7A37C2001ABE40 /* MTSReadableHealthLabels.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1C41E7A37C2001ABE40 /* MTSReadableHealthLabels.m */; };
+		E38AE1C51E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1C41E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,12 +153,7 @@
 		E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphCreationViewController.m; sourceTree = "<group>"; };
 		E3336E691E5291FC00AD0BC2 /* MTSGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraphViewController.h; sourceTree = "<group>"; };
 		E3336E6A1E5291FC00AD0BC2 /* MTSGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphViewController.m; sourceTree = "<group>"; };
-		E3594A391E7C600100494BDC /* MTSHealthData+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTSHealthData+CoreDataClass.h"; sourceTree = "<group>"; };
-		E3594A3A1E7C600100494BDC /* MTSHealthData+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTSHealthData+CoreDataClass.m"; sourceTree = "<group>"; };
-		E3594A3B1E7C600100494BDC /* MTSHealthData+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTSHealthData+CoreDataProperties.h"; sourceTree = "<group>"; };
-		E3594A3C1E7C600100494BDC /* MTSHealthData+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTSHealthData+CoreDataProperties.m"; sourceTree = "<group>"; };
-		E3594A411E7C8C1D00494BDC /* MTSReadableHealthLabels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSReadableHealthLabels.h; sourceTree = "<group>"; };
-		E3594A431E7C8D3500494BDC /* MTSHealthData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSHealthData.h; sourceTree = "<group>"; };
+		E3594A411E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSQuantityTypeIdentifiers.h; sourceTree = "<group>"; };
 		E37362201E6B9D240072DFBC /* MTSGraphViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTSGraphViewTests.m; path = ../MetricsTests/MTSGraphViewTests.m; sourceTree = "<group>"; };
 		E3784B6B1E46494D005F87BC /* Metrics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Metrics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3784B6F1E46494D005F87BC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -229,7 +219,7 @@
 		E38AE1BA1E7A3444001ABE40 /* MTSHealthDataCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSHealthDataCoordinator.h; sourceTree = "<group>"; };
 		E38AE1BB1E7A3444001ABE40 /* MTSHealthDataCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSHealthDataCoordinator.m; sourceTree = "<group>"; };
 		E38AE1BE1E7A3497001ABE40 /* MTSHealthDataCoordinatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSHealthDataCoordinatorTests.m; sourceTree = "<group>"; };
-		E38AE1C41E7A37C2001ABE40 /* MTSReadableHealthLabels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSReadableHealthLabels.m; sourceTree = "<group>"; };
+		E38AE1C41E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSQuantityTypeIdentifiers.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -402,11 +392,6 @@
 			isa = PBXGroup;
 			children = (
 				E38AE1961E78E9F0001ABE40 /* Metrics.xcdatamodeld */,
-				E3594A431E7C8D3500494BDC /* MTSHealthData.h */,
-				E3594A391E7C600100494BDC /* MTSHealthData+CoreDataClass.h */,
-				E3594A3A1E7C600100494BDC /* MTSHealthData+CoreDataClass.m */,
-				E3594A3B1E7C600100494BDC /* MTSHealthData+CoreDataProperties.h */,
-				E3594A3C1E7C600100494BDC /* MTSHealthData+CoreDataProperties.m */,
 				E38AE1AC1E78EE71001ABE40 /* MTSGraph.h */,
 				E38AE1AE1E78EF1D001ABE40 /* MTSGraph+CoreDataClass.h */,
 				E38AE1AF1E78EF1D001ABE40 /* MTSGraph+CoreDataClass.m */,
@@ -424,8 +409,8 @@
 				E38AE19F1E78E9F0001ABE40 /* MTSHealthTypeTransformer.h */,
 				E38AE1A01E78E9F0001ABE40 /* MTSHealthTypeTransformer.m */,
 				E3784BDA1E4684F8005F87BC /* MetricsKit.h */,
-				E3594A411E7C8C1D00494BDC /* MTSReadableHealthLabels.h */,
-				E38AE1C41E7A37C2001ABE40 /* MTSReadableHealthLabels.m */,
+				E3594A411E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h */,
+				E38AE1C41E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m */,
 				E3784BDB1E4684F8005F87BC /* Info.plist */,
 			);
 			path = MetricsKit;
@@ -460,8 +445,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3594A3D1E7C600100494BDC /* MTSHealthData+CoreDataClass.h in Headers */,
-				E3594A441E7C8D3500494BDC /* MTSHealthData.h in Headers */,
 				E38AE1A81E78E9F0001ABE40 /* MTSGraphView+Methods.h in Headers */,
 				E38AE1AD1E78EE71001ABE40 /* MTSGraph.h in Headers */,
 				E38AE1A41E78E9F0001ABE40 /* MTSGraph+HKQuery.h in Headers */,
@@ -470,10 +453,9 @@
 				E38AE1A61E78E9F0001ABE40 /* MTSGraphView.h in Headers */,
 				E38AE1A91E78E9F0001ABE40 /* MTSHealthTypeTransformer.h in Headers */,
 				E38AE1A21E78E9F0001ABE40 /* MTSDataPointsTransformer.h in Headers */,
-				E3594A421E7C8C1D00494BDC /* MTSReadableHealthLabels.h in Headers */,
+				E3594A421E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h in Headers */,
 				E38AE1BC1E7A3444001ABE40 /* MTSHealthDataCoordinator.h in Headers */,
 				E3784BDC1E4684F8005F87BC /* MetricsKit.h in Headers */,
-				E3594A3F1E7C600100494BDC /* MTSHealthData+CoreDataProperties.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -795,13 +777,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E38AE1A11E78E9F0001ABE40 /* Metrics.xcdatamodeld in Sources */,
-				E3594A401E7C600100494BDC /* MTSHealthData+CoreDataProperties.m in Sources */,
 				E38AE1A51E78E9F0001ABE40 /* MTSGraph+HKQuery.m in Sources */,
 				E38AE1AA1E78E9F0001ABE40 /* MTSHealthTypeTransformer.m in Sources */,
 				E38AE1A71E78E9F0001ABE40 /* MTSGraphView.m in Sources */,
 				E38AE1B51E78EF1D001ABE40 /* MTSGraph+CoreDataProperties.m in Sources */,
-				E38AE1C51E7A37C2001ABE40 /* MTSReadableHealthLabels.m in Sources */,
-				E3594A3E1E7C600100494BDC /* MTSHealthData+CoreDataClass.m in Sources */,
+				E38AE1C51E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m in Sources */,
 				E38AE1BD1E7A3445001ABE40 /* MTSHealthDataCoordinator.m in Sources */,
 				E38AE1A31E78E9F0001ABE40 /* MTSDataPointsTransformer.m in Sources */,
 				E38AE1B31E78EF1D001ABE40 /* MTSGraph+CoreDataClass.m in Sources */,

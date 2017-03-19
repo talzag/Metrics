@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <HealthKit/HealthKit.h>
-#import "MTSHealthData+CoreDataClass.h"
 
 /**
  Contains the logic for determining which health data can be grouped together.
@@ -30,9 +29,6 @@
  @param typeB MTSHealthData instance
  @return YES if the data from both types can be combined, NO otherwise.
  */
-- (BOOL)healthData:(MTSHealthData *)typeA canBeGroupedWithHealthType:(MTSHealthData *)typeB;
-
-
-- (NSDictionary <NSString *, HKQuantityTypeIdentifier> *)groupableHealthTypesForHealthData:(MTSHealthData *)healthData;
+//- (BOOL)healthData:(MTSHealthData *)typeA canBeGroupedWithHealthType:(MTSHealthData *)typeB;
 
 @end

@@ -94,6 +94,4 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
     return cell;
 }
 
-#pragma mark <UICollectionViewDelegate>
-
 @end
