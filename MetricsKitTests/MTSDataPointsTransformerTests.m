@@ -6,7 +6,8 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
+
 #import "MTSDataPointsTransformer.h"
 
 @interface MTSDataPointsTransformerTests : XCTestCase

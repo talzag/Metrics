@@ -28,7 +28,7 @@
     self.endDateLabel.text = [[self dateFormatter] stringFromDate:[[self graph] endDate]];
     self.graphView.dataPoints = self.graph.dataPoints;
     
-    [self.graph populateGraphDataByQueryingHealthStore:self.healthStore];
+    [self.graph populateGraphDataByQueryingHealthStore:self.healthStore completionHandler:nil];
 }
 
 - (void)didReceiveMemoryWarning {

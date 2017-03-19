@@ -6,12 +6,13 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <HealthKit/HealthKit.h>
+@import Foundation;
+@import HealthKit;
+
 #import "MTSGraph+CoreDataClass.h"
 
 @interface MTSGraph (HKQuery)
 
-- (void)populateGraphDataByQueryingHealthStore:(HKHealthStore *)healthStore;
+- (void)populateGraphDataByQueryingHealthStore:(HKHealthStore * _Nonnull)healthStore completionHandler:(void (^ _Nullable)(NSArray<__kindof HKSample *> * _Nullable samples))completionHandler ;
 
 @end

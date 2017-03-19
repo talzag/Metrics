@@ -27,38 +27,29 @@
     graphsViewController.managedObjectContext = self.persistentContainer.viewContext;
     graphsViewController.quantityTypeIdentifiers = self.quantityTypeIdentifiers;
     
-    self.healthStore = [[HKHealthStore alloc] init];
-    [self requestHealthSharingAuthorization];
+    if ([HKHealthStore isHealthDataAvailable]) {
+        self.healthStore = [[HKHealthStore alloc] init];
+        [self requestHealthSharingAuthorization];
+    }
     
     return YES;
 }
 
 - (void)requestHealthSharingAuthorization {
     __weak AppDelegate *weakSelf = self;
-    [self.healthStore requestAuthorizationToShareTypes:nil
-                                             readTypes:[self healthTypesToRead]
-                                            completion:^(BOOL success, NSError * _Nullable error) {
-                                                if (!success) {
-                                                    NSLog(@"ERROR: %@", error.localizedDescription);
-                                                    abort();
-                                                }
-                                                
-                                                AppDelegate *delegate = weakSelf;
-                                                
-                                                UINavigationController *navController = (UINavigationController *)[delegate.window rootViewController];
-                                                MTSGraphCollectionViewController *graphViewController = (MTSGraphCollectionViewController *)[[navController viewControllers] firstObject];
-                                                graphViewController.healthStore = delegate.healthStore;
-                                            }];
-}
-
-- (NSSet *)healthTypesToRead {
-    NSMutableSet *readTypes = [NSMutableSet set];
-    
-    [self.quantityTypeIdentifiers enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, HKQuantityTypeIdentifier  _Nonnull obj, BOOL * _Nonnull stop) {
-        [readTypes addObject:[HKObjectType quantityTypeForIdentifier:obj]];
+    [MTSHealthDataCoordinator requestReadAccessForHealthStore:self.healthStore
+                                            completionHandler:^(BOOL success, NSError * _Nullable error) {
+        if (!success) {
+            NSLog(@"ERROR: %@", error.localizedDescription);
+            abort();
+        }
+        
+        AppDelegate *delegate = weakSelf;
+        
+        UINavigationController *navController = (UINavigationController *)[delegate.window rootViewController];
+        MTSGraphCollectionViewController *graphViewController = (MTSGraphCollectionViewController *)[[navController viewControllers] firstObject];
+        graphViewController.healthStore = delegate.healthStore;
     }];
-    
-    return [NSSet setWithSet:readTypes];
 }
 
 #pragma mark - Core Data stack
@@ -74,7 +65,7 @@
             [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
                 if (error != nil) {
                     NSLog(@"Unresolved error %@, %@", error, error.userInfo);
-#if DEBUG
+#ifdef DEBUG
                     abort();
 #endif
                 }
@@ -92,7 +83,7 @@
     NSError *error = nil;
     if ([context hasChanges] && ![context save:&error]) {
         NSLog(@"Unresolved error %@, %@", error, error.userInfo);
-#if DEBUG
+#ifdef DEBUG
         abort();
 #endif
     }

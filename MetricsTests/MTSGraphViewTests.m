@@ -6,7 +6,8 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
+
 #import "MTSGraphView+Methods.h"
 
 @interface MTSGraphViewTests : XCTestCase
@@ -119,7 +120,7 @@
     XCTAssertEqual(100, [[self graphView] positionOnYAxisForValue:50 scaledForMaxValue:max]);
 }
 
-- (void)testGraphDrawingPerformance {
+- (void)PENDING_testGraphDrawingPerformance {
     [self measureBlock:^{
         [[self graphView] drawRect:[self graphView].frame];
     }];

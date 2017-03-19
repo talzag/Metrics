@@ -6,12 +6,14 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
+
 #import "MTSHealthDataCoordinator.h"
 
 @interface MTSHealthDataCoordinatorTests : XCTestCase
 
 @property MTSHealthDataCoordinator *coordinator;
+@property HKHealthStore *healthStore;
 
 @end
 
@@ -21,10 +23,13 @@
     [super setUp];
     
     [self setCoordinator:[MTSHealthDataCoordinator new]];
+    
+    [self setHealthStore:[HKHealthStore new]];
 }
 
 - (void)tearDown {
     [self setCoordinator:nil];
+    [self setHealthStore:nil];
     
     [super tearDown];
 }
@@ -51,6 +56,21 @@
     XCTAssertFalse([MTSHealthDataCoordinator healthType:dietaryEnergy canBeGroupedWithHealthType:swimDistance]);
     
     XCTAssertFalse([MTSHealthDataCoordinator healthType:stepCount canBeGroupedWithHealthType:swimDistance]);
+}
+
+- (void)testThatItRequestsReadAccessToHealthKit {
+    XCTestExpectation *accessExpectation = [self expectationWithDescription:@"Test was granted access to HKHealthStore."];
+    [MTSHealthDataCoordinator requestReadAccessForHealthStore:[self healthStore]
+                                            completionHandler:^(BOOL success, NSError * _Nullable error) {
+                                                XCTAssertTrue(success);
+                                                [accessExpectation fulfill];
+                                            }];
+    
+    [self waitForExpectationsWithTimeout:10 handler:^(NSError * _Nullable error) {
+        if (error) {
+            XCTFail("Test was not granted read access to the health store in time: %@", error.localizedDescription);
+        }
+    }];
 }
 
 @end

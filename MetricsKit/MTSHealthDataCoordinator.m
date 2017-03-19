@@ -45,7 +45,30 @@
                                                       }];
     
     [healthStore executeQuery:query];
+}
 
++ (void)requestReadAccessForHealthStore:(HKHealthStore *)healthStore
+                      completionHandler:(void (^ _Nonnull)(BOOL, NSError * _Nullable))completionHandler {
+    NSMutableSet *readTypes = [NSMutableSet set];
+    
+    NSDictionary *identifiers = MTSQuantityTypeIdentifiers();
+    [identifiers enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, HKQuantityTypeIdentifier  _Nonnull obj, BOOL * _Nonnull stop) {
+        [readTypes addObject:[HKObjectType quantityTypeForIdentifier:obj]];
+    }];
+ 
+    NSSet *shareTypes;
+    
+#ifdef DEBUG
+    HKQuantityType *activeEnergy = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierActiveEnergyBurned];
+    HKQuantityType *dietaryEnery = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
+    HKQuantityType *baseEnergy = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBasalEnergyBurned];
+    
+    shareTypes =  [NSSet setWithObjects:activeEnergy, dietaryEnery, baseEnergy, nil];
+#endif
+    
+    [healthStore requestAuthorizationToShareTypes:shareTypes readTypes:readTypes completion:^(BOOL success, NSError * _Nullable error) {
+        completionHandler(success, error);
+    }];
 }
 
 @end

@@ -18,5 +18,9 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Allow access to complete unit testing of MetricsKit</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Allow access to complete unit testing of MetricsKit</string>
 </dict>
 </plist>
