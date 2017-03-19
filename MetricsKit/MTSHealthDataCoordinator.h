@@ -25,10 +25,17 @@
  
  Base Calories Burned + Active Calories Burned - Dietary Calories Consumed = Real Calorie difference
 
- @param typeA MTSHealthData instance
- @param typeB MTSHealthData instance
- @return YES if the data from both types can be combined, NO otherwise.
+ @param typeA Identifier A
+ @param typeB Identifier B
+ @return YES if the data of both types can be combined, NO otherwise.
  */
-//- (BOOL)healthData:(MTSHealthData *)typeA canBeGroupedWithHealthType:(MTSHealthData *)typeB;
+
++ (BOOL)healthType:(_Nonnull HKQuantityTypeIdentifier)typeA canBeGroupedWithHealthType:(_Nonnull HKQuantityTypeIdentifier)typeB;
+
++ (void)queryHealthStore:(HKHealthStore * _Nonnull)healthStore
+         forQuantityType:(HKQuantityTypeIdentifier _Nonnull)typeIdentifier
+                fromDate:(NSDate * _Nonnull)startDate
+                  toDate:(NSDate * _Nonnull)endDate
+  usingCompletionHandler:(void (^ _Nonnull)(NSArray <__kindof HKSample *>* _Nullable samples)) completionHandler;
 
 @end

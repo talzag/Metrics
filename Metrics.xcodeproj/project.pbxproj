@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		E3336E681E52918300AD0BC2 /* MTSGraphCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */; };
 		E3336E6B1E5291FC00AD0BC2 /* MTSGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E6A1E5291FC00AD0BC2 /* MTSGraphViewController.m */; };
-		E3594A421E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = E3594A411E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h */; };
+		E3594A421E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = E3594A411E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3784B701E46494D005F87BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784B6F1E46494D005F87BC /* main.m */; };
 		E3784B731E46494D005F87BC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784B721E46494D005F87BC /* AppDelegate.m */; };
 		E3784B791E46494D005F87BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3784B771E46494D005F87BC /* Main.storyboard */; };
@@ -391,26 +391,26 @@
 		E3784BD91E4684F8005F87BC /* MetricsKit */ = {
 			isa = PBXGroup;
 			children = (
+				E3784BDA1E4684F8005F87BC /* MetricsKit.h */,
+				E3594A411E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h */,
+				E38AE1C41E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m */,
+				E38AE1BA1E7A3444001ABE40 /* MTSHealthDataCoordinator.h */,
+				E38AE1BB1E7A3444001ABE40 /* MTSHealthDataCoordinator.m */,
+				E38AE19C1E78E9F0001ABE40 /* MTSGraphView.h */,
+				E38AE19D1E78E9F0001ABE40 /* MTSGraphView.m */,
 				E38AE1961E78E9F0001ABE40 /* Metrics.xcdatamodeld */,
 				E38AE1AC1E78EE71001ABE40 /* MTSGraph.h */,
 				E38AE1AE1E78EF1D001ABE40 /* MTSGraph+CoreDataClass.h */,
 				E38AE1AF1E78EF1D001ABE40 /* MTSGraph+CoreDataClass.m */,
 				E38AE1B01E78EF1D001ABE40 /* MTSGraph+CoreDataProperties.h */,
 				E38AE1B11E78EF1D001ABE40 /* MTSGraph+CoreDataProperties.m */,
-				E38AE1BA1E7A3444001ABE40 /* MTSHealthDataCoordinator.h */,
-				E38AE1BB1E7A3444001ABE40 /* MTSHealthDataCoordinator.m */,
+				E38AE19E1E78E9F0001ABE40 /* MTSGraphView+Methods.h */,
+				E38AE19F1E78E9F0001ABE40 /* MTSHealthTypeTransformer.h */,
+				E38AE1A01E78E9F0001ABE40 /* MTSHealthTypeTransformer.m */,
 				E38AE1981E78E9F0001ABE40 /* MTSDataPointsTransformer.h */,
 				E38AE1991E78E9F0001ABE40 /* MTSDataPointsTransformer.m */,
 				E38AE19A1E78E9F0001ABE40 /* MTSGraph+HKQuery.h */,
 				E38AE19B1E78E9F0001ABE40 /* MTSGraph+HKQuery.m */,
-				E38AE19C1E78E9F0001ABE40 /* MTSGraphView.h */,
-				E38AE19D1E78E9F0001ABE40 /* MTSGraphView.m */,
-				E38AE19E1E78E9F0001ABE40 /* MTSGraphView+Methods.h */,
-				E38AE19F1E78E9F0001ABE40 /* MTSHealthTypeTransformer.h */,
-				E38AE1A01E78E9F0001ABE40 /* MTSHealthTypeTransformer.m */,
-				E3784BDA1E4684F8005F87BC /* MetricsKit.h */,
-				E3594A411E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h */,
-				E38AE1C41E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m */,
 				E3784BDB1E4684F8005F87BC /* Info.plist */,
 			);
 			path = MetricsKit;

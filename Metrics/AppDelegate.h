@@ -10,14 +10,14 @@
 @import HealthKit;
 @import CoreData;
 
+#import <MetricsKit/MetricsKit.h>
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) NSDictionary <NSString *, HKQuantityTypeIdentifier>*quantityTypeIdentifiers;
 @property (readonly, strong) NSPersistentContainer *persistentContainer;
 
 - (void)saveContext;
-
 
 @end
 

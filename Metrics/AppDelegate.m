@@ -12,6 +12,7 @@
 @interface AppDelegate ()
 
 @property (strong) HKHealthStore *healthStore;
+@property (strong, nonatomic) NSDictionary <NSString *, HKQuantityTypeIdentifier>*quantityTypeIdentifiers;
 
 @end
 
@@ -19,12 +20,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.healthStore = [[HKHealthStore alloc] init];
-    [self requestHealthSharingAuthorization];
+    self.quantityTypeIdentifiers = MTSQuantityTypeIdentifiers();
     
     UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
     MTSGraphCollectionViewController *graphsViewController = (MTSGraphCollectionViewController *)navController.viewControllers.firstObject;
     graphsViewController.managedObjectContext = self.persistentContainer.viewContext;
+    graphsViewController.quantityTypeIdentifiers = self.quantityTypeIdentifiers;
+    
+    self.healthStore = [[HKHealthStore alloc] init];
+    [self requestHealthSharingAuthorization];
     
     return YES;
 }
@@ -45,96 +49,6 @@
                                                 MTSGraphCollectionViewController *graphViewController = (MTSGraphCollectionViewController *)[[navController viewControllers] firstObject];
                                                 graphViewController.healthStore = delegate.healthStore;
                                             }];
-}
-
-// TODO: Move these to MetricsKit
-
-- (NSDictionary <NSString *, HKQuantityTypeIdentifier>*)quantityTypeIdentifiers {
-    NSDictionary *quantityTypes = @{
-                                   // Body Measurements
-                                   @"Body Mass Index": HKQuantityTypeIdentifierBodyMassIndex,
-                                   @"Body Fat Percentage": HKQuantityTypeIdentifierBodyFatPercentage,
-                                   @"Height": HKQuantityTypeIdentifierHeight,
-                                   @"Body Mass": HKQuantityTypeIdentifierBodyMass,
-                                   @"Lean Body Mass": HKQuantityTypeIdentifierLeanBodyMass,
-                                   
-                                   // Fitness
-                                   @"Step Count": HKQuantityTypeIdentifierStepCount,
-                                   @"Walking/Running Distance": HKQuantityTypeIdentifierDistanceWalkingRunning,
-                                   @"Cycling Distance": HKQuantityTypeIdentifierDistanceCycling,
-                                   @"Wheelchair Distance": HKQuantityTypeIdentifierDistanceWheelchair,
-                                   @"Base Energy Burned": HKQuantityTypeIdentifierBasalEnergyBurned,
-                                   @"Active Energy Burned": HKQuantityTypeIdentifierActiveEnergyBurned,
-                                   @"Flights Climbed": HKQuantityTypeIdentifierFlightsClimbed,
-                                   @"Nike Fuel": HKQuantityTypeIdentifierNikeFuel,
-                                   @"Exercise Time": HKQuantityTypeIdentifierAppleExerciseTime,
-                                   @"Wheelchair Pushes": HKQuantityTypeIdentifierPushCount,
-                                   @"Swimming Distance": HKQuantityTypeIdentifierDistanceSwimming,
-                                   @"Swimming Stroke Count": HKQuantityTypeIdentifierSwimmingStrokeCount,
-                                   
-                                   // Vitals
-                                   @"Heart Rate": HKQuantityTypeIdentifierHeartRate,
-                                   @"Body Temperature": HKQuantityTypeIdentifierBodyTemperature,
-                                   @"Base Body Temperature": HKQuantityTypeIdentifierBasalBodyTemperature,
-                                   @"Systolic Blood Pressure": HKQuantityTypeIdentifierBloodPressureSystolic,
-                                   @"Diastolic Blood Pressure": HKQuantityTypeIdentifierBloodPressureDiastolic,
-                                   @"Respiratory Rate": HKQuantityTypeIdentifierRespiratoryRate,
-                                   
-                                   // Results
-                                   @"Oxygen Saturation": HKQuantityTypeIdentifierOxygenSaturation,
-                                   @"Peripheral Perfusion Index": HKQuantityTypeIdentifierPeripheralPerfusionIndex,
-                                   @"Blood Glucose": HKQuantityTypeIdentifierBloodGlucose,
-                                   @"Number of Times Fallen": HKQuantityTypeIdentifierNumberOfTimesFallen,
-                                   @"Electrodermal Activity": HKQuantityTypeIdentifierElectrodermalActivity,
-                                   @"Inhaler Usage": HKQuantityTypeIdentifierInhalerUsage,
-                                   @"Blood Alcohol Content": HKQuantityTypeIdentifierBloodAlcoholContent,
-                                   @"Forced Vital Capacity": HKQuantityTypeIdentifierForcedVitalCapacity,
-                                   @"Forced Expiratory Volume": HKQuantityTypeIdentifierForcedExpiratoryVolume1,
-                                   @"Peak Expiratory Flow Rate": HKQuantityTypeIdentifierPeakExpiratoryFlowRate,
-                                   
-                                   // Nutrition
-                                   @"Total Fat": HKQuantityTypeIdentifierDietaryFatTotal,
-                                   @"Polyunsaturated Fat": HKQuantityTypeIdentifierDietaryFatPolyunsaturated,
-                                   @"Monounstaurated Fat": HKQuantityTypeIdentifierDietaryFatMonounsaturated,
-                                   @"Saturated Fat": HKQuantityTypeIdentifierDietaryFatSaturated,
-                                   @"Cholesterol": HKQuantityTypeIdentifierDietaryCholesterol,
-                                   @"Sodium": HKQuantityTypeIdentifierDietarySodium,
-                                   @"Carbohydrates": HKQuantityTypeIdentifierDietaryCarbohydrates,
-                                   @"Fiber": HKQuantityTypeIdentifierDietaryFiber,
-                                   @"Sugar": HKQuantityTypeIdentifierDietarySugar,
-                                   @"Calories Eaten": HKQuantityTypeIdentifierDietaryEnergyConsumed,
-                                   @"Protein": HKQuantityTypeIdentifierDietaryProtein,
-                                   @"Vitamin A": HKQuantityTypeIdentifierDietaryVitaminA,
-                                   @"Vitamin B6": HKQuantityTypeIdentifierDietaryVitaminB6,
-                                   @"Vitamin B12": HKQuantityTypeIdentifierDietaryVitaminB12,
-                                   @"Vitamin C": HKQuantityTypeIdentifierDietaryVitaminC,
-                                   @"Vitamin D": HKQuantityTypeIdentifierDietaryVitaminD,
-                                   @"Vitamin E": HKQuantityTypeIdentifierDietaryVitaminE,
-                                   @"Vitamin K": HKQuantityTypeIdentifierDietaryVitaminK,
-                                   @"Calcium": HKQuantityTypeIdentifierDietaryCalcium,
-                                   @"Iron": HKQuantityTypeIdentifierDietaryIron,
-                                   @"Thiamin": HKQuantityTypeIdentifierDietaryThiamin,
-                                   @"Riboflavin": HKQuantityTypeIdentifierDietaryRiboflavin,
-                                   @"Niacin": HKQuantityTypeIdentifierDietaryNiacin,
-                                   @"Folate": HKQuantityTypeIdentifierDietaryFolate,
-                                   @"Biotin": HKQuantityTypeIdentifierDietaryBiotin,
-                                   @"Pantothenic Acid": HKQuantityTypeIdentifierDietaryPantothenicAcid,
-                                   @"Phosphorus": HKQuantityTypeIdentifierDietaryPhosphorus,
-                                   @"Iodine": HKQuantityTypeIdentifierDietaryIodine,
-                                   @"Magnesium": HKQuantityTypeIdentifierDietaryMagnesium,
-                                   @"Zinc": HKQuantityTypeIdentifierDietaryZinc,
-                                   @"Selenium": HKQuantityTypeIdentifierDietarySelenium,
-                                   @"Copper": HKQuantityTypeIdentifierDietaryCopper,
-                                   @"Manganese": HKQuantityTypeIdentifierDietaryManganese,
-                                   @"Chromium": HKQuantityTypeIdentifierDietaryChromium,
-                                   @"Molybdenum": HKQuantityTypeIdentifierDietaryMolybdenum,
-                                   @"Chloride": HKQuantityTypeIdentifierDietaryChloride,
-                                   @"Potassium": HKQuantityTypeIdentifierDietaryPotassium,
-                                   @"Caffeine": HKQuantityTypeIdentifierDietaryCaffeine,
-                                   @"Water": HKQuantityTypeIdentifierDietaryWater,
-                                   @"UV Exposure": HKQuantityTypeIdentifierUVExposure
-                                   };
-    return quantityTypes;
 }
 
 - (NSSet *)healthTypesToRead {
