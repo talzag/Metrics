@@ -16,11 +16,11 @@
     for (id ident in self.quantityHealthTypeIdentifiers) {
         if ([ident isKindOfClass:[NSString class]]) {
             [MTSHealthDataCoordinator queryHealthStore:healthStore
-                   forQuantityType:(HKQuantityTypeIdentifier)ident
-                          fromDate:self.startDate
-                            toDate:self.endDate
-            usingCompletionHandler:^(NSArray<__kindof HKSample *> * _Nullable samples) {
-                
+                                       forQuantityType:(HKQuantityTypeIdentifier)ident
+                                              fromDate:self.startDate
+                                                toDate:self.endDate
+                                usingCompletionHandler:^(NSArray<__kindof HKSample *> * _Nullable samples) {
+                                    
                 NSMutableArray *dataPoints = [NSMutableArray array];
                 for (HKQuantitySample *sample in samples) {
                     double calories = [sample.quantity doubleValueForUnit:[HKUnit kilocalorieUnit]];

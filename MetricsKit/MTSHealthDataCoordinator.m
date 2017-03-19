@@ -12,9 +12,12 @@
 @implementation MTSHealthDataCoordinator
 
 + (BOOL)healthType:(HKQuantityTypeIdentifier)typeA canBeGroupedWithHealthType:(HKQuantityTypeIdentifier)typeB {
-    return (typeA == typeB) && (typeA == HKQuantityTypeIdentifierBasalEnergyBurned  ||
-                                typeA == HKQuantityTypeIdentifierActiveEnergyBurned ||
-                                typeA == HKQuantityTypeIdentifierDietaryEnergyConsumed);
+    return (typeA == HKQuantityTypeIdentifierBasalEnergyBurned  ||
+            typeA == HKQuantityTypeIdentifierActiveEnergyBurned ||
+            typeA == HKQuantityTypeIdentifierDietaryEnergyConsumed) &&
+           (typeB == HKQuantityTypeIdentifierBasalEnergyBurned  ||
+            typeB == HKQuantityTypeIdentifierActiveEnergyBurned ||
+            typeB == HKQuantityTypeIdentifierDietaryEnergyConsumed);
 }
 
 + (void)queryHealthStore:(HKHealthStore * _Nonnull)healthStore

@@ -6,10 +6,14 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
+@import HealthKit;
+
 #import "MTSHealthTypeTransformer.h"
 
 @interface MTSHealthTypeTransformerTests : XCTestCase
+
+@property (nonatomic) MTSHealthTypeTransformer *transformer;
 
 @end
 
@@ -17,24 +21,68 @@
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    [self setTransformer:[MTSHealthTypeTransformer new]];
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    [self setTransformer:nil];
+    
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+- (void)testThatItAllowsReverseTransformation {
+    XCTAssertTrue([MTSHealthTypeTransformer allowsReverseTransformation]);
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testThatItTransformDataToNSSet {
+    XCTAssertEqualObjects([NSSet class], [MTSHealthTypeTransformer transformedValueClass]);
+}
+
+- (void)testThatItTransformsDataPoints {
+    NSSet *dataPoints = [NSSet setWithObjects:
+                         HKQuantityTypeIdentifierDietaryEnergyConsumed,
+                         HKQuantityTypeIdentifierActiveEnergyBurned,
+                         HKQuantityTypeIdentifierBasalEnergyBurned, nil];
+    
+    id transformed = [[self transformer] transformedValue:dataPoints];
+    XCTAssertTrue([transformed isKindOfClass:[NSData class]]);
+}
+
+- (void)testThatItWillHandleTransformingDataThatHasBeenTransformed {
+    NSData *emptyData = [NSData data];
+    id transformed = [[self transformer] transformedValue:emptyData];
+    XCTAssertNil(transformed);
+}
+
+- (void)testThatItWillNotTransformDataThatIsNotAnNSSet {
+    NSString *name = @"Daniel";
+    id transformed = [[self transformer] transformedValue:name];
+    XCTAssertNil(transformed);
+}
+
+- (void)testThatItWillNotReverseTransformDataThatWasNotAnNSSet {
+    NSArray *dataPoints = @[
+                            HKQuantityTypeIdentifierDietaryEnergyConsumed,
+                            HKQuantityTypeIdentifierActiveEnergyBurned,
+                            HKQuantityTypeIdentifierBasalEnergyBurned];
+    
+    NSData *transformed = [NSKeyedArchiver archivedDataWithRootObject:dataPoints];
+    
+    id reversed = [[self transformer] reverseTransformedValue:transformed];
+    XCTAssertNil(reversed);
+}
+
+- (void)testThatItReverseTransformsDataPoints {
+    NSSet *dataPoints = [NSSet setWithObjects:
+                         HKQuantityTypeIdentifierDietaryEnergyConsumed,
+                         HKQuantityTypeIdentifierActiveEnergyBurned,
+                         HKQuantityTypeIdentifierBasalEnergyBurned, nil];
+    NSData *transformed = [NSKeyedArchiver archivedDataWithRootObject:dataPoints];
+    
+    id reversed = [[self transformer] reverseTransformedValue:transformed];
+    XCTAssertTrue([reversed isKindOfClass:[NSSet class]]);
+    XCTAssertEqualObjects((NSSet *)reversed, dataPoints);
 }
 
 @end

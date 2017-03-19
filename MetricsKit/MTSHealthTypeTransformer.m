@@ -20,15 +20,21 @@
 }
 
 - (id)transformedValue:(id)value {
-    if ([value isKindOfClass:[NSData class]]) {
-        return value;
+    if (![value isKindOfClass:[NSSet class]]) {
+        return nil;
     }
     
     return [NSKeyedArchiver archivedDataWithRootObject:value];
 }
 
 - (id)reverseTransformedValue:(id)value {
-    return [NSKeyedUnarchiver unarchiveObjectWithData:value];
+    id reversed = [NSKeyedUnarchiver unarchiveObjectWithData:value];
+    
+    if (![reversed isKindOfClass:[NSSet class]]) {
+        return nil;
+    }
+    
+    return reversed;
 }
 
 @end

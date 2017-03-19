@@ -11,30 +11,46 @@
 
 @interface MTSHealthDataCoordinatorTests : XCTestCase
 
+@property MTSHealthDataCoordinator *coordinator;
+
 @end
 
 @implementation MTSHealthDataCoordinatorTests
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    [self setCoordinator:[MTSHealthDataCoordinator new]];
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    [self setCoordinator:nil];
+    
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testThatItDeterminesCorrectCombinationsOfData {
+    HKQuantityTypeIdentifier activeEnergy = HKQuantityTypeIdentifierActiveEnergyBurned;
+    HKQuantityTypeIdentifier baseEnergy = HKQuantityTypeIdentifierBasalEnergyBurned;
+    HKQuantityTypeIdentifier dietaryEnergy = HKQuantityTypeIdentifierDietaryEnergyConsumed;
+    
+    HKQuantityTypeIdentifier stepCount = HKQuantityTypeIdentifierStepCount;
+    HKQuantityTypeIdentifier swimDistance = HKQuantityTypeIdentifierDistanceSwimming;
+    
+    XCTAssertTrue([MTSHealthDataCoordinator healthType:activeEnergy canBeGroupedWithHealthType:baseEnergy]);
+    XCTAssertTrue([MTSHealthDataCoordinator healthType:activeEnergy canBeGroupedWithHealthType:dietaryEnergy]);
+    XCTAssertTrue([MTSHealthDataCoordinator healthType:baseEnergy canBeGroupedWithHealthType:dietaryEnergy]);
+    
+    XCTAssertFalse([MTSHealthDataCoordinator healthType:activeEnergy canBeGroupedWithHealthType:stepCount]);
+    XCTAssertFalse([MTSHealthDataCoordinator healthType:activeEnergy canBeGroupedWithHealthType:swimDistance]);
+    
+    XCTAssertFalse([MTSHealthDataCoordinator healthType:baseEnergy canBeGroupedWithHealthType:stepCount]);
+    XCTAssertFalse([MTSHealthDataCoordinator healthType:baseEnergy canBeGroupedWithHealthType:swimDistance]);
+    
+    XCTAssertFalse([MTSHealthDataCoordinator healthType:dietaryEnergy canBeGroupedWithHealthType:stepCount]);
+    XCTAssertFalse([MTSHealthDataCoordinator healthType:dietaryEnergy canBeGroupedWithHealthType:swimDistance]);
+    
+    XCTAssertFalse([MTSHealthDataCoordinator healthType:stepCount canBeGroupedWithHealthType:swimDistance]);
 }
 
 @end
