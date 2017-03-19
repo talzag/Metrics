@@ -120,10 +120,4 @@
     XCTAssertEqual(100, [[self graphView] positionOnYAxisForValue:50 scaledForMaxValue:max]);
 }
 
-- (void)PENDING_testGraphDrawingPerformance {
-    [self measureBlock:^{
-        [[self graphView] drawRect:[self graphView].frame];
-    }];
-}
-
 @end
