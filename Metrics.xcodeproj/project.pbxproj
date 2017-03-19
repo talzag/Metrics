@@ -61,6 +61,8 @@
 		E38AE1BD1E7A3445001ABE40 /* MTSHealthDataCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1BB1E7A3444001ABE40 /* MTSHealthDataCoordinator.m */; };
 		E38AE1BF1E7A3497001ABE40 /* MTSHealthDataCoordinatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1BE1E7A3497001ABE40 /* MTSHealthDataCoordinatorTests.m */; };
 		E38AE1C51E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1C41E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m */; };
+		E3F276F31E7EC83E007DE843 /* MTSRealCalorieValue.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F276F11E7EC83E007DE843 /* MTSRealCalorieValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E3F276F51E7EC8E0007DE843 /* MTSRealCalorieValue.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F276F41E7EC8E0007DE843 /* MTSRealCalorieValue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,6 +228,8 @@
 		E38AE1BB1E7A3444001ABE40 /* MTSHealthDataCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSHealthDataCoordinator.m; sourceTree = "<group>"; };
 		E38AE1BE1E7A3497001ABE40 /* MTSHealthDataCoordinatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSHealthDataCoordinatorTests.m; sourceTree = "<group>"; };
 		E38AE1C41E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSQuantityTypeIdentifiers.m; sourceTree = "<group>"; };
+		E3F276F11E7EC83E007DE843 /* MTSRealCalorieValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSRealCalorieValue.h; sourceTree = "<group>"; };
+		E3F276F41E7EC8E0007DE843 /* MTSRealCalorieValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSRealCalorieValue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -399,6 +403,8 @@
 			isa = PBXGroup;
 			children = (
 				E3784BDA1E4684F8005F87BC /* MetricsKit.h */,
+				E3F276F11E7EC83E007DE843 /* MTSRealCalorieValue.h */,
+				E3F276F41E7EC8E0007DE843 /* MTSRealCalorieValue.m */,
 				E3594A411E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h */,
 				E38AE1C41E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m */,
 				E38AE1BA1E7A3444001ABE40 /* MTSHealthDataCoordinator.h */,
@@ -458,6 +464,7 @@
 				E38AE1A81E78E9F0001ABE40 /* MTSGraphView+Methods.h in Headers */,
 				E38AE1AD1E78EE71001ABE40 /* MTSGraph.h in Headers */,
 				E38AE1A41E78E9F0001ABE40 /* MTSGraph+HKQuery.h in Headers */,
+				E3F276F31E7EC83E007DE843 /* MTSRealCalorieValue.h in Headers */,
 				E38AE1B41E78EF1D001ABE40 /* MTSGraph+CoreDataProperties.h in Headers */,
 				E38AE1B21E78EF1D001ABE40 /* MTSGraph+CoreDataClass.h in Headers */,
 				E38AE1A61E78E9F0001ABE40 /* MTSGraphView.h in Headers */,
@@ -789,6 +796,7 @@
 			files = (
 				E38AE1A11E78E9F0001ABE40 /* Metrics.xcdatamodeld in Sources */,
 				E38AE1A51E78E9F0001ABE40 /* MTSGraph+HKQuery.m in Sources */,
+				E3F276F51E7EC8E0007DE843 /* MTSRealCalorieValue.m in Sources */,
 				E38AE1AA1E78E9F0001ABE40 /* MTSHealthTypeTransformer.m in Sources */,
 				E38AE1A71E78E9F0001ABE40 /* MTSGraphView.m in Sources */,
 				E38AE1B51E78EF1D001ABE40 /* MTSGraph+CoreDataProperties.m in Sources */,
