@@ -109,7 +109,7 @@
     
     [self waitForExpectationsWithTimeout:15 handler:^(NSError * _Nullable error) {
         if (error) {
-            XCTFail(@"Error attempting to delete data from health store.a");
+            XCTFail(@"Error attempting to delete data from health store.");
         }
     }];
     

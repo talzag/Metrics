@@ -203,15 +203,7 @@ NSString *MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-identifier";
 }
 
 - (void)drawRect:(CGRect)rect {
-    if (CGRectIsNull(rect)) {
-        return;
-    }
-    
     CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    if (!context) {
-        return;
-    }
     
     // Add rounded corners clip
     UIBezierPath *clipPath = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:25.0];

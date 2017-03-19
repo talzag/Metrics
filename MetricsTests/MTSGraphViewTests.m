@@ -33,8 +33,9 @@
     
     CGRect frame = CGRectMake(0, 0, 300, 200);
     MTSGraphView *view = [[MTSGraphView alloc] initWithFrame:frame];
+    [view setDataPoints:testDataSet];
+    
     [self setGraphView:view];
-    [[self graphView] setDataPoints:testDataSet];
 }
 
 - (void)tearDown {
@@ -106,7 +107,7 @@
     CGFloat max = [maxNum doubleValue];
     // max == 100
     
-    // should return 0
+    // should return 0x
     XCTAssertEqual(0, [[self graphView] positionOnYAxisForValue:0 scaledForMaxValue:max]);
     
     // 170 - 30 = 140
@@ -118,6 +119,41 @@
     // 50 / 100 = 0.5
     // 170 - 0.5 * 140 = 100
     XCTAssertEqual(100, [[self graphView] positionOnYAxisForValue:50 scaledForMaxValue:max]);
+}
+
+- (void)testGraphDrawingPerformance {
+    UIGraphicsBeginImageContext([self graphView].frame.size);
+    
+    [self measureBlock:^{
+        [[self graphView] drawRect:[self graphView].frame];
+    }];
+    
+    UIGraphicsEndImageContext();
+}
+
+- (void)testBackgroundDrawingPerformance {
+    [[self graphView] setTopColor:[UIColor cyanColor]];
+    [[self graphView] setBottomColor:[UIColor blueColor]];
+    
+    UIGraphicsBeginImageContext([self graphView].frame.size);
+    
+    [self measureBlock:^{
+        [[self graphView] drawRect:[self graphView].frame];
+    }];
+    
+    UIGraphicsEndImageContext();
+}
+
+- (void)testDrawingPerformanceWithNoIntermediateLines {
+    [[self graphView] setDrawIntermediateLines:NO];
+    
+    UIGraphicsBeginImageContext([self graphView].frame.size);
+    
+    [self measureBlock:^{
+        [[self graphView] drawRect:[self graphView].frame];
+    }];
+    
+    UIGraphicsEndImageContext();
 }
 
 @end
