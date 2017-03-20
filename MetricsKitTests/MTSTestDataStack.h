@@ -8,11 +8,19 @@
 
 @import Foundation;
 @import CoreData;
+@import HealthKit;
 
 @interface MTSTestDataStack : NSObject
 
-@property (nonatomic) NSManagedObjectModel *model;
-@property (nonatomic) NSPersistentStoreCoordinator *coordinator;
-@property (nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, nullable) NSManagedObjectModel *model;
+@property (nonatomic, nullable) NSPersistentStoreCoordinator *coordinator;
+@property (nonatomic, nullable) NSManagedObjectContext *managedObjectContext;
 
+@property (nonatomic, nonnull) NSSet *healthDataTypes;
+
+- (void)insertMockHealthDataIntoHealthStore:(nonnull HKHealthStore *)healthStore
+                          completionHandler:(void (^ _Nullable)(BOOL success, NSError * _Nullable error))completionHandler;
+
+- (void)deleteMockDataFromHealthStore:(HKHealthStore * _Nonnull)healthStore
+                withCompletionHandler:(void (^ _Nullable)(void))completionHandler;
 @end

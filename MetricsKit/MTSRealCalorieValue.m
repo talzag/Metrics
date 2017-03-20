@@ -12,7 +12,7 @@ void queryHealthStore(HKHealthStore *healthStore, NSDate *start, NSDate *end, HK
     
     NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:start
                                                                endDate:end
-                                                               options:HKQueryOptionNone];
+                                                               options:HKQueryOptionStrictStartDate];
     
     HKStatisticsQuery *query = [[HKStatisticsQuery alloc] initWithQuantityType:quantityType
                                                                  quantitySamplePredicate:predicate

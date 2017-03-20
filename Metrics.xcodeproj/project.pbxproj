@@ -443,12 +443,12 @@
 			children = (
 				E30C08391E7E31BE0083DB7B /* MTSTestDataStack.h */,
 				E30C083A1E7E31BE0083DB7B /* MTSTestDataStack.m */,
+				E38AE18A1E78E798001ABE40 /* MetricsKitTests.m */,
 				E30C08371E7E30810083DB7B /* MTSGraphHKQueryTests.m */,
 				E38AE1BE1E7A3497001ABE40 /* MTSHealthDataCoordinatorTests.m */,
 				E38AE1B81E7A342D001ABE40 /* MTSHealthTypeTransformerTests.m */,
 				E38AE1B61E7A33EA001ABE40 /* MTSDataPointsTransformerTests.m */,
 				E37362201E6B9D240072DFBC /* MTSGraphViewTests.m */,
-				E38AE18A1E78E798001ABE40 /* MetricsKitTests.m */,
 				E38AE18C1E78E798001ABE40 /* Info.plist */,
 			);
 			path = MetricsKitTests;

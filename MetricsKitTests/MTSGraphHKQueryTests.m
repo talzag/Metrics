@@ -18,49 +18,9 @@
 @property MTSTestDataStack *dataStack;
 @property MTSGraph *graph;
 
-@property (nonatomic) NSSet <HKQuantityType *>*healthDataTypes;
-
 @end
 
 @implementation MTSGraphHKQueryTests
-
-- (NSSet *)healthDataTypes {
-    HKQuantityType *activeEnergy = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierActiveEnergyBurned];
-    HKQuantityType *dietaryEnery = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
-    HKQuantityType *baseEnergy = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBasalEnergyBurned];
-    
-    return [NSSet setWithObjects:activeEnergy, dietaryEnery, baseEnergy, nil];
-}
-
-- (void)insertMockHealthDataIntoHealthStore:(HKHealthStore *)healthStore completionHandler:(void (^ _Nullable)(BOOL success, NSError * _Nullable error))completionHandler {
-    NSDate *now = [NSDate date];
-    HKQuantity *calories = [HKQuantity quantityWithUnit:[HKUnit kilocalorieUnit]
-                                            doubleValue:100];
-    
-    HKQuantityType *activeEnergy = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierActiveEnergyBurned];
-    HKQuantitySample *activeEnergySample = [HKQuantitySample quantitySampleWithType:activeEnergy
-                                                                           quantity:calories
-                                                                          startDate:now
-                                                                            endDate:now];
-    
-    HKQuantityType *dietaryEnery = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
-    HKQuantitySample *dietaryEnergySample = [HKQuantitySample quantitySampleWithType:dietaryEnery
-                                                                            quantity:calories
-                                                                           startDate:now
-                                                                             endDate:now];
-    
-    HKQuantityType *baseEnergy = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBasalEnergyBurned];
-    HKQuantitySample *baseEnergySample = [HKQuantitySample quantitySampleWithType:baseEnergy
-                                                                         quantity:calories
-                                                                        startDate:now
-                                                                          endDate:now];
-    
-    [healthStore saveObjects:@[activeEnergySample, dietaryEnergySample, baseEnergySample] withCompletion:^(BOOL success, NSError * _Nullable error) {
-        if (completionHandler) {
-            completionHandler(success, error);
-        }
-    }];
-}
 
 - (void)setUp {
     [super setUp];
@@ -72,14 +32,14 @@
     XCTestExpectation *writeAccessExpectation = [self expectationWithDescription:@"Write access granted"];
     XCTestExpectation *writeDataExpectation = [self expectationWithDescription:@"Mock health data written"];
     __weak MTSGraphHKQueryTests *weakSelf = self;
-    [[self healthStore] requestAuthorizationToShareTypes:[self healthDataTypes]
+    [[self healthStore] requestAuthorizationToShareTypes:[[self dataStack] healthDataTypes]
                                                readTypes:nil
                                               completion:^(BOOL success, NSError * _Nullable error) {
                                                   if (success) {
                                                       [writeAccessExpectation fulfill];
                                                       
                                                       MTSGraphHKQueryTests *this = weakSelf;
-                                                      [this insertMockHealthDataIntoHealthStore:this.healthStore completionHandler:^(BOOL success, NSError * _Nullable error) {
+                                                      [[this dataStack] insertMockHealthDataIntoHealthStore:this.healthStore completionHandler:^(BOOL success, NSError * _Nullable error) {
                                                           if (success) {
                                                               [writeDataExpectation fulfill];
                                                           }
@@ -94,24 +54,20 @@
 }
 
 - (void)tearDown {
-    [self setGraph:nil];
-    [self setDataStack:nil];
-    
-    NSPredicate *predicate = [HKQuery predicateForObjectsFromSource:[HKSource defaultSource]];
-    for (HKQuantityType *type in [self healthDataTypes]) {
-        XCTestExpectation *cleanUpExpectation = [self expectationWithDescription:[NSString stringWithFormat:@"Removed %@ health data", type]];
-        [[self healthStore] deleteObjectsOfType:type predicate:predicate withCompletion:^(BOOL success, NSUInteger deletedObjectCount, NSError * _Nullable error) {
-            if (success) {
-                [cleanUpExpectation fulfill];
-            }
-        }];
-    }
+    XCTestExpectation *cleanUpExpectation = [self expectationWithDescription:@"Removed health data"];
+    [[self dataStack] deleteMockDataFromHealthStore:[self healthStore] withCompletionHandler:^{
+        [cleanUpExpectation fulfill];
+    }];
     
     [self waitForExpectationsWithTimeout:15 handler:^(NSError * _Nullable error) {
         if (error) {
             XCTFail(@"Error attempting to delete data from health store.");
         }
     }];
+    
+    [self setGraph:nil];
+    [self setDataStack:nil];
+    [self setHealthStore:nil];
     
     [super tearDown];
 }
