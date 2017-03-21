@@ -12,7 +12,7 @@
 
 @implementation MTSGraph (HKQuery)
 
-- (void)populateGraphDataByQueryingHealthStore:(HKHealthStore * _Nonnull)healthStore
+- (void)populateDataPointsByQueryingHealthStore:(HKHealthStore * _Nonnull)healthStore
                              completionHandler:(void (^ _Nullable)(NSArray<__kindof HKSample *> * _Nullable samples))completionHandler {
     for (id ident in self.quantityHealthTypeIdentifiers) {
         __weak MTSGraph *weakSelf = self;

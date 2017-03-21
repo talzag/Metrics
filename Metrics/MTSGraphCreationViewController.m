@@ -24,12 +24,16 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
 @property NSDate *startDate;
 @property NSDate *endDate;
 
+@property NSDictionary <NSString *, HKQuantityTypeIdentifier>*quantityTypeIdentifiers;
+
 @end
 
 @implementation MTSGraphCreationViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setQuantityTypeIdentifiers:MTSQuantityTypeIdentifiers()];
     
     self.quantityNames = [self.quantityTypeIdentifiers.allKeys sortedArrayUsingComparator:^NSComparisonResult(NSString *  _Nonnull key1, NSString *  _Nonnull key2) {
         return [key1 localizedStandardCompare:key2];

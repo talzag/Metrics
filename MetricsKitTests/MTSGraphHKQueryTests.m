@@ -77,7 +77,7 @@
     [[self graph] setQuantityHealthTypeIdentifiers:[NSSet setWithObject:HKQuantityTypeIdentifierActiveEnergyBurned]];
     XCTestExpectation *dataExpectation = [self expectationWithDescription:@"Finished querying health store"];
     __weak MTSGraphHKQueryTests *weakSelf = self;
-    [[self graph] populateGraphDataByQueryingHealthStore:[self healthStore] completionHandler:^(NSArray<__kindof HKSample *> * _Nullable samples) {
+    [[self graph] populateDataPointsByQueryingHealthStore:[self healthStore] completionHandler:^(NSArray<__kindof HKSample *> * _Nullable samples) {
         if ([samples count]) {
             MTSGraphHKQueryTests *this = weakSelf;
             NSSet *data = [[this graph] dataPoints];

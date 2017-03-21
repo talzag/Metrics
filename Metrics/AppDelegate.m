@@ -12,7 +12,6 @@
 @interface AppDelegate ()
 
 @property (strong) HKHealthStore *healthStore;
-@property (strong, nonatomic) NSDictionary <NSString *, HKQuantityTypeIdentifier>*quantityTypeIdentifiers;
 
 @end
 
@@ -20,15 +19,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.quantityTypeIdentifiers = MTSQuantityTypeIdentifiers();
     
-    UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
-    MTSGraphCollectionViewController *graphsViewController = (MTSGraphCollectionViewController *)navController.viewControllers.firstObject;
-    graphsViewController.managedObjectContext = self.persistentContainer.viewContext;
-    graphsViewController.quantityTypeIdentifiers = self.quantityTypeIdentifiers;
+    UINavigationController *navController = (UINavigationController *)[[self window] rootViewController];
+    MTSGraphCollectionViewController *graphsViewController = [[navController viewControllers] firstObject];
+    [graphsViewController setManagedObjectContext: [[self persistentContainer] viewContext]];
     
     if ([HKHealthStore isHealthDataAvailable]) {
-        self.healthStore = [[HKHealthStore alloc] init];
+        [self setHealthStore:[HKHealthStore new]];
         [self requestHealthSharingAuthorization];
     }
     
@@ -37,18 +34,20 @@
 
 - (void)requestHealthSharingAuthorization {
     __weak AppDelegate *weakSelf = self;
-    [MTSHealthDataCoordinator requestReadAccessForHealthStore:self.healthStore
-                                            completionHandler:^(BOOL success, NSError * _Nullable error) {
+    
+    [MTSHealthDataCoordinator requestReadAccessForHealthStore:self.healthStore completionHandler:^(BOOL success, NSError * _Nullable error) {
         if (!success) {
-            NSLog(@"ERROR: %@", error.localizedDescription);
+            NSLog(@"ERROR: %@", [error localizedDescription]);
+#ifdef DEBUG
             abort();
+#endif
         }
         
-        AppDelegate *delegate = weakSelf;
+        AppDelegate *this = weakSelf;
         
-        UINavigationController *navController = (UINavigationController *)[delegate.window rootViewController];
-        MTSGraphCollectionViewController *graphViewController = (MTSGraphCollectionViewController *)[[navController viewControllers] firstObject];
-        graphViewController.healthStore = delegate.healthStore;
+        UINavigationController *navController = (UINavigationController *)[[this window] rootViewController];
+        MTSGraphCollectionViewController *graphsViewController = (MTSGraphCollectionViewController *)[[navController viewControllers] firstObject];
+        [graphsViewController setHealthStore:[this healthStore]];
     }];
 }
 
@@ -82,7 +81,7 @@
     NSManagedObjectContext *context = self.persistentContainer.viewContext;
     NSError *error = nil;
     if ([context hasChanges] && ![context save:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 #ifdef DEBUG
         abort();
 #endif

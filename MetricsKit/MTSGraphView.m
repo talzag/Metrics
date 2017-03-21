@@ -18,28 +18,54 @@ NSString *MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-identifier";
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self initalizeValues];
+        _topColor = [UIColor whiteColor];
+        _bottomColor = [UIColor whiteColor];
+        _needsDataPointsDisplay = NO;
+        _dataPoints = [NSSet set];
+        _graphTopMarginPercent = _graphBottomMarginPercent = 0.15;
+        _graphLeftRightMarginPercent = 0.05;
+        _drawIntermediateLines = YES;
     }
     return self;
 }
 
-// TODO: Implement encodeWithCoder: as well
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        [self initalizeValues];
+        NSUInteger xTitleLen = [aDecoder decodeDoubleForKey:@"xTitleLen"];
+        const char *xTitleBytes = (char *)[aDecoder decodeBytesForKey:@"xAxisTitle" returnedLength:&xTitleLen];
+        _xAxisTitle = [NSString stringWithCString:xTitleBytes encoding:NSUTF8StringEncoding];
+        
+        NSUInteger yTitleLen = [aDecoder decodeDoubleForKey:@"yTitleLen"];
+        const char *yTitleBytes = (char *)[aDecoder decodeBytesForKey:@"yAxisTitle" returnedLength:&yTitleLen];
+        _yAxisTitle = [NSString stringWithCString:yTitleBytes encoding:NSUTF8StringEncoding];
+        
+        _drawIntermediateLines = [aDecoder decodeBoolForKey:@"drawIntermediateLines"];
+        _topColor = [aDecoder decodeObjectForKey:@"topColor"];
+        _bottomColor = [aDecoder decodeObjectForKey:@"bottomColor"];
     }
     return self;
 }
 
-- (void)initalizeValues {
-    _topColor = [UIColor whiteColor];
-    _bottomColor = [UIColor whiteColor];
-    _needsDataPointsDisplay = NO;
-    _dataPoints = [NSSet set];
-    _graphTopMarginPercent = _graphBottomMarginPercent = 0.15;
-    _graphLeftRightMarginPercent = 0.05;
-    _drawIntermediateLines = YES;
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+    
+    long xTitleLen = [_xAxisTitle lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    [aCoder encodeDouble:xTitleLen forKey:@"xTitleLen"];
+    const char *xTitle = [_xAxisTitle cStringUsingEncoding:NSUTF8StringEncoding];
+    [aCoder encodeBytes:(const void *)xTitle length:xTitleLen forKey:@"xAxisTitle"];
+    
+    long yTitleLen = [_yAxisTitle lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    [aCoder encodeDouble:yTitleLen forKey:@"yTitleLen"];
+    const char *yTitle = [_yAxisTitle cStringUsingEncoding:NSUTF8StringEncoding];
+    [aCoder encodeBytes:(const void *)yTitle length:yTitleLen forKey:@"yAxisTitle"];
+    
+    NSData *points = [NSKeyedArchiver archivedDataWithRootObject:_dataPoints];
+    [aCoder encodeBytes:[points bytes] length:[points length] forKey:@"dataPoints"];
+    
+    [aCoder encodeBool:_drawIntermediateLines forKey:@"drawIntermediateLines"];
+    [aCoder encodeObject:_topColor forKey:@"topColor"];
+    [aCoder encodeObject:_bottomColor forKey:@"bottomColor"];
 }
 
 - (void)setDataPoints:(NSSet<NSDictionary<NSString *,id> *> *)dataPoints {

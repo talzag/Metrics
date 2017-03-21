@@ -41,55 +41,54 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"Show Graph"]) {
+        MTSGraphCollectionViewCell *cell = (MTSGraphCollectionViewCell *)sender;
+        NSIndexPath *indexPath = [[self collectionView] indexPathForCell:cell];
+        MTSGraph *graph =[[self graphs] objectAtIndex:[indexPath row]];
+        
         MTSGraphViewController *destination = (MTSGraphViewController *)[segue destinationViewController];
-        destination.healthStore = self.healthStore;
-        
-        MTSGraphCollectionViewCell *cell = (MTSGraphCollectionViewCell *) sender;
-        NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-        destination.graph = self.graphs[indexPath.row];
-        destination.quantityTypeIdentifiers = self.quantityTypeIdentifiers;
-        
+        [destination setGraph:graph];
     } else if ([segue.identifier isEqualToString:@"Create Graph"]) {
-        UINavigationController *navController = (UINavigationController *)[segue destinationViewController];
-        MTSGraphCreationViewController *destination = (MTSGraphCreationViewController *)navController.viewControllers.firstObject;
-        destination.quantityTypeIdentifiers = self.quantityTypeIdentifiers;
+        MTSGraph *graph = [[MTSGraph alloc] initWithContext:[self managedObjectContext]];
         
-        MTSGraph *graph = [[MTSGraph alloc] initWithContext:self.managedObjectContext];
-        destination.graph = graph;
+        UINavigationController *navController = (UINavigationController *)[segue destinationViewController];
+        MTSGraphCreationViewController *destination = [[navController viewControllers] firstObject];
+        [destination setGraph:graph];
     }
 }
 
 - (IBAction)exitFromGraphCreationScene:(UIStoryboardSegue *)segue {
-    MTSGraphCreationViewController *source = (MTSGraphCreationViewController *)segue.sourceViewController;
-    MTSGraph *graph = source.graph;
-    self.graphs = [self.graphs arrayByAddingObject:graph];
+    MTSGraphCreationViewController *source = (MTSGraphCreationViewController *)[segue sourceViewController];
+    MTSGraph *graph = [source graph];
+    self.graphs = [[self graphs] arrayByAddingObject:graph];
     
-    [self.collectionView reloadData];
+    [[self collectionView] reloadData];
         
-    if (!self.managedObjectContext.hasChanges) {
+    if (![[self managedObjectContext] hasChanges]) {
         return;
     }
     
     NSError *error;
-    if (![self.managedObjectContext save:&error]) {
-        NSLog(@"%@", error.debugDescription);
+    if (![[self managedObjectContext] save:&error]) {
+        NSLog(@"%@", [error debugDescription]);
     }
 }
 
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.graphs count];
+    return [[self graphs] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MTSGraphCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     MTSGraph *graph = [self.graphs objectAtIndex:[indexPath row]];
-    cell.graphTitleLabel.text = graph.title;
-    cell.graphView.xAxisTitle = graph.xAxisTitle;
-    cell.graphView.yAxisTitle = graph.yAxisTitle;
-    cell.graphView.dataPoints = graph.dataPoints;
+    [[cell graphTitleLabel] setText:[graph title]];
+    
+    MTSGraphView *graphView = [cell graphView];
+    [graphView setXAxisTitle:[graph xAxisTitle]];
+    [graphView setYAxisTitle:[graph yAxisTitle]];
+    [graphView setDataPoints:[graph dataPoints]];
     
     return cell;
 }

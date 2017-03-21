@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *startDateTextField;
 @property (weak, nonatomic) IBOutlet UITextField *endDateTextField;
 
-@property NSDictionary <NSString *, HKQuantityTypeIdentifier>*quantityTypeIdentifiers;
 @property MTSGraph *graph;
 
 @end

@@ -17,6 +17,5 @@
 
 @property HKHealthStore *healthStore;
 @property NSManagedObjectContext *managedObjectContext;
-@property NSDictionary <NSString *, HKQuantityTypeIdentifier>*quantityTypeIdentifiers;
 
 @end

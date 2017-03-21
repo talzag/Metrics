@@ -7,16 +7,13 @@
 //
 
 @import UIKit;
+@import HealthKit;
 
 #import <MetricsKit/MetricsKit.h>
 
-@import HealthKit;
+@interface MTSGraphViewController : UIViewController
 
-@interface MTSGraphViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
-
-@property HKHealthStore *healthStore;
 @property MTSGraph *graph;
 @property (weak, nonatomic) IBOutlet MTSGraphView *graphView;
-@property NSDictionary <NSString *, HKQuantityTypeIdentifier>*quantityTypeIdentifiers;
 
 @end

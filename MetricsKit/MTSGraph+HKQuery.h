@@ -13,6 +13,6 @@
 
 @interface MTSGraph (HKQuery)
 
-- (void)populateGraphDataByQueryingHealthStore:(HKHealthStore * _Nonnull)healthStore completionHandler:(void (^ _Nullable)(NSArray<__kindof HKSample *> * _Nullable samples))completionHandler ;
+- (void)populateDataPointsByQueryingHealthStore:(HKHealthStore * _Nonnull)healthStore completionHandler:(void (^ _Nullable)(NSArray<__kindof HKSample *> * _Nullable samples))completionHandler ;
 
 @end

@@ -121,6 +121,27 @@
     XCTAssertEqual(100, [[self graphView] positionOnYAxisForValue:50 scaledForMaxValue:max]);
 }
 
+- (void)testThatItEncodesCorrectly {
+    [[self graphView] setDrawIntermediateLines:NO];
+    [[self graphView] setTopColor:[UIColor redColor]];
+    [[self graphView] setBottomColor:[UIColor grayColor]];
+    [[self graphView] setXAxisTitle:@"X Axis Title for Encoding"];
+    [[self graphView] setYAxisTitle:@"Y axis title for encoding"];
+    
+    NSKeyedArchiver *aCoder = [NSKeyedArchiver new];
+    [[self graphView] encodeWithCoder:aCoder];
+    
+    NSKeyedUnarchiver *aDecoder = [[NSKeyedUnarchiver alloc] initForReadingWithData:[aCoder encodedData]];
+    MTSGraphView *decoded = [[MTSGraphView alloc] initWithCoder:aDecoder];
+    
+    XCTAssertFalse([decoded drawIntermediateLines]);
+    XCTAssertEqualObjects([decoded topColor], [UIColor redColor]);
+    XCTAssertEqualObjects([decoded bottomColor], [UIColor grayColor]);
+    XCTAssertTrue([[decoded xAxisTitle] isEqualToString:@"X Axis Title for Encoding"], @"Actual decoded title: %@", [decoded xAxisTitle]);
+    XCTAssertTrue([[decoded yAxisTitle] isEqualToString:@"Y axis title for encoding"], @"Actual decoded title: %@", [decoded yAxisTitle]);
+    XCTAssertEqualObjects([decoded dataPoints], [self testData]);
+}
+
 - (void)testGraphDrawingPerformance {
     UIGraphicsBeginImageContext([self graphView].frame.size);
     
