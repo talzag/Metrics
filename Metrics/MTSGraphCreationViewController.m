@@ -13,18 +13,16 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
 @interface MTSGraphCreationViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray <NSString *>*quantityNames;
 @property (strong, nonatomic) NSMutableSet <HKQuantityTypeIdentifier>*selectedHealthTypes;
-
 @property (nonatomic) UIView *datePickerContainer;
 @property (nonatomic) UIDatePicker *datePicker;
 @property (nonatomic) NSDateFormatter *dateFormatter;
 @property UITextField *activeTextField;
-
 @property NSDate *startDate;
 @property NSDate *endDate;
-
 @property NSDictionary <NSString *, HKQuantityTypeIdentifier>*quantityTypeIdentifiers;
+@property NSArray <NSDictionary *>*healthCategories;
+@property (nonatomic) NSArray <NSString *>*healthTypeIconNames;
 
 @end
 
@@ -33,42 +31,42 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setHealthCategories:MTSQuantityTypeHealthCategories()];
     [self setQuantityTypeIdentifiers:MTSQuantityTypeIdentifiers()];
-    
-    self.quantityNames = [self.quantityTypeIdentifiers.allKeys sortedArrayUsingComparator:^NSComparisonResult(NSString *  _Nonnull key1, NSString *  _Nonnull key2) {
-        return [key1 localizedStandardCompare:key2];
-    }];
     
     self.selectedHealthTypes = [NSMutableSet set];
     
     NSDate *date = [NSDate date];
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
+    NSDateComponents *components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay
+                                               fromDate:date];
     
     self.endDate = [calendar dateFromComponents:components];
-    self.startDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:-1 toDate:self.endDate options:NSCalendarWrapComponents];
+    self.startDate = [calendar dateByAddingUnit:NSCalendarUnitDay
+                                          value:-1
+                                         toDate:[self endDate]
+                                        options:NSCalendarWrapComponents];
     
     self.startDateTextField.text = [self.dateFormatter stringFromDate:self.startDate];
     self.endDateTextField.text = [self.dateFormatter stringFromDate:self.endDate];
     
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter addObserver:self
-                           selector:@selector(displayDatePickerContainer:)
-                               name:UIKeyboardDidHideNotification
-                             object:nil];
-    
-    [notificationCenter addObserver:self
-                           selector:@selector(deviceOrientationDidChange:)
-                               name:UIDeviceOrientationDidChangeNotification
-                             object:nil];
-    
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [self setHealthTypeIconNames:@[
+                                   @"body-measurements",
+                                   @"fitness",
+                                   @"vitals",
+                                   @"results",
+                                   @"nutrition"
+                                   ]];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+- (NSDateFormatter *)dateFormatter {
+    if (!_dateFormatter) {
+        _dateFormatter = [NSDateFormatter new];
+        _dateFormatter.dateFormat = @"MMM dd, yyyy";
+        _dateFormatter.locale = [NSLocale currentLocale];
+    }
     
-    [super viewDidDisappear:animated];
+    return _dateFormatter;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -82,15 +80,79 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
-- (NSDateFormatter *)dateFormatter {
-    if (!_dateFormatter) {
-        _dateFormatter = [[NSDateFormatter alloc] init];
-        _dateFormatter.dateFormat = @"MMM dd, yyyy";
-        _dateFormatter.locale = [NSLocale currentLocale];
-    }
-    return _dateFormatter;
+#pragma mark UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [[self healthCategories] count];
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSDictionary *category = [[self healthCategories] objectAtIndex:section];
+    return [category count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:HealthIdentifierCell];
+    
+    NSDictionary *category = [[self healthCategories] objectAtIndex:[indexPath section]];
+    NSArray *keys = [category keysSortedByValueUsingComparator:^NSComparisonResult(NSString *  _Nonnull obj1, NSString *  _Nonnull obj2) {
+        return [obj1 localizedStandardCompare:obj2];
+    }];
+    
+    NSString *key = [keys objectAtIndex:[indexPath row]];
+    [[cell textLabel] setText:key];
+    
+    NSString *iconName = [[self healthTypeIconNames] objectAtIndex:[indexPath section]];
+    UIImage *icon = [UIImage imageNamed:iconName];
+    [[cell imageView] setImage:icon];
+    
+    HKQuantityTypeIdentifier ident = [self.quantityTypeIdentifiers objectForKey:key];
+    if ([[self selectedHealthTypes] containsObject:ident]) {
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    } else {
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+    }
+    
+    return cell;
+}
+
+#pragma mark UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    NSString *key = [[cell textLabel] text];
+    HKQuantityTypeIdentifier ident = [[self quantityTypeIdentifiers] objectForKey:key];
+    
+    if ([cell accessoryType] == UITableViewCellAccessoryCheckmark) {
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+        [[self selectedHealthTypes] removeObject:ident];
+    } else if (cell.accessoryType == UITableViewCellAccessoryNone) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [[self selectedHealthTypes] addObject:ident];
+    }
+}
+
+/*
+ NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+ [notificationCenter addObserver:self
+ selector:@selector(displayDatePickerContainer:)
+ name:UIKeyboardDidHideNotification
+ object:nil];
+ 
+ [notificationCenter addObserver:self
+ selector:@selector(deviceOrientationDidChange:)
+ name:UIDeviceOrientationDidChangeNotification
+ object:nil];
+ 
+ [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+ 
+- (void)viewDidDisappear:(BOOL)animated {
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+    [super viewDidDisappear:animated];
+}
+ 
 // FIXME: Need to take into account that a users' device could rotate & adjust picker container size/frame accordingly
 - (UIView *)datePickerContainer {
     if (!_datePickerContainer) {
@@ -192,48 +254,6 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
     }];
 }
 
-#pragma mark UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.quantityTypeIdentifiers.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:HealthIdentifierCell];
-    
-    NSString *key = self.quantityNames[indexPath.row];
-    cell.textLabel.text = key;
-    
-    HKQuantityTypeIdentifier ident = [self.quantityTypeIdentifiers objectForKey:key];
-    if ([self.selectedHealthTypes containsObject:ident]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
-    
-    return cell;
-}
-
-#pragma mark UITableViewDelegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    NSString *key = cell.textLabel.text;
-    HKQuantityTypeIdentifier ident = [self.quantityTypeIdentifiers objectForKey:key];
-    
-    if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        
-        [self.selectedHealthTypes removeObject:ident];
-    } else if (cell.accessoryType == UITableViewCellAccessoryNone) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        
-        [self.selectedHealthTypes addObject:ident];
-    }
-}
-
 #pragma mark UITextFieldDelegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
@@ -264,5 +284,6 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
     
     return YES;
 }
+*/
 
 @end
