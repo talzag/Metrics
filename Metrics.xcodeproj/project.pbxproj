@@ -81,6 +81,7 @@
 		E3BC40281E82258500F0D44C /* MetricsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E3784BDA1E4684F8005F87BC /* MetricsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3BC402F1E82285A00F0D44C /* MetricsKitNano.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BC402D1E82258500F0D44C /* MetricsKitNano.framework */; };
 		E3BC40301E82285A00F0D44C /* MetricsKitNano.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3BC402D1E82258500F0D44C /* MetricsKitNano.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E3BC40361E82335100F0D44C /* MTSHealthResultsInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BC40351E82335100F0D44C /* MTSHealthResultsInterfaceController.m */; };
 		E3F276F31E7EC83E007DE843 /* MTSRealCalorieValue.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F276F11E7EC83E007DE843 /* MTSRealCalorieValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3F276F51E7EC8E0007DE843 /* MTSRealCalorieValue.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F276F41E7EC8E0007DE843 /* MTSRealCalorieValue.m */; };
 /* End PBXBuildFile section */
@@ -268,6 +269,8 @@
 		E38AE1C41E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSQuantityTypeIdentifiers.m; sourceTree = "<group>"; };
 		E3BC402D1E82258500F0D44C /* MetricsKitNano.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MetricsKitNano.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3BC402E1E82258600F0D44C /* MetricsKitNano-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MetricsKitNano-Info.plist"; path = "/Users/dstrokis/Developer/Metrics/MetricsKitNano-Info.plist"; sourceTree = "<absolute>"; };
+		E3BC40341E82335100F0D44C /* MTSHealthResultsInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSHealthResultsInterfaceController.h; sourceTree = "<group>"; };
+		E3BC40351E82335100F0D44C /* MTSHealthResultsInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSHealthResultsInterfaceController.m; sourceTree = "<group>"; };
 		E3F276F11E7EC83E007DE843 /* MTSRealCalorieValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSRealCalorieValue.h; sourceTree = "<group>"; };
 		E3F276F41E7EC8E0007DE843 /* MTSRealCalorieValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSRealCalorieValue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -429,6 +432,8 @@
 				E3784BF81E46D017005F87BC /* Metrics WatchKit Extension.entitlements */,
 				E3784BAE1E46494E005F87BC /* InterfaceController.h */,
 				E3784BAF1E46494E005F87BC /* InterfaceController.m */,
+				E3BC40341E82335100F0D44C /* MTSHealthResultsInterfaceController.h */,
+				E3BC40351E82335100F0D44C /* MTSHealthResultsInterfaceController.m */,
 				E3784BB11E46494E005F87BC /* ExtensionDelegate.h */,
 				E3784BB21E46494E005F87BC /* ExtensionDelegate.m */,
 				E3784BB41E46494E005F87BC /* NotificationController.h */,
@@ -886,6 +891,7 @@
 				E3784BB91E46494E005F87BC /* ComplicationController.m in Sources */,
 				E3784BB01E46494E005F87BC /* InterfaceController.m in Sources */,
 				E3784BB61E46494E005F87BC /* NotificationController.m in Sources */,
+				E3BC40361E82335100F0D44C /* MTSHealthResultsInterfaceController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

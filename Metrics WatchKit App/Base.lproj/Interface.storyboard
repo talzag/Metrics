@@ -25,6 +25,7 @@
                                     </group>
                                     <connections>
                                         <outlet property="healthTypeLabel" destination="DMN-Nc-ptV" id="IEz-fZ-eHY"/>
+                                        <segue destination="hUk-7d-GWI" kind="push" identifier="ShowQueryResults" id="Ohk-8x-8n4"/>
                                     </connections>
                                 </tableRow>
                             </items>
@@ -52,6 +53,28 @@
                 </notificationController>
             </objects>
             <point key="canvasLocation" x="220" y="643"/>
+        </scene>
+        <!--Health Results Interface Controller-->
+        <scene sceneID="ETB-OT-5QQ">
+            <objects>
+                <controller id="hUk-7d-GWI" customClass="MTSHealthResultsInterfaceController">
+                    <items>
+                        <table alignment="left" id="Yko-be-XOX">
+                            <items>
+                                <tableRow identifier="HealthDataSampleRow" id="lZb-mX-1mT">
+                                    <group key="rootItem" width="1" alignment="left" id="Lkf-fh-QhX">
+                                        <items>
+                                            <label width="82" height="1" alignment="left" text="Date" textAlignment="left" id="XaX-BV-wS5"/>
+                                            <label width="0.40000000000000002" height="1" alignment="left" text="Units" textAlignment="right" id="tX8-bV-k6T"/>
+                                        </items>
+                                    </group>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="477.74358974358978" y="344.79487179487182"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">

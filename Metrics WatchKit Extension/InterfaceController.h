@@ -13,6 +13,7 @@
 
 @interface InterfaceController : WKInterfaceController
 
+@property HKHealthStore *healthStore;
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceTable *healthLabelsInterfaceTable;
 
 @end

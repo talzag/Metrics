@@ -21,8 +21,13 @@ NSArray <NSDictionary *>*MTSQuantityTypeHealthCategories(void) {
 }
 
 NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeIdentifiers(void) {
-    return @{
-             };
+    NSMutableDictionary *identifiers = [NSMutableDictionary dictionary];
+    
+    for (NSDictionary *dict in MTSQuantityTypeHealthCategories()) {
+        [identifiers addEntriesFromDictionary:dict];
+    }
+    
+    return [NSDictionary dictionaryWithDictionary:identifiers];
 }
 
 NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeBodyMeasurementIdentifiers(void) {

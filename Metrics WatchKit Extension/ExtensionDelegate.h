@@ -6,7 +6,10 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import <WatchKit/WatchKit.h>
+@import WatchKit;
+@import HealthKit;
+
+#import <MetricsKit/MetricsKit.h>
 
 @interface ExtensionDelegate : NSObject <WKExtensionDelegate>
 
