@@ -34,15 +34,17 @@ NSString *MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-identifier";
     if (self) {
         NSUInteger xTitleLen = [aDecoder decodeDoubleForKey:@"xTitleLen"];
         const char *xTitleBytes = (char *)[aDecoder decodeBytesForKey:@"xAxisTitle" returnedLength:&xTitleLen];
-        _xAxisTitle = [NSString stringWithCString:xTitleBytes encoding:NSUTF8StringEncoding];
+        _xAxisTitle = [[NSString alloc] initWithBytes:xTitleBytes length:xTitleLen encoding:NSUTF8StringEncoding];
         
         NSUInteger yTitleLen = [aDecoder decodeDoubleForKey:@"yTitleLen"];
         const char *yTitleBytes = (char *)[aDecoder decodeBytesForKey:@"yAxisTitle" returnedLength:&yTitleLen];
-        _yAxisTitle = [NSString stringWithCString:yTitleBytes encoding:NSUTF8StringEncoding];
+        _yAxisTitle = [[NSString alloc] initWithBytes:yTitleBytes length:yTitleLen encoding:NSUTF8StringEncoding];
         
         _drawIntermediateLines = [aDecoder decodeBoolForKey:@"drawIntermediateLines"];
         _topColor = [aDecoder decodeObjectForKey:@"topColor"];
         _bottomColor = [aDecoder decodeObjectForKey:@"bottomColor"];
+        
+        _dataPoints = [aDecoder decodeObjectForKey:@"dataPoints"];
     }
     return self;
 }
@@ -60,8 +62,7 @@ NSString *MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-identifier";
     const char *yTitle = [_yAxisTitle cStringUsingEncoding:NSUTF8StringEncoding];
     [aCoder encodeBytes:(const void *)yTitle length:yTitleLen forKey:@"yAxisTitle"];
     
-    NSData *points = [NSKeyedArchiver archivedDataWithRootObject:_dataPoints];
-    [aCoder encodeBytes:[points bytes] length:[points length] forKey:@"dataPoints"];
+    [aCoder encodeObject:_dataPoints forKey:@"dataPoints"];
     
     [aCoder encodeBool:_drawIntermediateLines forKey:@"drawIntermediateLines"];
     [aCoder encodeObject:_topColor forKey:@"topColor"];

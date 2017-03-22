@@ -131,7 +131,8 @@
     NSKeyedArchiver *aCoder = [NSKeyedArchiver new];
     [[self graphView] encodeWithCoder:aCoder];
     
-    NSKeyedUnarchiver *aDecoder = [[NSKeyedUnarchiver alloc] initForReadingWithData:[aCoder encodedData]];
+    NSData *data = [aCoder encodedData];
+    NSKeyedUnarchiver *aDecoder = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
     MTSGraphView *decoded = [[MTSGraphView alloc] initWithCoder:aDecoder];
     
     XCTAssertFalse([decoded drawIntermediateLines]);
