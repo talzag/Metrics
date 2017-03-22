@@ -24,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>MetricsKit copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>MetricsKit iOS.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -63,6 +68,11 @@
 			<true/>
 		</dict>
 		<key>E38AE1871E78E798001ABE40</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E3BC400E1E82258500F0D44C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
