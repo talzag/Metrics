@@ -6,9 +6,19 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import <WatchKit/WatchKit.h>
-#import <Foundation/Foundation.h>
+@import WatchKit;
+@import Foundation;
+
+#import <MetricsKit/MetricsKit.h>
 
 @interface InterfaceController : WKInterfaceController
+
+@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceTable *healthLabelsInterfaceTable;
+
+@end
+
+@interface MTSHealthLabelRowController : NSObject
+
+@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceLabel *healthTypeLabel;
 
 @end
