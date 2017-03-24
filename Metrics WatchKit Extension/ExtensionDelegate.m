@@ -20,8 +20,8 @@
         
         [MTSHealthDataCoordinator requestReadAccessForHealthStore:healthStore completionHandler:^(BOOL success, NSError * _Nullable error) {
             if (success) {
-                InterfaceController *controller = (InterfaceController *)[[WKExtension sharedExtension] rootInterfaceController];
-                [controller setHealthStore:healthStore];
+//                InterfaceController *controller = (InterfaceController *)[[WKExtension sharedExtension] rootInterfaceController];
+//                [controller setHealthStore:healthStore];
             }
         }];
     }

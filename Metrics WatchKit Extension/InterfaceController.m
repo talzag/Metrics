@@ -9,7 +9,6 @@
 #import "InterfaceController.h"
 
 @implementation MTSHealthLabelRowController
-
 @end
 
 @interface InterfaceController()

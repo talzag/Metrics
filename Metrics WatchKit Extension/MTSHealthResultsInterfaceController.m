@@ -8,7 +8,12 @@
 
 #import "MTSHealthResultsInterfaceController.h"
 
+@implementation MTSHealthResultsTableRowController
+@end
+
 @interface MTSHealthResultsInterfaceController ()
+
+@property NSDateFormatter *dateFormatter;
 
 @end
 
@@ -18,10 +23,12 @@
     [super awakeWithContext:context];
     
     NSDictionary *contextDict = (NSDictionary *)context;
+    
     HKQuantityTypeIdentifier identifier = (HKQuantityTypeIdentifier)[contextDict objectForKey:@"identifier"];
     HKHealthStore *healthStore = (HKHealthStore *)[contextDict objectForKey:@"healthStore"];
     NSString *name = (NSString *)[contextDict objectForKey:@"name"];
-    [self setTitle:name];
+    
+    [[self typeInterfaceLabel] setText:name];
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate *now = [NSDate date];
@@ -29,17 +36,44 @@
     NSDate *endDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:startDate options:0];
     
     __weak MTSHealthResultsInterfaceController *this = self;
+    
     [MTSHealthDataCoordinator queryHealthStore:healthStore
                                forQuantityType:identifier
                                       fromDate:startDate
                                         toDate:endDate
-                        usingCompletionHandler:^(NSArray<__kindof HKSample *> * _Nullable samples) {
-                            [this configureInterfaceTableWithHealthSamples:samples];
+                        usingCompletionHandler:^(NSArray<__kindof NSDictionary *> * _Nullable samples) {
+                            [this configureInterfaceTable:this.resultsInterfaceTable WithHealthSamples:samples];
                         }];
+    
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    [formatter setDateStyle:NSDateFormatterShortStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setLocale:[NSLocale currentLocale]];
+    [formatter setCalendar:[NSCalendar currentCalendar]];
+    [self setDateFormatter:formatter];
 }
 
-- (void)configureInterfaceTableWithHealthSamples:(NSArray<__kindof HKSample *> *)samples {
+- (void)configureInterfaceTable:(WKInterfaceTable *)table WithHealthSamples:(NSArray<__kindof NSDictionary *> *)samples {
+    NSInteger rowNumber = [samples count];
+    if (rowNumber == 0) {
+        return;
+    }
     
+    [table setNumberOfRows:rowNumber withRowType:@"HealthDataSampleRow"];
+    
+    NSString *unit = [[samples objectAtIndex:0] objectForKey:@"unit"];
+    [[self unitsInterfaceLabel] setText:unit];
+    
+    for (NSInteger i = 0; i < rowNumber; i++) {
+        MTSHealthResultsTableRowController *controller = [table rowControllerAtIndex:i];
+        NSDictionary *sample = [samples objectAtIndex:i];
+        
+        NSDate *date = [sample objectForKey:@"date"];
+        [[controller sampleDateLabel] setText:[[self dateFormatter] stringFromDate:date]];
+        
+        NSNumber *amount = [sample objectForKey:@"amount"];
+        [[controller sampleAmountLabel] setText:[NSString stringWithFormat:@"%.0f", [amount doubleValue]]];
+    }
 }
 
 - (void)willActivate {

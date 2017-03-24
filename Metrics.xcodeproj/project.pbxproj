@@ -82,6 +82,7 @@
 		E3BC402F1E82285A00F0D44C /* MetricsKitNano.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BC402D1E82258500F0D44C /* MetricsKitNano.framework */; };
 		E3BC40301E82285A00F0D44C /* MetricsKitNano.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3BC402D1E82258500F0D44C /* MetricsKitNano.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E3BC40361E82335100F0D44C /* MTSHealthResultsInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BC40351E82335100F0D44C /* MTSHealthResultsInterfaceController.m */; };
+		E3C6350F1E84BA1200A84052 /* MTSGraphsInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C6350E1E84BA1200A84052 /* MTSGraphsInterfaceController.m */; };
 		E3F276F31E7EC83E007DE843 /* MTSRealCalorieValue.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F276F11E7EC83E007DE843 /* MTSRealCalorieValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3F276F51E7EC8E0007DE843 /* MTSRealCalorieValue.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F276F41E7EC8E0007DE843 /* MTSRealCalorieValue.m */; };
 /* End PBXBuildFile section */
@@ -271,6 +272,8 @@
 		E3BC402E1E82258600F0D44C /* MetricsKitNano-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MetricsKitNano-Info.plist"; path = "/Users/dstrokis/Developer/Metrics/MetricsKitNano-Info.plist"; sourceTree = "<absolute>"; };
 		E3BC40341E82335100F0D44C /* MTSHealthResultsInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSHealthResultsInterfaceController.h; sourceTree = "<group>"; };
 		E3BC40351E82335100F0D44C /* MTSHealthResultsInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSHealthResultsInterfaceController.m; sourceTree = "<group>"; };
+		E3C6350D1E84BA1200A84052 /* MTSGraphsInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraphsInterfaceController.h; sourceTree = "<group>"; };
+		E3C6350E1E84BA1200A84052 /* MTSGraphsInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphsInterfaceController.m; sourceTree = "<group>"; };
 		E3F276F11E7EC83E007DE843 /* MTSRealCalorieValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSRealCalorieValue.h; sourceTree = "<group>"; };
 		E3F276F41E7EC8E0007DE843 /* MTSRealCalorieValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSRealCalorieValue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -429,17 +432,19 @@
 		E3784BAB1E46494E005F87BC /* Metrics WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				E3784BF81E46D017005F87BC /* Metrics WatchKit Extension.entitlements */,
+				E3784BB11E46494E005F87BC /* ExtensionDelegate.h */,
+				E3784BB21E46494E005F87BC /* ExtensionDelegate.m */,
 				E3784BAE1E46494E005F87BC /* InterfaceController.h */,
 				E3784BAF1E46494E005F87BC /* InterfaceController.m */,
 				E3BC40341E82335100F0D44C /* MTSHealthResultsInterfaceController.h */,
 				E3BC40351E82335100F0D44C /* MTSHealthResultsInterfaceController.m */,
-				E3784BB11E46494E005F87BC /* ExtensionDelegate.h */,
-				E3784BB21E46494E005F87BC /* ExtensionDelegate.m */,
+				E3C6350D1E84BA1200A84052 /* MTSGraphsInterfaceController.h */,
+				E3C6350E1E84BA1200A84052 /* MTSGraphsInterfaceController.m */,
 				E3784BB41E46494E005F87BC /* NotificationController.h */,
 				E3784BB51E46494E005F87BC /* NotificationController.m */,
 				E3784BB71E46494E005F87BC /* ComplicationController.h */,
 				E3784BB81E46494E005F87BC /* ComplicationController.m */,
+				E3784BF81E46D017005F87BC /* Metrics WatchKit Extension.entitlements */,
 				E3784BBA1E46494E005F87BC /* Assets.xcassets */,
 				E3784BBC1E46494E005F87BC /* Info.plist */,
 				E3784BAC1E46494E005F87BC /* Supporting Files */,
@@ -888,6 +893,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3784BB31E46494E005F87BC /* ExtensionDelegate.m in Sources */,
+				E3C6350F1E84BA1200A84052 /* MTSGraphsInterfaceController.m in Sources */,
 				E3784BB91E46494E005F87BC /* ComplicationController.m in Sources */,
 				E3784BB01E46494E005F87BC /* InterfaceController.m in Sources */,
 				E3784BB61E46494E005F87BC /* NotificationController.m in Sources */,
@@ -1267,6 +1273,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_STATIC_ANALYZER_MODE = deep;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = NO;
@@ -1279,6 +1286,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.MetricsKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1290,6 +1298,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_STATIC_ANALYZER_MODE = deep;
 				CODE_SIGN_IDENTITY = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = NO;
@@ -1302,6 +1311,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.MetricsKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";

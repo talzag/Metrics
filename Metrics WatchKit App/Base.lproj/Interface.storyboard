@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="16E191a" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="16E191a" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="XnQ-IE-tok">
     <device id="watch42" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,10 +9,24 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--My Graphs-->
+        <scene sceneID="KP7-Nz-ORs">
+            <objects>
+                <controller title="My Graphs" id="XnQ-IE-tok" customClass="MTSGraphsInterfaceController">
+                    <items>
+                        <imageView width="1" height="1" alignment="left" id="hkg-vI-hfd"/>
+                    </items>
+                    <connections>
+                        <outlet property="graphInterfaceImage" destination="hkg-vI-hfd" id="BXZ-mS-mMx"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="220" y="9"/>
+        </scene>
+        <!--Metrics-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController">
+                <controller title="Metrics" id="AgC-eL-Hgc" customClass="InterfaceController">
                     <items>
                         <label width="1" alignment="left" text="What data would you like to see?" textAlignment="center" numberOfLines="0" id="RTf-sE-NFJ"/>
                         <table alignment="left" id="7yY-qM-SXG">
@@ -52,36 +66,51 @@
                     </connections>
                 </notificationController>
             </objects>
-            <point key="canvasLocation" x="220" y="643"/>
+            <point key="canvasLocation" x="220" y="745"/>
         </scene>
-        <!--Health Results Interface Controller-->
+        <!--Results-->
         <scene sceneID="ETB-OT-5QQ">
             <objects>
-                <controller id="hUk-7d-GWI" customClass="MTSHealthResultsInterfaceController">
+                <controller title="Results" id="hUk-7d-GWI" customClass="MTSHealthResultsInterfaceController">
                     <items>
+                        <group width="1" alignment="left" id="MGl-BQ-NuL">
+                            <items>
+                                <label alignment="left" text="Type Name" minimumScaleFactor="0.69999999999999996" id="WNu-yL-GgX"/>
+                                <label alignment="right" text="Unit" id="m7f-lW-Bhv"/>
+                            </items>
+                        </group>
+                        <separator alignment="left" id="6wM-hn-xhH"/>
                         <table alignment="left" id="Yko-be-XOX">
                             <items>
-                                <tableRow identifier="HealthDataSampleRow" id="lZb-mX-1mT">
+                                <tableRow identifier="HealthDataSampleRow" id="lZb-mX-1mT" customClass="MTSHealthResultsTableRowController">
                                     <group key="rootItem" width="1" alignment="left" id="Lkf-fh-QhX">
                                         <items>
-                                            <label width="82" height="1" alignment="left" text="Date" textAlignment="left" id="XaX-BV-wS5"/>
-                                            <label width="0.40000000000000002" height="1" alignment="left" text="Units" textAlignment="right" id="tX8-bV-k6T"/>
+                                            <label width="0.59999999999999998" height="1" alignment="left" text="Time/Day" textAlignment="left" id="XaX-BV-wS5"/>
+                                            <label width="0.40000000000000002" height="1" alignment="left" text="Amt" textAlignment="right" minimumScaleFactor="0.90000000000000002" id="tX8-bV-k6T"/>
                                         </items>
                                     </group>
+                                    <connections>
+                                        <outlet property="sampleAmountLabel" destination="tX8-bV-k6T" id="FQE-yn-xlM"/>
+                                        <outlet property="sampleDateLabel" destination="XaX-BV-wS5" id="WG3-zV-uaS"/>
+                                    </connections>
                                 </tableRow>
                             </items>
                         </table>
                     </items>
+                    <connections>
+                        <outlet property="resultsInterfaceTable" destination="Yko-be-XOX" id="NrO-gI-eln"/>
+                        <outlet property="unitsInterfaceLabel" destination="m7f-lW-Bhv" id="Gqk-ZI-ZAb"/>
+                    </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="477.74358974358978" y="344.79487179487182"/>
+            <point key="canvasLocation" x="499" y="345"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
                 <controller id="4sK-HA-Art" customClass="NotificationController"/>
             </objects>
-            <point key="canvasLocation" x="468" y="643"/>
+            <point key="canvasLocation" x="478" y="746"/>
         </scene>
     </scenes>
 </document>

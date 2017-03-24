@@ -20,29 +20,58 @@
             typeB == HKQuantityTypeIdentifierDietaryEnergyConsumed);
 }
 
-+ (void)queryHealthStore:(HKHealthStore * _Nonnull)healthStore
-         forQuantityType:(HKQuantityTypeIdentifier _Nonnull)typeIdentifier
-                fromDate:(NSDate * _Nonnull)startDate
-                  toDate:(NSDate * _Nonnull)endDate
-  usingCompletionHandler:(void (^ _Nonnull)(NSArray <__kindof HKSample *>* _Nullable samples)) completionHandler {
++ (void)queryHealthStore:(nonnull HKHealthStore *)healthStore
+         forQuantityType:(nonnull HKQuantityTypeIdentifier)typeIdentifier
+                fromDate:(nonnull NSDate *)startDate
+                  toDate:(nonnull NSDate *)endDate
+  usingCompletionHandler:(void (^ _Nonnull)(NSArray <__kindof NSDictionary *>* _Nullable samples)) completionHandler {
     NSPredicate *predicate = [HKSampleQuery predicateForSamplesWithStartDate:startDate
                                                                      endDate:endDate
                                                                      options:HKQueryOptionNone];
     
     HKQuantityType *sampleType = [HKSampleType quantityTypeForIdentifier:typeIdentifier];
     
+    void (^queryCompletion)(HKSampleQuery *, NSArray *, NSError *) = ^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error) {
+        if (!results) {
+            NSLog(@"Error executing query: %@", error.localizedDescription);
+            return;
+        }
+        
+        [healthStore preferredUnitsForQuantityTypes:[NSSet setWithObject:sampleType]
+                                         completion:^(NSDictionary<HKQuantityType *,HKUnit *> * _Nonnull preferredUnits, NSError * _Nullable error)
+         {
+             if (!preferredUnits) {
+#ifdef DEBUG
+                 abort();
+#endif
+                 return;
+             }
+             
+             HKUnit *preferredUnit = [preferredUnits objectForKey:sampleType];
+             
+             NSMutableArray *samples = [NSMutableArray array];
+             for (HKQuantitySample *sample in results) {
+                 double value = [[sample quantity] doubleValueForUnit:preferredUnit];
+                 NSNumber *amount = [NSNumber numberWithDouble:value];
+                 
+                 NSDictionary *record = @{
+                                          @"date": [sample endDate],
+                                          @"amount": amount,
+                                          @"unit": [preferredUnit unitString]
+                                          };
+                 
+                 [samples addObject:record];
+             }
+             
+             completionHandler(samples);
+         }];
+    };
+    
     HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:sampleType
                                                            predicate:predicate
                                                                limit:HKObjectQueryNoLimit
                                                      sortDescriptors:nil
-                                                      resultsHandler:^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error) {
-                                                          if (!results) {
-                                                              NSLog(@"Error executing query: %@", error.localizedDescription);
-                                                              return;
-                                                          }
-                                                          
-                                                          completionHandler(results);
-                                                      }];
+                                                      resultsHandler:queryCompletion];
     
     [healthStore executeQuery:query];
 }
