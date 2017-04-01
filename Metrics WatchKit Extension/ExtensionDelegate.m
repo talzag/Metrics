@@ -8,23 +8,25 @@
 
 #import "ExtensionDelegate.h"
 #import "InterfaceController.h"
+#import "MTSGraphsInterfaceController.h"
 
 @implementation ExtensionDelegate
 
 - (void)applicationDidFinishLaunching {
-    // Perform any final initialization of your application.
+    MTSGraphsInterfaceController *graphsController = (MTSGraphsInterfaceController *)[[WKExtension sharedExtension] rootInterfaceController];
+    [graphsController setManagedObjectContext:[[self persistentContainer] viewContext]];
     
-    
-    if ([HKHealthStore isHealthDataAvailable]) {
-        HKHealthStore *healthStore = [HKHealthStore new];
-        
-        [MTSHealthDataCoordinator requestReadAccessForHealthStore:healthStore completionHandler:^(BOOL success, NSError * _Nullable error) {
-            if (success) {
+    // TODO: Implement delegate methods to enable access using iPhone
+//    if ([HKHealthStore isHealthDataAvailable]) {
+//        HKHealthStore *healthStore = [HKHealthStore new];
+//        
+//        [MTSHealthStoreManager requestReadAccessForHealthStore:healthStore completionHandler:^(BOOL success, NSError * _Nullable error) {
+//            if (success) {
 //                InterfaceController *controller = (InterfaceController *)[[WKExtension sharedExtension] rootInterfaceController];
 //                [controller setHealthStore:healthStore];
-            }
-        }];
-    }
+//            }
+//        }];
+//    }
 }
 
 - (void)applicationDidBecomeActive {
@@ -32,8 +34,7 @@
 }
 
 - (void)applicationWillResignActive {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, etc.
+    [self saveContext];
 }
 
 - (void)handleBackgroundTasks:(NSSet<WKRefreshBackgroundTask *> *)backgroundTasks {
@@ -44,6 +45,41 @@
         } else {
             [task setTaskCompleted];
         }
+    }
+}
+
+#pragma mark - Core Data stack
+
+@synthesize persistentContainer = _persistentContainer;
+
+- (NSPersistentContainer *)persistentContainer {
+    @synchronized (self) {
+        if (_persistentContainer == nil) {
+            NSURL *modelURL = [[NSBundle bundleWithIdentifier:@"com.dstrokis.MetricsKitNano"] URLForResource:@"Metrics" withExtension:@"momd"];
+            NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+            _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"Metrics" managedObjectModel:model];
+            [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
+                if (error != nil) {
+                    NSLog(@"Unresolved error %@, %@", error, error.userInfo);
+#ifdef DEBUG
+                    abort();
+#endif
+                }
+            }];
+        }
+    }
+    
+    return _persistentContainer;
+}
+
+- (void)saveContext {
+    NSManagedObjectContext *context = self.persistentContainer.viewContext;
+    NSError *error = nil;
+    if ([context hasChanges] && ![context save:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+#ifdef DEBUG
+        abort();
+#endif
     }
 }
 

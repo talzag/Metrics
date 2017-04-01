@@ -21,6 +21,12 @@ FOUNDATION_EXPORT const unsigned char MetricsKitVersionString[];
 #endif
 
 #import <MetricsKit/MTSGraph.h>
-#import <MetricsKit/MTSHealthDataCoordinator.h>
+#import <MetricsKit/MTSQuery.h>
+#import <MetricsKit/MTSHealthStoreManager.h>
 #import <MetricsKit/MTSQuantityTypeIdentifiers.h>
 #import <MetricsKit/MTSRealCalorieValue.h>
+#import <MetricsKit/MTSGraphDrawing.h>
+
+extern NSString *MTSGraphLineColorKey;
+extern NSString *MTSGraphDataPointsKey;
+extern NSString *MTSGraphDataIdentifierKey;

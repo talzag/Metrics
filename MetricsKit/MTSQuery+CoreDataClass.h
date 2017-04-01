@@ -1,5 +1,5 @@
 //
-//  MTSGraph+CoreDataClass.h
+//  MTSQuery+CoreDataClass.h
 //  Metrics
 //
 //  Created by Daniel Strokis on 3/26/17.
@@ -8,16 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import <CoreGraphics/CoreGraphics.h>
 
-@class MTSQuery;
+@class MTSGraph, NSSet;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MTSGraph : NSManagedObject
+@interface MTSQuery : NSManagedObject
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#import "MTSGraph+CoreDataProperties.h"
+#import "MTSQuery+CoreDataProperties.h"

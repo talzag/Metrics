@@ -9,10 +9,10 @@
 @import Foundation;
 @import HealthKit;
 
-#import "MTSGraph+CoreDataClass.h"
-
-@interface MTSGraph (HKQuery)
-
-- (void)populateDataPointsByQueryingHealthStore:(HKHealthStore * _Nonnull)healthStore completionHandler:(void (^ _Nullable)(NSArray<__kindof HKSample *> * _Nullable samples))completionHandler ;
-
-@end
+//#import "MTSGraph+CoreDataClass.h"
+//
+//@interface MTSGraph (HKQuery)
+//
+//- (void)populateDataPointsByQueryingHealthStore:(HKHealthStore * _Nonnull)healthStore completionHandler:(void (^ _Nullable)(NSArray<__kindof HKSample *> * _Nullable samples))completionHandler ;
+//
+//@end

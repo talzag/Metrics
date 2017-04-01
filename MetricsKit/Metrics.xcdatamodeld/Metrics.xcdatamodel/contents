@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16E192b" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="1.0">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F43c" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="1.0">
     <entity name="MTSGraph" representedClassName="MTSGraph" syncable="YES">
-        <attribute name="categoryHealthTypeIdentifiers" optional="YES" attributeType="Transformable" valueTransformerName="MTSHealthTypeTransformer" customClassName="NSSet" syncable="YES"/>
-        <attribute name="dataPoints" optional="YES" attributeType="Transformable" valueTransformerName="MTSDataPointsTransformer" customClassName="NSSet" syncable="YES"/>
-        <attribute name="endDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="quantityHealthTypeIdentifiers" optional="YES" attributeType="Transformable" valueTransformerName="MTSHealthTypeTransformer" customClassName="NSSet" syncable="YES"/>
-        <attribute name="startDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="xAxisLabels" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="xAxisTitle" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="yAxisTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="query" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTSQuery" inverseName="graph" inverseEntity="MTSQuery" syncable="YES"/>
     </entity>
-    <entity name="MTSQuantitySample" representedClassName="MTSQuantitySample" syncable="YES" codeGenerationType="class">
+    <entity name="MTSQuantitySample" representedClassName="MTSQuantitySample" syncable="YES">
         <attribute name="amount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="unit" attributeType="String" syncable="YES"/>
@@ -20,14 +13,16 @@
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="label" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
     </entity>
-    <entity name="MTSQuery" representedClassName="MTSQuery" syncable="YES" codeGenerationType="class">
-        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+    <entity name="MTSQuery" representedClassName="MTSQuery" syncable="YES">
+        <attribute name="endDate" attributeType="Date" minDateTimeInterval="-1609441200" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="quantityTypes" optional="YES" attributeType="Transformable" valueTransformerName="MTSHealthTypeTransformer" customClassName="NSSet" syncable="YES"/>
+        <attribute name="startDate" attributeType="Date" minDateTimeInterval="-1609441200" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="graph" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTSGraph" inverseName="query" inverseEntity="MTSGraph" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MTSGraph" positionX="-308" positionY="81" width="128" height="180"/>
-        <element name="MTSQuantityType" positionX="-63" positionY="54" width="128" height="75"/>
-        <element name="MTSQuantitySample" positionX="-189" positionY="135" width="128" height="90"/>
-        <element name="MTSQuery" positionX="-189" positionY="135" width="128" height="75"/>
+        <element name="MTSGraph" positionX="-155" positionY="-60" width="128" height="75"/>
+        <element name="MTSQuantitySample" positionX="43" positionY="117" width="128" height="28"/>
+        <element name="MTSQuantityType" positionX="-108" positionY="117" width="128" height="73"/>
+        <element name="MTSQuery" positionX="54" positionY="-54" width="128" height="28"/>
     </elements>
 </model>

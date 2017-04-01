@@ -22,9 +22,6 @@
     [super viewDidLoad];
     
     self.navigationItem.title = self.graph.title;
-    self.startDateLabel.text = [[self dateFormatter] stringFromDate:[[self graph] startDate]];
-    self.endDateLabel.text = [[self dateFormatter] stringFromDate:[[self graph] endDate]];
-    self.graphView.dataPoints = self.graph.dataPoints;
 }
 
 - (NSDateFormatter *)dateFormatter {

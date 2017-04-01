@@ -71,9 +71,7 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     self.graph.title = self.graphTitleTextField.text;
-    self.graph.startDate = self.startDate;
-    self.graph.endDate = self.endDate;
-    self.graph.quantityHealthTypeIdentifiers = [NSSet setWithSet:self.selectedHealthTypes];
+    
 }
 
 - (IBAction)cancel:(id)sender {

@@ -9,6 +9,6 @@
 #ifndef MTSGraph_h
 #define MTSGraph_h
 
-#import "MTSGraph+HKQuery.h"
+#import "MTSGraph+CoreDataClass.h"
 
 #endif /* MTSGraph_h */

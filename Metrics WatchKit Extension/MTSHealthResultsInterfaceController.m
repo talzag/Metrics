@@ -37,7 +37,7 @@
     
     __weak MTSHealthResultsInterfaceController *this = self;
     
-    [MTSHealthDataCoordinator queryHealthStore:healthStore
+    [MTSHealthStoreManager queryHealthStore:healthStore
                                forQuantityType:identifier
                                       fromDate:startDate
                                         toDate:endDate

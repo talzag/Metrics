@@ -8,9 +8,13 @@
 
 @import Foundation;
 @import WatchKit;
-@import CoreGraphics;
+@import CoreData;
+
+#import <MetricsKit/MetricsKit.h>
 
 @interface MTSGraphsInterfaceController : WKInterfaceController
+
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceImage *graphInterfaceImage;
+@property NSManagedObjectContext *managedObjectContext;
 
 @end

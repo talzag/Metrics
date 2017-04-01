@@ -8,9 +8,12 @@
 
 @import WatchKit;
 @import HealthKit;
+@import CoreData;
 
 #import <MetricsKit/MetricsKit.h>
 
 @interface ExtensionDelegate : NSObject <WKExtensionDelegate>
+
+@property (readonly, strong) NSPersistentContainer *persistentContainer;
 
 @end

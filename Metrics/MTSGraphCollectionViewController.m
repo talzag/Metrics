@@ -86,9 +86,7 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
     [[cell graphTitleLabel] setText:[graph title]];
     
     MTSGraphView *graphView = [cell graphView];
-    [graphView setXAxisTitle:[graph xAxisTitle]];
-    [graphView setYAxisTitle:[graph yAxisTitle]];
-    [graphView setDataPoints:[graph dataPoints]];
+    [cell setGraphView:graphView];
     
     return cell;
 }

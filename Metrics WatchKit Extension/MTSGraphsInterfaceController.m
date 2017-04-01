@@ -13,24 +13,25 @@
 - (void)awakeWithContext:(id)ctx {
     [super awakeWithContext:ctx];
     
-    CGRect screen = [WKInterfaceDevice currentDevice].screenBounds;
+    
+}
+
+- (void)willActivate {
+    MTSGraph *graph = [[MTSGraph alloc] initWithContext:[self managedObjectContext]];
+    
+    
+    CGRect screen = [[WKInterfaceDevice currentDevice] screenBounds];
     CGSize screenSize = screen.size;
     
     UIGraphicsBeginImageContextWithOptions(screenSize, YES, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    UIColor *blue = [UIColor redColor];
-    CGContextSetFillColorWithColor(context, blue.CGColor);
-    CGContextFillRect(context, screen);
+    MTSDrawGraph(graph, context, screen);
     
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     [[self graphInterfaceImage] setImage:image];
     
     UIGraphicsEndImageContext();
-}
-
-- (void)willActivate {
-    
 }
 
 @end
