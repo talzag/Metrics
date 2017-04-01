@@ -133,20 +133,17 @@ CGFloat MTSGraphPositionOnXAxisAtIndex(CGRect rect, int index, NSUInteger numEle
     return MTSGraphColumnWidth(rect, numElements) * index + MTSGraphLeftMargin(rect);
 }
 
-/*
-CGFloat MTSGraphPositionOnYAxisForValue(CGFloat value, CGFloat maxValue) {
+CGFloat MTSGraphPositionOnYAxisForValue(CGRect rect, CGFloat value, CGFloat maxValue) {
     if (!value || !maxValue) {
         return 0;
     }
  
-    CGFloat height = self.actualGraphHeight - self.actualGraphTopMargin;
+    CGFloat height = MTSGraphHeight(rect) - MTSGraphTopMargin(rect);
     CGFloat ratio = value / maxValue;
-    return self.actualGraphHeight - ratio * height;
+    return MTSGraphHeight(rect) - ratio * height;
 }
-*/
 
 void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSSet<NSDictionary<NSString *,id> *> *dataPoints) {
-/*
      CGFloat maxValue = 0.0;
      for (NSDictionary <NSString *, id> *data in dataPoints) {
         NSArray *values = [data objectForKey:MTSGraphDataPointsKey];
@@ -156,7 +153,7 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSSet<NSDictionar
         }
      }
      
-     
+ /*
      UIBezierPath *graphLine = [UIBezierPath bezierPath];
      graphLine.lineWidth = 2.0;
      
@@ -187,6 +184,7 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSSet<NSDictionar
 }
 
 void MTSDrawGraph(MTSGraph *graph, CGContextRef context, CGRect rect) {
+    CGContextRetain(context);
     CGContextSaveGState(context);
     
     // Clip to rounded corners
@@ -198,8 +196,7 @@ void MTSDrawGraph(MTSGraph *graph, CGContextRef context, CGRect rect) {
     // draw background
     CGContextSaveGState(context);
     
-    CGColorRef top = NULL;
-    CGColorRef bottom = NULL;
+    CGColorRef top = NULL, bottom = NULL;
 //    if ([graph topColor]) {
 //        top = [graph topColor];
 //    }
@@ -220,4 +217,5 @@ void MTSDrawGraph(MTSGraph *graph, CGContextRef context, CGRect rect) {
     CGContextSaveGState(context);
     MTSGraphPlotDataPoints(context, rect, NULL);
     CGContextRestoreGState(context);
+    CGContextRelease(context);
 }

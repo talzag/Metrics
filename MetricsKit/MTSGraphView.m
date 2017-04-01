@@ -9,10 +9,6 @@
 #import "MTSGraphView.h"
 #import "MTSGraphView+Methods.h"
 
-NSString *MTSGraphLineColorKey = @"com.dstrokis.Mtrcs.lineColor";
-NSString *MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
-NSString *MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-identifier";
-
 @implementation MTSGraphView
 
 - (instancetype)initWithFrame:(CGRect)frame {

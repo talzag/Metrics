@@ -9,6 +9,10 @@
 #ifndef MTSGraph_h
 #define MTSGraph_h
 
+extern NSString *MTSGraphLineColorKey;
+extern NSString *MTSGraphDataPointsKey;
+extern NSString *MTSGraphDataIdentifierKey;
+
 #import "MTSGraph+CoreDataClass.h"
 
 #endif /* MTSGraph_h */
