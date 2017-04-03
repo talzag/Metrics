@@ -15,8 +15,16 @@ NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-
 
 @implementation MTSGraph (MTSQueryable)
 
-- (void)executeQueryUsingHealthStore:(HKHealthStore * _Nonnull)healthStore withCompletionHandler:(void (^ _Nullable)(NSArray * _Nullable, NSError * _Nullable))completionHandler {
+- (void)executeQueryWithCompletionHandler:(void (^ _Nullable)(NSArray * _Nullable, NSError * _Nullable))completionHandler {
     if (![self query]) {
+        // create NSError
+        // call completionHandler
+        return;
+    }
+    
+    if (![self healthStore]) {
+        // create NSError
+        // call completionHandler
         return;
     }
     
@@ -28,6 +36,7 @@ NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-
         [types addObject:type];
     }
     
+/*
     // Use NSSet to get preferred units
     // using GCD to make this work synchronous on our current thread.
     __block NSDictionary *units;
@@ -49,16 +58,25 @@ NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-
         completionHandler(nil, unitError);
         return;
     }
+*/
     
     // Create handler for each HKSampleQuery*
     dispatch_group_t group = dispatch_group_create();
+    
     // Query error check happens at end after all queries have been executed.
     __block NSError *queryError;
     NSMutableArray *finishedArray = [NSMutableArray array];
     void (^resultsHandler)(HKSampleQuery*, NSArray*, NSError*) = ^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error) {
         if (error) {
-            //FIXME: combine NSError's instead
-            queryError = error;
+            NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+            [userInfo addEntriesFromDictionary:[error userInfo]];
+            
+            NSDictionary *originalUserInfo = [queryError userInfo];
+            if (originalUserInfo) {
+                [userInfo addEntriesFromDictionary:originalUserInfo];
+            }
+            
+            queryError = [NSError errorWithDomain:NSCocoaErrorDomain code:1 userInfo:userInfo];
         } else {
             [finishedArray addObjectsFromArray:results];
         }
@@ -73,26 +91,29 @@ NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-
     NSPredicate *predicate = [HKSampleQuery predicateForSamplesWithStartDate:start
                                                                      endDate:end
                                                                      options:HKQueryOptionNone];
-    for (HKQuantityType *type in types) {
-        HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:type
-                                                               predicate:predicate
-                                                                   limit:HKObjectQueryNoLimit
-                                                         sortDescriptors:nil
-                                                          resultsHandler:resultsHandler];
-        dispatch_group_enter(group);
-        [healthStore executeQuery:query];
-    }
-    
-    // Wait until all HKQuery's have been executed
-    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
     
     
-    // Finally, call the completion handler
-    if (queryError) {
-        completionHandler(nil, queryError);
-    } else {
-        completionHandler(finishedArray, NULL);
-    }
+    dispatch_queue_t backgroundQueue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0);
+    dispatch_async(backgroundQueue, ^{
+        for (HKQuantityType *type in types) {
+            HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:type
+                                                                   predicate:predicate
+                                                                       limit:HKObjectQueryNoLimit
+                                                             sortDescriptors:nil
+                                                              resultsHandler:resultsHandler];
+            dispatch_group_enter(group);
+            [[self healthStore] executeQuery:query];
+        }
+        
+        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+            // Finally, call the completion handler
+            if (queryError) {
+                completionHandler(nil, queryError);
+            } else {
+                completionHandler(finishedArray, NULL);
+            }
+        });
+    });
 }
 
 @end

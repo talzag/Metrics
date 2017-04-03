@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F43c" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="1.0">
     <entity name="MTSGraph" representedClassName="MTSGraph" syncable="YES">
+        <attribute name="healthStore" optional="YES" transient="YES" attributeType="Transformable" customClassName="HKHealthStore" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="query" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTSQuery" inverseName="graph" inverseEntity="MTSQuery" syncable="YES"/>
     </entity>
@@ -20,7 +21,7 @@
         <relationship name="graph" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTSGraph" inverseName="query" inverseEntity="MTSGraph" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MTSGraph" positionX="-155" positionY="-60" width="128" height="75"/>
+        <element name="MTSGraph" positionX="-155" positionY="-60" width="128" height="90"/>
         <element name="MTSQuantitySample" positionX="43" positionY="117" width="128" height="28"/>
         <element name="MTSQuantityType" positionX="-108" positionY="117" width="128" height="73"/>
         <element name="MTSQuery" positionX="54" positionY="-54" width="128" height="28"/>
