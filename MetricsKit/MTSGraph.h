@@ -9,10 +9,19 @@
 #ifndef MTSGraph_h
 #define MTSGraph_h
 
-extern NSString *MTSGraphLineColorKey;
-extern NSString *MTSGraphDataPointsKey;
-extern NSString *MTSGraphDataIdentifierKey;
-
+#include <Foundation/Foundation.h>
+#include <HealthKit/HealthKit.h>
 #import "MTSGraph+CoreDataClass.h"
+
+extern NSString * const _Nonnull MTSGraphLineColorKey;
+extern NSString * const _Nonnull MTSGraphDataPointsKey;
+extern NSString * const _Nonnull MTSGraphDataIdentifierKey;
+
+@interface MTSGraph (MTSQueryable)
+
+- (void)executeQueryUsingHealthStore:(HKHealthStore * _Nonnull)healthStore
+               withCompletionHandler:(void (^ _Nullable)(NSArray * _Nullable, NSError * _Nullable))completionHandler;
+
+@end
 
 #endif /* MTSGraph_h */
