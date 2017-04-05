@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MTSGraphDrawing.h"
 
 IB_DESIGNABLE
 @interface MTSGraphView : UIView

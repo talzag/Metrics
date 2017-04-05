@@ -34,7 +34,7 @@ CGFloat MTSGraphHeight(CGRect rect) {
 }
 
 CGFloat MTSGraphWidth(CGRect rect) {
-    return rect.size.width - (MTSGraphLeftMargin(rect) + MTSGraphRightMargin(rect));
+    return rect.size.width - MTSGraphLeftMargin(rect) - MTSGraphRightMargin(rect);
 }
 
 CGFloat MTSGraphColumnWidth(CGRect rect, NSUInteger numElements) {
@@ -130,12 +130,12 @@ void drawGraphLines(CGContextRef context, CGRect rect) {
 }
 
 CGFloat MTSGraphPositionOnXAxisAtIndex(CGRect rect, int index, NSUInteger numElements) {
-    return MTSGraphColumnWidth(rect, numElements) * index + MTSGraphLeftMargin(rect);
+    return MTSGraphColumnWidth(rect, numElements - 1) * index + MTSGraphLeftMargin(rect);
 }
 
 CGFloat MTSGraphPositionOnYAxisForValue(CGRect rect, CGFloat value, CGFloat maxValue) {
     if (!value || !maxValue) {
-        return 0;
+        return MTSGraphHeight(rect);
     }
  
     CGFloat height = MTSGraphHeight(rect) - MTSGraphTopMargin(rect);
@@ -152,38 +152,33 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSSet<NSDictionar
             maxValue = floatValue > maxValue ? floatValue : maxValue;
         }
      }
-     
- /*
-     UIBezierPath *graphLine = [UIBezierPath bezierPath];
-     graphLine.lineWidth = 2.0;
-     
-     for (NSDictionary <NSString *, id> *data in dataPoints) {
-         NSArray *values = [data objectForKey:MTSGraphDataPointsKey];
-         UIColor *lineColor = [data objectForKey:MTSGraphLineColorKey];
+    
+    CGContextSetLineWidth(context, 2.0);
+    CGMutablePathRef graphPath = CGPathCreateMutable();
+ 
+    for (NSDictionary <NSString *, id> *data in dataPoints) {
+        NSArray <NSNumber *>*values = [data objectForKey:MTSGraphDataPointsKey];
+        
+        NSInteger size = values.count;
+        CGFloat startX = MTSGraphPositionOnXAxisAtIndex(rect, 0, size);
+        CGFloat startY = MTSGraphPositionOnYAxisForValue(rect, [[values firstObject] doubleValue], maxValue);
+        CGPathMoveToPoint(graphPath, NULL, startX, startY);
          
-         NSInteger size = values.count;
-         CGFloat startX = [self positionOnXAxisForValueAtIndex:0 fromArrayOfSize:size];
-         CGFloat startY = [self positionOnYAxisForValue:[[values firstObject] doubleValue] scaledForMaxValue:maxValue];
-         CGPoint startingPoint = CGPointMake(startX, startY);
-         [graphLine moveToPoint:startingPoint];
+        for (int i = 1; i < size; i++) {
+            CGFloat x = MTSGraphPositionOnXAxisAtIndex(rect, i, size);
+            CGFloat y = MTSGraphPositionOnYAxisForValue(rect, [values[i] doubleValue], maxValue);
+             
+            CGPathAddLineToPoint(graphPath, NULL, x, y);
+        }
          
-         for (int i = 1; i < size; i++) {
-             CGFloat x = [self positionOnXAxisForValueAtIndex:i fromArrayOfSize:size];
-             CGFloat y = [self positionOnYAxisForValue:[values[i] doubleValue] scaledForMaxValue:maxValue];
-             CGPoint point = CGPointMake(x, y);
-             [graphLine addLineToPoint:point];
-         }
-         
-         
-         [lineColor setStroke];
-         [graphLine stroke];
-         
-         [graphLine removeAllPoints];
-     }
- */
+        CGContextAddPath(context, graphPath);
+        CGContextStrokePath(context);
+    }
+    
+    CGPathRelease(graphPath);
 }
 
-void MTSDrawGraph(MTSGraph *graph, CGContextRef context, CGRect rect) {
+void MTSDrawGraph(CGContextRef context, CGRect rect, NSSet<NSDictionary<NSString *,id> *> * _Nullable dataPoints) {
     CGContextRetain(context);
     CGContextSaveGState(context);
     
@@ -215,7 +210,7 @@ void MTSDrawGraph(MTSGraph *graph, CGContextRef context, CGRect rect) {
 
     // plot data points
     CGContextSaveGState(context);
-    MTSGraphPlotDataPoints(context, rect, NULL);
+    MTSGraphPlotDataPoints(context, rect, dataPoints);
     CGContextRestoreGState(context);
     CGContextRelease(context);
 }

@@ -21,6 +21,8 @@ extern NSString * const _Nonnull MTSGraphDataIdentifierKey;
 
 - (void)executeQueryWithCompletionHandler:(void (^ _Nullable)(NSArray * _Nullable, NSError * _Nullable))completionHandler;
 
+- (NSSet<NSDictionary<NSString *,id> *> * _Nullable)graphDataFromQueryResults:(NSArray <NSArray<HKQuantitySample *> *>* _Nonnull)results;
+
 @end
 
 #endif /* MTSGraph_h */
