@@ -16,13 +16,10 @@ FOUNDATION_EXPORT const unsigned char MetricsKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <MetricsKit/PublicHeader.h>
 
-#if (TARGET_OS_IOS || TARGET_OS_SIMULATOR) && !TARGET_OS_WATCH
-    #import <MetricsKit/MTSGraphView.h>
-#endif
-
 #import <MetricsKit/MTSGraph.h>
 #import <MetricsKit/MTSQuery.h>
 #import <MetricsKit/MTSHealthStoreManager.h>
 #import <MetricsKit/MTSQuantityTypeIdentifiers.h>
+#import <MetricsKit/MTSQuantitySample.h>
 #import <MetricsKit/MTSRealCalorieValue.h>
 #import <MetricsKit/MTSGraphDrawing.h>

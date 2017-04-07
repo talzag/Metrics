@@ -7,7 +7,6 @@
 //
 
 #import "MTSGraphView.h"
-#import "MTSGraphView+Methods.h"
 
 @implementation MTSGraphView
 
@@ -16,10 +15,7 @@
     if (self) {
         _topColor = [UIColor whiteColor];
         _bottomColor = [UIColor whiteColor];
-        _needsDataPointsDisplay = NO;
         _dataPoints = [NSSet set];
-        _graphTopMarginPercent = _graphBottomMarginPercent = 0.15;
-        _graphLeftRightMarginPercent = 0.05;
         _drawIntermediateLines = YES;
     }
     return self;

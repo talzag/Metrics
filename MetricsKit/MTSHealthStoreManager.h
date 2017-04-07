@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <HealthKit/HealthKit.h>
 
+#import "MTSQuantitySample.h"
 
 @interface MTSHealthStoreManager : NSObject
 
@@ -33,6 +34,6 @@
          forQuantityType:(HKQuantityTypeIdentifier _Nonnull)typeIdentifier
                 fromDate:(NSDate * _Nonnull)startDate
                   toDate:(NSDate * _Nonnull)endDate
-  usingCompletionHandler:(void (^ _Nonnull)(NSArray <__kindof NSDictionary *>* _Nullable samples)) completionHandler;
+  usingCompletionHandler:(void (^ _Nonnull)(NSArray <MTSQuantitySample *>* _Nullable samples)) completionHandler;
 
 @end

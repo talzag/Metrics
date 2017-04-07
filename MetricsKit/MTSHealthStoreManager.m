@@ -39,7 +39,7 @@
          forQuantityType:(nonnull HKQuantityTypeIdentifier)typeIdentifier
                 fromDate:(nonnull NSDate *)startDate
                   toDate:(nonnull NSDate *)endDate
-  usingCompletionHandler:(void (^ _Nonnull)(NSArray <__kindof NSDictionary *>* _Nullable samples)) completionHandler {
+  usingCompletionHandler:(void (^ _Nonnull)(NSArray <MTSQuantitySample *>* _Nullable samples)) completionHandler {
     NSPredicate *predicate = [HKSampleQuery predicateForSamplesWithStartDate:startDate
                                                                      endDate:endDate
                                                                      options:HKQueryOptionNone];
@@ -64,18 +64,17 @@
              
              HKUnit *preferredUnit = [preferredUnits objectForKey:sampleType];
              
-             NSMutableArray *samples = [NSMutableArray array];
+             NSMutableArray <MTSQuantitySample *>*samples = [NSMutableArray array];
              for (HKQuantitySample *sample in results) {
+                 NSDate *date = [sample endDate];
+                 NSString *unitString = [preferredUnit unitString];
                  double value = [[sample quantity] doubleValueForUnit:preferredUnit];
                  NSNumber *amount = [NSNumber numberWithDouble:value];
                  
-                 NSDictionary *record = @{
-                                          @"date": [sample endDate],
-                                          @"amount": amount,
-                                          @"unit": [preferredUnit unitString]
-                                          };
-                 
-                 [samples addObject:record];
+                 MTSQuantitySample *mtsSample = [[MTSQuantitySample alloc] initWithDate:date
+                                                                             unitString:unitString
+                                                                              andAmount:amount];
+                 [samples addObject:mtsSample];
              }
              
              completionHandler(samples);

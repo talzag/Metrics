@@ -10,6 +10,7 @@
 @import HealthKit;
 
 #import <MetricsKit/MetricsKit.h>
+#import "MTSGraphView.h"
 
 @interface MTSGraphViewController : UIViewController
 
