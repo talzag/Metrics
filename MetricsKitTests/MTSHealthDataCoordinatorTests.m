@@ -1,5 +1,5 @@
 //
-//  MTSHealthDataCoordinatorTests.m
+//  MTSHealthStoreManagerTests.m
 //  Metrics
 //
 //  Created by Daniel Strokis on 3/15/17.
@@ -8,21 +8,21 @@
 
 @import XCTest;
 
-#import "MTSHealthDataCoordinator.h"
+#import "MTSHealthStoreManager.h"
 
-@interface MTSHealthDataCoordinatorTests : XCTestCase
+@interface MTSHealthStoreManagerTests : XCTestCase
 
-@property MTSHealthDataCoordinator *coordinator;
+@property MTSHealthStoreManager *coordinator;
 @property HKHealthStore *healthStore;
 
 @end
 
-@implementation MTSHealthDataCoordinatorTests
+@implementation MTSHealthStoreManagerTests
 
 - (void)setUp {
     [super setUp];
     
-    [self setCoordinator:[MTSHealthDataCoordinator new]];
+    [self setCoordinator:[MTSHealthStoreManager new]];
     
     [self setHealthStore:[HKHealthStore new]];
 }
@@ -34,33 +34,9 @@
     [super tearDown];
 }
 
-- (void)testThatItDeterminesCorrectCombinationsOfData {
-    HKQuantityTypeIdentifier activeEnergy = HKQuantityTypeIdentifierActiveEnergyBurned;
-    HKQuantityTypeIdentifier baseEnergy = HKQuantityTypeIdentifierBasalEnergyBurned;
-    HKQuantityTypeIdentifier dietaryEnergy = HKQuantityTypeIdentifierDietaryEnergyConsumed;
-    
-    HKQuantityTypeIdentifier stepCount = HKQuantityTypeIdentifierStepCount;
-    HKQuantityTypeIdentifier swimDistance = HKQuantityTypeIdentifierDistanceSwimming;
-    
-    XCTAssertTrue([MTSHealthDataCoordinator healthType:activeEnergy canBeGroupedWithHealthType:baseEnergy]);
-    XCTAssertTrue([MTSHealthDataCoordinator healthType:activeEnergy canBeGroupedWithHealthType:dietaryEnergy]);
-    XCTAssertTrue([MTSHealthDataCoordinator healthType:baseEnergy canBeGroupedWithHealthType:dietaryEnergy]);
-    
-    XCTAssertFalse([MTSHealthDataCoordinator healthType:activeEnergy canBeGroupedWithHealthType:stepCount]);
-    XCTAssertFalse([MTSHealthDataCoordinator healthType:activeEnergy canBeGroupedWithHealthType:swimDistance]);
-    
-    XCTAssertFalse([MTSHealthDataCoordinator healthType:baseEnergy canBeGroupedWithHealthType:stepCount]);
-    XCTAssertFalse([MTSHealthDataCoordinator healthType:baseEnergy canBeGroupedWithHealthType:swimDistance]);
-    
-    XCTAssertFalse([MTSHealthDataCoordinator healthType:dietaryEnergy canBeGroupedWithHealthType:stepCount]);
-    XCTAssertFalse([MTSHealthDataCoordinator healthType:dietaryEnergy canBeGroupedWithHealthType:swimDistance]);
-    
-    XCTAssertFalse([MTSHealthDataCoordinator healthType:stepCount canBeGroupedWithHealthType:swimDistance]);
-}
-
 - (void)testThatItRequestsReadAccessToHealthKit {
     XCTestExpectation *accessExpectation = [self expectationWithDescription:@"Test was granted access to HKHealthStore."];
-    [MTSHealthDataCoordinator requestReadAccessForHealthStore:[self healthStore]
+    [MTSHealthStoreManager requestReadAccessForHealthStore:[self healthStore]
                                             completionHandler:^(BOOL success, NSError * _Nullable error) {
                                                 XCTAssertTrue(success);
                                                 [accessExpectation fulfill];

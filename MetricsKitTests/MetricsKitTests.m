@@ -57,52 +57,6 @@
     [super tearDown];
 }
 
-- (void)testThatGraphDataIsSaved {
-    NSDictionary *data = @{
-                           MTSGraphLineColorKey: [UIColor blueColor],
-                           MTSGraphDataPointsKey: @[@25, @50, @75, @100, @50, @75, @25]
-                           };
-    NSSet *dataPoints = [NSSet setWithObject:data];
-    
-    MTSGraph *graph = [[MTSGraph alloc] initWithContext:[[self dataStack] managedObjectContext]];
-    graph.dataPoints = dataPoints;
-    
-    [[[self dataStack] managedObjectContext] save:nil];
-    
-    NSManagedObjectID *graphID = [graph objectID];
-    MTSGraph *copy = [[[self dataStack] managedObjectContext] objectWithID:graphID];
-    NSSet *savedDataPoints = [copy dataPoints];
-    NSDictionary *savedData = [savedDataPoints anyObject];
-    
-    UIColor *originalColor = [data objectForKey:MTSGraphLineColorKey];
-    UIColor *color = [savedData objectForKey:MTSGraphLineColorKey];
-    XCTAssertEqualObjects(color, originalColor);
-    
-    NSArray *original = [data objectForKey:MTSGraphDataPointsKey];
-    NSArray *points = [savedData objectForKey:MTSGraphDataPointsKey];
-    XCTAssertEqualObjects(points, original);
-}
-
-- (void)testThatGraphHealthIdentifiersAreSaved {
-    NSSet *quantityIdents = [NSSet setWithObjects:HKQuantityTypeIdentifierDietaryWater, HKQuantityTypeIdentifierActiveEnergyBurned, nil];
-    NSSet *categoryIdents = [NSSet setWithObjects:HKCategoryTypeIdentifierSleepAnalysis, nil];
-    
-    MTSGraph *graph = [[MTSGraph alloc] initWithContext:[[self dataStack] managedObjectContext]];
-    [graph setQuantityHealthTypeIdentifiers:quantityIdents];
-    [graph setCategoryHealthTypeIdentifiers: categoryIdents];
-    
-    [[[self dataStack] managedObjectContext] save:nil];
-    
-    NSManagedObjectID *graphID = [graph objectID];
-    MTSGraph *copy = [[[self dataStack] managedObjectContext] objectWithID:graphID];
-    
-    NSSet* copyQuantityIdents = [copy quantityHealthTypeIdentifiers];
-    XCTAssertEqualObjects(quantityIdents, copyQuantityIdents);
-    
-    NSSet* copyCategoryIdents = [graph categoryHealthTypeIdentifiers];
-    XCTAssertEqualObjects(categoryIdents, copyCategoryIdents);
-}
-
 - (void)testThatRealCalorieValueIsCalculated {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate *now = [NSDate date];

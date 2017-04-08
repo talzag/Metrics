@@ -15,9 +15,9 @@
                       completionHandler:(void (^ _Nonnull)(BOOL, NSError * _Nullable))completionHandler {
     NSMutableSet *readTypes = [NSMutableSet set];
     
-    NSDictionary *identifiers = MTSQuantityTypeIdentifiers();
-    [identifiers enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, HKQuantityTypeIdentifier  _Nonnull obj, BOOL * _Nonnull stop) {
-        [readTypes addObject:[HKObjectType quantityTypeForIdentifier:obj]];
+    NSDictionary <HKQuantityTypeIdentifier, NSString *> *identifiers = MTSQuantityTypeIdentifiers();
+    [identifiers enumerateKeysAndObjectsUsingBlock:^(HKQuantityTypeIdentifier _Nonnull key, NSString * _Nonnull obj, BOOL * _Nonnull stop) {
+        [readTypes addObject:[HKObjectType quantityTypeForIdentifier:key]];
     }];
     
     NSSet *shareTypes;

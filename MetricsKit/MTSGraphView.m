@@ -15,8 +15,6 @@
     if (self) {
         _topColor = [UIColor whiteColor];
         _bottomColor = [UIColor whiteColor];
-        _dataPoints = [NSSet set];
-        _drawIntermediateLines = YES;
     }
     return self;
 }
