@@ -20,7 +20,7 @@ NSArray <NSDictionary *>*MTSQuantityTypeHealthCategories(void) {
              ];
 }
 
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeIdentifiers(void) {
+NSDictionary <HKQuantityTypeIdentifier, NSString *> *MTSQuantityTypeIdentifiers(void) {
     NSMutableDictionary *identifiers = [NSMutableDictionary dictionary];
     
     for (NSDictionary *dict in MTSQuantityTypeHealthCategories()) {
@@ -30,17 +30,17 @@ NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeIdentifiers(
     return [NSDictionary dictionaryWithDictionary:identifiers];
 }
 
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeBodyMeasurementIdentifiers(void) {
+NSDictionary <HKQuantityTypeIdentifier, NSString *> *MTSQuantityTypeBodyMeasurementIdentifiers(void) {
      return @{
-              @"Body Mass Index": HKQuantityTypeIdentifierBodyMassIndex,
-              @"Body Fat Percentage": HKQuantityTypeIdentifierBodyFatPercentage,
-              @"Height": HKQuantityTypeIdentifierHeight,
-              @"Body Mass": HKQuantityTypeIdentifierBodyMass,
-              @"Lean Body Mass": HKQuantityTypeIdentifierLeanBodyMass
+              HKQuantityTypeIdentifierBodyMassIndex: @"Body Mass Index",
+              HKQuantityTypeIdentifierBodyFatPercentage: @"Body Fat Percentage",
+              HKQuantityTypeIdentifierHeight: @"Height",
+              HKQuantityTypeIdentifierBodyMass: @"Body Mass",
+              HKQuantityTypeIdentifierLeanBodyMass: @"Lean Body Mass"
               };
 }
 
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeFitnessIdentifiers(void) {
+NSDictionary <HKQuantityTypeIdentifier, NSString *> *MTSQuantityTypeFitnessIdentifiers(void) {
     return @{
              @"Step Count": HKQuantityTypeIdentifierStepCount,
              @"Walking/Running Distance": HKQuantityTypeIdentifierDistanceWalkingRunning,
@@ -57,7 +57,7 @@ NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeFitnessIdent
              };
 }
 
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeVitalsIdentifiers(void) {
+NSDictionary <HKQuantityTypeIdentifier, NSString *> *MTSQuantityTypeVitalsIdentifiers(void) {
     return @{
              @"Heart Rate": HKQuantityTypeIdentifierHeartRate,
              @"Body Temperature": HKQuantityTypeIdentifierBodyTemperature,
@@ -68,7 +68,7 @@ NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeVitalsIdenti
              };
 }
 
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeResultsIdentifiers(void) {
+NSDictionary <HKQuantityTypeIdentifier, NSString *> *MTSQuantityTypeResultsIdentifiers(void) {
     return @{
              @"Oxygen Saturation": HKQuantityTypeIdentifierOxygenSaturation,
              @"Peripheral Perfusion Index": HKQuantityTypeIdentifierPeripheralPerfusionIndex,
@@ -83,7 +83,7 @@ NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeResultsIdent
              };
 }
 
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeNutritionIdentifiers(void) {
+NSDictionary <HKQuantityTypeIdentifier, NSString *> *MTSQuantityTypeNutritionIdentifiers(void) {
     return @{
              @"Total Fat": HKQuantityTypeIdentifierDietaryFatTotal,
              @"Polyunsaturated Fat": HKQuantityTypeIdentifierDietaryFatPolyunsaturated,

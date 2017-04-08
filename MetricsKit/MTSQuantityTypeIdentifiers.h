@@ -11,16 +11,16 @@
 
 NSArray <NSDictionary *>*MTSQuantityTypeHealthCategories(void);
 
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeIdentifiers(void);
+NSDictionary <HKQuantityTypeIdentifier, NSString *> *MTSQuantityTypeIdentifiers(void);
 
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeBodyMeasurementIdentifiers(void);
+NSDictionary <HKQuantityTypeIdentifier, NSString *> *MTSQuantityTypeBodyMeasurementIdentifiers(void);
 
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeFitnessIdentifiers(void);
+NSDictionary <HKQuantityTypeIdentifier, NSString *> *MTSQuantityTypeFitnessIdentifiers(void);
 
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeVitalsIdentifiers(void);
+NSDictionary <HKQuantityTypeIdentifier, NSString *> *MTSQuantityTypeVitalsIdentifiers(void);
 
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeResultsIdentifiers(void);
+NSDictionary <HKQuantityTypeIdentifier, NSString *> *MTSQuantityTypeResultsIdentifiers(void);
 
-NSDictionary <NSString *, HKQuantityTypeIdentifier> *MTSQuantityTypeNutritionIdentifiers(void);
+NSDictionary <HKQuantityTypeIdentifier, NSString *> *MTSQuantityTypeNutritionIdentifiers(void);
 
 #endif /* MTSQuantityTypeIdentifiers_h */
