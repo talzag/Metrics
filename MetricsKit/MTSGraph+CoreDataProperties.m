@@ -14,10 +14,10 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"MTSGraph"];
 }
 
+@dynamic bottomColor;
 @dynamic healthStore;
 @dynamic title;
 @dynamic topColor;
-@dynamic bottomColor;
 @dynamic query;
 
 @end

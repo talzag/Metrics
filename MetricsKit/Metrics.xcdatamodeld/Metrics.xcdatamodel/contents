@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F43c" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="1.0">
     <entity name="MTSGraph" representedClassName="MTSGraph" syncable="YES">
-        <attribute name="bottomColor" optional="YES" attributeType="Binary" valueTransformerName="MTSColorTransformer" syncable="YES"/>
+        <attribute name="bottomColor" optional="YES" attributeType="Transformable" valueTransformerName="MTSColorTransformer" customClassName="NSValue" syncable="YES"/>
         <attribute name="healthStore" optional="YES" transient="YES" attributeType="Transformable" customClassName="HKHealthStore" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="topColor" optional="YES" attributeType="Binary" valueTransformerName="MTSColorTransformer" syncable="YES"/>
+        <attribute name="topColor" optional="YES" attributeType="Transformable" valueTransformerName="MTSColorTransformer" customClassName="NSValue" syncable="YES"/>
         <relationship name="query" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTSQuery" inverseName="graph" inverseEntity="MTSQuery" syncable="YES"/>
     </entity>
     <entity name="MTSQuery" representedClassName="MTSQuery" syncable="YES">

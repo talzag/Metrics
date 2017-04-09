@@ -15,10 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<MTSGraph *> *)fetchRequest;
 
+@property (nullable, nonatomic, retain) NSValue *bottomColor;
 @property (nullable, nonatomic, retain) HKHealthStore *healthStore;
 @property (nullable, nonatomic, copy) NSString *title;
-@property (nullable, nonatomic, retain) NSData *topColor;
-@property (nullable, nonatomic, retain) NSData *bottomColor;
+@property (nullable, nonatomic, retain) NSValue *topColor;
 @property (nullable, nonatomic, retain) MTSQuery *query;
 
 @end

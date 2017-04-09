@@ -84,7 +84,7 @@
     NSDictionary *testData = @{
                                MTSGraphDataPointsKey: @[@0, @75, @25, @50, @100, @50, @75, @25, @0]
                                };
-   NSArray *testSet = [NSArray arrayWithObject:testData];
+    NSArray *testSet = [NSArray arrayWithObject:testData];
     
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
