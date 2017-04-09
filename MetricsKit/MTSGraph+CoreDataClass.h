@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import <HealthKit/HealthKit.h>
 
 @class MTSQuery;
 

@@ -6,7 +6,6 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import <HealthKit/HealthKit.h>
 #import "MTSHealthTypeTransformer.h"
 
 @implementation MTSHealthTypeTransformer

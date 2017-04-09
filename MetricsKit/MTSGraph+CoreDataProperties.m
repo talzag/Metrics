@@ -2,7 +2,7 @@
 //  MTSGraph+CoreDataProperties.m
 //  Metrics
 //
-//  Created by Daniel Strokis on 4/3/17.
+//  Created by Daniel Strokis on 4/9/17.
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
@@ -16,6 +16,8 @@
 
 @dynamic healthStore;
 @dynamic title;
+@dynamic topColor;
+@dynamic bottomColor;
 @dynamic query;
 
 @end
