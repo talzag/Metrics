@@ -42,7 +42,7 @@
   usingCompletionHandler:(void (^ _Nonnull)(NSArray <MTSQuantitySample *>* _Nullable samples)) completionHandler {
     NSPredicate *predicate = [HKSampleQuery predicateForSamplesWithStartDate:startDate
                                                                      endDate:endDate
-                                                                     options:HKQueryOptionNone];
+                                                                     options:HKQueryOptionStrictEndDate];
     
     HKQuantityType *sampleType = [HKSampleType quantityTypeForIdentifier:typeIdentifier];
     

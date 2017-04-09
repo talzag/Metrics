@@ -25,7 +25,7 @@
     NSDictionary *testData = @{
                                MTSGraphDataPointsKey: @[@0, @75, @25, @50, @100, @50, @75, @25, @0]
                                };
-    NSSet *testSet = [NSSet setWithObject:testData];
+    NSArray *testSet = [NSArray arrayWithObject:testData];
     
     MTSDrawGraph(context, rect, testSet);
 }

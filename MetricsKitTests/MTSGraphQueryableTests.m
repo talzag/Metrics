@@ -12,7 +12,7 @@
 #import "MetricsKit.h"
 #import "MTSTestDataStack.h"
 
-@interface MTSGraphHKQueryTests : XCTestCase
+@interface MTSGraphQueryableTests : XCTestCase
 
 @property HKHealthStore *healthStore;
 @property MTSTestDataStack *dataStack;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation MTSGraphHKQueryTests
+@implementation MTSGraphQueryableTests
 
 - (void)setUp {
     [super setUp];
@@ -31,14 +31,14 @@
     
     XCTestExpectation *writeAccessExpectation = [self expectationWithDescription:@"Write access granted"];
     XCTestExpectation *writeDataExpectation = [self expectationWithDescription:@"Mock health data written"];
-    __weak MTSGraphHKQueryTests *weakSelf = self;
+    __weak MTSGraphQueryableTests *weakSelf = self;
     [[self healthStore] requestAuthorizationToShareTypes:[[self dataStack] healthDataTypes]
                                                readTypes:nil
                                               completion:^(BOOL success, NSError * _Nullable error) {
                                                   if (success) {
                                                       [writeAccessExpectation fulfill];
                                                       
-                                                      MTSGraphHKQueryTests *this = weakSelf;
+                                                      MTSGraphQueryableTests *this = weakSelf;
                                                       [[this dataStack] insertMockHealthDataIntoHealthStore:this.healthStore completionHandler:^(BOOL success, NSError * _Nullable error) {
                                                           if (success) {
                                                               [writeDataExpectation fulfill];
@@ -72,26 +72,45 @@
     [super tearDown];
 }
 
-- (void)X_testThatItPopulatesDataPointsAfterQueryingHealthStore {
-//    XCTAssertNil([[self graph] dataPoints]);
-//    [[self graph] setQuantityHealthTypeIdentifiers:[NSSet setWithObject:HKQuantityTypeIdentifierActiveEnergyBurned]];
-//    XCTestExpectation *dataExpectation = [self expectationWithDescription:@"Finished querying health store"];
-//    __weak MTSGraphHKQueryTests *weakSelf = self;
-//    [[self graph] populateDataPointsByQueryingHealthStore:[self healthStore] completionHandler:^(NSArray<__kindof HKSample *> * _Nullable samples) {
-//        if ([samples count]) {
-//            MTSGraphHKQueryTests *this = weakSelf;
-//            NSSet *data = [[this graph] dataPoints];
-//            XCTAssertNotNil(data);
-//            XCTAssert([data count] == 1);
-//            [dataExpectation fulfill];
-//        }
-//    }];
-//    
-//    [self waitForExpectationsWithTimeout:15 handler:^(NSError * _Nullable error) {
-//        if (error) {
-//            XCTFail(@"Error attempting to query health store for data.");
-//        }
-//    }];
+- (void)testThatItPopulatesDataPointsAfterQueryingHealthStore {
+    NSManagedObjectContext *context = [[self dataStack] managedObjectContext];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *now = [NSDate date];
+    NSDate *start = [calendar startOfDayForDate:now];
+    NSDate *end = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:start options:NSCalendarWrapComponents];
+    
+    MTSQuery *query = [[MTSQuery alloc] initWithContext:context];
+    NSSet *types = [NSSet setWithObjects: HKQuantityTypeIdentifierActiveEnergyBurned, HKQuantityTypeIdentifierBasalEnergyBurned, nil];
+    [query setQuantityTypes:types];
+    [query setStartDate:start];
+    [query setEndDate:end];
+    
+    MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
+    [graph setQuery:query];
+    [graph setHealthStore:[self healthStore]];
+    
+    if (![context save:nil]) {
+        XCTFail(@"Could not save changes in managed object context");
+    }
+    
+    XCTestExpectation *queryExpectation = [self expectationWithDescription:@"Graph querying"];
+    [graph executeQueryWithCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
+        XCTAssertNotNil(results);
+        
+        [graph graphDataFromQueryResults:results completionHandler:^(NSArray <NSDictionary<NSString *,id> *> * _Nullable dataSet, NSError * _Nullable error) {
+            XCTAssertNotNil(dataSet);
+            XCTAssertEqual([dataSet count], 2);
+            
+            [queryExpectation fulfill];
+        }];
+    }];
+    
+    [self waitForExpectationsWithTimeout:15 handler:^(NSError * _Nullable error) {
+        if (error) {
+            XCTFail(@"Error attempting to execute graphy query.");
+        }
+    }];
 }
 
 @end

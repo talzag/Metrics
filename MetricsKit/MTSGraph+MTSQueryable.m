@@ -73,75 +73,65 @@ NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-
         [types addObject:type];
     }
     
-    dispatch_queue_t backgroundQueue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0);
-    dispatch_async(backgroundQueue, ^{
-        for (HKQuantityType *type in types) {
-            HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:type
-                                                                   predicate:predicate
-                                                                       limit:HKObjectQueryNoLimit
-                                                             sortDescriptors:nil
-                                                              resultsHandler:resultsHandler];
-            dispatch_group_enter(group);
-            [[self healthStore] executeQuery:query];
-        }
-        
-        if (queryError) {
-            completionHandler(nil, queryError);
-        } else {
-            completionHandler(finishedArray, NULL);
-        }
-    });
+//    dispatch_queue_t backgroundQueue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0);
+//    dispatch_async(backgroundQueue, ^{ });
+    for (HKQuantityType *type in types) {
+        HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:type
+                                                               predicate:predicate
+                                                                   limit:HKObjectQueryNoLimit
+                                                         sortDescriptors:nil
+                                                          resultsHandler:resultsHandler];
+        dispatch_group_enter(group);
+        [[self healthStore] executeQuery:query];
+    }
+    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+    
+    if (queryError) {
+        completionHandler(nil, queryError);
+    } else {
+        completionHandler(finishedArray, NULL);
+    }
 }
 
-- (NSSet<NSDictionary<NSString *,id> *> * _Nullable)graphDataFromQueryResults:(NSArray <NSArray<HKQuantitySample *> *>* _Nonnull)results {
+- (void)graphDataFromQueryResults:(NSArray <NSArray<HKQuantitySample *> *>* _Nonnull)results
+                completionHandler:(void (^ _Nonnull)(NSArray <NSDictionary<NSString *,id> *> * _Nullable, NSError * _Nullable))completionHandler {
     NSMutableArray *types = [NSMutableArray array];
     for (NSArray <HKQuantitySample *>* sampleSet in results) {
         HKQuantityType *type = [[sampleSet firstObject] quantityType];
         [types addObject:type];
     }
-
-    // Use NSSet to get preferred units
-    // using GCD to make this work synchronous on our current thread.
-    __block NSDictionary *units;
-    __block NSError *unitError;
-    dispatch_semaphore_t unitSema = dispatch_semaphore_create(0);
-    [[self healthStore] preferredUnitsForQuantityTypes:[NSSet setWithArray:types]
-                                            completion:^(NSDictionary<HKQuantityType *,HKUnit *> * _Nonnull preferredUnits, NSError * _Nullable error) {
-                                                if (error) {
-                                                    unitError = error;
-                                                } else {
-                                                    units = preferredUnits;
-                                                }
-                                                dispatch_semaphore_signal(unitSema);
-                                            }];
     
-    dispatch_semaphore_wait(unitSema, DISPATCH_TIME_FOREVER);
-
-    if (unitError) {
-        return nil;
-    }
-    
-    NSMutableSet *graphDataSet = [NSMutableSet set];
-    for (NSArray <HKQuantitySample *> *sampleSet in results) {
-        HKQuantityType *type = [[sampleSet firstObject] quantityType];
-        HKUnit *unit = [units objectForKey:type];
-        
-        NSMutableArray *amounts = [NSMutableArray array];
-        
-        for (HKQuantitySample *sample in sampleSet) {
-            double quantity = [[sample quantity] doubleValueForUnit:unit];
-            NSNumber *amount = [NSNumber numberWithDouble:quantity];
-            [amounts addObject:amount];
+    void (^unitsHandler)(NSDictionary* _Nonnull, NSError* _Nullable) = ^(NSDictionary<HKQuantityType *,HKUnit *> * _Nonnull preferredUnits, NSError * _Nullable error) {
+        if (error) {
+            completionHandler(nil, error);
+            return;
         }
         
-        NSDictionary *lineData = @{
-                                   MTSGraphDataPointsKey: amounts
-                                   };
+        NSMutableArray *graphDataSet = [NSMutableArray array];
+        for (NSArray <HKQuantitySample *> *sampleSet in results) {
+            HKQuantityType *type = [[sampleSet firstObject] quantityType];
+            HKUnit *unit = [preferredUnits objectForKey:type];
+            
+            NSMutableArray *amounts = [NSMutableArray array];
+            
+            for (HKQuantitySample *sample in sampleSet) {
+                double quantity = [[sample quantity] doubleValueForUnit:unit];
+                NSNumber *amount = [NSNumber numberWithDouble:quantity];
+                [amounts addObject:amount];
+            }
+            
+            NSDictionary *lineData = @{
+                                       MTSGraphDataPointsKey: amounts
+                                       };
+            
+            [graphDataSet addObject:lineData];
+        }
         
-        [graphDataSet addObject:lineData];
-    }
+        completionHandler(graphDataSet, nil);
+    };
     
-    return [NSSet setWithSet:graphDataSet];
+    [[self healthStore] preferredUnitsForQuantityTypes:[NSSet setWithArray:types]
+                                             completion:unitsHandler];
 }
 
 

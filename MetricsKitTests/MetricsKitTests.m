@@ -78,4 +78,22 @@
     }];
 }
 
+- (void)testGraphDrawingPerformance {
+    CGSize size = CGSizeMake(200, 150);
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    NSDictionary *testData = @{
+                               MTSGraphDataPointsKey: @[@0, @75, @25, @50, @100, @50, @75, @25, @0]
+                               };
+   NSArray *testSet = [NSArray arrayWithObject:testData];
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    [self measureBlock:^{
+        MTSDrawGraph(context, rect, testSet);
+    }];
+    
+    UIGraphicsEndImageContext();
+}
+
 @end

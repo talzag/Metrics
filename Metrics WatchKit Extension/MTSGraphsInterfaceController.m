@@ -33,7 +33,7 @@
     NSDictionary *testData = @{
                                MTSGraphDataPointsKey: @[@0, @75, @25, @50, @100, @50, @75, @25, @0]
                                };
-    NSSet *testSet = [NSSet setWithObject:testData];
+    NSArray *testSet = [NSArray arrayWithObject:testData];
     MTSDrawGraph(context, screen, testSet);
     
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
@@ -42,14 +42,18 @@
     [graph executeQueryWithCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (!error) {
-                NSSet *dataPoints = [graph graphDataFromQueryResults:results];
-                if (dataPoints) {
-                    MTSDrawGraph(context, screen, dataPoints);
-                }
+                [graph graphDataFromQueryResults:results completionHandler:^(NSArray <NSDictionary<NSString *,id> *> * _Nullable dataSet, NSError * _Nullable error) {
+                    if (!error) {
+                        MTSDrawGraph(context, screen, dataSet);
+                    }
+                    
+                    CGContextRelease(context);
+                    UIGraphicsEndImageContext();
+                }];
+            } else {
+                CGContextRelease(context);
+                UIGraphicsEndImageContext();
             }
-            
-            CGContextRelease(context);
-            UIGraphicsEndImageContext();
         });
     }];
 }

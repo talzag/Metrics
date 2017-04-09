@@ -143,7 +143,7 @@ CGFloat MTSGraphPositionOnYAxisForValue(CGRect rect, CGFloat value, CGFloat maxV
     return MTSGraphHeight(rect) - ratio * height;
 }
 
-void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSSet<NSDictionary<NSString *,id> *> *dataPoints) {
+void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <NSDictionary<NSString *,id> *> *dataPoints) {
      CGFloat maxValue = 0.0;
      for (NSDictionary <NSString *, id> *data in dataPoints) {
         NSArray *values = [data objectForKey:MTSGraphDataPointsKey];
@@ -178,7 +178,7 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSSet<NSDictionar
     CGPathRelease(graphPath);
 }
 
-void MTSDrawGraph(CGContextRef context, CGRect rect, NSSet<NSDictionary<NSString *,id> *> * _Nullable dataPoints) {
+void MTSDrawGraph(CGContextRef context, CGRect rect, NSArray <NSDictionary<NSString *,id> *> * _Nullable dataPoints) {
     CGContextRetain(context);
     CGContextSaveGState(context);
     
