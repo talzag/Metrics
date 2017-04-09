@@ -13,11 +13,19 @@
 @implementation MTSGraph (Colors)
 
 - (CGColorRef)transformedTopColor {
-    return [[self topColor] colorValue];
+    if ([self topColor]) {
+        return [[self topColor] colorValue];
+    }
+    
+    return nil;
 }
 
 - (CGColorRef)transformedBottomColor {
-    return [[self bottomColor] colorValue];
+    if ([self bottomColor]) {
+        return [[self bottomColor] colorValue];
+    }
+    
+    return nil;
 }
 
 @end
