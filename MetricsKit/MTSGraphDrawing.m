@@ -178,7 +178,7 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <NSDictio
     CGPathRelease(graphPath);
 }
 
-void MTSDrawGraph(CGContextRef context, CGRect rect, NSArray <NSDictionary<NSString *,id> *> * _Nullable dataPoints) {
+void MTSDrawGraph(CGContextRef context, CGRect rect, NSArray <NSDictionary<NSString *,id> *> * _Nullable dataPoints, CGColorRef _Nullable topColor, CGColorRef _Nullable bottomColor) {
     CGContextRetain(context);
     CGContextSaveGState(context);
     
@@ -191,16 +191,7 @@ void MTSDrawGraph(CGContextRef context, CGRect rect, NSArray <NSDictionary<NSStr
     // draw background
     CGContextSaveGState(context);
     
-    CGColorRef top = NULL, bottom = NULL;
-//    if ([graph topColor]) {
-//        top = [graph topColor];
-//    }
-//    
-//    if ([graph bottomColor]) {
-//        bottom = [graph bottomColor];
-//    }
-    
-    drawGradient(context, rect, top, bottom);
+    drawGradient(context, rect, topColor, bottomColor);
     CGContextRestoreGState(context);
     
     // draw graph lines

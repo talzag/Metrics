@@ -14,6 +14,6 @@
 
 #import "MTSGraph.h"
 
-void MTSDrawGraph(CGContextRef _Nonnull context, CGRect rect, NSArray <NSDictionary<NSString *,id> *> * _Nullable dataPoints);
+void MTSDrawGraph(CGContextRef _Nonnull context, CGRect rect, NSArray <NSDictionary<NSString *,id> *> * _Nullable dataPoints, CGColorRef _Nullable topColor, CGColorRef _Nullable bottomColor);
 
 #endif /* MTSGraphDrawing_h */

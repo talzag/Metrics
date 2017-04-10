@@ -27,6 +27,7 @@
 		E356FD5A1E9AD9B9004058CD /* NSValue+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = E356FD561E9AD9B9004058CD /* NSValue+Color.m */; };
 		E356FD5F1E9ADB71004058CD /* MTSGraph+Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = E356FD5E1E9ADB71004058CD /* MTSGraph+Colors.m */; };
 		E356FD601E9ADB71004058CD /* MTSGraph+Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = E356FD5E1E9ADB71004058CD /* MTSGraph+Colors.m */; };
+		E356FD621E9ADE8C004058CD /* MTSGraphColorsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E356FD611E9ADE8C004058CD /* MTSGraphColorsTests.m */; };
 		E3594A421E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = E3594A411E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3784B701E46494D005F87BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784B6F1E46494D005F87BC /* main.m */; };
 		E3784B731E46494D005F87BC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784B721E46494D005F87BC /* AppDelegate.m */; };
@@ -229,6 +230,7 @@
 		E356FD551E9AD9B9004058CD /* NSValue+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+Color.h"; sourceTree = "<group>"; };
 		E356FD561E9AD9B9004058CD /* NSValue+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+Color.m"; sourceTree = "<group>"; };
 		E356FD5E1E9ADB71004058CD /* MTSGraph+Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTSGraph+Colors.m"; sourceTree = "<group>"; };
+		E356FD611E9ADE8C004058CD /* MTSGraphColorsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphColorsTests.m; sourceTree = "<group>"; };
 		E3594A411E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSQuantityTypeIdentifiers.h; sourceTree = "<group>"; };
 		E37362201E6B9D240072DFBC /* MTSGraphViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphViewTests.m; sourceTree = "<group>"; };
 		E3784B6B1E46494D005F87BC /* Metrics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Metrics.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -519,6 +521,7 @@
 		E38AE1891E78E798001ABE40 /* MetricsKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				E356FD611E9ADE8C004058CD /* MTSGraphColorsTests.m */,
 				E30C08391E7E31BE0083DB7B /* MTSTestDataStack.h */,
 				E30C083A1E7E31BE0083DB7B /* MTSTestDataStack.m */,
 				E38AE18A1E78E798001ABE40 /* MetricsKitTests.m */,
@@ -996,6 +999,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E356FD621E9ADE8C004058CD /* MTSGraphColorsTests.m in Sources */,
 				E38AE1B91E7A342D001ABE40 /* MTSHealthTypeTransformerTests.m in Sources */,
 				E30C08381E7E30810083DB7B /* MTSGraphQueryableTests.m in Sources */,
 				E30C083B1E7E31BE0083DB7B /* MTSTestDataStack.m in Sources */,

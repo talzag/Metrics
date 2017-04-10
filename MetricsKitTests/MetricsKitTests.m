@@ -90,7 +90,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     [self measureBlock:^{
-        MTSDrawGraph(context, rect, testSet);
+        MTSDrawGraph(context, rect, testSet, NULL, NULL);
     }];
     
     UIGraphicsEndImageContext();

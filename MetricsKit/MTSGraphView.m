@@ -27,7 +27,17 @@
                                };
     NSArray *testSet = [NSArray arrayWithObject:testData];
     
-    MTSDrawGraph(context, rect, testSet);
+    CGColorRef top = NULL, bottom = NULL;
+    
+    if ([self topColor]) {
+        top = [[self topColor] CGColor];
+    }
+    
+    if ([self bottomColor]) {
+        bottom = [[self bottomColor] CGColor];
+    }
+    
+    MTSDrawGraph(context, rect, testSet, top, bottom);
 }
 
 @end

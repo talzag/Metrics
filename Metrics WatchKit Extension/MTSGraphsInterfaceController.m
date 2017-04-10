@@ -34,7 +34,7 @@
                                MTSGraphDataPointsKey: @[@0, @75, @25, @50, @100, @50, @75, @25, @0]
                                };
     NSArray *testSet = [NSArray arrayWithObject:testData];
-    MTSDrawGraph(context, screen, testSet);
+    MTSDrawGraph(context, screen, testSet, NULL, NULL);
     
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     [[self graphInterfaceImage] setImage:image];
@@ -44,7 +44,7 @@
             if (!error) {
                 [graph graphDataFromQueryResults:results completionHandler:^(NSArray <NSDictionary<NSString *,id> *> * _Nullable dataSet, NSError * _Nullable error) {
                     if (!error) {
-                        MTSDrawGraph(context, screen, dataSet);
+                        MTSDrawGraph(context, screen, dataSet, NULL, NULL);
                     }
                     
                     CGContextRelease(context);
