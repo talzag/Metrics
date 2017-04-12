@@ -64,7 +64,6 @@
 		E38AE1AA1E78E9F0001ABE40 /* MTSHealthTypeTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1A01E78E9F0001ABE40 /* MTSHealthTypeTransformer.m */; };
 		E38AE1AB1E78EC70001ABE40 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3784BF51E46CF66005F87BC /* HealthKit.framework */; };
 		E38AE1AD1E78EE71001ABE40 /* MTSGraph.h in Headers */ = {isa = PBXBuildFile; fileRef = E38AE1AC1E78EE71001ABE40 /* MTSGraph.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E38AE1B71E7A33EA001ABE40 /* MTSDataPointsTransformerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1B61E7A33EA001ABE40 /* MTSDataPointsTransformerTests.m */; };
 		E38AE1B91E7A342D001ABE40 /* MTSHealthTypeTransformerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1B81E7A342D001ABE40 /* MTSHealthTypeTransformerTests.m */; };
 		E38AE1BC1E7A3444001ABE40 /* MTSHealthStoreManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E38AE1BA1E7A3444001ABE40 /* MTSHealthStoreManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E38AE1BD1E7A3445001ABE40 /* MTSHealthStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1BB1E7A3444001ABE40 /* MTSHealthStoreManager.m */; };
@@ -285,7 +284,6 @@
 		E38AE19F1E78E9F0001ABE40 /* MTSHealthTypeTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSHealthTypeTransformer.h; sourceTree = "<group>"; };
 		E38AE1A01E78E9F0001ABE40 /* MTSHealthTypeTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSHealthTypeTransformer.m; sourceTree = "<group>"; };
 		E38AE1AC1E78EE71001ABE40 /* MTSGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraph.h; sourceTree = "<group>"; };
-		E38AE1B61E7A33EA001ABE40 /* MTSDataPointsTransformerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSDataPointsTransformerTests.m; sourceTree = "<group>"; };
 		E38AE1B81E7A342D001ABE40 /* MTSHealthTypeTransformerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSHealthTypeTransformerTests.m; sourceTree = "<group>"; };
 		E38AE1BA1E7A3444001ABE40 /* MTSHealthStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSHealthStoreManager.h; sourceTree = "<group>"; };
 		E38AE1BB1E7A3444001ABE40 /* MTSHealthStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSHealthStoreManager.m; sourceTree = "<group>"; };
@@ -528,7 +526,6 @@
 				E38AE1BE1E7A3497001ABE40 /* MTSHealthStoreManagerTests.m */,
 				E30C08371E7E30810083DB7B /* MTSGraphQueryableTests.m */,
 				E38AE1B81E7A342D001ABE40 /* MTSHealthTypeTransformerTests.m */,
-				E38AE1B61E7A33EA001ABE40 /* MTSDataPointsTransformerTests.m */,
 				E38AE18C1E78E798001ABE40 /* Info.plist */,
 			);
 			path = MetricsKitTests;
@@ -1003,7 +1000,6 @@
 				E38AE1B91E7A342D001ABE40 /* MTSHealthTypeTransformerTests.m in Sources */,
 				E30C08381E7E30810083DB7B /* MTSGraphQueryableTests.m in Sources */,
 				E30C083B1E7E31BE0083DB7B /* MTSTestDataStack.m in Sources */,
-				E38AE1B71E7A33EA001ABE40 /* MTSDataPointsTransformerTests.m in Sources */,
 				E38AE18B1E78E798001ABE40 /* MetricsKitTests.m in Sources */,
 				E38AE1BF1E7A3497001ABE40 /* MTSHealthStoreManagerTests.m in Sources */,
 			);

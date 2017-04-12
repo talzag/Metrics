@@ -12,57 +12,33 @@
 
 #import "MetricsKit.h"
 #import "MTSTestDataStack.h"
+#import "NSValue+Color.h"
 
 @interface MTSGraphColorsTests : XCTestCase
-
-@property MTSTestDataStack *dataStack;
-@property HKHealthStore *healthStore;
 
 @end
 
 @implementation MTSGraphColorsTests
 
-- (void)setUp {
-    [super setUp];
-    [self setDataStack:[MTSTestDataStack new]];
-    [self setHealthStore:[HKHealthStore new]];
-    
-    XCTestExpectation *writeExpectation = [self expectationWithDescription:@"Mock data written"];
-    [[self dataStack] insertMockHealthDataIntoHealthStore:[self healthStore] completionHandler:^(BOOL success, NSError * _Nullable error) {
-        [writeExpectation fulfill];
-    }];
-    
-    [self waitForExpectationsWithTimeout:15 handler:^(NSError * _Nullable error) {
-        if (error) {
-            XCTFail(@"Error waiting for mock data to be written to health store.");
-        }
-    }];
-}
-
-- (void)tearDown {
-    XCTestExpectation *deletExpectation = [self expectationWithDescription:@"Mock data deleted"];
-    [[self dataStack] deleteMockDataFromHealthStore:[self healthStore] withCompletionHandler:^{
-        [deletExpectation fulfill];
-    }];
-    
-    [self waitForExpectationsWithTimeout:15 handler:^(NSError * _Nullable error) {
-        if (error) {
-            XCTFail(@"Error waiting for mock data to be deleted from health store");
-        }
-    }];
-    
-    [self setDataStack:nil];
-    [self setHealthStore:nil];
-    
-    [super tearDown];
-}
-
 - (void)testThatColorsAreBoxedCorrectly {
-    // Create NSValue with CGColorRef
-}
-
-- (void)testTransformedColors {
-    //
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    
+    CGFloat blackComponents[] = { 0.0, 0.0, 0.0, 1.0 };
+    CGColorRef black = CGColorCreate(colorSpace, blackComponents);
+    NSValue *blackValue = [NSValue valueWithCGColorRef:black];
+    XCTAssertNotNil(blackValue);
+    
+    CGColorRef blackValueBuffer;
+    [blackValue getValue:&blackValueBuffer];
+    XCTAssertTrue(blackValueBuffer != NULL);
+    
+    const CGFloat *blackCompCopy = CGColorGetComponents(blackValueBuffer);
+    XCTAssertTrue(blackComponents[0] == *blackCompCopy);
+    XCTAssertTrue(blackComponents[1] == *(blackCompCopy + 1));
+    XCTAssertTrue(blackComponents[2] == *(blackCompCopy + 2));
+    XCTAssertTrue(blackComponents[3] == *(blackCompCopy + 3));
+    
+    CGColorSpaceRelease(colorSpace);
 }
 
 @end
