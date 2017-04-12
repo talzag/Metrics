@@ -519,10 +519,10 @@
 		E38AE1891E78E798001ABE40 /* MetricsKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				E356FD611E9ADE8C004058CD /* MTSGraphColorsTests.m */,
 				E30C08391E7E31BE0083DB7B /* MTSTestDataStack.h */,
 				E30C083A1E7E31BE0083DB7B /* MTSTestDataStack.m */,
 				E38AE18A1E78E798001ABE40 /* MetricsKitTests.m */,
+				E356FD611E9ADE8C004058CD /* MTSGraphColorsTests.m */,
 				E38AE1BE1E7A3497001ABE40 /* MTSHealthStoreManagerTests.m */,
 				E30C08371E7E30810083DB7B /* MTSGraphQueryableTests.m */,
 				E38AE1B81E7A342D001ABE40 /* MTSHealthTypeTransformerTests.m */,

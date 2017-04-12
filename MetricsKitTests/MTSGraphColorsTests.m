@@ -28,8 +28,7 @@
     NSValue *blackValue = [NSValue valueWithCGColorRef:black];
     XCTAssertNotNil(blackValue);
     
-    CGColorRef blackValueBuffer;
-    [blackValue getValue:&blackValueBuffer];
+    CGColorRef blackValueBuffer = [blackValue colorValue];
     XCTAssertTrue(blackValueBuffer != NULL);
     
     const CGFloat *blackCompCopy = CGColorGetComponents(blackValueBuffer);
