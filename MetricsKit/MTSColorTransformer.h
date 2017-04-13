@@ -6,8 +6,9 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreGraphics/CoreGraphics.h>
+@import Foundation;
+
+#import "MTSColorBox.h"
 
 @interface MTSColorTransformer : NSValueTransformer
 

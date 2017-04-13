@@ -1,15 +1,15 @@
 //
-//  NSValue+Color.h
+//  NSColorBox.h
 //  Metrics
 //
-//  Created by Daniel Strokis on 4/9/17.
+//  Created by Daniel Strokis on 4/13/17.
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreGraphics/CoreGraphics.h>
+@import Foundation;
+@import CoreGraphics;
 
-@interface NSValue (Color)
+@interface MTSColorBox : NSValue
 
 + (instancetype)valueWithCGColorRef:(CGColorRef)value;
 

@@ -15,11 +15,11 @@
 }
 
 + (Class)transformedValueClass {
-    return [NSValue class];
+    return [MTSColorBox class];
 }
 
 - (id)transformedValue:(id)value {
-    if (![value isKindOfClass:[NSValue class]]) {
+    if (![value isKindOfClass:[MTSColorBox class]]) {
         return nil;
     }
     
@@ -29,7 +29,7 @@
 - (id)reverseTransformedValue:(id)value {
     id reversed = [NSKeyedUnarchiver unarchiveObjectWithData:value];
     
-    if (![reversed isKindOfClass:[NSValue class]]) {
+    if (![reversed isKindOfClass:[MTSColorBox class]]) {
         return nil;
     }
     

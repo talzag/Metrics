@@ -10,7 +10,6 @@
 @import CoreGraphics;
 
 #import "MTSColorTransformer.h"
-#import "NSValue+Color.h"
 
 @interface MTSColorTransformerTests : XCTestCase
 
@@ -44,7 +43,7 @@
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGFloat comps[] = { 0.0, 0.0, 0.0, 1.0 };
     CGColorRef black = CGColorCreate(colorSpace, comps);
-    NSValue *value = [NSValue valueWithCGColorRef:black];
+    MTSColorBox *value = [MTSColorBox valueWithCGColorRef:black];
     
     id transformed = [[self transformer] transformedValue:value];
     XCTAssertTrue([transformed isKindOfClass:[NSData class]]);
@@ -78,7 +77,7 @@
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGFloat comps[] = { 0.0, 0.0, 0.0, 1.0 };
     CGColorRef black = CGColorCreate(colorSpace, comps);
-    NSValue *value = [NSValue valueWithCGColorRef:black];
+    MTSColorBox *value = [MTSColorBox valueWithCGColorRef:black];
     NSData *transformed = [NSKeyedArchiver archivedDataWithRootObject:value];
     
     id reversed = [[self transformer] reverseTransformedValue:transformed];
@@ -93,7 +92,7 @@
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGFloat comps[] = { 0.0, 0.0, 0.0, 1.0 };
     CGColorRef black = CGColorCreate(colorSpace, comps);
-    NSValue *value = [NSValue valueWithCGColorRef:black];
+    MTSColorBox *value = [MTSColorBox valueWithCGColorRef:black];
     
     MTSColorTransformer *transformer = [self transformer];
     
