@@ -37,6 +37,7 @@
     XCTAssertTrue(blackComponents[2] == *(blackCompCopy + 2));
     XCTAssertTrue(blackComponents[3] == *(blackCompCopy + 3));
     
+    CGColorRelease(black);
     CGColorSpaceRelease(colorSpace);
 }
 

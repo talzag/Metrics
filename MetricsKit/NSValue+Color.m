@@ -11,7 +11,7 @@
 @implementation NSValue (Color)
 
 + (instancetype)valueWithCGColorRef:(CGColorRef)value {
-    return [self value:&value withObjCType:@encode(CGColorRef)];
+    return [self valueWithBytes:value objCType:@encode(CGColorRef)];
 }
 
 - (CGColorRef)colorValue {
