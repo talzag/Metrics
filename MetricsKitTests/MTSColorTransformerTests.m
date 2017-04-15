@@ -35,15 +35,15 @@
     XCTAssertTrue([MTSColorTransformer allowsReverseTransformation]);
 }
 
-- (void)testThatItTransformsDataToNSValue {
-    XCTAssertEqualObjects([NSValue class], [MTSColorTransformer transformedValueClass]);
+- (void)testThatItTransformsDataToMTSColorBox {
+    XCTAssertEqualObjects([MTSColorBox class], [MTSColorTransformer transformedValueClass]);
 }
 
 - (void)testThatItWillTransformAnNSValue {
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGFloat comps[] = { 0.0, 0.0, 0.0, 1.0 };
     CGColorRef black = CGColorCreate(colorSpace, comps);
-    MTSColorBox *value = [MTSColorBox valueWithCGColorRef:black];
+    MTSColorBox *value = [[MTSColorBox alloc] initWithCGColorRef:black];
     
     id transformed = [[self transformer] transformedValue:value];
     XCTAssertTrue([transformed isKindOfClass:[NSData class]]);
@@ -77,12 +77,11 @@
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGFloat comps[] = { 0.0, 0.0, 0.0, 1.0 };
     CGColorRef black = CGColorCreate(colorSpace, comps);
-    MTSColorBox *value = [MTSColorBox valueWithCGColorRef:black];
+    MTSColorBox *value = [[MTSColorBox alloc] initWithCGColorRef:black];
     NSData *transformed = [NSKeyedArchiver archivedDataWithRootObject:value];
     
     id reversed = [[self transformer] reverseTransformedValue:transformed];
-    XCTAssertTrue([reversed isKindOfClass:[NSValue class]]);
-    XCTAssertEqualObjects((NSValue *)reversed, value);
+    XCTAssertTrue([reversed isKindOfClass:[MTSColorBox class]]);
     
     CGColorRelease(black);
     CGColorSpaceRelease(colorSpace);
@@ -92,7 +91,7 @@
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGFloat comps[] = { 0.0, 0.0, 0.0, 1.0 };
     CGColorRef black = CGColorCreate(colorSpace, comps);
-    MTSColorBox *value = [MTSColorBox valueWithCGColorRef:black];
+    MTSColorBox *value = [[MTSColorBox alloc] initWithCGColorRef:black];
     
     MTSColorTransformer *transformer = [self transformer];
     

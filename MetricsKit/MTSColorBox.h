@@ -9,10 +9,11 @@
 @import Foundation;
 @import CoreGraphics;
 
-@interface MTSColorBox : NSValue
+@interface MTSColorBox : NSObject <NSCoding>
 
-+ (instancetype)valueWithCGColorRef:(CGColorRef)value;
+- (instancetype)initWithCGColorRef:(CGColorRef)value;
 
-@property (readonly) CGColorRef colorValue;
+@property (readonly) CGColorRef color;
+@property NSUInteger numComponents;
 
 @end

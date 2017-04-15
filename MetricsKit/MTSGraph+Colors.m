@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "MTSGraph.h"
-#import "NSValue+Color.h"
+#import "MTSColorBox.h"
 
 @implementation MTSGraph (Colors)
 
 - (CGColorRef)transformedTopColor {
     if ([self topColor]) {
-        return [[self topColor] colorValue];
+        return [[self topColor] color];
     }
     
     return nil;
@@ -22,7 +22,7 @@
 
 - (CGColorRef)transformedBottomColor {
     if ([self bottomColor]) {
-        return [[self bottomColor] colorValue];
+        return [[self bottomColor] color];
     }
     
     return nil;
