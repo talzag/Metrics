@@ -8,7 +8,7 @@
 
 #import "MTSColorBox.h"
 
-static NSString * const kCOMPONENTS_KEY = @"com.dstrokis.Metrics.color.components";
+//static NSString * const kCOMPONENTS_KEY = @"com.dstrokis.Metrics.color.components";
 static NSString * const kR = @"r";
 static NSString * const kG = @"g";
 static NSString * const kB = @"b";

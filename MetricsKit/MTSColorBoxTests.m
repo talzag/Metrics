@@ -41,6 +41,7 @@
     
     id unarchive = [NSKeyedUnarchiver unarchiveObjectWithData:archive];
     XCTAssert([unarchive isKindOfClass:[MTSColorBox class]]);
+    XCTAssert([[self colorBox] color] != NULL);
 }
 
 - (void)testThatItConformsToNSCoding {
@@ -52,6 +53,7 @@
     NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
     MTSColorBox *box = [[MTSColorBox alloc] initWithCoder:unarchiver];
     XCTAssertNotNil(box);
+    XCTAssertEqual([[self colorBox] color], [[UIColor blueColor] CGColor]);
 }
 
 @end

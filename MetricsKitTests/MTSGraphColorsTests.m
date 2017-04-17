@@ -66,7 +66,12 @@
     [graph setBottomColor:blueBox];
 
     NSManagedObjectID *objectID = [graph objectID];
-    [[[self dataStack] managedObjectContext] save:nil];
+    
+    NSError *error = nil;
+    if (![[[self dataStack] managedObjectContext] save:&error]) {
+        XCTFail(@"Error saving MTSColorBox: %@", [error debugDescription]);
+    }
+    
     graph = nil;
     
     MTSGraph *saved = [[[self dataStack] managedObjectContext] objectWithID:objectID];
