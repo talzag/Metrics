@@ -26,11 +26,4 @@ extern NSString * const _Nonnull MTSGraphDataIdentifierKey;
 
 @end
 
-@interface MTSGraph (Colors)
-
-- (CGColorRef _Nullable)transformedTopColor;
-- (CGColorRef _Nullable)transformedBottomColor;
-
-@end
-
 #endif /* MTSGraph_h */
