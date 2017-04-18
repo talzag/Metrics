@@ -57,24 +57,25 @@
 }
 
 - (void)testThatGraphColorsAreSavedCorrectly {
-    MTSGraph *graph = [[MTSGraph alloc] initWithContext:[[self dataStack] managedObjectContext]];
+    NSManagedObjectContext *context = [[self dataStack] managedObjectContext];
+    MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
     
     MTSColorBox *blueBox = [[MTSColorBox alloc] initWithCGColorRef:[[UIColor blueColor] CGColor]];
     MTSColorBox *cyanBox = [[MTSColorBox alloc] initWithCGColorRef:[[UIColor cyanColor] CGColor]];
     
     [graph setTopColor:cyanBox];
     [graph setBottomColor:blueBox];
-
-    NSManagedObjectID *objectID = [graph objectID];
+    [graph setTitle:@"Test Graph"];
     
     NSError *error = nil;
-    if (![[[self dataStack] managedObjectContext] save:&error]) {
+    if (![context save:&error]) {
         XCTFail(@"Error saving MTSColorBox: %@", [error debugDescription]);
     }
-    
+
+    NSManagedObjectID *objectID = [graph objectID];
     graph = nil;
     
-    MTSGraph *saved = [[[self dataStack] managedObjectContext] objectWithID:objectID];
+    MTSGraph *saved = [context objectWithID:objectID];
     XCTAssertNotNil(saved);
     XCTAssertEqualObjects([saved topColor], cyanBox);
     XCTAssertEqualObjects([saved bottomColor], blueBox);

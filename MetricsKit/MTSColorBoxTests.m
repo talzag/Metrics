@@ -56,4 +56,13 @@
     XCTAssertEqual([[self colorBox] color], [[UIColor blueColor] CGColor]);
 }
 
+- (void)testThatItCanBeTransformed {
+    NSValueTransformer *transformer = nil;
+    NSData *transformedData = nil;
+    
+    transformer = [NSValueTransformer valueTransformerForName:NSKeyedUnarchiveFromDataTransformerName];
+    transformedData = [transformer reverseTransformedValue:[self colorBox]];
+    XCTAssertNotNil(transformedData, @"Transformer was not able to produce binary data");
+}
+
 @end

@@ -25,6 +25,7 @@ static NSString * const kA = @"a";
     if (self) {
         _color = value;
         _numComponents = CGColorGetNumberOfComponents(value);
+        NSAssert(_numComponents == 4, @"Components not RGBA");
     }
     return self;
 }
