@@ -56,9 +56,6 @@
                                          completion:^(NSDictionary<HKQuantityType *,HKUnit *> * _Nonnull preferredUnits, NSError * _Nullable error)
          {
              if (!preferredUnits) {
-#ifdef DEBUG
-                 abort();
-#endif
                  return;
              }
              

@@ -90,9 +90,7 @@
     [graph setQuery:query];
     [graph setHealthStore:[self healthStore]];
     
-    if (![context save:nil]) {
-        XCTFail(@"Could not save changes in managed object context");
-    }
+    [context save:nil];
     
     XCTestExpectation *queryExpectation = [self expectationWithDescription:@"Graph querying"];
     [graph executeQueryWithCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {

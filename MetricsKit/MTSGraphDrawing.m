@@ -37,8 +37,8 @@ CGFloat MTSGraphWidth(CGRect rect) {
     return rect.size.width - MTSGraphLeftMargin(rect) - MTSGraphRightMargin(rect);
 }
 
-CGFloat MTSGraphColumnWidth(CGRect rect, NSUInteger numElements) {
-    if (numElements == 0) {
+CGFloat MTSGraphColumnWidth(CGRect rect, NSInteger numElements) {
+    if (numElements <= 0) {
         return MTSGraphWidth(rect);
     }
     
@@ -57,8 +57,8 @@ void drawGradient(CGContextRef context, CGRect rect, CGColorRef top, CGColorRef 
         
         CGColorRelease(white);
     } else {
-        const void *colors[] = { &top, &bottom };
-        CFArrayRef colorsArray = CFArrayCreate(NULL, colors, 2, NULL);
+        const CGColorRef colors[] = { top, bottom };
+        CFArrayRef colorsArray = CFArrayCreate(NULL, (void *)colors, 2, NULL);
         
         CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, colorsArray, NULL);
         CGContextDrawLinearGradient(context, gradient, CGPointZero, CGPointMake(0.0, rect.size.height), kCGGradientDrawsAfterEndLocation);

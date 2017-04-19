@@ -9,6 +9,7 @@
 @import XCTest;
 @import CoreData;
 @import HealthKit;
+@import UIKit;
 
 #import "MetricsKit.h"
 #import "MTSTestDataStack.h"
@@ -91,6 +92,45 @@
     
     [self measureBlock:^{
         MTSDrawGraph(context, rect, testSet, NULL, NULL);
+    }];
+    
+    UIGraphicsEndImageContext();
+}
+
+- (void)testGraphDrawingWithEmptyDataSet {
+    CGSize size = CGSizeMake(200, 150);
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    NSDictionary *testData = @{
+                               MTSGraphDataPointsKey: @[]
+                               };
+    NSArray *testSet = [NSArray arrayWithObject:testData];
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    [self measureBlock:^{
+        MTSDrawGraph(context, rect, testSet, NULL, NULL);
+    }];
+    
+    UIGraphicsEndImageContext();
+}
+
+- (void)testGraphDrawingWithGradients {
+    CGSize size = CGSizeMake(200, 150);
+    CGRect rect = CGRectMake(0, 0, size.width, size.height);
+    NSDictionary *testData = @{
+                               MTSGraphDataPointsKey: @[]
+                               };
+    NSArray *testSet = [NSArray arrayWithObject:testData];
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGColorRef cyan = [[UIColor cyanColor] CGColor];
+    CGColorRef blue = [[UIColor blueColor] CGColor];
+    
+    [self measureBlock:^{
+        MTSDrawGraph(context, rect, testSet, cyan, blue);
     }];
     
     UIGraphicsEndImageContext();
