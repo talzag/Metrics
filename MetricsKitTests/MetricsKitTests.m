@@ -58,6 +58,106 @@
     [super tearDown];
 }
 
+- (void)testGraphUsageWorkflow {
+    NSManagedObjectContext *context = [[self dataStack] managedObjectContext];
+    MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
+    
+    [graph setTitle:@"Test Graph"];
+    [graph setHealthStore:[self healthStore]];
+    
+    MTSColorBox *blueBox = [[MTSColorBox alloc] initWithCGColorRef:[[UIColor blueColor] CGColor]];
+    MTSColorBox *cyanBox = [[MTSColorBox alloc] initWithCGColorRef:[[UIColor cyanColor] CGColor]];
+    [graph setTopColor:cyanBox];
+    [graph setBottomColor:blueBox];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *now = [NSDate date];
+    NSDate *start = [calendar startOfDayForDate:now];
+    NSDate *end = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:start options:NSCalendarWrapComponents];
+    
+    MTSQuery *query = [[MTSQuery alloc] initWithContext:context];
+    NSSet *types = [NSSet setWithObjects: HKQuantityTypeIdentifierActiveEnergyBurned, HKQuantityTypeIdentifierBasalEnergyBurned, nil];
+    [query setQuantityTypes:types];
+    [query setStartDate:start];
+    [query setEndDate:end];
+    [graph setQuery:query];
+    
+    [context save:nil];
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Complete data flow test"];
+    [graph executeQueryWithCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
+        [graph graphDataFromQueryResults:results completionHandler:^(NSArray<NSDictionary<NSString *,id> *> * _Nullable dataSets, NSError * _Nullable error) {
+            MTSRealCalorieValue([graph healthStore], [[graph query] startDate], [[graph query] endDate], ^(double calories, NSError *error) {
+                XCTAssertEqual([results count], 2);
+                XCTAssertEqual(calories, -100);
+                
+                NSDictionary *firstLine = [dataSets firstObject];
+                
+                NSArray *dataPoints = [firstLine objectForKey:MTSGraphDataPointsKey];
+                XCTAssertEqual([dataPoints count], 1);
+                
+                HKQuantityTypeIdentifier lineId = [firstLine objectForKey:MTSGraphDataIdentifierKey];
+                XCTAssertNotNil(lineId);
+                
+                [expectation fulfill];
+            });
+        }];
+    }];
+    
+    [self waitForExpectationsWithTimeout:15 handler:^(NSError * _Nullable error) {
+        if (error) {
+            XCTFail(@"Test timed out waiting for graph completion handlers.");
+        }
+    }];
+}
+
+- (void)testThatObjectsSaveCorrectly {
+    NSManagedObjectContext *context = [[self dataStack] managedObjectContext];
+    MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
+    
+    [graph setTitle:@"Test Graph"];
+    [graph setHealthStore:[self healthStore]];
+    
+    MTSColorBox *blueBox = [[MTSColorBox alloc] initWithCGColorRef:[[UIColor blueColor] CGColor]];
+    MTSColorBox *cyanBox = [[MTSColorBox alloc] initWithCGColorRef:[[UIColor cyanColor] CGColor]];
+    [graph setTopColor:cyanBox];
+    [graph setBottomColor:blueBox];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *now = [NSDate date];
+    NSDate *start = [calendar startOfDayForDate:now];
+    NSDate *end = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:start options:NSCalendarWrapComponents];
+    
+    MTSQuery *query = [[MTSQuery alloc] initWithContext:context];
+    NSSet *types = [NSSet setWithObjects: HKQuantityTypeIdentifierActiveEnergyBurned, HKQuantityTypeIdentifierBasalEnergyBurned, nil];
+    [query setQuantityTypes:types];
+    [query setStartDate:start];
+    [query setEndDate:end];
+    [graph setQuery:query];
+    
+    [context save:nil];
+    
+    NSManagedObjectID *queryID = [query objectID];
+    query = nil;
+    
+    NSFetchRequest *queryFetch = [MTSQuery fetchRequest];
+    [queryFetch setPredicate:[NSPredicate predicateWithFormat:@"objectID == %@", queryID]];
+    NSArray *fetchResults = [context executeFetchRequest:queryFetch error:nil];
+    XCTAssertEqual([fetchResults count], 1);
+    XCTAssertTrue([[fetchResults firstObject] isKindOfClass:[MTSQuery class]]);
+    XCTAssertEqualObjects([[fetchResults firstObject] startDate], start);
+    XCTAssertEqualObjects([[fetchResults firstObject] endDate], end);
+    XCTAssertEqualObjects([[fetchResults firstObject] graph], graph);
+    
+    NSManagedObjectID *objectID = [graph objectID];
+    graph = nil;
+    
+    MTSGraph *fetchedGraph = [context objectWithID:objectID];
+    XCTAssertEqualObjects([fetchedGraph topColor], cyanBox);
+    XCTAssertEqualObjects([fetchedGraph bottomColor], blueBox);
+    XCTAssertEqualObjects([fetchedGraph query], [fetchResults firstObject]);
+}
+
 - (void)testThatRealCalorieValueIsCalculated {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate *now = [NSDate date];

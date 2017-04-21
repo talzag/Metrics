@@ -17,14 +17,18 @@ NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-
 
 - (void)executeQueryWithCompletionHandler:(void (^ _Nullable)(NSArray * _Nullable, NSError * _Nullable))completionHandler {
     if (![self query]) {
-        // create NSError
-        // call completionHandler
+        NSError *error = [NSError errorWithDomain:@"com.dstrokis.Metrics" code:1 userInfo:@{
+                                                                                            NSLocalizedDescriptionKey: @"Query cannot be nil"
+                                                                                            }];
+        completionHandler(nil, error);
         return;
     }
     
     if (![self healthStore]) {
-        // create NSError
-        // call completionHandler
+        NSError *error = [NSError errorWithDomain:@"com.dstrokis.Metrics" code:2 userInfo:@{
+                                                                                            NSLocalizedDescriptionKey: @"Health store cannot be nil"
+                                                                                            }];
+        completionHandler(nil, error);
         return;
     }
     
@@ -48,7 +52,7 @@ NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-
                 [userInfo addEntriesFromDictionary:originalUserInfo];
             }
             
-            queryError = [NSError errorWithDomain:NSCocoaErrorDomain code:1 userInfo:userInfo];
+            queryError = [NSError errorWithDomain:@"com.dstrokis.Metrics" code:3 userInfo:userInfo];
         } else {
             [finishedArray addObject:results];
         }
@@ -86,11 +90,7 @@ NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-
     }
     dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
     
-    if (queryError) {
-        completionHandler(nil, queryError);
-    } else {
-        completionHandler(finishedArray, NULL);
-    }
+    completionHandler(finishedArray, queryError);
 }
 
 - (void)graphDataFromQueryResults:(NSArray <NSArray<HKQuantitySample *> *>* _Nonnull)results
@@ -121,7 +121,8 @@ NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-
             }
             
             NSDictionary *lineData = @{
-                                       MTSGraphDataPointsKey: amounts
+                                       MTSGraphDataPointsKey: amounts,
+                                       MTSGraphDataIdentifierKey: [type identifier]
                                        };
             
             [graphDataSet addObject:lineData];

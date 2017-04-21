@@ -111,4 +111,65 @@
     }];
 }
 
+- (void)testThatItWillReturnAnErrorIfQueryIsNull {
+    NSManagedObjectContext *context = [[self dataStack] managedObjectContext];
+    
+    MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
+    [graph setHealthStore:[self healthStore]];
+    
+    [context save:nil];
+    
+    XCTestExpectation *queryExpectation = [self expectationWithDescription:@"Graph querying with nil query"];
+    [graph executeQueryWithCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
+        XCTAssertNil(results);
+        XCTAssertNotNil(error);
+        XCTAssertEqualObjects([error domain], @"com.dstrokis.Metrics");
+        XCTAssertEqual([error code], 1);
+        
+        [queryExpectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:15 handler:^(NSError * _Nullable error) {
+        if (error) {
+            XCTFail(@"Error attempting to execute graphy query.");
+        }
+    }];
+}
+
+- (void)testThatItWillReturnAnErrorIfHealthStoreIsNull {
+    NSManagedObjectContext *context = [[self dataStack] managedObjectContext];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *now = [NSDate date];
+    NSDate *start = [calendar startOfDayForDate:now];
+    NSDate *end = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:start options:NSCalendarWrapComponents];
+    
+    MTSQuery *query = [[MTSQuery alloc] initWithContext:context];
+    NSSet *types = [NSSet setWithObjects: HKQuantityTypeIdentifierActiveEnergyBurned, HKQuantityTypeIdentifierBasalEnergyBurned, nil];
+    [query setQuantityTypes:types];
+    [query setStartDate:start];
+    [query setEndDate:end];
+    
+    MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
+    [graph setQuery:query];
+    
+    [context save:nil];
+    
+    XCTestExpectation *queryExpectation = [self expectationWithDescription:@"Graph querying with nil health store"];
+    [graph executeQueryWithCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
+        XCTAssertNil(results);
+        XCTAssertNotNil(error);
+        XCTAssertEqualObjects([error domain], @"com.dstrokis.Metrics");
+        XCTAssertEqual([error code], 2);
+        
+        [queryExpectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:15 handler:^(NSError * _Nullable error) {
+        if (error) {
+            XCTFail(@"Error attempting to execute graphy query.");
+        }
+    }];
+}
+
 @end
