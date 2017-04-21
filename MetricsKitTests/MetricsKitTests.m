@@ -99,6 +99,12 @@
                 HKQuantityTypeIdentifier lineId = [firstLine objectForKey:MTSGraphDataIdentifierKey];
                 XCTAssertNotNil(lineId);
                 
+                CGSize size = CGSizeMake(150, 100);
+                CGRect frame = CGRectMake(0.0, 0.0, size.width, size.height);
+                UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+                MTSDrawGraph(UIGraphicsGetCurrentContext(), frame, dataSets, [[graph topColor] color], [[graph bottomColor] color]);
+                UIGraphicsEndImageContext();
+                
                 [expectation fulfill];
             });
         }];
