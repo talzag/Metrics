@@ -17,16 +17,16 @@
     [graphsController setManagedObjectContext:[[self persistentContainer] viewContext]];
     
     // TODO: Implement delegate methods to enable access using iPhone
-//    if ([HKHealthStore isHealthDataAvailable]) {
-//        HKHealthStore *healthStore = [HKHealthStore new];
-//        
-//        [MTSHealthStoreManager requestReadAccessForHealthStore:healthStore completionHandler:^(BOOL success, NSError * _Nullable error) {
-//            if (success) {
-//                InterfaceController *controller = (InterfaceController *)[[WKExtension sharedExtension] rootInterfaceController];
-//                [controller setHealthStore:healthStore];
-//            }
-//        }];
-//    }
+    if ([HKHealthStore isHealthDataAvailable]) {
+        HKHealthStore *healthStore = [HKHealthStore new];
+        
+        [MTSHealthStoreManager requestReadAccessForHealthStore:healthStore completionHandler:^(BOOL success, NSError * _Nullable error) {
+            if (success) {
+                InterfaceController *controller = (InterfaceController *)[[WKExtension sharedExtension] rootInterfaceController];
+                [controller setHealthStore:healthStore];
+            }
+        }];
+    }
 }
 
 - (void)applicationDidBecomeActive {

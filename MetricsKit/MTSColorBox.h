@@ -13,7 +13,7 @@
 
 - (instancetype)initWithCGColorRef:(CGColorRef)value;
 
-@property (readonly) CGColorRef color;
-@property NSUInteger numComponents;
+@property (nonatomic, readonly) CGColorRef color;
+@property (nonatomic) NSUInteger numComponents;
 
 @end
