@@ -18,7 +18,6 @@
 
 @end
 
-
 @interface MTSHealthLabelRowController : NSObject
 
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceLabel *healthTypeLabel;

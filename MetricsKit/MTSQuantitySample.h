@@ -10,9 +10,9 @@
 
 @interface MTSQuantitySample : NSObject
 
-@property (nonatomic) NSDate *date;
-@property (nonatomic) NSString *unit;
-@property (nonatomic) NSNumber *amount;
+@property NSDate *date;
+@property NSString *unit;
+@property NSNumber *amount;
 
 - (instancetype)initWithDate:(NSDate *)date unitString:(NSString *)unit andAmount:(NSNumber *)amount;
 
