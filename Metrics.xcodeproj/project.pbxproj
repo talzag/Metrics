@@ -384,7 +384,6 @@
 				E38AE1891E78E798001ABE40 /* MetricsKitTests */,
 				E3784B6C1E46494D005F87BC /* Products */,
 				E3784BF41E46CF66005F87BC /* Frameworks */,
-				E3BC402E1E82258600F0D44C /* MetricsKitNano-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -504,6 +503,7 @@
 				E3B3B3F01E88BD0100707324 /* Classes */,
 				E3B3B3F11E88BD1D00707324 /* Functions */,
 				E3784BDB1E4684F8005F87BC /* Info.plist */,
+				E3BC402E1E82258600F0D44C /* MetricsKitNano-Info.plist */,
 			);
 			path = MetricsKit;
 			sourceTree = "<group>";
