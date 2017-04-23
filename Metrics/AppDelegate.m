@@ -38,9 +38,6 @@
     [MTSHealthStoreManager requestReadAccessForHealthStore:self.healthStore completionHandler:^(BOOL success, NSError * _Nullable error) {
         if (!success) {
             NSLog(@"ERROR: %@", [error localizedDescription]);
-#ifdef DEBUG
-            abort();
-#endif
         }
         
         AppDelegate *this = weakSelf;

@@ -10,10 +10,12 @@
 #import "MTSGraphCollectionViewCell.h"
 #import "MTSGraphViewController.h"
 #import "MTSGraphCreationViewController.h"
+#import "MTSDataSelectionViewController.h"
 
 @interface MTSGraphCollectionViewController ()
 
 @property (strong) NSArray <MTSGraph *>*graphs;
+@property (nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
@@ -40,19 +42,19 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"Show Graph"]) {
+    if ([segue.identifier isEqualToString:@"showGraph"]) {
         MTSGraphCollectionViewCell *cell = (MTSGraphCollectionViewCell *)sender;
         NSIndexPath *indexPath = [[self collectionView] indexPathForCell:cell];
         MTSGraph *graph =[[self graphs] objectAtIndex:[indexPath row]];
         
         MTSGraphViewController *destination = (MTSGraphViewController *)[segue destinationViewController];
         [destination setGraph:graph];
-    } else if ([segue.identifier isEqualToString:@"Create Graph"]) {
-        MTSGraph *graph = [[MTSGraph alloc] initWithContext:[self managedObjectContext]];
+    } else if ([segue.identifier isEqualToString:@"selectHealthData"]) {
+        MTSQuery *newQuery = [[MTSQuery alloc] initWithContext:[self managedObjectContext]];
         
         UINavigationController *navController = (UINavigationController *)[segue destinationViewController];
-        MTSGraphCreationViewController *destination = [[navController viewControllers] firstObject];
-        [destination setGraph:graph];
+        MTSDataSelectionViewController *destination = [[navController viewControllers] firstObject];
+        [destination setQuery:newQuery];
     }
 }
 
@@ -62,10 +64,6 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
     self.graphs = [[self graphs] arrayByAddingObject:graph];
     
     [[self collectionView] reloadData];
-        
-    if (![[self managedObjectContext] hasChanges]) {
-        return;
-    }
     
     NSError *error;
     if (![[self managedObjectContext] save:&error]) {
