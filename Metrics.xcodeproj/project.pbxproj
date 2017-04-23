@@ -9,24 +9,65 @@
 /* Begin PBXBuildFile section */
 		E30838731E993CCA00348B46 /* MTSGraphViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E37362201E6B9D240072DFBC /* MTSGraphViewTests.m */; };
 		E30838761E99E6E500348B46 /* MTSColorTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = E30838741E99E6E500348B46 /* MTSColorTransformer.h */; };
-		E30838771E99E6E500348B46 /* MTSColorTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = E30838741E99E6E500348B46 /* MTSColorTransformer.h */; };
 		E30838781E99E6E500348B46 /* MTSColorTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E30838751E99E6E500348B46 /* MTSColorTransformer.m */; };
-		E30838791E99E6E500348B46 /* MTSColorTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E30838751E99E6E500348B46 /* MTSColorTransformer.m */; };
 		E30C08361E7E2B690083DB7B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3784BF51E46CF66005F87BC /* HealthKit.framework */; };
 		E30C08381E7E30810083DB7B /* MTSGraphQueryableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C08371E7E30810083DB7B /* MTSGraphQueryableTests.m */; };
 		E30C083B1E7E31BE0083DB7B /* MTSTestDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C083A1E7E31BE0083DB7B /* MTSTestDataStack.m */; };
-		E320E0981E90477F0039628C /* MTSGraphDrawing.h in Headers */ = {isa = PBXBuildFile; fileRef = E3B3B3D31E877D9500707324 /* MTSGraphDrawing.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E320E0991E9047A00039628C /* MTSGraphDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B3B3D11E877D8A00707324 /* MTSGraphDrawing.m */; };
 		E320E09E1E919BD60039628C /* MTSGraph+MTSQueryable.m in Sources */ = {isa = PBXBuildFile; fileRef = E320E09D1E919BD60039628C /* MTSGraph+MTSQueryable.m */; };
-		E320E09F1E919BD60039628C /* MTSGraph+MTSQueryable.m in Sources */ = {isa = PBXBuildFile; fileRef = E320E09D1E919BD60039628C /* MTSGraph+MTSQueryable.m */; };
 		E3236A4B1EA013080084C41C /* MTSColorTransformerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E3236A4A1EA013080084C41C /* MTSColorTransformerTests.m */; };
 		E3236A4E1EA01D080084C41C /* MTSColorBox.h in Headers */ = {isa = PBXBuildFile; fileRef = E3236A4C1EA01D080084C41C /* MTSColorBox.h */; };
-		E3236A4F1EA01D080084C41C /* MTSColorBox.h in Headers */ = {isa = PBXBuildFile; fileRef = E3236A4C1EA01D080084C41C /* MTSColorBox.h */; };
 		E3236A501EA01D080084C41C /* MTSColorBox.m in Sources */ = {isa = PBXBuildFile; fileRef = E3236A4D1EA01D080084C41C /* MTSColorBox.m */; };
-		E3236A511EA01D080084C41C /* MTSColorBox.m in Sources */ = {isa = PBXBuildFile; fileRef = E3236A4D1EA01D080084C41C /* MTSColorBox.m */; };
+		E32B1E701EAC0B40003E55C8 /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784BB21E46494E005F87BC /* ExtensionDelegate.m */; };
+		E32B1E711EAC0B40003E55C8 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784BAF1E46494E005F87BC /* InterfaceController.m */; };
+		E32B1E721EAC0B40003E55C8 /* MTSHealthResultsInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BC40351E82335100F0D44C /* MTSHealthResultsInterfaceController.m */; };
+		E32B1E731EAC0B40003E55C8 /* MTSGraphsInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C6350E1E84BA1200A84052 /* MTSGraphsInterfaceController.m */; };
+		E32B1E741EAC0B40003E55C8 /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784BB51E46494E005F87BC /* NotificationController.m */; };
+		E32B1E751EAC0B40003E55C8 /* ComplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784BB81E46494E005F87BC /* ComplicationController.m */; };
+		E32B1E781EAC0B98003E55C8 /* Metrics WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = E3784B981E46494E005F87BC /* Metrics WatchKit App.app */; };
 		E32BD51E1EA2D3C000026842 /* MTSColorBoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E32BD51D1EA2D3C000026842 /* MTSColorBoxTests.m */; };
 		E3336E681E52918300AD0BC2 /* MTSGraphCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */; };
 		E3336E6B1E5291FC00AD0BC2 /* MTSGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E6A1E5291FC00AD0BC2 /* MTSGraphViewController.m */; };
+		E352E6071EAC2E63006E8372 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E352E6061EAC2E63006E8372 /* HealthKit.framework */; };
+		E352E6101EAC2F3F006E8372 /* MTSGraph+CoreDataClass.h in Headers */ = {isa = PBXBuildFile; fileRef = E352E6081EAC2F3F006E8372 /* MTSGraph+CoreDataClass.h */; };
+		E352E6111EAC2F3F006E8372 /* MTSGraph+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E352E6091EAC2F3F006E8372 /* MTSGraph+CoreDataClass.m */; };
+		E352E6121EAC2F3F006E8372 /* MTSGraph+CoreDataProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = E352E60A1EAC2F3F006E8372 /* MTSGraph+CoreDataProperties.h */; };
+		E352E6131EAC2F3F006E8372 /* MTSGraph+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E352E60B1EAC2F3F006E8372 /* MTSGraph+CoreDataProperties.m */; };
+		E352E6141EAC2F3F006E8372 /* MTSQuery+CoreDataClass.h in Headers */ = {isa = PBXBuildFile; fileRef = E352E60C1EAC2F3F006E8372 /* MTSQuery+CoreDataClass.h */; };
+		E352E6151EAC2F3F006E8372 /* MTSQuery+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E352E60D1EAC2F3F006E8372 /* MTSQuery+CoreDataClass.m */; };
+		E352E6161EAC2F3F006E8372 /* MTSQuery+CoreDataProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = E352E60E1EAC2F3F006E8372 /* MTSQuery+CoreDataProperties.h */; };
+		E352E6171EAC2F3F006E8372 /* MTSQuery+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E352E60F1EAC2F3F006E8372 /* MTSQuery+CoreDataProperties.m */; };
+		E352E6241EAC2FEF006E8372 /* MetricsKitNano.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E352E61D1EAC2FEF006E8372 /* MetricsKitNano.framework */; };
+		E352E6251EAC2FEF006E8372 /* MetricsKitNano.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E352E61D1EAC2FEF006E8372 /* MetricsKitNano.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E352E62A1EAC2FFE006E8372 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E352E6061EAC2E63006E8372 /* HealthKit.framework */; };
+		E352E62B1EAC308C006E8372 /* Metrics.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1961E78E9F0001ABE40 /* Metrics.xcdatamodeld */; };
+		E352E62C1EAC308C006E8372 /* MTSGraph+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E352E6091EAC2F3F006E8372 /* MTSGraph+CoreDataClass.m */; };
+		E352E62D1EAC308C006E8372 /* MTSGraph+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E352E60B1EAC2F3F006E8372 /* MTSGraph+CoreDataProperties.m */; };
+		E352E62E1EAC308C006E8372 /* MTSQuery+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E352E60D1EAC2F3F006E8372 /* MTSQuery+CoreDataClass.m */; };
+		E352E62F1EAC308C006E8372 /* MTSQuery+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E352E60F1EAC2F3F006E8372 /* MTSQuery+CoreDataProperties.m */; };
+		E352E6301EAC308C006E8372 /* MTSGraph+MTSQueryable.m in Sources */ = {isa = PBXBuildFile; fileRef = E320E09D1E919BD60039628C /* MTSGraph+MTSQueryable.m */; };
+		E352E6311EAC308C006E8372 /* MTSQuantitySample.m in Sources */ = {isa = PBXBuildFile; fileRef = E3822C4D1E981CD3007CD419 /* MTSQuantitySample.m */; };
+		E352E6321EAC308C006E8372 /* MTSHealthStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1BB1E7A3444001ABE40 /* MTSHealthStoreManager.m */; };
+		E352E6331EAC308C006E8372 /* MTSHealthTypeTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1A01E78E9F0001ABE40 /* MTSHealthTypeTransformer.m */; };
+		E352E6341EAC308C006E8372 /* MTSColorTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E30838751E99E6E500348B46 /* MTSColorTransformer.m */; };
+		E352E6351EAC308C006E8372 /* MTSColorBox.m in Sources */ = {isa = PBXBuildFile; fileRef = E3236A4D1EA01D080084C41C /* MTSColorBox.m */; };
+		E352E6361EAC308C006E8372 /* MTSRealCalorieValue.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F276F41E7EC8E0007DE843 /* MTSRealCalorieValue.m */; };
+		E352E6371EAC308C006E8372 /* MTSQuantityTypeIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1C41E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m */; };
+		E352E6381EAC308C006E8372 /* MTSGraphDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B3B3D11E877D8A00707324 /* MTSGraphDrawing.m */; };
+		E352E6391EAC30A9006E8372 /* MetricsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E3784BDA1E4684F8005F87BC /* MetricsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E352E63A1EAC30A9006E8372 /* MTSGraph+CoreDataClass.h in Headers */ = {isa = PBXBuildFile; fileRef = E352E6081EAC2F3F006E8372 /* MTSGraph+CoreDataClass.h */; };
+		E352E63B1EAC30A9006E8372 /* MTSGraph+CoreDataProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = E352E60A1EAC2F3F006E8372 /* MTSGraph+CoreDataProperties.h */; };
+		E352E63C1EAC30A9006E8372 /* MTSQuery+CoreDataClass.h in Headers */ = {isa = PBXBuildFile; fileRef = E352E60C1EAC2F3F006E8372 /* MTSQuery+CoreDataClass.h */; };
+		E352E63D1EAC30A9006E8372 /* MTSQuery+CoreDataProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = E352E60E1EAC2F3F006E8372 /* MTSQuery+CoreDataProperties.h */; };
+		E352E63E1EAC30A9006E8372 /* MTSQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = E3B3B3ED1E889CBC00707324 /* MTSQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E352E63F1EAC30A9006E8372 /* MTSGraph.h in Headers */ = {isa = PBXBuildFile; fileRef = E38AE1AC1E78EE71001ABE40 /* MTSGraph.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E352E6401EAC30A9006E8372 /* MTSQuantitySample.h in Headers */ = {isa = PBXBuildFile; fileRef = E3822C4C1E981CD3007CD419 /* MTSQuantitySample.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E352E6411EAC30A9006E8372 /* MTSHealthStoreManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E38AE1BA1E7A3444001ABE40 /* MTSHealthStoreManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E352E6421EAC30A9006E8372 /* MTSHealthTypeTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = E38AE19F1E78E9F0001ABE40 /* MTSHealthTypeTransformer.h */; };
+		E352E6431EAC30A9006E8372 /* MTSColorTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = E30838741E99E6E500348B46 /* MTSColorTransformer.h */; };
+		E352E6441EAC30A9006E8372 /* MTSColorBox.h in Headers */ = {isa = PBXBuildFile; fileRef = E3236A4C1EA01D080084C41C /* MTSColorBox.h */; };
+		E352E6451EAC30A9006E8372 /* MTSRealCalorieValue.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F276F11E7EC83E007DE843 /* MTSRealCalorieValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E352E6461EAC30A9006E8372 /* MTSQuantityTypeIdentifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = E3594A411E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E352E6471EAC30A9006E8372 /* MTSGraphDrawing.h in Headers */ = {isa = PBXBuildFile; fileRef = E3B3B3D31E877D9500707324 /* MTSGraphDrawing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E356FD621E9ADE8C004058CD /* MTSGraphColorsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E356FD611E9ADE8C004058CD /* MTSGraphColorsTests.m */; };
 		E3594A421E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = E3594A411E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3784B701E46494D005F87BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784B6F1E46494D005F87BC /* main.m */; };
@@ -36,27 +77,19 @@
 		E3784B7E1E46494D005F87BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3784B7C1E46494D005F87BC /* LaunchScreen.storyboard */; };
 		E3784B891E46494E005F87BC /* MetricsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784B881E46494E005F87BC /* MetricsTests.m */; };
 		E3784B941E46494E005F87BC /* MetricsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784B931E46494E005F87BC /* MetricsUITests.m */; };
-		E3784B991E46494E005F87BC /* Metrics WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = E3784B981E46494E005F87BC /* Metrics WatchKit App.app */; };
 		E3784B9F1E46494E005F87BC /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3784B9D1E46494E005F87BC /* Interface.storyboard */; };
 		E3784BA11E46494E005F87BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3784BA01E46494E005F87BC /* Assets.xcassets */; };
 		E3784BA81E46494E005F87BC /* Metrics WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E3784BA71E46494E005F87BC /* Metrics WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		E3784BB01E46494E005F87BC /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784BAF1E46494E005F87BC /* InterfaceController.m */; };
-		E3784BB31E46494E005F87BC /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784BB21E46494E005F87BC /* ExtensionDelegate.m */; };
-		E3784BB61E46494E005F87BC /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784BB51E46494E005F87BC /* NotificationController.m */; };
-		E3784BB91E46494E005F87BC /* ComplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784BB81E46494E005F87BC /* ComplicationController.m */; };
 		E3784BBB1E46494E005F87BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3784BBA1E46494E005F87BC /* Assets.xcassets */; };
 		E3784BDC1E4684F8005F87BC /* MetricsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E3784BDA1E4684F8005F87BC /* MetricsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3784BDF1E4684F8005F87BC /* MetricsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3784BD81E4684F8005F87BC /* MetricsKit.framework */; };
 		E3784BE01E4684F8005F87BC /* MetricsKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3784BD81E4684F8005F87BC /* MetricsKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E3784BF61E46CF66005F87BC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3784BF51E46CF66005F87BC /* HealthKit.framework */; };
-		E3784BFA1E46D018005F87BC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3784BF91E46D018005F87BC /* HealthKit.framework */; };
 		E3784C031E47DBBB005F87BC /* MTSGraphCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784C021E47DBBB005F87BC /* MTSGraphCollectionViewController.m */; };
 		E3784C061E47DC0E005F87BC /* MTSGraphCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784C051E47DC0E005F87BC /* MTSGraphCollectionViewCell.m */; };
 		E3822C3F1E981ABE007CD419 /* MTSGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE19D1E78E9F0001ABE40 /* MTSGraphView.m */; };
 		E3822C4E1E981CD3007CD419 /* MTSQuantitySample.h in Headers */ = {isa = PBXBuildFile; fileRef = E3822C4C1E981CD3007CD419 /* MTSQuantitySample.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E3822C4F1E981CD3007CD419 /* MTSQuantitySample.h in Headers */ = {isa = PBXBuildFile; fileRef = E3822C4C1E981CD3007CD419 /* MTSQuantitySample.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3822C501E981CD3007CD419 /* MTSQuantitySample.m in Sources */ = {isa = PBXBuildFile; fileRef = E3822C4D1E981CD3007CD419 /* MTSQuantitySample.m */; };
-		E3822C511E981CD3007CD419 /* MTSQuantitySample.m in Sources */ = {isa = PBXBuildFile; fileRef = E3822C4D1E981CD3007CD419 /* MTSQuantitySample.m */; };
 		E38AE18B1E78E798001ABE40 /* MetricsKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE18A1E78E798001ABE40 /* MetricsKitTests.m */; };
 		E38AE18D1E78E798001ABE40 /* MetricsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3784BD81E4684F8005F87BC /* MetricsKit.framework */; };
 		E38AE1A11E78E9F0001ABE40 /* Metrics.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1961E78E9F0001ABE40 /* Metrics.xcdatamodeld */; };
@@ -72,28 +105,25 @@
 		E3B3B3D21E877D8A00707324 /* MTSGraphDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B3B3D11E877D8A00707324 /* MTSGraphDrawing.m */; };
 		E3B3B3D41E877DBC00707324 /* MTSGraphDrawing.h in Headers */ = {isa = PBXBuildFile; fileRef = E3B3B3D31E877D9500707324 /* MTSGraphDrawing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3B3B3EE1E889CBC00707324 /* MTSQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = E3B3B3ED1E889CBC00707324 /* MTSQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E3B3B3EF1E889CBC00707324 /* MTSQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = E3B3B3ED1E889CBC00707324 /* MTSQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E3BC40101E82258500F0D44C /* Metrics.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1961E78E9F0001ABE40 /* Metrics.xcdatamodeld */; };
-		E3BC40121E82258500F0D44C /* MTSRealCalorieValue.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F276F41E7EC8E0007DE843 /* MTSRealCalorieValue.m */; };
-		E3BC40131E82258500F0D44C /* MTSHealthTypeTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1A01E78E9F0001ABE40 /* MTSHealthTypeTransformer.m */; };
-		E3BC40161E82258500F0D44C /* MTSQuantityTypeIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1C41E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m */; };
-		E3BC40171E82258500F0D44C /* MTSHealthStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1BB1E7A3444001ABE40 /* MTSHealthStoreManager.m */; };
-		E3BC401B1E82258500F0D44C /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3784BF51E46CF66005F87BC /* HealthKit.framework */; };
-		E3BC401E1E82258500F0D44C /* MTSGraph.h in Headers */ = {isa = PBXBuildFile; fileRef = E38AE1AC1E78EE71001ABE40 /* MTSGraph.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E3BC40201E82258500F0D44C /* MTSRealCalorieValue.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F276F11E7EC83E007DE843 /* MTSRealCalorieValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E3BC40241E82258500F0D44C /* MTSHealthTypeTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = E38AE19F1E78E9F0001ABE40 /* MTSHealthTypeTransformer.h */; };
-		E3BC40261E82258500F0D44C /* MTSQuantityTypeIdentifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = E3594A411E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E3BC40271E82258500F0D44C /* MTSHealthStoreManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E38AE1BA1E7A3444001ABE40 /* MTSHealthStoreManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E3BC40281E82258500F0D44C /* MetricsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E3784BDA1E4684F8005F87BC /* MetricsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E3BC402F1E82285A00F0D44C /* MetricsKitNano.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BC402D1E82258500F0D44C /* MetricsKitNano.framework */; };
-		E3BC40301E82285A00F0D44C /* MetricsKitNano.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3BC402D1E82258500F0D44C /* MetricsKitNano.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E3BC40361E82335100F0D44C /* MTSHealthResultsInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BC40351E82335100F0D44C /* MTSHealthResultsInterfaceController.m */; };
-		E3C6350F1E84BA1200A84052 /* MTSGraphsInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C6350E1E84BA1200A84052 /* MTSGraphsInterfaceController.m */; };
 		E3F276F31E7EC83E007DE843 /* MTSRealCalorieValue.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F276F11E7EC83E007DE843 /* MTSRealCalorieValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3F276F51E7EC8E0007DE843 /* MTSRealCalorieValue.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F276F41E7EC8E0007DE843 /* MTSRealCalorieValue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		E32B1E761EAC0B8F003E55C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E3784B631E46494D005F87BC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E3784B971E46494E005F87BC;
+			remoteInfo = "Metrics WatchKit App";
+		};
+		E352E6221EAC2FEF006E8372 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E3784B631E46494D005F87BC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E352E61C1EAC2FEF006E8372;
+			remoteInfo = MetricsKitNano;
+		};
 		E3784B851E46494E005F87BC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E3784B631E46494D005F87BC /* Project object */;
@@ -107,13 +137,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = E3784B6A1E46494D005F87BC;
 			remoteInfo = Metrics;
-		};
-		E3784B9A1E46494E005F87BC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E3784B631E46494D005F87BC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E3784B971E46494E005F87BC;
-			remoteInfo = "Metrics WatchKit App";
 		};
 		E3784BA91E46494E005F87BC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -143,16 +166,20 @@
 			remoteGlobalIDString = E3784B6A1E46494D005F87BC;
 			remoteInfo = Metrics;
 		};
-		E3BC40311E82285A00F0D44C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E3784B631E46494D005F87BC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E3BC400E1E82258500F0D44C;
-			remoteInfo = MetricsKitNano;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		E352E6291EAC2FEF006E8372 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E352E6251EAC2FEF006E8372 /* MetricsKitNano.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E3784BC21E46494E005F87BC /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -170,7 +197,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				E3784B991E46494E005F87BC /* Metrics WatchKit App.app in Embed Watch Content */,
+				E32B1E781EAC0B98003E55C8 /* Metrics WatchKit App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,17 +209,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				E3784BE01E4684F8005F87BC /* MetricsKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E3BC40331E82285A00F0D44C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				E3BC40301E82285A00F0D44C /* MetricsKitNano.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,6 +230,16 @@
 		E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphCreationViewController.m; sourceTree = "<group>"; };
 		E3336E691E5291FC00AD0BC2 /* MTSGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraphViewController.h; sourceTree = "<group>"; };
 		E3336E6A1E5291FC00AD0BC2 /* MTSGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphViewController.m; sourceTree = "<group>"; };
+		E352E6061EAC2E63006E8372 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.2.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		E352E6081EAC2F3F006E8372 /* MTSGraph+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTSGraph+CoreDataClass.h"; sourceTree = "<group>"; };
+		E352E6091EAC2F3F006E8372 /* MTSGraph+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTSGraph+CoreDataClass.m"; sourceTree = "<group>"; };
+		E352E60A1EAC2F3F006E8372 /* MTSGraph+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTSGraph+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E352E60B1EAC2F3F006E8372 /* MTSGraph+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTSGraph+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E352E60C1EAC2F3F006E8372 /* MTSQuery+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTSQuery+CoreDataClass.h"; sourceTree = "<group>"; };
+		E352E60D1EAC2F3F006E8372 /* MTSQuery+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTSQuery+CoreDataClass.m"; sourceTree = "<group>"; };
+		E352E60E1EAC2F3F006E8372 /* MTSQuery+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTSQuery+CoreDataProperties.h"; sourceTree = "<group>"; };
+		E352E60F1EAC2F3F006E8372 /* MTSQuery+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTSQuery+CoreDataProperties.m"; sourceTree = "<group>"; };
+		E352E61D1EAC2FEF006E8372 /* MetricsKitNano.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MetricsKitNano.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E356FD611E9ADE8C004058CD /* MTSGraphColorsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphColorsTests.m; sourceTree = "<group>"; };
 		E3594A411E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSQuantityTypeIdentifiers.h; sourceTree = "<group>"; };
 		E37362201E6B9D240072DFBC /* MTSGraphViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphViewTests.m; sourceTree = "<group>"; };
@@ -277,8 +303,6 @@
 		E3B3B3D11E877D8A00707324 /* MTSGraphDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphDrawing.m; sourceTree = "<group>"; };
 		E3B3B3D31E877D9500707324 /* MTSGraphDrawing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTSGraphDrawing.h; sourceTree = "<group>"; };
 		E3B3B3ED1E889CBC00707324 /* MTSQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSQuery.h; sourceTree = "<group>"; };
-		E3BC402D1E82258500F0D44C /* MetricsKitNano.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MetricsKitNano.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E3BC402E1E82258600F0D44C /* MetricsKitNano-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MetricsKitNano-Info.plist"; path = "/Users/dstrokis/Developer/Metrics/MetricsKitNano-Info.plist"; sourceTree = "<absolute>"; };
 		E3BC40341E82335100F0D44C /* MTSHealthResultsInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSHealthResultsInterfaceController.h; sourceTree = "<group>"; };
 		E3BC40351E82335100F0D44C /* MTSHealthResultsInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSHealthResultsInterfaceController.m; sourceTree = "<group>"; };
 		E3C6350D1E84BA1200A84052 /* MTSGraphsInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraphsInterfaceController.h; sourceTree = "<group>"; };
@@ -288,6 +312,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E352E6191EAC2FEF006E8372 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E352E62A1EAC2FFE006E8372 /* HealthKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E3784B681E46494D005F87BC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -315,8 +347,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3784BFA1E46D018005F87BC /* HealthKit.framework in Frameworks */,
-				E3BC402F1E82285A00F0D44C /* MetricsKitNano.framework in Frameworks */,
+				E352E6071EAC2E63006E8372 /* HealthKit.framework in Frameworks */,
+				E352E6241EAC2FEF006E8372 /* MetricsKitNano.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,14 +369,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E3BC401A1E82258500F0D44C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E3BC401B1E82258500F0D44C /* HealthKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -360,7 +384,6 @@
 				E38AE1891E78E798001ABE40 /* MetricsKitTests */,
 				E3784B6C1E46494D005F87BC /* Products */,
 				E3784BF41E46CF66005F87BC /* Frameworks */,
-				E3BC402E1E82258600F0D44C /* MetricsKitNano-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -374,7 +397,7 @@
 				E3784BA71E46494E005F87BC /* Metrics WatchKit Extension.appex */,
 				E3784BD81E4684F8005F87BC /* MetricsKit.framework */,
 				E38AE1881E78E798001ABE40 /* MetricsKitTests.xctest */,
-				E3BC402D1E82258500F0D44C /* MetricsKitNano.framework */,
+				E352E61D1EAC2FEF006E8372 /* MetricsKitNano.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -487,6 +510,7 @@
 		E3784BF41E46CF66005F87BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E352E6061EAC2E63006E8372 /* HealthKit.framework */,
 				E3784BF91E46D018005F87BC /* HealthKit.framework */,
 				E3784BF51E46CF66005F87BC /* HealthKit.framework */,
 			);
@@ -513,6 +537,14 @@
 		E3B3B3F01E88BD0100707324 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E352E6081EAC2F3F006E8372 /* MTSGraph+CoreDataClass.h */,
+				E352E6091EAC2F3F006E8372 /* MTSGraph+CoreDataClass.m */,
+				E352E60A1EAC2F3F006E8372 /* MTSGraph+CoreDataProperties.h */,
+				E352E60B1EAC2F3F006E8372 /* MTSGraph+CoreDataProperties.m */,
+				E352E60C1EAC2F3F006E8372 /* MTSQuery+CoreDataClass.h */,
+				E352E60D1EAC2F3F006E8372 /* MTSQuery+CoreDataClass.m */,
+				E352E60E1EAC2F3F006E8372 /* MTSQuery+CoreDataProperties.h */,
+				E352E60F1EAC2F3F006E8372 /* MTSQuery+CoreDataProperties.m */,
 				E3B3B3ED1E889CBC00707324 /* MTSQuery.h */,
 				E38AE1AC1E78EE71001ABE40 /* MTSGraph.h */,
 				E320E09D1E919BD60039628C /* MTSGraph+MTSQueryable.m */,
@@ -546,45 +578,71 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		E352E61A1EAC2FEF006E8372 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E352E63F1EAC30A9006E8372 /* MTSGraph.h in Headers */,
+				E352E63E1EAC30A9006E8372 /* MTSQuery.h in Headers */,
+				E352E6411EAC30A9006E8372 /* MTSHealthStoreManager.h in Headers */,
+				E352E6461EAC30A9006E8372 /* MTSQuantityTypeIdentifiers.h in Headers */,
+				E352E6401EAC30A9006E8372 /* MTSQuantitySample.h in Headers */,
+				E352E6451EAC30A9006E8372 /* MTSRealCalorieValue.h in Headers */,
+				E352E6471EAC30A9006E8372 /* MTSGraphDrawing.h in Headers */,
+				E352E6391EAC30A9006E8372 /* MetricsKit.h in Headers */,
+				E352E63A1EAC30A9006E8372 /* MTSGraph+CoreDataClass.h in Headers */,
+				E352E63B1EAC30A9006E8372 /* MTSGraph+CoreDataProperties.h in Headers */,
+				E352E63C1EAC30A9006E8372 /* MTSQuery+CoreDataClass.h in Headers */,
+				E352E63D1EAC30A9006E8372 /* MTSQuery+CoreDataProperties.h in Headers */,
+				E352E6421EAC30A9006E8372 /* MTSHealthTypeTransformer.h in Headers */,
+				E352E6431EAC30A9006E8372 /* MTSColorTransformer.h in Headers */,
+				E352E6441EAC30A9006E8372 /* MTSColorBox.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E3784BD51E4684F8005F87BC /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E352E6161EAC2F3F006E8372 /* MTSQuery+CoreDataProperties.h in Headers */,
 				E38AE1AD1E78EE71001ABE40 /* MTSGraph.h in Headers */,
 				E3F276F31E7EC83E007DE843 /* MTSRealCalorieValue.h in Headers */,
 				E3B3B3D41E877DBC00707324 /* MTSGraphDrawing.h in Headers */,
 				E3B3B3EE1E889CBC00707324 /* MTSQuery.h in Headers */,
+				E352E6101EAC2F3F006E8372 /* MTSGraph+CoreDataClass.h in Headers */,
+				E352E6121EAC2F3F006E8372 /* MTSGraph+CoreDataProperties.h in Headers */,
 				E38AE1A91E78E9F0001ABE40 /* MTSHealthTypeTransformer.h in Headers */,
 				E3822C4E1E981CD3007CD419 /* MTSQuantitySample.h in Headers */,
 				E3236A4E1EA01D080084C41C /* MTSColorBox.h in Headers */,
 				E3594A421E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h in Headers */,
+				E352E6141EAC2F3F006E8372 /* MTSQuery+CoreDataClass.h in Headers */,
 				E30838761E99E6E500348B46 /* MTSColorTransformer.h in Headers */,
 				E38AE1BC1E7A3444001ABE40 /* MTSHealthStoreManager.h in Headers */,
 				E3784BDC1E4684F8005F87BC /* MetricsKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E3BC401C1E82258500F0D44C /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E3BC401E1E82258500F0D44C /* MTSGraph.h in Headers */,
-				E3BC40201E82258500F0D44C /* MTSRealCalorieValue.h in Headers */,
-				E3BC40241E82258500F0D44C /* MTSHealthTypeTransformer.h in Headers */,
-				E3B3B3EF1E889CBC00707324 /* MTSQuery.h in Headers */,
-				E320E0981E90477F0039628C /* MTSGraphDrawing.h in Headers */,
-				E3BC40261E82258500F0D44C /* MTSQuantityTypeIdentifiers.h in Headers */,
-				E3822C4F1E981CD3007CD419 /* MTSQuantitySample.h in Headers */,
-				E3236A4F1EA01D080084C41C /* MTSColorBox.h in Headers */,
-				E3BC40271E82258500F0D44C /* MTSHealthStoreManager.h in Headers */,
-				E30838771E99E6E500348B46 /* MTSColorTransformer.h in Headers */,
-				E3BC40281E82258500F0D44C /* MetricsKit.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		E352E61C1EAC2FEF006E8372 /* MetricsKitNano */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E352E6261EAC2FEF006E8372 /* Build configuration list for PBXNativeTarget "MetricsKitNano" */;
+			buildPhases = (
+				E352E6181EAC2FEF006E8372 /* Sources */,
+				E352E6191EAC2FEF006E8372 /* Frameworks */,
+				E352E61A1EAC2FEF006E8372 /* Headers */,
+				E352E61B1EAC2FEF006E8372 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MetricsKitNano;
+			productName = MetricsKitNano;
+			productReference = E352E61D1EAC2FEF006E8372 /* MetricsKitNano.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		E3784B6A1E46494D005F87BC /* Metrics */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E3784BC71E46494E005F87BC /* Build configuration list for PBXNativeTarget "Metrics" */;
@@ -598,8 +656,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				E3784B9B1E46494E005F87BC /* PBXTargetDependency */,
 				E3784BDE1E4684F8005F87BC /* PBXTargetDependency */,
+				E32B1E771EAC0B8F003E55C8 /* PBXTargetDependency */,
 			);
 			name = Metrics;
 			productName = Metrics;
@@ -666,12 +724,12 @@
 				E3784BA31E46494E005F87BC /* Sources */,
 				E3784BA41E46494E005F87BC /* Frameworks */,
 				E3784BA51E46494E005F87BC /* Resources */,
-				E3BC40331E82285A00F0D44C /* Embed Frameworks */,
+				E352E6291EAC2FEF006E8372 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E3BC40321E82285A00F0D44C /* PBXTargetDependency */,
+				E352E6231EAC2FEF006E8372 /* PBXTargetDependency */,
 			);
 			name = "Metrics WatchKit Extension";
 			productName = "Metrics WatchKit Extension";
@@ -715,24 +773,6 @@
 			productReference = E38AE1881E78E798001ABE40 /* MetricsKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		E3BC400E1E82258500F0D44C /* MetricsKitNano */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E3BC402A1E82258500F0D44C /* Build configuration list for PBXNativeTarget "MetricsKitNano" */;
-			buildPhases = (
-				E3BC400F1E82258500F0D44C /* Sources */,
-				E3BC401A1E82258500F0D44C /* Frameworks */,
-				E3BC401C1E82258500F0D44C /* Headers */,
-				E3BC40291E82258500F0D44C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MetricsKitNano;
-			productName = MetricsKit;
-			productReference = E3BC402D1E82258500F0D44C /* MetricsKitNano.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -742,6 +782,11 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = dstrokis;
 				TargetAttributes = {
+					E352E61C1EAC2FEF006E8372 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = SWP5WTP5JJ;
+						ProvisioningStyle = Automatic;
+					};
 					E3784B6A1E46494D005F87BC = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = SWP5WTP5JJ;
@@ -791,10 +836,6 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = E3784B6A1E46494D005F87BC;
 					};
-					E3BC400E1E82258500F0D44C = {
-						DevelopmentTeam = SWP5WTP5JJ;
-						ProvisioningStyle = Automatic;
-					};
 				};
 			};
 			buildConfigurationList = E3784B661E46494D005F87BC /* Build configuration list for PBXProject "Metrics" */;
@@ -817,12 +858,19 @@
 				E3784BA61E46494E005F87BC /* Metrics WatchKit Extension */,
 				E3784BD71E4684F8005F87BC /* MetricsKit */,
 				E38AE1871E78E798001ABE40 /* MetricsKitTests */,
-				E3BC400E1E82258500F0D44C /* MetricsKitNano */,
+				E352E61C1EAC2FEF006E8372 /* MetricsKitNano */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E352E61B1EAC2FEF006E8372 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E3784B691E46494D005F87BC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -878,16 +926,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E3BC40291E82258500F0D44C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E352E6181EAC2FEF006E8372 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E352E62B1EAC308C006E8372 /* Metrics.xcdatamodeld in Sources */,
+				E352E62C1EAC308C006E8372 /* MTSGraph+CoreDataClass.m in Sources */,
+				E352E62D1EAC308C006E8372 /* MTSGraph+CoreDataProperties.m in Sources */,
+				E352E62E1EAC308C006E8372 /* MTSQuery+CoreDataClass.m in Sources */,
+				E352E62F1EAC308C006E8372 /* MTSQuery+CoreDataProperties.m in Sources */,
+				E352E6301EAC308C006E8372 /* MTSGraph+MTSQueryable.m in Sources */,
+				E352E6311EAC308C006E8372 /* MTSQuantitySample.m in Sources */,
+				E352E6321EAC308C006E8372 /* MTSHealthStoreManager.m in Sources */,
+				E352E6331EAC308C006E8372 /* MTSHealthTypeTransformer.m in Sources */,
+				E352E6341EAC308C006E8372 /* MTSColorTransformer.m in Sources */,
+				E352E6351EAC308C006E8372 /* MTSColorBox.m in Sources */,
+				E352E6361EAC308C006E8372 /* MTSRealCalorieValue.m in Sources */,
+				E352E6371EAC308C006E8372 /* MTSQuantityTypeIdentifiers.m in Sources */,
+				E352E6381EAC308C006E8372 /* MTSGraphDrawing.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E3784B671E46494D005F87BC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -923,12 +985,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3784BB31E46494E005F87BC /* ExtensionDelegate.m in Sources */,
-				E3C6350F1E84BA1200A84052 /* MTSGraphsInterfaceController.m in Sources */,
-				E3784BB91E46494E005F87BC /* ComplicationController.m in Sources */,
-				E3784BB01E46494E005F87BC /* InterfaceController.m in Sources */,
-				E3784BB61E46494E005F87BC /* NotificationController.m in Sources */,
-				E3BC40361E82335100F0D44C /* MTSHealthResultsInterfaceController.m in Sources */,
+				E32B1E701EAC0B40003E55C8 /* ExtensionDelegate.m in Sources */,
+				E32B1E711EAC0B40003E55C8 /* InterfaceController.m in Sources */,
+				E32B1E721EAC0B40003E55C8 /* MTSHealthResultsInterfaceController.m in Sources */,
+				E32B1E731EAC0B40003E55C8 /* MTSGraphsInterfaceController.m in Sources */,
+				E32B1E741EAC0B40003E55C8 /* NotificationController.m in Sources */,
+				E32B1E751EAC0B40003E55C8 /* ComplicationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -937,10 +999,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3236A501EA01D080084C41C /* MTSColorBox.m in Sources */,
+				E352E6131EAC2F3F006E8372 /* MTSGraph+CoreDataProperties.m in Sources */,
+				E352E6151EAC2F3F006E8372 /* MTSQuery+CoreDataClass.m in Sources */,
 				E30838781E99E6E500348B46 /* MTSColorTransformer.m in Sources */,
 				E38AE1A11E78E9F0001ABE40 /* Metrics.xcdatamodeld in Sources */,
 				E3822C501E981CD3007CD419 /* MTSQuantitySample.m in Sources */,
 				E3B3B3D21E877D8A00707324 /* MTSGraphDrawing.m in Sources */,
+				E352E6171EAC2F3F006E8372 /* MTSQuery+CoreDataProperties.m in Sources */,
+				E352E6111EAC2F3F006E8372 /* MTSGraph+CoreDataClass.m in Sources */,
 				E3F276F51E7EC8E0007DE843 /* MTSRealCalorieValue.m in Sources */,
 				E320E09E1E919BD60039628C /* MTSGraph+MTSQueryable.m in Sources */,
 				E38AE1AA1E78E9F0001ABE40 /* MTSHealthTypeTransformer.m in Sources */,
@@ -964,26 +1030,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E3BC400F1E82258500F0D44C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E3236A511EA01D080084C41C /* MTSColorBox.m in Sources */,
-				E30838791E99E6E500348B46 /* MTSColorTransformer.m in Sources */,
-				E3BC40101E82258500F0D44C /* Metrics.xcdatamodeld in Sources */,
-				E320E0991E9047A00039628C /* MTSGraphDrawing.m in Sources */,
-				E3822C511E981CD3007CD419 /* MTSQuantitySample.m in Sources */,
-				E3BC40121E82258500F0D44C /* MTSRealCalorieValue.m in Sources */,
-				E3BC40131E82258500F0D44C /* MTSHealthTypeTransformer.m in Sources */,
-				E3BC40161E82258500F0D44C /* MTSQuantityTypeIdentifiers.m in Sources */,
-				E3BC40171E82258500F0D44C /* MTSHealthStoreManager.m in Sources */,
-				E320E09F1E919BD60039628C /* MTSGraph+MTSQueryable.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		E32B1E771EAC0B8F003E55C8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E3784B971E46494E005F87BC /* Metrics WatchKit App */;
+			targetProxy = E32B1E761EAC0B8F003E55C8 /* PBXContainerItemProxy */;
+		};
+		E352E6231EAC2FEF006E8372 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E352E61C1EAC2FEF006E8372 /* MetricsKitNano */;
+			targetProxy = E352E6221EAC2FEF006E8372 /* PBXContainerItemProxy */;
+		};
 		E3784B861E46494E005F87BC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E3784B6A1E46494D005F87BC /* Metrics */;
@@ -993,11 +1052,6 @@
 			isa = PBXTargetDependency;
 			target = E3784B6A1E46494D005F87BC /* Metrics */;
 			targetProxy = E3784B901E46494E005F87BC /* PBXContainerItemProxy */;
-		};
-		E3784B9B1E46494E005F87BC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E3784B971E46494E005F87BC /* Metrics WatchKit App */;
-			targetProxy = E3784B9A1E46494E005F87BC /* PBXContainerItemProxy */;
 		};
 		E3784BAA1E46494E005F87BC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1018,11 +1072,6 @@
 			isa = PBXTargetDependency;
 			target = E3784B6A1E46494D005F87BC /* Metrics */;
 			targetProxy = E38AE1931E78E7AD001ABE40 /* PBXContainerItemProxy */;
-		};
-		E3BC40321E82285A00F0D44C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E3BC400E1E82258500F0D44C /* MetricsKitNano */;
-			targetProxy = E3BC40311E82285A00F0D44C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1054,6 +1103,58 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E352E6271EAC2FEF006E8372 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = SWP5WTP5JJ;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/MetricsKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.MetricsKitNano;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Debug;
+		};
+		E352E6281EAC2FEF006E8372 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = SWP5WTP5JJ;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/MetricsKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.MetricsKitNano;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Release;
+		};
 		E3784BBD1E46494E005F87BC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1094,7 +1195,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1135,7 +1236,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1149,13 +1250,14 @@
 				CODE_SIGN_ENTITLEMENTS = "Metrics WatchKit Extension/Metrics WatchKit Extension.entitlements";
 				DEVELOPMENT_TEAM = SWP5WTP5JJ;
 				INFOPLIST_FILE = "Metrics WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.Metrics.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -1166,13 +1268,14 @@
 				CODE_SIGN_ENTITLEMENTS = "Metrics WatchKit Extension/Metrics WatchKit Extension.entitlements";
 				DEVELOPMENT_TEAM = SWP5WTP5JJ;
 				INFOPLIST_FILE = "Metrics WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.Metrics.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
@@ -1188,7 +1291,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
@@ -1204,7 +1307,7 @@
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
@@ -1221,6 +1324,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_PEDANTIC = YES;
 				INFOPLIST_FILE = Metrics/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.Metrics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1244,6 +1348,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_PEDANTIC = YES;
 				INFOPLIST_FILE = Metrics/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.Metrics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1317,6 +1422,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = MetricsKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.MetricsKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1342,6 +1448,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = MetricsKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.MetricsKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1379,59 +1486,17 @@
 			};
 			name = Release;
 		};
-		E3BC402B1E82258500F0D44C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = NO;
-				DEVELOPMENT_TEAM = SWP5WTP5JJ;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/MetricsKitNano-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.MetricsKitNano;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		E3BC402C1E82258500F0D44C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = NO;
-				DEVELOPMENT_TEAM = SWP5WTP5JJ;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/MetricsKitNano-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dstrokis.MetricsKitNano;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E352E6261EAC2FEF006E8372 /* Build configuration list for PBXNativeTarget "MetricsKitNano" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E352E6271EAC2FEF006E8372 /* Debug */,
+				E352E6281EAC2FEF006E8372 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		E3784B661E46494D005F87BC /* Build configuration list for PBXProject "Metrics" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1500,15 +1565,6 @@
 			buildConfigurations = (
 				E38AE1911E78E798001ABE40 /* Debug */,
 				E38AE1921E78E798001ABE40 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E3BC402A1E82258500F0D44C /* Build configuration list for PBXNativeTarget "MetricsKitNano" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E3BC402B1E82258500F0D44C /* Debug */,
-				E3BC402C1E82258500F0D44C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -6,7 +6,7 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for MetricsKit.
 FOUNDATION_EXPORT double MetricsKitVersionNumber;
