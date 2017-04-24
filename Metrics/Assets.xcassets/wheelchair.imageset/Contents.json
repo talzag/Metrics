@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "tape_measure_sewing.png",
+      "filename" : "wheelchair.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "tape_measure_sewing-1.png",
+      "filename" : "wheelchair-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "tape_measure_sewing-2.png",
+      "filename" : "wheelchair-2.png",
       "scale" : "3x"
     }
   ],
