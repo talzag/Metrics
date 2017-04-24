@@ -17,17 +17,21 @@ NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-
 
 - (void)executeQueryWithCompletionHandler:(void (^ _Nullable)(NSArray * _Nullable, NSError * _Nullable))completionHandler {
     if (![self query]) {
-        NSError *error = [NSError errorWithDomain:@"com.dstrokis.Metrics" code:1 userInfo:@{
-                                                                                            NSLocalizedDescriptionKey: @"Query cannot be nil"
-                                                                                            }];
+        NSError *error = [NSError errorWithDomain:@"com.dstrokis.Metrics"
+                                             code:1
+                                         userInfo:@{
+                                                    NSLocalizedDescriptionKey: @"Query cannot be nil"
+                                                    }];
         completionHandler(nil, error);
         return;
     }
     
     if (![self healthStore]) {
-        NSError *error = [NSError errorWithDomain:@"com.dstrokis.Metrics" code:2 userInfo:@{
-                                                                                            NSLocalizedDescriptionKey: @"Health store cannot be nil"
-                                                                                            }];
+        NSError *error = [NSError errorWithDomain:@"com.dstrokis.Metrics"
+                                             code:2
+                                         userInfo:@{
+                                                    NSLocalizedDescriptionKey: @"Health store cannot be nil"
+                                                    }];
         completionHandler(nil, error);
         return;
     }
@@ -77,28 +81,34 @@ NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-
         [types addObject:type];
     }
     
-//    dispatch_queue_t backgroundQueue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0);
-//    dispatch_async(backgroundQueue, ^{ });
-    for (HKQuantityType *type in types) {
-        HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:type
-                                                               predicate:predicate
-                                                                   limit:HKObjectQueryNoLimit
-                                                         sortDescriptors:nil
-                                                          resultsHandler:resultsHandler];
-        dispatch_group_enter(group);
-        [[self healthStore] executeQuery:query];
-    }
-    dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
-    
-    completionHandler(finishedArray, queryError);
+    dispatch_queue_t backgroundQueue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0);
+    dispatch_async(backgroundQueue, ^{
+        for (HKQuantityType *type in types) {
+            HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:type
+                                                                   predicate:predicate
+                                                                       limit:HKObjectQueryNoLimit
+                                                             sortDescriptors:nil
+                                                              resultsHandler:resultsHandler];
+            dispatch_group_enter(group);
+            [[self healthStore] executeQuery:query];
+        }
+        dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+        
+        [self graphDataFromQueryResults:finishedArray completionHandler:^(NSArray * graphData, NSError * graphDataError) {
+            completionHandler(graphData, graphDataError);
+        }];
+    });
 }
 
 - (void)graphDataFromQueryResults:(NSArray <NSArray<HKQuantitySample *> *>* _Nonnull)results
                 completionHandler:(void (^ _Nonnull)(NSArray <NSDictionary<NSString *,id> *> * _Nullable, NSError * _Nullable))completionHandler {
     NSMutableArray *types = [NSMutableArray array];
     for (NSArray <HKQuantitySample *>* sampleSet in results) {
-        HKQuantityType *type = [[sampleSet firstObject] quantityType];
-        [types addObject:type];
+        HKQuantitySample *sample = [sampleSet firstObject];
+        if (sample) {
+            HKQuantityType *type = [sample quantityType];
+            [types addObject:type];
+        }
     }
     
     void (^unitsHandler)(NSDictionary* _Nonnull, NSError* _Nullable) = ^(NSDictionary<HKQuantityType *,HKUnit *> * _Nonnull preferredUnits, NSError * _Nullable error) {
@@ -131,8 +141,11 @@ NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-
         completionHandler(graphDataSet, nil);
     };
     
-    [[self healthStore] preferredUnitsForQuantityTypes:[NSSet setWithArray:types]
-                                             completion:unitsHandler];
+    if ([types count]) {
+        [[self healthStore] preferredUnitsForQuantityTypes:[NSSet setWithArray:types] completion:unitsHandler];
+    } else {
+        completionHandler(@[], nil);
+    }
 }
 
 

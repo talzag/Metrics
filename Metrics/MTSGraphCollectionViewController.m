@@ -12,10 +12,9 @@
 #import "MTSGraphCreationViewController.h"
 #import "MTSDataSelectionViewController.h"
 
-@interface MTSGraphCollectionViewController ()
+@interface MTSGraphCollectionViewController () <NSFetchedResultsControllerDelegate>
 
-@property (strong) NSArray <MTSGraph *>*graphs;
-@property (nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSFetchedResultsController <MTSGraph *>*fetchedResultsController;
 
 @end
 
@@ -26,17 +25,85 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSFetchRequest *request = [MTSGraph fetchRequest];
-    request.fetchBatchSize = 15;
-    
     NSError *error;
-    NSArray *graphs = [self.managedObjectContext executeFetchRequest:request error:&error];
+    [[self fetchedResultsController] performFetch:&error];
     
-    if (graphs == nil) {
-        NSLog(@"Error fetching graphs: %@", error.debugDescription);
+    if (error) {
+        NSLog(@"%@", [error description]);
+    }
+}
+
+#pragma mark - NSFetchedResultsController
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    if (!_fetchedResultsController) {
+        NSFetchRequest <MTSGraph *> *fetchRequest = [MTSGraph fetchRequest];
+        [fetchRequest setFetchBatchSize:10];
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
+        [fetchRequest setSortDescriptors:@[sortDescriptor]];
+        
+        NSFetchedResultsController *controller = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                                     managedObjectContext:[self managedObjectContext]
+                                                                                       sectionNameKeyPath:nil
+                                                                                                cacheName:nil];
+        [controller setDelegate:self];
+        _fetchedResultsController = controller;
     }
     
-    self.graphs = graphs;
+    return _fetchedResultsController;
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+//    [[self collectionView] setAllowsSelection:NO];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+  didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex
+     forChangeType:(NSFetchedResultsChangeType)type {
+    
+    UICollectionView *collectionView = [self collectionView];
+    switch (type) {
+        case NSFetchedResultsChangeInsert:
+            [collectionView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [collectionView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    UICollectionView *collectionView = [self collectionView];
+    
+    switch (type) {
+        case NSFetchedResultsChangeUpdate:
+            [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+            break;
+        case NSFetchedResultsChangeMove:
+            [collectionView moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
+            break;
+        case NSFetchedResultsChangeInsert:
+            [collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [collectionView deleteItemsAtIndexPaths:@[indexPath]];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+//    [[self collectionView] setAllowsSelection:YES];
 }
 
 #pragma mark - Navigation
@@ -45,42 +112,44 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
     if ([segue.identifier isEqualToString:@"showGraph"]) {
         MTSGraphCollectionViewCell *cell = (MTSGraphCollectionViewCell *)sender;
         NSIndexPath *indexPath = [[self collectionView] indexPathForCell:cell];
-        MTSGraph *graph =[[self graphs] objectAtIndex:[indexPath row]];
+        MTSGraph *graph = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         
+        [graph setHealthStore:[self healthStore]];
         MTSGraphViewController *destination = (MTSGraphViewController *)[segue destinationViewController];
         [destination setGraph:graph];
     } else if ([segue.identifier isEqualToString:@"selectHealthData"]) {
+        MTSGraph *newGraph = [[MTSGraph alloc] initWithContext:[self managedObjectContext]];
         MTSQuery *newQuery = [[MTSQuery alloc] initWithContext:[self managedObjectContext]];
+        [newGraph setQuery:newQuery];
         
         UINavigationController *navController = (UINavigationController *)[segue destinationViewController];
         MTSDataSelectionViewController *destination = [[navController viewControllers] firstObject];
-        [destination setQuery:newQuery];
+        [destination setGraph:newGraph];
     }
 }
 
 - (IBAction)exitFromGraphCreationScene:(UIStoryboardSegue *)segue {
-    MTSGraphCreationViewController *source = (MTSGraphCreationViewController *)[segue sourceViewController];
-    MTSGraph *graph = [source graph];
-    self.graphs = [[self graphs] arrayByAddingObject:graph];
-    
-    [[self collectionView] reloadData];
-    
     NSError *error;
     if (![[self managedObjectContext] save:&error]) {
         NSLog(@"%@", [error debugDescription]);
     }
 }
 
-#pragma mark <UICollectionViewDataSource>
+#pragma mark - UICollectionViewDataSource
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return [[[self fetchedResultsController] sections] count];
+}
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [[self graphs] count];
+    id<NSFetchedResultsSectionInfo> sectionInfo = [[[self fetchedResultsController] sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MTSGraphCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    MTSGraph *graph = [self.graphs objectAtIndex:[indexPath row]];
+    MTSGraph *graph = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     [[cell graphTitleLabel] setText:[graph title]];
     
     MTSGraphView *graphView = [cell graphView];

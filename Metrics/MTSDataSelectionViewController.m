@@ -9,9 +9,6 @@
 #import "MTSDataSelectionViewController.h"
 #import "MTSGraphCreationViewController.h"
 
-
-static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
-
 @interface MTSDataSelectionViewController ()
 
 @property (strong, nonatomic) NSMutableSet <HKQuantityTypeIdentifier>*selectedHealthTypes;
@@ -58,7 +55,7 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:HealthIdentifierCell];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"healthIdentifierCell"];
     
     NSDictionary <HKQuantityTypeIdentifier, NSString *> *category = [[self healthCategories] objectAtIndex:[indexPath section]];
     NSArray *keys = [category allKeys];
@@ -101,13 +98,18 @@ static NSString * const HealthIdentifierCell = @"HealthIdentifierCell";
 #pragma mark - Navigation
 
 - (IBAction)cancel:(id)sender {
-    [self dismissViewControllerAnimated:true completion:nil];
+    NSManagedObjectContext *context = [[self graph] managedObjectContext];
+    [context deleteObject:[self graph]];
+    
+    [self dismissViewControllerAnimated:TRUE completion:nil];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"createGraph"]) {
+        [[[self graph] query] setQuantityTypes:[self selectedHealthTypes]];
+        
         MTSGraphCreationViewController *controller = (MTSGraphCreationViewController *)[segue destinationViewController];
-        [controller setQuery:[self query]];
+        [controller setGraph:[self graph]];
     }
 }
 

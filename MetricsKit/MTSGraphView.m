@@ -22,10 +22,12 @@
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    NSDictionary *testData = @{
-                               MTSGraphDataPointsKey: @[@0, @75, @25, @50, @100, @50, @75, @25, @0]
-                               };
-    NSArray *testSet = [NSArray arrayWithObject:testData];
+    NSArray *data = [self dataPoints];
+    
+//    NSDictionary *testData = @{
+//                                 MTSGraphDataPointsKey: @[@0, @75, @25, @50, @100, @50, @75, @25, @0]
+//                                 };
+//    data = [NSArray arrayWithObject:testData];
     
     CGColorRef top = NULL, bottom = NULL;
     
@@ -37,7 +39,7 @@
         bottom = [[self bottomColor] CGColor];
     }
     
-    MTSDrawGraph(context, rect, testSet, top, bottom);
+    MTSDrawGraph(context, rect, data, top, bottom);
 }
 
 @end

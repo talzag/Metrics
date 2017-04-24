@@ -14,9 +14,6 @@
 
 @interface MTSGraphCreationViewController : UIViewController
 
-@property (nonatomic) NSManagedObjectContext *context;
-@property (strong, nonatomic) NSMutableSet <HKQuantityTypeIdentifier>*selectedHealthTypes;
-@property (nonatomic) MTSQuery *query;
 @property (nonatomic) MTSGraph *graph;
 
 @end

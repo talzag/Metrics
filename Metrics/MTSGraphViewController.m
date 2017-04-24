@@ -22,13 +22,23 @@
     [super viewDidLoad];
     
     self.navigationItem.title = self.graph.title;
+    
+    MTSGraph *graph = [self graph];
+    [graph executeQueryWithCompletionHandler:^(NSArray * _Nullable dataPoints, NSError * _Nullable error) {
+        if (!error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[self graphView] setDataPoints:dataPoints];
+                [[self graphView] setNeedsDisplay];
+            });
+        }
+    }];
 }
 
 - (NSDateFormatter *)dateFormatter {
     if (!_dateFormatter) {
         _dateFormatter = [[NSDateFormatter alloc] init];
-        _dateFormatter.dateFormat = @"MMM dd, yyyy";
-        _dateFormatter.locale = [NSLocale currentLocale];
+        [_dateFormatter setDateFormat:@"MMM dd, yyyy" ];
+        [_dateFormatter setLocale:[NSLocale currentLocale]];
     }
     return _dateFormatter;
 }

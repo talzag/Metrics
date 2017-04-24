@@ -18,4 +18,6 @@ IB_DESIGNABLE
 @property (nonatomic) IBInspectable UIColor *topColor;
 @property (nonatomic) IBInspectable UIColor *bottomColor;
 
+@property (nonatomic) NSArray <NSDictionary<NSString *,id> *> *dataPoints;
+
 @end

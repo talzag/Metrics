@@ -13,6 +13,6 @@
 
 @interface MTSDataSelectionViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic) MTSQuery *query;
+@property (nonatomic) MTSGraph *graph;
 
 @end
