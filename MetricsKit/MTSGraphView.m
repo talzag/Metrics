@@ -24,15 +24,15 @@
     
     NSArray *data = [self dataPoints];
     
-    NSDictionary *testDataA = @{
-                                MTSGraphDataPointsKey: @[@75, @25, @50, @100, @50, @75, @25],
-                                MTSGraphLineColorKey: [[MTSColorBox alloc] initWithCGColorRef:[[UIColor blueColor] CGColor]]
-                                };
-    NSDictionary *testDataB = @{
-                                MTSGraphDataPointsKey: @[@36, @57],
-                                MTSGraphLineColorKey: [[MTSColorBox alloc] initWithCGColorRef:[[UIColor redColor] CGColor]]
-                                };
-    data = [NSArray arrayWithObjects:testDataA, testDataB, nil];
+//    NSDictionary *testDataA = @{
+//                                MTSGraphDataPointsKey: @[@75, @25, @50, @100, @50, @75, @25],
+//                                MTSGraphLineColorKey: [[MTSColorBox alloc] initWithCGColorRef:[[UIColor blueColor] CGColor]]
+//                                };
+//    NSDictionary *testDataB = @{
+//                                MTSGraphDataPointsKey: @[@36, @57],
+//                                MTSGraphLineColorKey: [[MTSColorBox alloc] initWithCGColorRef:[[UIColor redColor] CGColor]]
+//                                };
+//    data = [NSArray arrayWithObjects:testDataA, testDataB, nil];
     
     CGColorRef top = NULL, bottom = NULL;
     

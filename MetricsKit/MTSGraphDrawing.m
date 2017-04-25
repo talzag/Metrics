@@ -166,38 +166,36 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <NSDictio
         
         NSArray <NSNumber *>*values = [data objectForKey:MTSGraphDataPointsKey];
         NSInteger size = values.count;
-        if (!size) {
-            continue;
-        }
-        
-        if (size == 1) {
-            CGFloat startX = MTSGraphPositionOnXAxisAtIndex(rect, 0, size);
-            CGFloat endX = rect.size.width - MTSGraphRightMargin(rect);
-            
-            CGFloat y = MTSGraphPositionOnYAxisForValue(rect, [values[0] doubleValue], maxValue);
-            
-            CGPathMoveToPoint(graphPath, NULL, startX, y);
-            CGPathAddLineToPoint(graphPath, NULL, endX, y);
-            
-            const CGFloat dashes[] = { 4.0, 4.0 };
-            CGContextSetLineDash(context, 0, dashes, 2);
-        } else {
-            CGFloat startX = MTSGraphPositionOnXAxisAtIndex(rect, 0, size);
-            CGFloat startY = MTSGraphPositionOnYAxisForValue(rect, [[values firstObject] doubleValue], maxValue);
-            CGPathMoveToPoint(graphPath, NULL, startX, startY);
-             
-            for (int i = 1; i < size; i++) {
-                CGFloat x = MTSGraphPositionOnXAxisAtIndex(rect, i, size);
-                CGFloat y = MTSGraphPositionOnYAxisForValue(rect, [values[i] doubleValue], maxValue);
-                 
-                CGPathAddLineToPoint(graphPath, NULL, x, y);
+        if (size) {
+            if (size == 1) {
+                CGFloat startX = MTSGraphPositionOnXAxisAtIndex(rect, 0, size);
+                CGFloat endX = rect.size.width - MTSGraphRightMargin(rect);
+                
+                CGFloat y = MTSGraphPositionOnYAxisForValue(rect, [values[0] doubleValue], maxValue);
+                
+                CGPathMoveToPoint(graphPath, NULL, startX, y);
+                CGPathAddLineToPoint(graphPath, NULL, endX, y);
+                
+                const CGFloat dashes[] = { 4.0, 4.0 };
+                CGContextSetLineDash(context, 0, dashes, 2);
+            } else {
+                CGFloat startX = MTSGraphPositionOnXAxisAtIndex(rect, 0, size);
+                CGFloat startY = MTSGraphPositionOnYAxisForValue(rect, [[values firstObject] doubleValue], maxValue);
+                CGPathMoveToPoint(graphPath, NULL, startX, startY);
+                
+                for (int i = 1; i < size; i++) {
+                    CGFloat x = MTSGraphPositionOnXAxisAtIndex(rect, i, size);
+                    CGFloat y = MTSGraphPositionOnYAxisForValue(rect, [values[i] doubleValue], maxValue);
+                    
+                    CGPathAddLineToPoint(graphPath, NULL, x, y);
+                }
+                
+                CGContextSetLineDash(context, 0, NULL, 0);
             }
             
-            CGContextSetLineDash(context, 0, NULL, 0);
+            CGContextAddPath(context, graphPath);
+            CGContextStrokePath(context);
         }
-        
-        CGContextAddPath(context, graphPath);
-        CGContextStrokePath(context);
         
         CGPathRelease(graphPath);
         

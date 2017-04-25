@@ -19,8 +19,10 @@
 
 @property (nonatomic) NSArray <HKQuantityTypeIdentifier>*selectedHealthTypes;
 @property (nonatomic) NSDictionary <HKQuantityTypeIdentifier, NSString *> *healthTypeNameLookup;
+@property (nonatomic) UIDatePicker *datePicker;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *timeUnitSegmentedControl;
 @property (weak, nonatomic) IBOutlet UITextField *startDateTextField;
 @property (weak, nonatomic) IBOutlet UITextField *endDateTextField;
 
@@ -44,6 +46,14 @@
                                           value:-1
                                          toDate:[self endDate]
                                         options:NSCalendarWrapComponents]];
+    
+    UIDatePicker *picker = [UIDatePicker new];
+    [picker setMaximumDate:date];
+    [picker addTarget:self action:@selector(dateTextField:) forControlEvents:UIControlEventValueChanged];
+    [self setDatePicker:picker];
+    
+    [[self startDateTextField] setInputView:picker];
+    [[self endDateTextField] setInputView:picker];
     
     [self updateTextField:[self startDateTextField] withDate:[self startDate]];
     [self updateTextField:[self endDateTextField] withDate:[self endDate]];
@@ -85,6 +95,7 @@
 }
 
 #pragma mark - UIDatePicker event handler
+
 - (IBAction)datePickerDidChangeValue:(UIDatePicker *)sender {
     NSDate *selectedDate = [sender date];
     UITextField *activeTextField = [self activeTextField];
@@ -98,10 +109,43 @@
     }
 }
 
+#pragma mark - UISegmentedControl event handler
+- (IBAction)timeUnitDidChange:(UISegmentedControl *)sender {
+    switch ([sender selectedSegmentIndex]) {
+        case 0:
+            [[self datePicker] setDatePickerMode:UIDatePickerModeDateAndTime];
+            break;
+        case 1: // fallthrough
+        case 2:
+            [[self datePicker] setDatePickerMode:UIDatePickerModeDate];
+            break;
+        default:
+            break;
+    }
+    
+    // update text fields
+}
+
+
 #pragma mark UITextField
+-(void)dateTextField:(id)sender {
+    UIDatePicker *picker = (UIDatePicker*)self.activeTextField.inputView;
+    NSDate *eventDate = picker.date;
+    
+    if ([[self activeTextField] isEqual:[self endDateTextField]]) {
+        [self setEndDate:eventDate];
+    } else {
+        [self setStartDate:eventDate];
+    }
+    
+    NSString *dateString = [self.dateFormatter stringFromDate:eventDate];
+    self.activeTextField.text = [NSString stringWithFormat:@"%@",dateString];
+    
+}
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    return NO;
+    self.activeTextField = textField;
+    return YES;
 }
 
 - (void)updateTextField:(UITextField *)textField withDate:(NSDate *)date {
