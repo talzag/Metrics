@@ -7,6 +7,7 @@
 //
 
 #import "MTSGraphCreationViewController.h"
+#import "MTSColorPickerTableViewCell.h"
 
 @interface MTSGraphCreationViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -54,9 +55,12 @@
     
     [[self startDateTextField] setInputView:picker];
     [[self endDateTextField] setInputView:picker];
+
     
-    [self updateTextField:[self startDateTextField] withDate:[self startDate]];
-    [self updateTextField:[self endDateTextField] withDate:[self endDate]];
+    NSString *formattedStartDate = [self.dateFormatter stringFromDate:[self startDate]];
+    NSString *formattedEndDate = [[self dateFormatter] stringFromDate:[self endDate]];
+    [[self startDateTextField] setText:formattedStartDate];
+    [[self endDateTextField] setText:formattedEndDate];
 }
 
 - (NSDateFormatter *)dateFormatter {
@@ -84,7 +88,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"healthDataCell"];
+    MTSColorPickerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"healthDataCell"];
     
     HKQuantityTypeIdentifier key = [[self selectedHealthTypes] objectAtIndex:[indexPath row]];
     NSString *value = [[self healthTypeNameLookup] objectForKey:key];
@@ -94,22 +98,8 @@
     return cell;
 }
 
-#pragma mark - UIDatePicker event handler
-
-- (IBAction)datePickerDidChangeValue:(UIDatePicker *)sender {
-    NSDate *selectedDate = [sender date];
-    UITextField *activeTextField = [self activeTextField];
-    
-    [self updateTextField:activeTextField withDate:selectedDate];
-    
-    if ([activeTextField isEqual:[self startDateTextField]]) {
-        [self setStartDate:selectedDate];
-    } else if ([activeTextField isEqual:[self endDateTextField]]) {
-        [self setEndDate:selectedDate];
-    }
-}
-
 #pragma mark - UISegmentedControl event handler
+
 - (IBAction)timeUnitDidChange:(UISegmentedControl *)sender {
     switch ([sender selectedSegmentIndex]) {
         case 0:
@@ -122,12 +112,11 @@
         default:
             break;
     }
-    
-    // update text fields
 }
 
 
 #pragma mark UITextField
+
 -(void)dateTextField:(id)sender {
     UIDatePicker *picker = (UIDatePicker*)self.activeTextField.inputView;
     NSDate *eventDate = picker.date;
@@ -144,13 +133,21 @@
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (![[textField inputView] isKindOfClass:[UIDatePicker class]]) {
+        return NO;
+    }
+    
     self.activeTextField = textField;
+    
+    UIDatePicker *picker = (UIDatePicker *)self.activeTextField.inputView;
+    if ([textField isEqual:[self endDateTextField]]){
+        [picker setMinimumDate:[self startDate]];
+        [picker setDate:[self endDate] animated:YES];
+    } else {
+        [picker setDate:[self startDate] animated:YES];
+    }
+    
     return YES;
-}
-
-- (void)updateTextField:(UITextField *)textField withDate:(NSDate *)date {
-    NSString *formattedDate = [self.dateFormatter stringFromDate:date];
-    [textField setText:formattedDate];
 }
 
 @end

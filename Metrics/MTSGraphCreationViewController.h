@@ -8,7 +8,6 @@
 
 @import UIKit;
 @import HealthKit;
-@import CoreData;
 
 #import <MetricsKit/MetricsKit.h>
 

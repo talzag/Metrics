@@ -106,6 +106,7 @@
 		E3BC40301E82285A00F0D44C /* MetricsKitNano.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3BC402D1E82258500F0D44C /* MetricsKitNano.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E3BC40361E82335100F0D44C /* MTSHealthResultsInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BC40351E82335100F0D44C /* MTSHealthResultsInterfaceController.m */; };
 		E3C6350F1E84BA1200A84052 /* MTSGraphsInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C6350E1E84BA1200A84052 /* MTSGraphsInterfaceController.m */; };
+		E3E236B81EAFA1AE0085D118 /* MTSColorPickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E236B71EAFA1AE0085D118 /* MTSColorPickerTableViewCell.m */; };
 		E3F276F31E7EC83E007DE843 /* MTSRealCalorieValue.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F276F11E7EC83E007DE843 /* MTSRealCalorieValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3F276F51E7EC8E0007DE843 /* MTSRealCalorieValue.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F276F41E7EC8E0007DE843 /* MTSRealCalorieValue.m */; };
 /* End PBXBuildFile section */
@@ -310,6 +311,8 @@
 		E3BC40351E82335100F0D44C /* MTSHealthResultsInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSHealthResultsInterfaceController.m; sourceTree = "<group>"; };
 		E3C6350D1E84BA1200A84052 /* MTSGraphsInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraphsInterfaceController.h; sourceTree = "<group>"; };
 		E3C6350E1E84BA1200A84052 /* MTSGraphsInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphsInterfaceController.m; sourceTree = "<group>"; };
+		E3E236B61EAFA1AE0085D118 /* MTSColorPickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSColorPickerTableViewCell.h; sourceTree = "<group>"; };
+		E3E236B71EAFA1AE0085D118 /* MTSColorPickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSColorPickerTableViewCell.m; sourceTree = "<group>"; };
 		E3F276F11E7EC83E007DE843 /* MTSRealCalorieValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSRealCalorieValue.h; sourceTree = "<group>"; };
 		E3F276F41E7EC8E0007DE843 /* MTSRealCalorieValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSRealCalorieValue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -422,6 +425,8 @@
 				E352E64F1EAD310A006E8372 /* MTSDataSelectionViewController.m */,
 				E3336E661E52918300AD0BC2 /* MTSGraphCreationViewController.h */,
 				E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */,
+				E3E236B61EAFA1AE0085D118 /* MTSColorPickerTableViewCell.h */,
+				E3E236B71EAFA1AE0085D118 /* MTSColorPickerTableViewCell.m */,
 				E38AE19C1E78E9F0001ABE40 /* MTSGraphView.h */,
 				E38AE19D1E78E9F0001ABE40 /* MTSGraphView.m */,
 				E3784B7A1E46494D005F87BC /* Assets.xcassets */,
@@ -945,6 +950,7 @@
 				E3784B701E46494D005F87BC /* main.m in Sources */,
 				E3336E681E52918300AD0BC2 /* MTSGraphCreationViewController.m in Sources */,
 				E3784C031E47DBBB005F87BC /* MTSGraphCollectionViewController.m in Sources */,
+				E3E236B81EAFA1AE0085D118 /* MTSColorPickerTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
