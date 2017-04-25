@@ -86,28 +86,19 @@
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"Complete data flow test"];
     [graph executeQueryWithCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
-        [graph graphDataFromQueryResults:results completionHandler:^(NSArray<NSDictionary<NSString *,id> *> * _Nullable dataSets, NSError * _Nullable error) {
-            MTSRealCalorieValue([graph healthStore], [[graph query] startDate], [[graph query] endDate], ^(double calories, NSError *error) {
-                XCTAssertEqual([results count], 2);
-                XCTAssertEqual(calories, -100);
-                
-                NSDictionary *firstLine = [dataSets firstObject];
-                
-                NSArray *dataPoints = [firstLine objectForKey:MTSGraphDataPointsKey];
-                XCTAssertEqual([dataPoints count], 1);
-                
-                HKQuantityTypeIdentifier lineId = [firstLine objectForKey:MTSGraphDataIdentifierKey];
-                XCTAssertNotNil(lineId);
-                
-                CGSize size = CGSizeMake(150, 100);
-                CGRect frame = CGRectMake(0.0, 0.0, size.width, size.height);
-                UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
-                MTSDrawGraph(UIGraphicsGetCurrentContext(), frame, dataSets, [[graph topColor] color], [[graph bottomColor] color]);
-                UIGraphicsEndImageContext();
-                
-                [expectation fulfill];
-            });
-        }];
+        MTSRealCalorieValue([graph healthStore], [[graph query] startDate], [[graph query] endDate], ^(double calories, NSError *error) {
+            XCTAssertEqual([results count], 2);
+            XCTAssertEqual(calories, -100);
+            
+            CGSize size = CGSizeMake(150, 100);
+            CGRect frame = CGRectMake(0.0, 0.0, size.width, size.height);
+            UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+            MTSDrawGraph(UIGraphicsGetCurrentContext(), frame, results, [[graph topColor] color], [[graph bottomColor] color]);
+            UIGraphicsEndImageContext();
+            
+            [expectation fulfill];
+        });
+
     }];
     
     [self waitForExpectationsWithTimeout:15 handler:^(NSError * _Nullable error) {

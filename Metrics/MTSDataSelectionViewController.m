@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSMutableSet <HKQuantityTypeIdentifier>*selectedHealthTypes;
 @property NSArray <NSDictionary <HKQuantityTypeIdentifier, NSString *> *> *healthCategories;
 @property (nonatomic) NSArray <NSString *>*healthTypeIconNames;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -47,7 +48,6 @@
     
     return title;
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSDictionary *category = [[self healthCategories] objectAtIndex:section];

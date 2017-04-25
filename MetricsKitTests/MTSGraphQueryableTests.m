@@ -96,12 +96,7 @@
     [graph executeQueryWithCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
         XCTAssertNotNil(results);
         
-        [graph graphDataFromQueryResults:results completionHandler:^(NSArray <NSDictionary<NSString *,id> *> * _Nullable dataSet, NSError * _Nullable error) {
-            XCTAssertNotNil(dataSet);
-            XCTAssertEqual([dataSet count], 2);
-            
-            [queryExpectation fulfill];
-        }];
+        [queryExpectation fulfill];
     }];
     
     [self waitForExpectationsWithTimeout:15 handler:^(NSError * _Nullable error) {

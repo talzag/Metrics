@@ -119,23 +119,25 @@ NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-
         
         NSMutableArray *graphDataSet = [NSMutableArray array];
         for (NSArray <HKQuantitySample *> *sampleSet in results) {
-            HKQuantityType *type = [[sampleSet firstObject] quantityType];
-            HKUnit *unit = [preferredUnits objectForKey:type];
-            
-            NSMutableArray *amounts = [NSMutableArray array];
-            
-            for (HKQuantitySample *sample in sampleSet) {
-                double quantity = [[sample quantity] doubleValueForUnit:unit];
-                NSNumber *amount = [NSNumber numberWithDouble:quantity];
-                [amounts addObject:amount];
+            if ([sampleSet count]) {
+                HKQuantityType *type = [[sampleSet firstObject] quantityType];
+                HKUnit *unit = [preferredUnits objectForKey:type];
+                
+                NSMutableArray *amounts = [NSMutableArray array];
+                
+                for (HKQuantitySample *sample in sampleSet) {
+                    double quantity = [[sample quantity] doubleValueForUnit:unit];
+                    NSNumber *amount = [NSNumber numberWithDouble:quantity];
+                    [amounts addObject:amount];
+                }
+                
+                NSDictionary *lineData = @{
+                                           MTSGraphDataPointsKey: amounts,
+                                           MTSGraphDataIdentifierKey: [type identifier]
+                                           };
+                
+                [graphDataSet addObject:lineData];
             }
-            
-            NSDictionary *lineData = @{
-                                       MTSGraphDataPointsKey: amounts,
-                                       MTSGraphDataIdentifierKey: [type identifier]
-                                       };
-            
-            [graphDataSet addObject:lineData];
         }
         
         completionHandler(graphDataSet, nil);

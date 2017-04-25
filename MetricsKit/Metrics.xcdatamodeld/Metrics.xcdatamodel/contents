@@ -5,7 +5,7 @@
         <attribute name="healthStore" optional="YES" transient="YES" attributeType="Transformable" customClassName="HKHealthStore" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="topColor" optional="YES" attributeType="Transformable" valueTransformerName="MTSColorTransformer" customClassName="MTSColorBox" syncable="YES"/>
-        <relationship name="query" maxCount="1" deletionRule="Nullify" destinationEntity="MTSQuery" inverseName="graph" inverseEntity="MTSQuery" syncable="YES"/>
+        <relationship name="query" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTSQuery" inverseName="graph" inverseEntity="MTSQuery" syncable="YES"/>
     </entity>
     <entity name="MTSQuery" representedClassName="MTSQuery" syncable="YES">
         <attribute name="endDate" attributeType="Date" minDateTimeInterval="-1609441200" usesScalarValueType="NO" syncable="YES"/>
