@@ -11,10 +11,20 @@
 @interface MTSColorPickerTableViewCell ()
 
 @property (nonatomic) CGRect originalSwatchFrame;
+@property (nonatomic) NSSortDescriptor *touchesSortDescriptor;
+
+- (UIColor *)colorFromLocationInView:(CGPoint)location;
 
 @end
 
 @implementation MTSColorPickerTableViewCell
+
+- (NSSortDescriptor *)touchesSortDescriptor {
+    if (!_touchesSortDescriptor) {
+        _touchesSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO];
+    }
+    return _touchesSortDescriptor;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -27,8 +37,11 @@
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [[touches sortedArrayUsingDescriptors:@[[self touchesSortDescriptor]]] firstObject];
+    CGPoint location = [touch locationInView:self];
     
-    
+    UIColor *interpolatedColor = [self colorFromLocationInView:location];
+    [[self colorSwatchView] setBackgroundColor:interpolatedColor];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -50,6 +63,12 @@
                      animations:^{
                          [[self colorSwatchView] setFrame:frame];
                      } completion:NULL];
+}
+
+- (UIColor *)colorFromLocationInView:(CGPoint)location {
+    NSLog(@"X location in view: %f", location.x);
+    
+    return [[self colorSwatchView] backgroundColor];
 }
 
 @end

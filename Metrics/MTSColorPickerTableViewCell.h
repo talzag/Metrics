@@ -10,7 +10,6 @@
 
 @interface MTSColorPickerTableViewCell : UITableViewCell
 
-@property (nonatomic) UIColor *swatchColor;
 @property (weak, nonatomic) IBOutlet UIView *colorSwatchView;
 
 @end
