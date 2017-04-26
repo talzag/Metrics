@@ -8,32 +8,49 @@
 
 #import "MTSColorPickerTableViewCell.h"
 
+@interface MTSColorPickerTableViewCell ()
+
+@property (nonatomic) CGRect originalSwatchFrame;
+
+@end
+
 @implementation MTSColorPickerTableViewCell
 
-- (void)setSwatchColor:(UIColor *)swatchColor {
-    _swatchColor = swatchColor;
-    // update colorSwatchView
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self setOriginalSwatchFrame:[self colorSwatchView].frame];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    // animage swatch over rest of cell
+    [self setColorSwatchViewFrame:[self frame]];
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesMoved:touches withEvent:event];
-    // track color across view ltr
+    
+    
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
-    // close color swatch view
-    // set _swatchColor
+    [self setColorSwatchViewFrame:[self originalSwatchFrame]];
 }
 
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesCancelled:touches withEvent:event];
-    // close color swatch view
+    [self setColorSwatchViewFrame:[self originalSwatchFrame]];
+}
+
+- (void)setColorSwatchViewFrame:(CGRect)frame {
+    [UIView animateWithDuration:0.5
+                          delay:0
+         usingSpringWithDamping:0.6
+          initialSpringVelocity:1.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         [[self colorSwatchView] setFrame:frame];
+                     } completion:NULL];
 }
 
 @end
