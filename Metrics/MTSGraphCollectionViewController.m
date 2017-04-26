@@ -54,10 +54,6 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
     return _fetchedResultsController;
 }
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-//    [[self collectionView] setAllowsSelection:NO];
-}
-
 - (void)controller:(NSFetchedResultsController *)controller
   didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo
            atIndex:(NSUInteger)sectionIndex
@@ -100,10 +96,6 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
         default:
             break;
     }
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-//    [[self collectionView] setAllowsSelection:YES];
 }
 
 #pragma mark - Navigation
