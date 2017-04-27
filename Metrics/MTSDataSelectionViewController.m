@@ -40,14 +40,14 @@
     return [[self healthCategories] count];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSString *title = [[self healthTypeIconNames] objectAtIndex:section];
-    
-    title = [title stringByReplacingOccurrencesOfString:@"-" withString:@" "];
-    title = [title localizedCapitalizedString];
-    
-    return title;
-}
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    NSString *title = [[self healthTypeIconNames] objectAtIndex:section];
+//    
+//    title = [title stringByReplacingOccurrencesOfString:@"-" withString:@" "];
+//    title = [title localizedCapitalizedString];
+//    
+//    return title;
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSDictionary *category = [[self healthCategories] objectAtIndex:section];
@@ -62,10 +62,6 @@
     
     HKQuantityTypeIdentifier key = [keys objectAtIndex:[indexPath row]];
     [[cell textLabel] setText:[category valueForKey:key]];
-    
-    NSString *iconName = [[self healthTypeIconNames] objectAtIndex:[indexPath section]];
-    UIImage *icon = [UIImage imageNamed:iconName];
-    [[cell imageView] setImage:icon];
     
     if ([[self selectedHealthTypes] containsObject:key]) {
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
@@ -93,6 +89,42 @@
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
         [[self selectedHealthTypes] addObject:ident];
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 30;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    CGFloat height = 30;
+    
+    NSString *title = [[self healthTypeIconNames] objectAtIndex:section];
+    UIImage *image = [UIImage imageNamed:title];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    [imageView setFrame:CGRectMake(0, 0, 30, 30)];
+    [[[imageView widthAnchor] constraintEqualToConstant:[imageView frame].size.height] setActive:YES];
+    
+    title = [title stringByReplacingOccurrencesOfString:@"-" withString:@" "];
+    title = [title localizedCapitalizedString];
+    
+    CGFloat width = [tableView frame].size.width;
+    CGRect titleRect = [title boundingRectWithSize:CGSizeMake(width, height) options:NSStringDrawingUsesFontLeading attributes:nil context:nil];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleRect];
+    [titleLabel setText:title];
+    
+    UIStackView *stackView = [[UIStackView alloc] initWithArrangedSubviews:@[imageView, titleLabel]];
+    [stackView setFrame:CGRectMake(0, 0, width, height)];
+    [stackView setAxis:UILayoutConstraintAxisHorizontal];
+    [stackView setSpacing:8.0];
+    [stackView setDistribution:UIStackViewDistributionFillProportionally];
+    [stackView setAlignment:UIStackViewAlignmentCenter];
+    
+    UIView *view = [[UIView alloc] initWithFrame:[stackView frame]];
+    [view setBackgroundColor:[UIColor whiteColor]];
+    [view addSubview:stackView];
+    [view setLayoutMargins:UIEdgeInsetsMake(0, 8, 0, 8)];
+    
+    return view;
 }
 
 #pragma mark - Navigation

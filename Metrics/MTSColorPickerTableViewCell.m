@@ -33,7 +33,16 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    [self setColorSwatchViewFrame:[self bounds]];
+    
+    [UIView animateWithDuration:0.5
+                          delay:0
+         usingSpringWithDamping:0.6
+          initialSpringVelocity:1.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         [[self colorSwatchView] setFrame:[self bounds]];
+                         [[self textLabel] setAlpha:0.0];
+                     } completion:NULL];
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -46,27 +55,32 @@
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
-    [self setColorSwatchViewFrame:[self originalSwatchFrame]];
-}
-
-- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [super touchesCancelled:touches withEvent:event];
-    [self setColorSwatchViewFrame:[self originalSwatchFrame]];
-}
-
-- (void)setColorSwatchViewFrame:(CGRect)frame {
     [UIView animateWithDuration:0.5
                           delay:0
          usingSpringWithDamping:0.6
           initialSpringVelocity:1.0
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-                         [[self colorSwatchView] setFrame:frame];
+                         [[self colorSwatchView] setFrame:[self originalSwatchFrame]];
+                         [[self textLabel] setAlpha:1.0];
+                     } completion:NULL];
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesCancelled:touches withEvent:event];
+    [UIView animateWithDuration:0.5
+                          delay:0
+         usingSpringWithDamping:0.6
+          initialSpringVelocity:1.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         [[self colorSwatchView] setFrame:[self originalSwatchFrame]];
+                         [[self textLabel] setAlpha:1.0];
                      } completion:NULL];
 }
 
 - (UIColor *)colorFromLocationInView:(CGPoint)location {
-    NSLog(@"X location in view: %f", location.x);
+    // interpolate color from location.x
     
     return [[self colorSwatchView] backgroundColor];
 }
