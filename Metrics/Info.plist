@@ -22,8 +22,6 @@
 	<true/>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Allow Metrics to read your data to plot it on graphs for you.</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>This permission should only be granted during testing.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
