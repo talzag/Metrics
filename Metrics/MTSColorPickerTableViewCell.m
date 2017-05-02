@@ -44,6 +44,7 @@
                             [UIColor orangeColor],
                             [UIColor yellowColor],
                             [UIColor greenColor],
+                            [UIColor cyanColor],
                             [UIColor blueColor],
                             [UIColor magentaColor],
                             [UIColor purpleColor]
@@ -71,7 +72,12 @@
     CGPoint location = [touch locationInView:self];
     
     UIColor *interpolatedColor = [self colorFromLocation:location inRect:[self bounds]];
-    [[self colorSwatchView] setBackgroundColor:interpolatedColor];
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        [[self colorSwatchView] setBackgroundColor:interpolatedColor];
+    }];
+    
+    [super touchesMoved:touches withEvent:event];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -97,46 +103,22 @@
 }
 
 - (UIColor *)colorFromLocation:(CGPoint)location inRect:(CGRect)rect {
-    CGFloat interval = rect.size.width / (CGFloat)[[self gradientColors] count];
+    NSInteger colorCount = [[self gradientColors] count];
+    CGFloat interval = rect.size.width / (CGFloat)colorCount;
     
-    size_t numCom = CGColorGetNumberOfComponents([[[self gradientColors] firstObject] CGColor]);
-    CGFloat * _Nullable c1 = NULL;
-    CGFloat * _Nullable c2 = NULL;
-    CGFloat start, end, x = location.x;
-    
-    
+    CGFloat x = location.x;
+    CGFloat start, end;
     NSInteger i;
-    for (i = 0; i < [[self gradientColors] count]; i++) {
+    for (i = 0; i < colorCount; i++) {
         start = i * interval;
         end = (i + 1) * interval;
         
-        CGColorRef startColor = [[[self gradientColors] objectAtIndex:i] CGColor];
-        CGColorRef endColor = [[[self gradientColors] objectAtIndex:(i + 1)] CGColor];
         if (start <= x && x <= end) {
-            c1 = (CGFloat * _Nullable)CGColorGetComponents(startColor);
-            c2 = (CGFloat * _Nullable)CGColorGetComponents(endColor);
-            break;
+            return [[self gradientColors] objectAtIndex:i];
         }
     }
     
-    if (numCom < 3 || !c1 || !c2) {
-        return [[self colorSwatchView] backgroundColor];
-    }
-    
-    CGFloat percenct = location.x / CGRectGetMaxX(rect);
-    CGFloat components[4];
-    
-    NSInteger j;
-    for (j = 0; j < numCom; j++) {
-        components[j] =  *(c1 + j) + percenct * (*(c2 + j) - *(c1 + j));
-    }
-    components[3] = 1.0;
-    
-    CGColorRef colorRef = CGColorCreate([self deviceColorSpace], components);
-    UIColor *color = [UIColor colorWithCGColor:colorRef];
-    CGColorRelease(colorRef);
-    
-    return color;
+    return nil;
 }
 
 @end
