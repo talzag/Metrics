@@ -1,26 +1,33 @@
 //
-//  GraphCollectionViewController.m
+//  MTSGraphsTableViewController.m
 //  Metrics
 //
-//  Created by Daniel Strokis on 2/5/17.
+//  Created by Daniel Strokis on 5/2/17.
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import "MTSGraphCollectionViewController.h"
-#import "MTSGraphCollectionViewCell.h"
+#import "MTSGraphsTableViewController.h"
 #import "MTSGraphViewController.h"
 #import "MTSGraphCreationViewController.h"
 #import "MTSDataSelectionViewController.h"
 
-@interface MTSGraphCollectionViewController () <NSFetchedResultsControllerDelegate>
+@interface MTSGraphTableViewCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet MTSGraphView *graphView;
+
+@end
+@implementation MTSGraphTableViewCell
+@end
+
+@interface MTSGraphsTableViewController () <NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController <MTSGraph *>*fetchedResultsController;
 
 @end
 
-@implementation MTSGraphCollectionViewController
+@implementation MTSGraphsTableViewController
 
-static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
+static NSString * const cellIdentifier = @"GraphCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,13 +66,15 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
            atIndex:(NSUInteger)sectionIndex
      forChangeType:(NSFetchedResultsChangeType)type {
     
-    UICollectionView *collectionView = [self collectionView];
+    UITableView *tableView = [self tableView];
+    NSIndexSet *section = [NSIndexSet indexSetWithIndex:sectionIndex];
+    
     switch (type) {
         case NSFetchedResultsChangeInsert:
-            [collectionView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+            [tableView insertSections:section withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         case NSFetchedResultsChangeDelete:
-            [collectionView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+            [tableView deleteSections:section withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         default:
             break;
@@ -78,20 +87,20 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
     
-    UICollectionView *collectionView = [self collectionView];
+    UITableView *tableView = [self tableView];
     
     switch (type) {
         case NSFetchedResultsChangeUpdate:
-            [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         case NSFetchedResultsChangeMove:
-            [collectionView moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
+            [tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
             break;
         case NSFetchedResultsChangeInsert:
-            [collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         case NSFetchedResultsChangeDelete:
-            [collectionView deleteItemsAtIndexPaths:@[indexPath]];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
         default:
             break;
@@ -102,8 +111,8 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showGraph"]) {
-        MTSGraphCollectionViewCell *cell = (MTSGraphCollectionViewCell *)sender;
-        NSIndexPath *indexPath = [[self collectionView] indexPathForCell:cell];
+        UITableViewCell *cell = (UITableViewCell *)sender;
+        NSIndexPath *indexPath = [[self tableView] indexPathForCell:cell];
         MTSGraph *graph = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         
         [graph setHealthStore:[self healthStore]];
@@ -127,27 +136,32 @@ static NSString * const reuseIdentifier = @"GraphCollectionViewCell";
     }
 }
 
-#pragma mark - UICollectionViewDataSource
+#pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [[[self fetchedResultsController] sections] count];
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    id<NSFetchedResultsSectionInfo> sectionInfo = [[[self fetchedResultsController] sections] objectAtIndex:section];
-    return [sectionInfo numberOfObjects];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    id<NSFetchedResultsSectionInfo> resultsSection = [[[self fetchedResultsController] sections] objectAtIndex:section];
+    return [resultsSection numberOfObjects];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    MTSGraphCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MTSGraphTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    MTSGraph *graph = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-    [[cell graphTitleLabel] setText:[graph title]];
-    
-    MTSGraphView *graphView = [cell graphView];
-    [cell setGraphView:graphView];
+//    MTSGraph *graph = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     
     return cell;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        MTSGraph *graph = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        [[self managedObjectContext] deleteObject:graph];
+        
+    }
 }
 
 @end

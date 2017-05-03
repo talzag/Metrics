@@ -1,19 +1,18 @@
 //
-//  GraphCollectionViewController.h
+//  MTSGraphsTableViewController.h
 //  Metrics
 //
-//  Created by Daniel Strokis on 2/5/17.
+//  Created by Daniel Strokis on 5/2/17.
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
 @import UIKit;
-
-#import <MetricsKit/MetricsKit.h>
-
 @import HealthKit;
 @import CoreData;
 
-@interface MTSGraphCollectionViewController : UICollectionViewController
+#import <MetricsKit/MetricsKit.h>
+
+@interface MTSGraphsTableViewController : UITableViewController
 
 @property HKHealthStore *healthStore;
 @property NSManagedObjectContext *managedObjectContext;

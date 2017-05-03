@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "MTSGraphCollectionViewController.h"
+#import "MTSGraphsTableViewController.h"
 
 @interface AppDelegate ()
 
@@ -21,7 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     UINavigationController *navController = (UINavigationController *)[[self window] rootViewController];
-    MTSGraphCollectionViewController *graphsViewController = [[navController viewControllers] firstObject];
+    MTSGraphsTableViewController *graphsViewController = [[navController viewControllers] firstObject];
     [graphsViewController setManagedObjectContext: [[self persistentContainer] viewContext]];
     
     if ([HKHealthStore isHealthDataAvailable]) {
@@ -30,6 +30,14 @@
     }
     
     return YES;
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application {
+    [self saveContext];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    [self saveContext];
 }
 
 - (void)requestHealthSharingAuthorization {
@@ -43,7 +51,7 @@
         AppDelegate *this = weakSelf;
         
         UINavigationController *navController = (UINavigationController *)[[this window] rootViewController];
-        MTSGraphCollectionViewController *graphsViewController = (MTSGraphCollectionViewController *)[[navController viewControllers] firstObject];
+        MTSGraphsTableViewController *graphsViewController = (MTSGraphsTableViewController *)[[navController viewControllers] firstObject];
         [graphsViewController setHealthStore:[this healthStore]];
     }];
 }

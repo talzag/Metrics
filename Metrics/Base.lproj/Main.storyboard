@@ -11,76 +11,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My Graphs-->
-        <scene sceneID="Up1-YC-XiG">
-            <objects>
-                <collectionViewController id="v24-g4-tJE" customClass="MTSGraphCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="LCb-2u-12c">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mBH-7h-4vA">
-                            <size key="itemSize" width="335" height="220"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GraphCollectionViewCell" id="0Z8-oV-TVO" customClass="MTSGraphCollectionViewCell">
-                                <rect key="frame" x="20" y="8" width="335" height="220"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="335" height="220"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Icg-Fz-d6J">
-                                            <rect key="frame" x="8" y="8" width="319" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pL8-GS-UlC" customClass="MTSGraphView">
-                                            <rect key="frame" x="0.0" y="37" width="335" height="183"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </subviews>
-                                </view>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="pL8-GS-UlC" secondAttribute="bottom" id="KJw-tL-Ong"/>
-                                    <constraint firstItem="Icg-Fz-d6J" firstAttribute="top" secondItem="0Z8-oV-TVO" secondAttribute="topMargin" id="Qqn-6Q-L76"/>
-                                    <constraint firstItem="pL8-GS-UlC" firstAttribute="top" secondItem="Icg-Fz-d6J" secondAttribute="bottom" constant="8" id="Qsf-8Y-QhW"/>
-                                    <constraint firstAttribute="trailing" secondItem="pL8-GS-UlC" secondAttribute="trailing" id="Vif-k3-jx9"/>
-                                    <constraint firstItem="Icg-Fz-d6J" firstAttribute="leading" secondItem="0Z8-oV-TVO" secondAttribute="leadingMargin" id="hrh-Z1-vUU"/>
-                                    <constraint firstItem="pL8-GS-UlC" firstAttribute="leading" secondItem="0Z8-oV-TVO" secondAttribute="leading" id="ivU-ow-ekK"/>
-                                    <constraint firstItem="Icg-Fz-d6J" firstAttribute="trailing" secondItem="0Z8-oV-TVO" secondAttribute="trailingMargin" id="pls-gp-iVN"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="graphTitleLabel" destination="Icg-Fz-d6J" id="IH2-05-nkK"/>
-                                    <outlet property="graphView" destination="pL8-GS-UlC" id="q8c-A2-wkq"/>
-                                    <segue destination="Zui-Cp-atU" kind="show" identifier="showGraph" id="xHC-Ep-ykI">
-                                        <segue key="commit" inheritsFrom="parent" id="Sqv-s8-zDB"/>
-                                        <segue key="preview" inheritsFrom="commit" id="i8T-IK-RFc"/>
-                                    </segue>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="v24-g4-tJE" id="vhd-4v-17Y"/>
-                            <outlet property="delegate" destination="v24-g4-tJE" id="KZ6-bq-fxA"/>
-                        </connections>
-                    </collectionView>
-                    <navigationItem key="navigationItem" title="My Graphs" id="d8X-eg-NmD">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="oBR-wh-wRR">
-                            <connections>
-                                <segue destination="mV6-Xv-G42" kind="presentation" identifier="selectHealthData" id="av2-Qd-HZo"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7UM-yp-x0P" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="655" y="42"/>
-        </scene>
         <!--New Graph-->
         <scene sceneID="U0l-6L-rtt">
             <objects>
@@ -229,7 +159,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pCd-Zp-LdQ" id="Dly-mA-XML">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NYE-Ut-Bwy">
@@ -285,6 +215,55 @@
                 <exit id="pcx-E6-EQ8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3380" y="-743.47826086956525"/>
+        </scene>
+        <!--My Graphs-->
+        <scene sceneID="RHy-Py-llZ">
+            <objects>
+                <tableViewController id="wxK-yg-TFl" customClass="MTSGraphsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="188" sectionHeaderHeight="28" sectionFooterHeight="28" id="QPy-RQ-jbi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GraphCell" rowHeight="188" id="017-ja-SMA" customClass="MTSGraphTableViewCell">
+                                <rect key="frame" x="0.0" y="28" width="375" height="188"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="017-ja-SMA" id="Q5c-S8-ygz">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="188"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vKH-iV-Hvj" customClass="MTSGraphView">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="188"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="graphView" destination="vKH-iV-Hvj" id="gat-qR-sE1"/>
+                                    <segue destination="Zui-Cp-atU" kind="show" identifier="showGraph" id="e4n-Ds-8gJ">
+                                        <segue key="commit" inheritsFrom="parent" id="vbK-pB-gWv"/>
+                                        <segue key="preview" inheritsFrom="commit" id="CNA-jN-OGB"/>
+                                    </segue>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="wxK-yg-TFl" id="tYk-2h-4wg"/>
+                            <outlet property="delegate" destination="wxK-yg-TFl" id="d6p-7O-6cQ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="My Graphs" id="hKw-sp-v2W">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="rHT-d3-MoA">
+                            <connections>
+                                <segue destination="mV6-Xv-G42" kind="show" identifier="selectHealthData" id="KiU-3q-F0k"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cNJ-qc-nFd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="688.79999999999995" y="42.728635682158924"/>
         </scene>
         <!--Graph View Controller-->
         <scene sceneID="Nfx-EA-oAZ">
@@ -462,7 +441,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="v24-g4-tJE" kind="relationship" relationship="rootViewController" id="GWy-Th-ocw"/>
+                        <segue destination="wxK-yg-TFl" kind="relationship" relationship="rootViewController" id="Ubs-0C-YHx"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TmM-ul-j5G" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -489,6 +468,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="xHC-Ep-ykI"/>
+        <segue reference="e4n-Ds-8gJ"/>
     </inferredMetricsTieBreakers>
 </document>
