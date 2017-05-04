@@ -12,11 +12,6 @@
 #include <Foundation/Foundation.h>
 #include <HealthKit/HealthKit.h>
 #import "MTSGraph+CoreDataClass.h"
-
-extern NSString * const _Nonnull MTSGraphLineColorKey;
-extern NSString * const _Nonnull MTSGraphDataPointsKey;
-extern NSString * const _Nonnull MTSGraphDataIdentifierKey;
-
 @interface MTSGraph (MTSQueryable)
 
 - (void)executeQueryWithHealthStore:(HKHealthStore * _Nonnull)healthStore usingCompletionHandler:(void (^ _Nullable)(NSArray * _Nullable, NSError * _Nullable))completionHandler;

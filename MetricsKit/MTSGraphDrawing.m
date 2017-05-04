@@ -8,6 +8,10 @@
 
 #import "MTSGraphDrawing.h"
 
+NSString * const _Nonnull MTSGraphLineColorKey = @"com.dstrokis.Mtrcs.lineColor";
+NSString * const _Nonnull MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
+NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-identifier";
+
 #define kMTSGRAPH_TOP_MARGIN  0.15
 #define kMTSGRAPH_BOTTOM_MARGIN  0.15
 #define kMTSGRAPH_LEFT_MARGIN  0.05

@@ -2,7 +2,7 @@
 //  MTSQuery+CoreDataProperties.m
 //  Metrics
 //
-//  Created by Daniel Strokis on 3/26/17.
+//  Created by Daniel Strokis on 5/4/17.
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
@@ -14,9 +14,9 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"MTSQuery"];
 }
 
-@dynamic startDate;
 @dynamic endDate;
-@dynamic quantityTypes;
+@dynamic dataTypeConfigurations;
+@dynamic startDate;
 @dynamic graph;
 
 @end

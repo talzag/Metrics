@@ -11,4 +11,6 @@
 
 #import "MTSQuery+CoreDataClass.h"
 
+// [self quantityTypes] is an NSSet <MTSQueryDataConfiguration *> *
+
 #endif /* MTSQuery_h */

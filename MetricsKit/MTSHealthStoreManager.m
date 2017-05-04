@@ -29,7 +29,7 @@
          forQuantityType:(nonnull HKQuantityTypeIdentifier)typeIdentifier
                 fromDate:(nonnull NSDate *)startDate
                   toDate:(nonnull NSDate *)endDate
-  usingCompletionHandler:(void (^ _Nonnull)(NSArray <MTSQuantitySample *>* _Nullable samples)) completionHandler {
+  usingCompletionHandler:(void (^ _Nonnull)(NSArray * _Nullable samples)) completionHandler {
     NSPredicate *predicate = [HKSampleQuery predicateForSamplesWithStartDate:startDate
                                                                      endDate:endDate
                                                                      options:HKQueryOptionStrictEndDate];
@@ -51,16 +51,19 @@
              
              HKUnit *preferredUnit = [preferredUnits objectForKey:sampleType];
              
-             NSMutableArray <MTSQuantitySample *>*samples = [NSMutableArray array];
+             NSMutableArray *samples = [NSMutableArray array];
              for (HKQuantitySample *sample in results) {
                  NSDate *date = [sample endDate];
                  NSString *unitString = [preferredUnit unitString];
                  double value = [[sample quantity] doubleValueForUnit:preferredUnit];
                  NSNumber *amount = [NSNumber numberWithDouble:value];
                  
-                 MTSQuantitySample *mtsSample = [[MTSQuantitySample alloc] initWithDate:date
-                                                                             unitString:unitString
-                                                                              andAmount:amount];
+                 NSDictionary *mtsSample = @{
+                                             @"date": date,
+                                             @"unit": unitString,
+                                             @"amount": amount
+                                             };
+                 
                  [samples addObject:mtsSample];
              }
              

@@ -8,10 +8,8 @@
 
 #import "MTSGraph.h"
 #import "MTSQuery.h"
-
-NSString * const _Nonnull MTSGraphLineColorKey = @"com.dstrokis.Mtrcs.lineColor";
-NSString * const _Nonnull MTSGraphDataPointsKey = @"com.dstrokis.Mtrcs.data";
-NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-identifier";
+#import "MTSGraphDrawing.h"
+#import "MTSQueryDataConfiguration.h"
 
 @implementation MTSGraph (MTSQueryable)
 
@@ -74,10 +72,10 @@ NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-
     
     
     // Create an NSSet of HKQuantityType*
-    NSSet *identifiers = [[self query] quantityTypes];
+    NSSet <MTSQueryDataConfiguration *>*dataConfigurations = [[self query] dataTypeConfigurations];
     NSMutableArray <HKQuantityType *>*types = [NSMutableArray array];
-    for (HKQuantityTypeIdentifier identifier in identifiers) {
-        HKQuantityType *type = [HKQuantityType quantityTypeForIdentifier:identifier];
+    for (MTSQueryDataConfiguration *config in dataConfigurations) {
+        HKQuantityType *type = [HKQuantityType quantityTypeForIdentifier:[config healthKitQuantityTypeIdentifier]];
         [types addObject:type];
     }
     
@@ -94,9 +92,11 @@ NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-
         }
         dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
         
-        [self graphDataFromQueryResults:finishedArray withHealthStore:healthStore completionHandler:^(NSArray * graphData, NSError * graphDataError) {
-            completionHandler(graphData, graphDataError);
-        }];
+        [self graphDataFromQueryResults:finishedArray
+                        withHealthStore:healthStore
+                      completionHandler:^(NSArray * graphData, NSError * graphDataError) {
+                          completionHandler(graphData, graphDataError);
+                      }];
     });
 }
 
@@ -132,6 +132,7 @@ NSString * const _Nonnull MTSGraphDataIdentifierKey = @"com.dstrokis.Mtrcs.data-
                     [amounts addObject:amount];
                 }
                 
+                // FIXME: Use model class here to wrap up this data instead of using a dictionary
                 NSDictionary *lineData = @{
                                            MTSGraphDataPointsKey: amounts,
                                            MTSGraphDataIdentifierKey: [type identifier]

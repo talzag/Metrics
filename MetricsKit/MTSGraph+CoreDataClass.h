@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <HealthKit/HealthKit.h>
+#import "MTSColorBox.h"
 
 @class MTSQuery;
 
