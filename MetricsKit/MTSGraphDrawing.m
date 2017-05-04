@@ -206,12 +206,6 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <NSDictio
 void MTSDrawGraph(CGContextRef context, CGRect rect, NSArray <NSDictionary<NSString *,id> *> * _Nullable dataPoints, CGColorRef _Nullable topColor, CGColorRef _Nullable bottomColor) {
     CGContextRetain(context);
     CGContextSaveGState(context);
-    
-    // Clip to rounded corners
-    CGPathRef clipPath = CGPathCreateWithRoundedRect(rect, 25, 25, NULL);
-    CGContextAddPath(context, clipPath);
-    CGContextClip(context);
-    CGPathRelease(clipPath);
 
     // draw background
     CGContextSaveGState(context);
