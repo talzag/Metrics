@@ -19,7 +19,6 @@
 - (void)willActivate {
     MTSGraph *graph = [[MTSGraph alloc] initWithContext:[self managedObjectContext]];
     HKHealthStore *store = [HKHealthStore new];
-    [graph setHealthStore:store];
     
     CGRect screen = [[WKInterfaceDevice currentDevice] screenBounds];
     CGSize screenSize = screen.size;
@@ -39,21 +38,14 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     [[self graphInterfaceImage] setImage:image];
     
-    [graph executeQueryWithCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
+    [graph executeQueryWithHealthStore:store usingCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (!error) {
-                [graph graphDataFromQueryResults:results completionHandler:^(NSArray <NSDictionary<NSString *,id> *> * _Nullable dataSet, NSError * _Nullable error) {
-                    if (!error) {
-                        MTSDrawGraph(context, screen, dataSet, NULL, NULL);
-                    }
-                    
-                    CGContextRelease(context);
-                    UIGraphicsEndImageContext();
-                }];
-            } else {
-                CGContextRelease(context);
-                UIGraphicsEndImageContext();
+                MTSDrawGraph(context, screen, results, NULL, NULL);
             }
+            
+            CGContextRelease(context);
+            UIGraphicsEndImageContext();
         });
     }];
 }

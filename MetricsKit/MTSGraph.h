@@ -19,9 +19,10 @@ extern NSString * const _Nonnull MTSGraphDataIdentifierKey;
 
 @interface MTSGraph (MTSQueryable)
 
-- (void)executeQueryWithCompletionHandler:(void (^ _Nullable)(NSArray * _Nullable, NSError * _Nullable))completionHandler;
+- (void)executeQueryWithHealthStore:(HKHealthStore * _Nonnull)healthStore usingCompletionHandler:(void (^ _Nullable)(NSArray * _Nullable, NSError * _Nullable))completionHandler;
 
 - (void)graphDataFromQueryResults:(NSArray <NSArray<HKQuantitySample *> *>* _Nonnull)results
+                  withHealthStore:(HKHealthStore * _Nonnull)healthStore
                 completionHandler:(void (^ _Nonnull)(NSArray <NSDictionary<NSString *,id> *> * _Nullable, NSError * _Nullable))completionHandler;
 
 @end

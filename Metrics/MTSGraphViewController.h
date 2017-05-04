@@ -14,7 +14,8 @@
 
 @interface MTSGraphViewController : UIViewController
 
-@property MTSGraph *graph;
+@property (nonatomic) MTSGraph *graph;
 @property (weak, nonatomic) IBOutlet MTSGraphView *graphView;
+@property (nonatomic) HKHealthStore *healthStore;
 
 @end

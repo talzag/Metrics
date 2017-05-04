@@ -224,8 +224,11 @@ void MTSDrawGraph(CGContextRef context, CGRect rect, NSArray <NSDictionary<NSStr
     CGContextRestoreGState(context);
 
     // plot data points
-    CGContextSaveGState(context);
-    MTSGraphPlotDataPoints(context, rect, dataPoints);
-    CGContextRestoreGState(context);
+    if (dataPoints) {
+        CGContextSaveGState(context);
+        MTSGraphPlotDataPoints(context, rect, dataPoints);
+        CGContextRestoreGState(context);
+    }
+    
     CGContextRelease(context);
 }

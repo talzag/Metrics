@@ -159,7 +159,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pCd-Zp-LdQ" id="Dly-mA-XML">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NYE-Ut-Bwy">
@@ -229,7 +229,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="188"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="017-ja-SMA" id="Q5c-S8-ygz">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="188"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="187.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vKH-iV-Hvj" customClass="MTSGraphView">
@@ -241,9 +241,9 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="graphView" destination="vKH-iV-Hvj" id="gat-qR-sE1"/>
-                                    <segue destination="Zui-Cp-atU" kind="show" identifier="showGraph" id="e4n-Ds-8gJ">
-                                        <segue key="commit" inheritsFrom="parent" id="vbK-pB-gWv"/>
-                                        <segue key="preview" inheritsFrom="commit" id="CNA-jN-OGB"/>
+                                    <segue destination="Zui-Cp-atU" kind="show" identifier="showGraph" id="0ax-1p-Bvo">
+                                        <segue key="commit" inheritsFrom="parent" id="bGG-qY-HkA"/>
+                                        <segue key="preview" inheritsFrom="commit" id="MNd-t3-uqH"/>
                                     </segue>
                                 </connections>
                             </tableViewCell>
@@ -256,7 +256,7 @@
                     <navigationItem key="navigationItem" title="My Graphs" id="hKw-sp-v2W">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="rHT-d3-MoA">
                             <connections>
-                                <segue destination="mV6-Xv-G42" kind="show" identifier="selectHealthData" id="KiU-3q-F0k"/>
+                                <segue destination="mV6-Xv-G42" kind="presentation" identifier="selectHealthData" id="q1s-SS-ATM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -468,6 +468,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="e4n-Ds-8gJ"/>
+        <segue reference="0ax-1p-Bvo"/>
     </inferredMetricsTieBreakers>
 </document>

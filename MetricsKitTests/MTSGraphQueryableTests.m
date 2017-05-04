@@ -88,12 +88,11 @@
     
     MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
     [graph setQuery:query];
-    [graph setHealthStore:[self healthStore]];
     
     [context save:nil];
     
     XCTestExpectation *queryExpectation = [self expectationWithDescription:@"Graph querying"];
-    [graph executeQueryWithCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
+    [graph executeQueryWithHealthStore:[self healthStore] usingCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
         XCTAssertNotNil(results);
         
         [queryExpectation fulfill];
@@ -110,12 +109,11 @@
     NSManagedObjectContext *context = [[self dataStack] managedObjectContext];
     
     MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
-    [graph setHealthStore:[self healthStore]];
     
     [context save:nil];
     
     XCTestExpectation *queryExpectation = [self expectationWithDescription:@"Graph querying with nil query"];
-    [graph executeQueryWithCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
+    [graph executeQueryWithHealthStore:[self healthStore] usingCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
         XCTAssertNil(results);
         XCTAssertNotNil(error);
         XCTAssertEqualObjects([error domain], @"com.dstrokis.Metrics");
@@ -151,7 +149,7 @@
     [context save:nil];
     
     XCTestExpectation *queryExpectation = [self expectationWithDescription:@"Graph querying with nil health store"];
-    [graph executeQueryWithCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
+    [graph executeQueryWithHealthStore:[self healthStore] usingCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
         XCTAssertNil(results);
         XCTAssertNotNil(error);
         XCTAssertEqualObjects([error domain], @"com.dstrokis.Metrics");

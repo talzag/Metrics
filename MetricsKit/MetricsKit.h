@@ -23,3 +23,4 @@ FOUNDATION_EXPORT const unsigned char MetricsKitVersionString[];
 #import <MetricsKit/MTSQuantitySample.h>
 #import <MetricsKit/MTSRealCalorieValue.h>
 #import <MetricsKit/MTSGraphDrawing.h>
+#import <MetricsKit/MTSColorBox.h>

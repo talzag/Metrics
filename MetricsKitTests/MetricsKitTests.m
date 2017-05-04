@@ -63,7 +63,6 @@
     MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
     
     [graph setTitle:@"Test Graph"];
-    [graph setHealthStore:[self healthStore]];
     
     MTSColorBox *blueBox = [[MTSColorBox alloc] initWithCGColorRef:[[UIColor blueColor] CGColor]];
     MTSColorBox *cyanBox = [[MTSColorBox alloc] initWithCGColorRef:[[UIColor cyanColor] CGColor]];
@@ -85,8 +84,8 @@
     [context save:nil];
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"Complete data flow test"];
-    [graph executeQueryWithCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
-        MTSRealCalorieValue([graph healthStore], [[graph query] startDate], [[graph query] endDate], ^(double calories, NSError *error) {
+    [graph executeQueryWithHealthStore:[self healthStore] usingCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
+        MTSRealCalorieValue([self healthStore], [[graph query] startDate], [[graph query] endDate], ^(double calories, NSError *error) {
             XCTAssertEqual([results count], 2);
             XCTAssertEqual(calories, -100);
             
@@ -113,7 +112,6 @@
     MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
     
     [graph setTitle:@"Test Graph"];
-    [graph setHealthStore:[self healthStore]];
     
     MTSColorBox *blueBox = [[MTSColorBox alloc] initWithCGColorRef:[[UIColor blueColor] CGColor]];
     MTSColorBox *cyanBox = [[MTSColorBox alloc] initWithCGColorRef:[[UIColor cyanColor] CGColor]];

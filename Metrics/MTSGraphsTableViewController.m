@@ -10,14 +10,7 @@
 #import "MTSGraphViewController.h"
 #import "MTSGraphCreationViewController.h"
 #import "MTSDataSelectionViewController.h"
-
-@interface MTSGraphTableViewCell : UITableViewCell
-
-@property (weak, nonatomic) IBOutlet MTSGraphView *graphView;
-
-@end
-@implementation MTSGraphTableViewCell
-@end
+#import "MTSGraphTableViewCell.h"
 
 @interface MTSGraphsTableViewController () <NSFetchedResultsControllerDelegate>
 
@@ -61,24 +54,8 @@ static NSString * const cellIdentifier = @"GraphCell";
     return _fetchedResultsController;
 }
 
-- (void)controller:(NSFetchedResultsController *)controller
-  didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo
-           atIndex:(NSUInteger)sectionIndex
-     forChangeType:(NSFetchedResultsChangeType)type {
-    
-    UITableView *tableView = [self tableView];
-    NSIndexSet *section = [NSIndexSet indexSetWithIndex:sectionIndex];
-    
-    switch (type) {
-        case NSFetchedResultsChangeInsert:
-            [tableView insertSections:section withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-        case NSFetchedResultsChangeDelete:
-            [tableView deleteSections:section withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-        default:
-            break;
-    }
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [[self tableView] beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller
@@ -107,6 +84,10 @@ static NSString * const cellIdentifier = @"GraphCell";
     }
 }
 
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [[self tableView] endUpdates];
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -115,9 +96,9 @@ static NSString * const cellIdentifier = @"GraphCell";
         NSIndexPath *indexPath = [[self tableView] indexPathForCell:cell];
         MTSGraph *graph = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         
-        [graph setHealthStore:[self healthStore]];
         MTSGraphViewController *destination = (MTSGraphViewController *)[segue destinationViewController];
         [destination setGraph:graph];
+        [destination setHealthStore:[self healthStore]];
     } else if ([segue.identifier isEqualToString:@"selectHealthData"]) {
         MTSGraph *newGraph = [[MTSGraph alloc] initWithContext:[self managedObjectContext]];
         MTSQuery *newQuery = [[MTSQuery alloc] initWithContext:[self managedObjectContext]];
@@ -134,13 +115,12 @@ static NSString * const cellIdentifier = @"GraphCell";
     if (![[self managedObjectContext] save:&error]) {
         NSLog(@"%@", [error debugDescription]);
     }
+    
+    NSArray *visible = [[self tableView] indexPathsForVisibleRows];
+    [[self tableView] reloadRowsAtIndexPaths:visible withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[[self fetchedResultsController] sections] count];
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     id<NSFetchedResultsSectionInfo> resultsSection = [[[self fetchedResultsController] sections] objectAtIndex:section];
@@ -150,7 +130,18 @@ static NSString * const cellIdentifier = @"GraphCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MTSGraphTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-//    MTSGraph *graph = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    MTSGraph *graph = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    
+    [graph executeQueryWithHealthStore:[self healthStore]
+                usingCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
+                    if (error) {
+                        return;
+                    }
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [[cell graphView] setDataPoints:results];
+                    });
+                }];
     
     return cell;
 }
@@ -160,7 +151,6 @@ static NSString * const cellIdentifier = @"GraphCell";
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MTSGraph *graph = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         [[self managedObjectContext] deleteObject:graph];
-        
     }
 }
 

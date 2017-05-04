@@ -21,17 +21,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = self.graph.title;
+    [[self navigationItem] setTitle:[[self graph] title]];
+    [[self startDateLabel] setText:[[self dateFormatter] stringFromDate:[[[self graph] query] startDate]]];
+    [[self endDateLabel] setText:[[self dateFormatter] stringFromDate:[[[self graph] query] endDate]]];
     
     MTSGraph *graph = [self graph];
-    [graph executeQueryWithCompletionHandler:^(NSArray * _Nullable dataPoints, NSError * _Nullable error) {
-        if (!error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[self graphView] setDataPoints:dataPoints];
-                [[self graphView] setNeedsDisplay];
-            });
-        }
-    }];
+    [graph executeQueryWithHealthStore:[self healthStore]
+                usingCompletionHandler:^(NSArray * _Nullable dataPoints, NSError * _Nullable error) {
+                    if (!error) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [[self graphView] setDataPoints:dataPoints];
+                        });
+                    }
+                }];
 }
 
 - (NSDateFormatter *)dateFormatter {
