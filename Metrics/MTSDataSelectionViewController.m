@@ -130,8 +130,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"createGraph"]) {
         NSMutableSet *configs = [NSMutableSet set];
+        
+        NSDictionary <HKQuantityTypeIdentifier, NSString *> *identifiers = MTSQuantityTypeIdentifiers();
         for (HKQuantityTypeIdentifier type in [self selectedHealthTypes]) {
-            NSString *displayName = [[self healthCategories] valueForKey:type];
+            NSString *displayName = [identifiers valueForKey:type];
             MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:[[self graph] managedObjectContext]];
             [config setHealthTypeDisplayName:displayName];
             [config setHealthKitTypeIdentifier:type];
