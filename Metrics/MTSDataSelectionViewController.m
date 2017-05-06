@@ -122,7 +122,7 @@
     UIView *view = [[UIView alloc] initWithFrame:[stackView frame]];
     [view setBackgroundColor:[UIColor whiteColor]];
     [view addSubview:stackView];
-    [view setLayoutMargins:UIEdgeInsetsMake(0, 8, 0, 8)];
+    [view setLayoutMargins:UIEdgeInsetsMake(20, 20, 20, 20)];
     
     return view;
 }
@@ -138,7 +138,17 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"createGraph"]) {
-        [[[self graph] query] setQuantityTypes:[self selectedHealthTypes]];
+        NSMutableSet *configs = [NSMutableSet set];
+        for (HKQuantityTypeIdentifier type in [self selectedHealthTypes]) {
+            NSString *displayName = [[self healthCategories] valueForKey:type];
+            MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithIdentifier:type
+                                                                                            displayName:displayName
+                                                                                              lineColor:nil
+                                                                                      fetchedDataPoints:nil];
+            [configs addObject:config];
+            
+        }
+        [[[self graph] query] setDataTypeConfigurations:[NSSet setWithSet:configs]];
         
         MTSGraphCreationViewController *controller = (MTSGraphCreationViewController *)[segue destinationViewController];
         [controller setGraph:[self graph]];

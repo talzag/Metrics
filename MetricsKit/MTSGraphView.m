@@ -19,7 +19,7 @@
     return self;
 }
 
-- (void)setDataPoints:(NSArray<NSDictionary<NSString *,id> *> *)dataPoints {
+- (void)setDataPoints:(NSSet <MTSQueryDataConfiguration *> *)dataPoints {
     _dataPoints = dataPoints;
     
     [self setNeedsDisplay];
@@ -28,7 +28,7 @@
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    NSArray *data = [self dataPoints];
+    NSSet *data = [self dataPoints];
     
     CGColorRef top = NULL, bottom = NULL;
     

@@ -18,7 +18,7 @@
 @property (nonatomic) NSDate *endDate;
 @property (nonatomic) UITextField *activeTextField;
 
-@property (nonatomic) NSArray <HKQuantityTypeIdentifier>*selectedHealthTypes;
+@property (nonatomic) NSArray <MTSQueryDataConfiguration *>*queryDataConfigurations;
 @property (nonatomic) NSDictionary <HKQuantityTypeIdentifier, NSString *> *healthTypeNameLookup;
 @property (nonatomic) UIDatePicker *datePicker;
 
@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setSelectedHealthTypes:[[[[self graph] query] quantityTypes] allObjects]];
+    [self setQueryDataConfigurations:[[[[self graph] query] dataTypeConfigurations] allObjects]];
     [self setHealthTypeNameLookup:MTSQuantityTypeIdentifiers()];
     
     NSDate *date = [NSDate date];
@@ -79,19 +79,30 @@
     MTSQuery *query = [[self graph] query];
     [query setStartDate: [self startDate]];
     [query setEndDate:[self endDate]];
+    
+    NSArray *configs = [self queryDataConfigurations];
+    NSInteger i;
+    for (i = 0; i < [configs count]; i++) {
+        MTSQueryDataConfiguration *config = [configs objectAtIndex:i];
+        MTSColorPickerTableViewCell *cell = [[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathWithIndex:i]];
+        
+        UIColor *selected = [[cell colorSwatchView] backgroundColor];
+        MTSColorBox *lineColor = [[MTSColorBox alloc] initWithCGColorRef:[selected CGColor]];
+        [config setLineColor:lineColor];
+    }
 }
 
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[[[self graph] query] quantityTypes] count];
+    return [[[[self graph] query] dataTypeConfigurations] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MTSColorPickerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"healthDataCell"];
     
-    HKQuantityTypeIdentifier key = [[self selectedHealthTypes] objectAtIndex:[indexPath row]];
-    NSString *value = [[self healthTypeNameLookup] objectForKey:key];
+    MTSQueryDataConfiguration *config = [[self queryDataConfigurations] objectAtIndex:[indexPath row]];
+    NSString *value = [[self healthTypeNameLookup] objectForKey:[config healthKitQuantityTypeIdentifier]];
     
     [[cell textLabel] setText:value];
     

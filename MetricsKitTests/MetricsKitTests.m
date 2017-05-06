@@ -76,7 +76,7 @@
     
     MTSQuery *query = [[MTSQuery alloc] initWithContext:context];
     NSSet *types = [NSSet setWithObjects: HKQuantityTypeIdentifierActiveEnergyBurned, HKQuantityTypeIdentifierBasalEnergyBurned, nil];
-    [query setQuantityTypes:types];
+//    [query setQuantityTypes:types];
     [query setStartDate:start];
     [query setEndDate:end];
     [graph setQuery:query];
@@ -84,7 +84,7 @@
     [context save:nil];
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"Complete data flow test"];
-    [graph executeQueryWithHealthStore:[self healthStore] usingCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
+    [graph executeQueryWithHealthStore:[self healthStore] usingCompletionHandler:^(NSSet * _Nullable results, NSError * _Nullable error) {
         MTSRealCalorieValue([self healthStore], [[graph query] startDate], [[graph query] endDate], ^(double calories, NSError *error) {
             XCTAssertEqual([results count], 2);
             XCTAssertEqual(calories, -100);
@@ -125,7 +125,7 @@
     
     MTSQuery *query = [[MTSQuery alloc] initWithContext:context];
     NSSet *types = [NSSet setWithObjects: HKQuantityTypeIdentifierActiveEnergyBurned, HKQuantityTypeIdentifierBasalEnergyBurned, nil];
-    [query setQuantityTypes:types];
+//    [query setQuantityTypes:types];
     [query setStartDate:start];
     [query setEndDate:end];
     [graph setQuery:query];
@@ -180,7 +180,7 @@
     NSDictionary *testData = @{
                                MTSGraphDataPointsKey: @[@0, @75, @25, @50, @100, @50, @75, @25, @0]
                                };
-    NSArray *testSet = [NSArray arrayWithObject:testData];
+    NSSet *testSet = [NSSet setWithObject:testData];
     
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -198,7 +198,7 @@
     NSDictionary *testData = @{
                                MTSGraphDataPointsKey: @[]
                                };
-    NSArray *testSet = [NSArray arrayWithObject:testData];
+    NSSet *testSet = [NSSet setWithObject:testData];
     
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -216,7 +216,7 @@
     NSDictionary *testData = @{
                                MTSGraphDataPointsKey: @[]
                                };
-    NSArray *testSet = [NSArray arrayWithObject:testData];
+    NSSet *testSet = [NSSet setWithObject:testData];
     
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();

@@ -28,17 +28,10 @@
     
     CGContextRetain(context);
     
-    
-    NSDictionary *testData = @{
-                               MTSGraphDataPointsKey: @[@0, @75, @25, @50, @100, @50, @75, @25, @0]
-                               };
-    NSArray *testSet = [NSArray arrayWithObject:testData];
-    MTSDrawGraph(context, screen, testSet, NULL, NULL);
-    
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     [[self graphInterfaceImage] setImage:image];
     
-    [graph executeQueryWithHealthStore:store usingCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
+    [graph executeQueryWithHealthStore:store usingCompletionHandler:^(NSSet * _Nullable results, NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (!error) {
                 MTSDrawGraph(context, screen, results, NULL, NULL);

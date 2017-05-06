@@ -147,10 +147,10 @@ CGFloat MTSGraphPositionOnYAxisForValue(CGRect rect, CGFloat value, CGFloat maxV
     return MTSGraphHeight(rect) - ratio * height;
 }
 
-void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <NSDictionary<NSString *,id> *> *dataPoints) {
+void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSSet <MTSQueryDataConfiguration *> *dataPoints) {
     CGFloat maxValue = 0.0;
-    for (NSDictionary <NSString *, id> *data in dataPoints) {
-        NSArray *values = [data objectForKey:MTSGraphDataPointsKey];
+    for (MTSQueryDataConfiguration *config in dataPoints) {
+        NSArray *values = [config fetchedDataPoints];
         for (NSNumber *value in values) {
             double floatValue = [value doubleValue];
             maxValue = floatValue > maxValue ? floatValue : maxValue;
@@ -159,16 +159,16 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <NSDictio
 
     CGContextSetLineWidth(context, 2.0);
     
-    for (NSDictionary <NSString *, id> *data in dataPoints) {
+    for (MTSQueryDataConfiguration *config in dataPoints) {
         CGContextSaveGState(context);
         
         CGMutablePathRef graphPath = CGPathCreateMutable();
 
-        MTSColorBox *lineColorBox = [data objectForKey:MTSGraphLineColorKey];
+        MTSColorBox *lineColorBox = [config lineColor];
         CGColorRef lineColor = [lineColorBox color];
         CGContextSetStrokeColorWithColor(context, lineColor);
         
-        NSArray <NSNumber *>*values = [data objectForKey:MTSGraphDataPointsKey];
+        NSArray <NSNumber *>*values = [config fetchedDataPoints];
         NSInteger size = values.count;
         if (size) {
             if (size == 1) {
@@ -207,7 +207,7 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <NSDictio
     }
 }
 
-void MTSDrawGraph(CGContextRef context, CGRect rect, NSArray <NSDictionary<NSString *,id> *> * _Nullable dataPoints, CGColorRef _Nullable topColor, CGColorRef _Nullable bottomColor) {
+void MTSDrawGraph(CGContextRef context, CGRect rect, NSSet <MTSQueryDataConfiguration *> * _Nullable dataPoints, CGColorRef _Nullable topColor, CGColorRef _Nullable bottomColor) {
     CGContextRetain(context);
     CGContextSaveGState(context);
 

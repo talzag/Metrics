@@ -27,7 +27,7 @@
     
     MTSGraph *graph = [self graph];
     [graph executeQueryWithHealthStore:[self healthStore]
-                usingCompletionHandler:^(NSArray * _Nullable dataPoints, NSError * _Nullable error) {
+                usingCompletionHandler:^(NSSet * _Nullable dataPoints, NSError * _Nullable error) {
                     if (!error) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [[self graphView] setDataPoints:dataPoints];

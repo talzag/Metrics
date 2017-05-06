@@ -8,6 +8,7 @@
 
 @import WatchKit;
 @import Foundation;
+@import HealthKit;
 
 #import <MetricsKit/MetricsKit.h>
 

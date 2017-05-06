@@ -41,7 +41,7 @@
                                forQuantityType:identifier
                                       fromDate:startDate
                                         toDate:endDate
-                        usingCompletionHandler:^(NSArray<MTSQuantitySample *> * _Nullable samples) {
+                        usingCompletionHandler:^(NSArray * _Nullable samples) {
                             [this configureInterfaceTable:this.resultsInterfaceTable WithHealthSamples:samples];
                         }];
     
@@ -53,7 +53,7 @@
     [self setDateFormatter:formatter];
 }
 
-- (void)configureInterfaceTable:(WKInterfaceTable *)table WithHealthSamples:(NSArray<MTSQuantitySample *> *)samples {
+- (void)configureInterfaceTable:(WKInterfaceTable *)table WithHealthSamples:(NSArray *)samples {
     NSInteger rowNumber = [samples count];
     if (rowNumber == 0) {
         return;
@@ -61,19 +61,19 @@
     
     [table setNumberOfRows:rowNumber withRowType:@"HealthDataSampleRow"];
     
-    NSString *unit = [[samples objectAtIndex:0] unit];
-    [[self unitsInterfaceLabel] setText:unit];
-    
-    for (NSInteger i = 0; i < rowNumber; i++) {
-        MTSHealthResultsTableRowController *controller = [table rowControllerAtIndex:i];
-        MTSQuantitySample *sample = [samples objectAtIndex:i];
-        
-        NSDate *date = [sample date];
-        [[controller sampleDateLabel] setText:[[self dateFormatter] stringFromDate:date]];
-        
-        NSNumber *amount = [sample amount];
-        [[controller sampleAmountLabel] setText:[NSString stringWithFormat:@"%.0f", [amount doubleValue]]];
-    }
+//    NSString *unit = [[samples objectAtIndex:0] unit];
+//    [[self unitsInterfaceLabel] setText:unit];
+//    
+//    for (NSInteger i = 0; i < rowNumber; i++) {
+//        MTSHealthResultsTableRowController *controller = [table rowControllerAtIndex:i];
+//        MTSQuantitySample *sample = [samples objectAtIndex:i];
+//        
+//        NSDate *date = [sample date];
+//        [[controller sampleDateLabel] setText:[[self dateFormatter] stringFromDate:date]];
+//        
+//        NSNumber *amount = [sample amount];
+//        [[controller sampleAmountLabel] setText:[NSString stringWithFormat:@"%.0f", [amount doubleValue]]];
+//    }
 }
 
 - (void)willActivate {

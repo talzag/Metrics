@@ -81,7 +81,7 @@
                             forQuantityType:HKQuantityTypeIdentifierActiveEnergyBurned
                                    fromDate:start
                                      toDate:end
-                     usingCompletionHandler:^(NSArray<MTSQuantitySample *> * _Nullable samples) {
+                     usingCompletionHandler:^(NSArray * _Nullable samples) {
                          XCTAssertTrue([samples count] > 0);
                          [queryExpectation fulfill];
                      }];

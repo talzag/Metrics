@@ -18,6 +18,6 @@ extern NSString * const _Nonnull MTSGraphLineColorKey;
 extern NSString * const _Nonnull MTSGraphDataPointsKey;
 extern NSString * const _Nonnull MTSGraphDataIdentifierKey;
 
-void MTSDrawGraph(CGContextRef _Nonnull context, CGRect rect, NSArray <NSDictionary<NSString *,id> *> * _Nullable dataPoints, CGColorRef _Nullable topColor, CGColorRef _Nullable bottomColor);
+void MTSDrawGraph(CGContextRef _Nonnull context, CGRect rect, NSSet <MTSQueryDataConfiguration *> * _Nullable dataPoints, CGColorRef _Nullable topColor, CGColorRef _Nullable bottomColor);
 
 #endif /* MTSGraphDrawing_h */
