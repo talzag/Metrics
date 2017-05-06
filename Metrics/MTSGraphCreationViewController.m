@@ -104,7 +104,7 @@
     MTSColorPickerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"healthDataCell"];
     
     MTSQueryDataConfiguration *config = [[self queryDataConfigurations] objectAtIndex:[indexPath row]];
-    NSString *value = [[self healthTypeNameLookup] objectForKey:[config healthKitQuantityTypeIdentifier]];
+    NSString *value = [[self healthTypeNameLookup] objectForKey:[config healthKitTypeIdentifier]];
     
     [[cell textLabel] setText:value];
     

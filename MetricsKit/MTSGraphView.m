@@ -25,6 +25,35 @@
     [self setNeedsDisplay];
 }
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        NSData *xTitleData = [aDecoder decodeObjectForKey:@"xAxisTitle"];
+        _xAxisTitle = [[NSString alloc] initWithData:xTitleData encoding:NSUTF8StringEncoding];
+        
+        NSData *yTitleData = [aDecoder decodeObjectForKey:@"yAxisTitle"];
+        _yAxisTitle = [[NSString alloc] initWithData:yTitleData encoding:NSUTF8StringEncoding];
+        
+        _topColor = [aDecoder decodeObjectForKey:@"topColor"];
+        _bottomColor = [aDecoder decodeObjectForKey:@"bottomColor"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
+
+    NSData *xAxisData = [_xAxisTitle dataUsingEncoding:NSUTF8StringEncoding];
+    [aCoder encodeObject:xAxisData forKey:@"xAxisTitle"];
+    
+    NSData *yAxisData = [_yAxisTitle dataUsingEncoding:NSUTF8StringEncoding];
+    [aCoder encodeObject:yAxisData forKey:@"yAxisTitle"];
+    
+    [aCoder encodeObject:_topColor forKey:@"topColor"];
+    [aCoder encodeObject:_bottomColor forKey:@"bottomColor"];
+}
+
+
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     

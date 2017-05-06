@@ -74,7 +74,7 @@
     NSSet <MTSQueryDataConfiguration *>*dataConfigurations = [[self query] dataTypeConfigurations];
     NSMutableArray <HKQuantityType *>*types = [NSMutableArray array];
     for (MTSQueryDataConfiguration *config in dataConfigurations) {
-        HKQuantityType *type = [HKQuantityType quantityTypeForIdentifier:[config healthKitQuantityTypeIdentifier]];
+        HKQuantityType *type = [HKQuantityType quantityTypeForIdentifier:[config healthKitTypeIdentifier]];
         [types addObject:type];
     }
     

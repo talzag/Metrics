@@ -12,8 +12,15 @@
         <attribute name="startDate" attributeType="Date" minDateTimeInterval="-1609441200" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="graph" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTSGraph" inverseName="query" inverseEntity="MTSGraph" syncable="YES"/>
     </entity>
+    <entity name="MTSQueryDataConfiguration" representedClassName="MTSQueryDataConfiguration" syncable="YES">
+        <attribute name="fetchedDataPoints" optional="YES" attributeType="Transformable" customClassName="NSArray" syncable="YES"/>
+        <attribute name="healthKitTypeIdentifier" attributeType="String" syncable="YES"/>
+        <attribute name="healthTypeDisplayName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lineColor" optional="YES" attributeType="Transformable" valueTransformerName="MTSColorTransformer" customClassName="MTSColorBox" syncable="YES"/>
+    </entity>
     <elements>
         <element name="MTSGraph" positionX="-155" positionY="-60" width="128" height="105"/>
         <element name="MTSQuery" positionX="54" positionY="-54" width="128" height="105"/>
+        <element name="MTSQueryDataConfiguration" positionX="-54" positionY="-18" width="128" height="105"/>
     </elements>
 </model>

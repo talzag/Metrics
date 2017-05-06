@@ -79,10 +79,9 @@
     NSDictionary *healthTypes = MTSQuantityTypeIdentifiers();
     NSMutableSet *configs = [NSMutableSet set];
     for (HKQuantityTypeIdentifier ident in types) {
-        MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithIdentifier:ident
-                                                                                      displayName:[healthTypes valueForKey:ident]
-                                                                                        lineColor:nil
-                                                                                fetchedDataPoints:nil];
+        MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:context];
+        [config setHealthKitTypeIdentifier:ident];
+        [config setHealthTypeDisplayName:[healthTypes valueForKey:ident]];
         [configs addObject:config];
     }
     [query setDataTypeConfigurations:[NSSet setWithSet:configs]];
@@ -137,10 +136,9 @@
     NSDictionary *healthTypes = MTSQuantityTypeIdentifiers();
     NSMutableSet *configs = [NSMutableSet set];
     for (HKQuantityTypeIdentifier ident in types) {
-        MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithIdentifier:ident
-                                                                                      displayName:[healthTypes valueForKey:ident]
-                                                                                        lineColor:nil
-                                                                                fetchedDataPoints:nil];
+        MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:context];
+        [config setHealthKitTypeIdentifier:ident];
+        [config setHealthTypeDisplayName:[healthTypes valueForKey:ident]];
         [configs addObject:config];
     }
     [query setDataTypeConfigurations:[NSSet setWithSet:configs]];
@@ -196,7 +194,7 @@
     CGSize size = CGSizeMake(200, 150);
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
     
-    MTSQueryDataConfiguration *config = [MTSQueryDataConfiguration new];
+    MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:[[self dataStack] managedObjectContext]];
     [config setFetchedDataPoints:@[@0, @75, @25, @50, @100, @50, @75, @25, @0]];
     NSSet *testSet = [NSSet setWithObject:config];
     
@@ -214,7 +212,7 @@
     CGSize size = CGSizeMake(200, 150);
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
     
-    MTSQueryDataConfiguration *config = [MTSQueryDataConfiguration new];
+    MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:[[self dataStack] managedObjectContext]];
     [config setFetchedDataPoints:@[]];
     NSSet *testSet = [NSSet setWithObject:config];
 
@@ -233,7 +231,7 @@
     CGSize size = CGSizeMake(200, 150);
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
     
-    MTSQueryDataConfiguration *config = [MTSQueryDataConfiguration new];
+    MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:[[self dataStack] managedObjectContext]];
     [config setFetchedDataPoints:@[]];
     NSSet *testSet = [NSSet setWithObject:config];
 

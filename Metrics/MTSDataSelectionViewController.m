@@ -40,15 +40,6 @@
     return [[self healthCategories] count];
 }
 
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    NSString *title = [[self healthTypeIconNames] objectAtIndex:section];
-//    
-//    title = [title stringByReplacingOccurrencesOfString:@"-" withString:@" "];
-//    title = [title localizedCapitalizedString];
-//    
-//    return title;
-//}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSDictionary *category = [[self healthCategories] objectAtIndex:section];
     return [category count];
@@ -141,10 +132,9 @@
         NSMutableSet *configs = [NSMutableSet set];
         for (HKQuantityTypeIdentifier type in [self selectedHealthTypes]) {
             NSString *displayName = [[self healthCategories] valueForKey:type];
-            MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithIdentifier:type
-                                                                                            displayName:displayName
-                                                                                              lineColor:nil
-                                                                                      fetchedDataPoints:nil];
+            MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:[[self graph] managedObjectContext]];
+            [config setHealthTypeDisplayName:displayName];
+            [config setHealthKitTypeIdentifier:type];
             [configs addObject:config];
             
         }

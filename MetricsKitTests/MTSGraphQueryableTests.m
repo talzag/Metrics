@@ -85,10 +85,9 @@
     NSDictionary *healthTypes = MTSQuantityTypeIdentifiers();
     NSMutableSet *configs = [NSMutableSet set];
     for (HKQuantityTypeIdentifier ident in types) {
-        MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithIdentifier:ident
-                                                                                        displayName:[healthTypes valueForKey:ident]
-                                                                                          lineColor:nil
-                                                                                  fetchedDataPoints:nil];
+        MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:context];
+        [config setHealthKitTypeIdentifier:ident];
+        [config setHealthTypeDisplayName:[healthTypes valueForKey:ident]];
         [configs addObject:config];
     }
     [query setDataTypeConfigurations:[NSSet setWithSet:configs]];
@@ -153,10 +152,9 @@
     NSDictionary *healthTypes = MTSQuantityTypeIdentifiers();
     NSMutableSet *configs = [NSMutableSet set];
     for (HKQuantityTypeIdentifier ident in types) {
-        MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithIdentifier:ident
-                                                                                      displayName:[healthTypes valueForKey:ident]
-                                                                                        lineColor:nil
-                                                                                fetchedDataPoints:nil];
+        MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:context];
+        [config setHealthKitTypeIdentifier:ident];
+        [config setHealthTypeDisplayName:[healthTypes valueForKey:ident]];
         [configs addObject:config];
     }
     [query setDataTypeConfigurations:[NSSet setWithSet:configs]];

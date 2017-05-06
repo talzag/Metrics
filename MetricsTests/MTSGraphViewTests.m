@@ -21,12 +21,6 @@
 - (void)setUp {
     [super setUp];
     
-//    MTSQueryDataConfiguration *config = [MTSQueryDataConfiguration new];
-//    [config setFetchedDataPoints:@[@0, @75, @25, @50, @100, @50, @75, @25, @0]];
-//    NSSet *testSet = [NSSet setWithObject:config];
-//
-//    [self setTestData:testSet];
-    
     CGRect frame = CGRectMake(0, 0, 300, 200);
     MTSGraphView *view = [[MTSGraphView alloc] initWithFrame:frame];
     
