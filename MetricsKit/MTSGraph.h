@@ -12,13 +12,15 @@
 #include <Foundation/Foundation.h>
 #include <HealthKit/HealthKit.h>
 #import "MTSGraph+CoreDataClass.h"
+#import "MTSQueryDataConfiguration.h"
+
 @interface MTSGraph (MTSQueryable)
 
-- (void)executeQueryWithHealthStore:(HKHealthStore * _Nonnull)healthStore usingCompletionHandler:(void (^ _Nullable)(NSArray * _Nullable, NSError * _Nullable))completionHandler;
+- (void)executeQueryWithHealthStore:(HKHealthStore * _Nonnull)healthStore usingCompletionHandler:(void (^ _Nullable)(NSSet * _Nullable, NSError * _Nullable))completionHandler;
 
 - (void)graphDataFromQueryResults:(NSArray <NSArray<HKQuantitySample *> *>* _Nonnull)results
                   withHealthStore:(HKHealthStore * _Nonnull)healthStore
-                completionHandler:(void (^ _Nonnull)(NSArray <NSDictionary<NSString *,id> *> * _Nullable, NSError * _Nullable))completionHandler;
+                completionHandler:(void (^ _Nonnull)(NSSet <MTSQueryDataConfiguration *> * _Nullable, NSError * _Nullable))completionHandler;
 
 @end
 

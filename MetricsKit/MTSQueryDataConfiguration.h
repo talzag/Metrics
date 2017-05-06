@@ -12,8 +12,14 @@
 
 @interface MTSQueryDataConfiguration : NSObject
 
-@property (nonatomic) HKQuantityTypeIdentifier healthKitQuantityTypeIdentifier;
-@property (nonatomic) NSString *quantityTypeDisplayName;
-@property (nonatomic) MTSColorBox *lineColor;
+@property (nonatomic, nonnull) HKQuantityTypeIdentifier healthKitQuantityTypeIdentifier;
+@property (nonatomic, nonnull) NSString *quantityTypeDisplayName;
+@property (nonatomic, nullable) MTSColorBox *lineColor;
+@property (nonatomic, nullable) NSArray <NSNumber *>*fetchedDataPoints;
+
+- (instancetype _Nonnull )initWithIdentifier:(HKQuantityTypeIdentifier _Nonnull)identifier
+                       displayName:(NSString *_Nonnull)displayName
+                                   lineColor:(MTSColorBox *_Nullable)lineColor
+                           fetchedDataPoints:(NSArray <NSNumber *>*_Nullable)dataPoints;
 
 @end
