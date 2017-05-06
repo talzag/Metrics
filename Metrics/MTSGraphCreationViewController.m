@@ -84,7 +84,9 @@
     NSInteger i;
     for (i = 0; i < [configs count]; i++) {
         MTSQueryDataConfiguration *config = [configs objectAtIndex:i];
-        MTSColorPickerTableViewCell *cell = [[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathWithIndex:i]];
+        
+        NSIndexPath*indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+        MTSColorPickerTableViewCell *cell = [[self tableView] cellForRowAtIndexPath: indexPath];
         
         UIColor *selected = [[cell colorSwatchView] backgroundColor];
         MTSColorBox *lineColor = [[MTSColorBox alloc] initWithCGColorRef:[selected CGColor]];
