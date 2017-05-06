@@ -76,7 +76,16 @@
     
     MTSQuery *query = [[MTSQuery alloc] initWithContext:context];
     NSSet *types = [NSSet setWithObjects: HKQuantityTypeIdentifierActiveEnergyBurned, HKQuantityTypeIdentifierBasalEnergyBurned, nil];
-//    [query setQuantityTypes:types];
+    NSDictionary *healthTypes = MTSQuantityTypeIdentifiers();
+    NSMutableSet *configs = [NSMutableSet set];
+    for (HKQuantityTypeIdentifier ident in types) {
+        MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithIdentifier:ident
+                                                                                      displayName:[healthTypes valueForKey:ident]
+                                                                                        lineColor:nil
+                                                                                fetchedDataPoints:nil];
+        [configs addObject:config];
+    }
+    [query setDataTypeConfigurations:[NSSet setWithSet:configs]];
     [query setStartDate:start];
     [query setEndDate:end];
     [graph setQuery:query];
@@ -125,7 +134,16 @@
     
     MTSQuery *query = [[MTSQuery alloc] initWithContext:context];
     NSSet *types = [NSSet setWithObjects: HKQuantityTypeIdentifierActiveEnergyBurned, HKQuantityTypeIdentifierBasalEnergyBurned, nil];
-//    [query setQuantityTypes:types];
+    NSDictionary *healthTypes = MTSQuantityTypeIdentifiers();
+    NSMutableSet *configs = [NSMutableSet set];
+    for (HKQuantityTypeIdentifier ident in types) {
+        MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithIdentifier:ident
+                                                                                      displayName:[healthTypes valueForKey:ident]
+                                                                                        lineColor:nil
+                                                                                fetchedDataPoints:nil];
+        [configs addObject:config];
+    }
+    [query setDataTypeConfigurations:[NSSet setWithSet:configs]];
     [query setStartDate:start];
     [query setEndDate:end];
     [graph setQuery:query];
@@ -177,10 +195,10 @@
 - (void)testGraphDrawingPerformance {
     CGSize size = CGSizeMake(200, 150);
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
-    NSDictionary *testData = @{
-                               MTSGraphDataPointsKey: @[@0, @75, @25, @50, @100, @50, @75, @25, @0]
-                               };
-    NSSet *testSet = [NSSet setWithObject:testData];
+    
+    MTSQueryDataConfiguration *config = [MTSQueryDataConfiguration new];
+    [config setFetchedDataPoints:@[@0, @75, @25, @50, @100, @50, @75, @25, @0]];
+    NSSet *testSet = [NSSet setWithObject:config];
     
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -195,10 +213,11 @@
 - (void)testGraphDrawingWithEmptyDataSet {
     CGSize size = CGSizeMake(200, 150);
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
-    NSDictionary *testData = @{
-                               MTSGraphDataPointsKey: @[]
-                               };
-    NSSet *testSet = [NSSet setWithObject:testData];
+    
+    MTSQueryDataConfiguration *config = [MTSQueryDataConfiguration new];
+    [config setFetchedDataPoints:@[]];
+    NSSet *testSet = [NSSet setWithObject:config];
+
     
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -213,10 +232,11 @@
 - (void)testGraphDrawingWithGradients {
     CGSize size = CGSizeMake(200, 150);
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
-    NSDictionary *testData = @{
-                               MTSGraphDataPointsKey: @[]
-                               };
-    NSSet *testSet = [NSSet setWithObject:testData];
+    
+    MTSQueryDataConfiguration *config = [MTSQueryDataConfiguration new];
+    [config setFetchedDataPoints:@[]];
+    NSSet *testSet = [NSSet setWithObject:config];
+
     
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
