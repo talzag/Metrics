@@ -20,7 +20,17 @@
         [readTypes addObject:[HKObjectType quantityTypeForIdentifier:key]];
     }];
     
-    [healthStore requestAuthorizationToShareTypes:nil readTypes:readTypes completion:^(BOOL success, NSError * _Nullable error) {
+    NSSet *shareTypes;
+    
+#ifdef DEBUG
+    HKQuantityType *activeEnergy = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierActiveEnergyBurned];
+    HKQuantityType *dietaryEnery = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
+    HKQuantityType *baseEnergy = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBasalEnergyBurned];
+    
+    shareTypes =  [NSSet setWithObjects:activeEnergy, dietaryEnery, baseEnergy, nil];
+#endif
+    
+    [healthStore requestAuthorizationToShareTypes:shareTypes readTypes:readTypes completion:^(BOOL success, NSError * _Nullable error) {
         completionHandler(success, error);
     }];
 }
