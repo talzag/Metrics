@@ -147,7 +147,7 @@ CGFloat MTSGraphPositionOnYAxisForValue(CGRect rect, CGFloat value, CGFloat maxV
     return MTSGraphHeight(rect) - ratio * height;
 }
 
-void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSSet <MTSQueryDataConfiguration *> *dataPoints) {
+void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <MTSQueryDataConfiguration *> *dataPoints) {
     CGFloat maxValue = 0.0;
     for (MTSQueryDataConfiguration *config in dataPoints) {
         NSArray *values = [config fetchedDataPoints];
@@ -160,13 +160,7 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSSet <MTSQueryDa
     CGContextSetLineWidth(context, 2.0);
     
     for (MTSQueryDataConfiguration *config in dataPoints) {
-        CGContextSaveGState(context);
-        
         CGMutablePathRef graphPath = CGPathCreateMutable();
-
-        MTSColorBox *lineColorBox = [config lineColor];
-        CGColorRef lineColor = [lineColorBox color];
-        CGContextSetStrokeColorWithColor(context, lineColor);
         
         NSArray <NSNumber *>*values = [config fetchedDataPoints];
         NSInteger size = values.count;
@@ -197,17 +191,23 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSSet <MTSQueryDa
                 CGContextSetLineDash(context, 0, NULL, 0);
             }
             
+            MTSColorBox *lineColorBox = [config lineColor];
+            CGColorRef lineColor = [lineColorBox color];
+            
+            CGContextSaveGState(context);
+
             CGContextAddPath(context, graphPath);
+            CGContextSetStrokeColorWithColor(context, lineColor);
             CGContextStrokePath(context);
+            
+            CGContextRestoreGState(context);
         }
         
         CGPathRelease(graphPath);
-        
-        CGContextRestoreGState(context);
     }
 }
 
-void MTSDrawGraph(CGContextRef context, CGRect rect, NSSet <MTSQueryDataConfiguration *> * _Nullable dataPoints, CGColorRef _Nullable topColor, CGColorRef _Nullable bottomColor) {
+void MTSDrawGraph(CGContextRef context, CGRect rect, NSArray <MTSQueryDataConfiguration *> * _Nullable dataConfigurations, CGColorRef _Nullable topColor, CGColorRef _Nullable bottomColor) {
     CGContextRetain(context);
     CGContextSaveGState(context);
 
@@ -222,9 +222,9 @@ void MTSDrawGraph(CGContextRef context, CGRect rect, NSSet <MTSQueryDataConfigur
     CGContextRestoreGState(context);
 
     // plot data points
-    if (dataPoints) {
+    if (dataConfigurations) {
         CGContextSaveGState(context);
-        MTSGraphPlotDataPoints(context, rect, dataPoints);
+        MTSGraphPlotDataPoints(context, rect, dataConfigurations);
         CGContextRestoreGState(context);
     }
     

@@ -129,7 +129,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"createGraph"]) {
-        NSMutableSet *configs = [NSMutableSet set];
+        NSMutableArray *configs = [NSMutableArray array];
         
         NSDictionary <HKQuantityTypeIdentifier, NSString *> *identifiers = MTSQuantityTypeIdentifiers();
         for (HKQuantityTypeIdentifier type in [self selectedHealthTypes]) {
@@ -140,7 +140,7 @@
             [configs addObject:config];
             
         }
-        [[[self graph] query] setDataTypeConfigurations:[NSSet setWithSet:configs]];
+        [[[self graph] query] setDataTypeConfigurations:[NSSet setWithArray:configs]];
         
         MTSGraphCreationViewController *controller = (MTSGraphCreationViewController *)[segue destinationViewController];
         [controller setGraph:[self graph]];

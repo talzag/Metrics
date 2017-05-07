@@ -15,10 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<MTSQueryDataConfiguration *> *)fetchRequest;
 
-@property (nullable, nonatomic, copy) NSString *healthTypeDisplayName;
-@property (nullable, nonatomic, retain) MTSColorBox *lineColor;
 @property (nullable, nonatomic, retain) NSArray *fetchedDataPoints;
 @property (nullable, nonatomic, copy) NSString *healthKitTypeIdentifier;
+@property (nullable, nonatomic, copy) NSString *healthTypeDisplayName;
+@property (nullable, nonatomic, retain) MTSColorBox *lineColor;
+@property (nullable, nonatomic, retain) MTSQuery *query;
 
 @end
 

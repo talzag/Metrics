@@ -133,7 +133,7 @@ static NSString * const cellIdentifier = @"GraphCell";
     MTSGraph *graph = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     
     [graph executeQueryWithHealthStore:[self healthStore]
-                usingCompletionHandler:^(NSSet * _Nullable results, NSError * _Nullable error) {
+                usingCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
                     if (error) {
                         return;
                     }

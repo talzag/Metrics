@@ -12,7 +12,7 @@
 
 @implementation MTSGraph (MTSQueryable)
 
-- (void)executeQueryWithHealthStore:(HKHealthStore * _Nonnull)healthStore usingCompletionHandler:(void (^ _Nullable)(NSSet * _Nullable, NSError * _Nullable))completionHandler {
+- (void)executeQueryWithHealthStore:(HKHealthStore * _Nonnull)healthStore usingCompletionHandler:(void (^ _Nullable)(NSArray * _Nullable, NSError * _Nullable))completionHandler {
     if (![self query]) {
         NSError *error = [NSError errorWithDomain:@"com.dstrokis.Metrics"
                                              code:1
@@ -93,7 +93,7 @@
         
         [self graphDataFromQueryResults:finishedArray
                         withHealthStore:healthStore
-                      completionHandler:^(NSSet * queryDataConfigurations, NSError * graphDataError) {
+                      completionHandler:^(NSArray * queryDataConfigurations, NSError * graphDataError) {
                           completionHandler(queryDataConfigurations, graphDataError);
                       }];
     });
@@ -101,7 +101,7 @@
 
 - (void)graphDataFromQueryResults:(NSArray <NSArray<HKQuantitySample *> *>* _Nonnull)results
                   withHealthStore:(HKHealthStore * _Nonnull)healthStore
-                completionHandler:(void (^ _Nonnull)(NSSet <MTSQueryDataConfiguration *> * _Nullable, NSError * _Nullable))completionHandler {
+                completionHandler:(void (^ _Nonnull)(NSArray <MTSQueryDataConfiguration *> * _Nullable, NSError * _Nullable))completionHandler {
     NSMutableArray *types = [NSMutableArray array];
     for (NSArray <HKQuantitySample *>* sampleSet in results) {
         HKQuantitySample *sample = [sampleSet firstObject];
@@ -116,11 +116,6 @@
             completionHandler(nil, error);
             return;
         }
-        
-        // dataTypeConfigurations should already have these properties configured before getting here:
-        // - lineColor
-        // - healthKitQuantityTypeIdentifier
-        // - quantityTypeDisplayName
         
         for (MTSQueryDataConfiguration *dataConfig in [[self query] dataTypeConfigurations]) {
             NSMutableArray *fetchedDataPoints = [NSMutableArray array];
@@ -142,36 +137,13 @@
             [dataConfig setFetchedDataPoints:[NSArray arrayWithArray:fetchedDataPoints]];
         }
         
-//        NSMutableArray *graphDataSet = [NSMutableArray array];
-//        for (NSArray <HKQuantitySample *> *sampleSet in results) {
-//            if ([sampleSet count]) {
-//                HKQuantityType *type = [[sampleSet firstObject] quantityType];
-//                HKUnit *unit = [preferredUnits objectForKey:type];
-//                
-//                NSMutableArray *amounts = [NSMutableArray array];
-//                
-//                for (HKQuantitySample *sample in sampleSet) {
-//                    double quantity = [[sample quantity] doubleValueForUnit:unit];
-//                    NSNumber *amount = [NSNumber numberWithDouble:quantity];
-//                    [amounts addObject:amount];
-//                }
-//                
-//                // FIXME: Use model class here to wrap up this data instead of using a dictionary
-//                NSDictionary *lineData = @{
-//                                           MTSGraphDataPointsKey: amounts,
-//                                           MTSGraphDataIdentifierKey: [type identifier]
-//                                           };
-//                [graphDataSet addObject:lineData];
-//            }
-//        }
-        
-        completionHandler([[self query] dataTypeConfigurations], nil);
+        completionHandler([[[self query] dataTypeConfigurations] allObjects], nil);
     };
     
     if ([types count]) {
         [healthStore preferredUnitsForQuantityTypes:[NSSet setWithArray:types] completion:unitsHandler];
     } else {
-        completionHandler([NSSet set], nil);
+        completionHandler(@[], nil);
     }
 }
 

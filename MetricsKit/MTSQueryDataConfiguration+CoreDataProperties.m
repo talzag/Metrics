@@ -14,9 +14,10 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"MTSQueryDataConfiguration"];
 }
 
-@dynamic healthTypeDisplayName;
-@dynamic lineColor;
 @dynamic fetchedDataPoints;
 @dynamic healthKitTypeIdentifier;
+@dynamic healthTypeDisplayName;
+@dynamic lineColor;
+@dynamic query;
 
 @end

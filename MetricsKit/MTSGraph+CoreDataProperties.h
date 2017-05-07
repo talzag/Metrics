@@ -2,11 +2,12 @@
 //  MTSGraph+CoreDataProperties.h
 //  Metrics
 //
-//  Created by Daniel Strokis on 5/3/17.
+//  Created by Daniel Strokis on 5/6/17.
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
 #import "MTSGraph+CoreDataClass.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 

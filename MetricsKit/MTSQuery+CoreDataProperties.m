@@ -2,7 +2,7 @@
 //  MTSQuery+CoreDataProperties.m
 //  Metrics
 //
-//  Created by Daniel Strokis on 5/4/17.
+//  Created by Daniel Strokis on 5/7/17.
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
@@ -15,8 +15,8 @@
 }
 
 @dynamic endDate;
-@dynamic dataTypeConfigurations;
 @dynamic startDate;
 @dynamic graph;
+@dynamic dataTypeConfigurations;
 
 @end

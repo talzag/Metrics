@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "MTSColorBox.h"
+#import "MTSQuery.h"
 
-@class MTSColorBox, NSArray;
+@class MTSColorBox, NSArray, MTSQuery;
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -18,6 +18,6 @@ IB_DESIGNABLE
 @property (nonatomic) IBInspectable UIColor *topColor;
 @property (nonatomic) IBInspectable UIColor *bottomColor;
 
-@property (nonatomic) NSSet <MTSQueryDataConfiguration *> *dataPoints;
+@property (nonatomic) NSArray <MTSQueryDataConfiguration *> *dataPoints;
 
 @end

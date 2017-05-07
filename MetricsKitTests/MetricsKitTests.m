@@ -92,7 +92,7 @@
     [context save:nil];
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"Complete data flow test"];
-    [graph executeQueryWithHealthStore:[self healthStore] usingCompletionHandler:^(NSSet * _Nullable results, NSError * _Nullable error) {
+    [graph executeQueryWithHealthStore:[self healthStore] usingCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
         MTSRealCalorieValue([self healthStore], [[graph query] startDate], [[graph query] endDate], ^(double calories, NSError *error) {
             XCTAssertEqual([results count], 2);
             XCTAssertEqual(calories, -100);
@@ -139,34 +139,56 @@
         MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:context];
         [config setHealthKitTypeIdentifier:ident];
         [config setHealthTypeDisplayName:[healthTypes valueForKey:ident]];
+        [config setLineColor:[[MTSColorBox alloc] initWithCGColorRef:[[UIColor blueColor] CGColor]]];
+        [config setFetchedDataPoints:@[]];
         [configs addObject:config];
     }
-    [query setDataTypeConfigurations:[NSSet setWithSet:configs]];
+    NSSet *configSet = [NSSet setWithSet:configs];
+    [query setDataTypeConfigurations:configSet];
     [query setStartDate:start];
     [query setEndDate:end];
     [graph setQuery:query];
     
-    [context save:nil];
-    
-    NSManagedObjectID *queryID = [query objectID];
+    NSError *error;
+    [context save:&error];
+    if (error) {
+        XCTFail(@"Error saving context: %@", error.description);
+    }
+
+    graph = nil;
     query = nil;
+    configSet = nil;
+    
+    NSManagedObjectContext *newContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    [newContext setPersistentStoreCoordinator:[context persistentStoreCoordinator]];
+    context = nil;
     
     NSFetchRequest *queryFetch = [MTSQuery fetchRequest];
-    [queryFetch setPredicate:[NSPredicate predicateWithFormat:@"objectID == %@", queryID]];
-    NSArray *fetchResults = [context executeFetchRequest:queryFetch error:nil];
+    NSArray <MTSQuery *>*fetchResults = [newContext executeFetchRequest:queryFetch error:nil];
     XCTAssertEqual([fetchResults count], 1);
     XCTAssertTrue([[fetchResults firstObject] isKindOfClass:[MTSQuery class]]);
     XCTAssertEqualObjects([[fetchResults firstObject] startDate], start);
     XCTAssertEqualObjects([[fetchResults firstObject] endDate], end);
-    XCTAssertEqualObjects([[fetchResults firstObject] graph], graph);
+    XCTAssertEqual([[[[fetchResults firstObject] dataTypeConfigurations] allObjects] count], 2);
     
-    NSManagedObjectID *objectID = [graph objectID];
-    graph = nil;
+    NSComparator configComparator = ^NSComparisonResult(MTSQueryDataConfiguration *  _Nonnull obj1, MTSQueryDataConfiguration *  _Nonnull obj2) {
+        return [[obj1 healthKitTypeIdentifier] compare:[obj2 healthKitTypeIdentifier]];
+    };
+    NSArray *configArray = [[[fetchResults firstObject] dataTypeConfigurations] allObjects];
     
-    MTSGraph *fetchedGraph = [context objectWithID:objectID];
+    NSArray <MTSQueryDataConfiguration *> *sortedA = [configArray sortedArrayUsingComparator:configComparator];
+    NSArray <MTSQueryDataConfiguration *> *sortedB = [[configs allObjects] sortedArrayUsingComparator:configComparator];
+    
+    XCTAssertEqualObjects([[sortedA firstObject] objectID], [[sortedB firstObject] objectID]);
+    
+    NSFetchRequest *graphFetch = [MTSGraph fetchRequest];
+    NSArray <MTSGraph *>* results = [newContext executeFetchRequest:graphFetch error:nil];
+    MTSGraph *fetchedGraph = [results firstObject];
+    XCTAssertNotNil(fetchedGraph);
     XCTAssertEqualObjects([fetchedGraph topColor], cyanBox);
     XCTAssertEqualObjects([fetchedGraph bottomColor], blueBox);
     XCTAssertEqualObjects([fetchedGraph query], [fetchResults firstObject]);
+    XCTAssertEqualObjects([[fetchResults firstObject] graph], fetchedGraph);
 }
 
 - (void)testThatRealCalorieValueIsCalculated {
@@ -196,13 +218,12 @@
     
     MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:[[self dataStack] managedObjectContext]];
     [config setFetchedDataPoints:@[@0, @75, @25, @50, @100, @50, @75, @25, @0]];
-    NSSet *testSet = [NSSet setWithObject:config];
     
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     [self measureBlock:^{
-        MTSDrawGraph(context, rect, testSet, NULL, NULL);
+        MTSDrawGraph(context, rect, @[config], NULL, NULL);
     }];
     
     UIGraphicsEndImageContext();
@@ -214,14 +235,12 @@
     
     MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:[[self dataStack] managedObjectContext]];
     [config setFetchedDataPoints:@[]];
-    NSSet *testSet = [NSSet setWithObject:config];
-
     
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     [self measureBlock:^{
-        MTSDrawGraph(context, rect, testSet, NULL, NULL);
+        MTSDrawGraph(context, rect, @[config], NULL, NULL);
     }];
     
     UIGraphicsEndImageContext();
@@ -233,8 +252,6 @@
     
     MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:[[self dataStack] managedObjectContext]];
     [config setFetchedDataPoints:@[]];
-    NSSet *testSet = [NSSet setWithObject:config];
-
     
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -243,7 +260,7 @@
     CGColorRef blue = [[UIColor blueColor] CGColor];
     
     [self measureBlock:^{
-        MTSDrawGraph(context, rect, testSet, cyan, blue);
+        MTSDrawGraph(context, rect, @[config], cyan, blue);
     }];
     
     UIGraphicsEndImageContext();

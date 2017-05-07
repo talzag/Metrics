@@ -2,7 +2,7 @@
 //  MTSQuery+CoreDataProperties.h
 //  Metrics
 //
-//  Created by Daniel Strokis on 5/4/17.
+//  Created by Daniel Strokis on 5/7/17.
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
@@ -16,9 +16,18 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSFetchRequest<MTSQuery *> *)fetchRequest;
 
 @property (nullable, nonatomic, copy) NSDate *endDate;
-@property (nullable, nonatomic, retain) NSSet *dataTypeConfigurations;
 @property (nullable, nonatomic, copy) NSDate *startDate;
 @property (nullable, nonatomic, retain) MTSGraph *graph;
+@property (nullable, nonatomic, retain) NSSet<MTSQueryDataConfiguration *> *dataTypeConfigurations;
+
+@end
+
+@interface MTSQuery (CoreDataGeneratedAccessors)
+
+- (void)addDataTypeConfigurationsObject:(MTSQueryDataConfiguration *)value;
+- (void)removeDataTypeConfigurationsObject:(MTSQueryDataConfiguration *)value;
+- (void)addDataTypeConfigurations:(NSSet<MTSQueryDataConfiguration *> *)values;
+- (void)removeDataTypeConfigurations:(NSSet<MTSQueryDataConfiguration *> *)values;
 
 @end
 
