@@ -8,7 +8,6 @@
 
 @import XCTest;
 
-#import <MetricsKit/MetricsKit.h>
 #import "MTSGraphView.h"
 
 @interface MTSGraphViewTests : XCTestCase
@@ -38,6 +37,7 @@
     [[self graphView] setBottomColor:[UIColor grayColor]];
     [[self graphView] setXAxisTitle:@"X Axis Title for Encoding"];
     [[self graphView] setYAxisTitle:@"Y axis title for encoding"];
+    [[self graphView] setDataPoints:@[]];
     
     NSKeyedArchiver *aCoder = [NSKeyedArchiver new];
     [[self graphView] encodeWithCoder:aCoder];

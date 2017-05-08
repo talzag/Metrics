@@ -7,11 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "MTSGraphsTableViewController.h"
 
 @interface AppDelegate ()
-
-@property (strong) HKHealthStore *healthStore;
 
 @end
 
@@ -30,6 +27,10 @@
     }
     
     return YES;
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application {
+    [self saveContext];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {

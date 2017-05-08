@@ -11,11 +11,13 @@
 @import CoreData;
 
 #import <MetricsKit/MetricsKit.h>
+#import "MTSGraphsTableViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (readonly, strong) NSPersistentContainer *persistentContainer;
+@property (strong) HKHealthStore *healthStore;
 
 - (void)saveContext;
 
