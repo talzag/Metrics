@@ -191,16 +191,13 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <MTSQuery
                 CGContextSetLineDash(context, 0, NULL, 0);
             }
             
+            CGContextAddPath(context, graphPath);
+
             MTSColorBox *lineColorBox = [config lineColor];
             CGColorRef lineColor = [lineColorBox color];
-            
-            CGContextSaveGState(context);
-
-            CGContextAddPath(context, graphPath);
             CGContextSetStrokeColorWithColor(context, lineColor);
-            CGContextStrokePath(context);
             
-            CGContextRestoreGState(context);
+            CGContextStrokePath(context);
         }
         
         CGPathRelease(graphPath);
@@ -222,7 +219,7 @@ void MTSDrawGraph(CGContextRef context, CGRect rect, NSArray <MTSQueryDataConfig
     CGContextRestoreGState(context);
 
     // plot data points
-    if (dataConfigurations) {
+    if ([dataConfigurations count]) {
         CGContextSaveGState(context);
         MTSGraphPlotDataPoints(context, rect, dataConfigurations);
         CGContextRestoreGState(context);

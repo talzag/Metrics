@@ -93,7 +93,7 @@
         
         [self graphDataFromQueryResults:finishedArray
                         withHealthStore:healthStore
-                      completionHandler:^(NSArray * queryDataConfigurations, NSError * graphDataError) {
+                      completionHandler:^(NSArray <MTSQueryDataConfiguration *> * queryDataConfigurations, NSError * graphDataError) {
                           completionHandler(queryDataConfigurations, graphDataError);
                       }];
     });
@@ -122,6 +122,11 @@
             
             for (NSArray <HKQuantitySample *> *sampleSet in results) {
                 if (![sampleSet count]) {
+                    continue;
+                }
+                
+                HKQuantityTypeIdentifier sampleSetID = [[[sampleSet firstObject] quantityType] identifier];
+                if ([sampleSetID compare:[dataConfig healthKitTypeIdentifier]] != NSOrderedSame) {
                     continue;
                 }
                 
