@@ -8,58 +8,41 @@
 
 #import "MTSColorBox.h"
 
-//static NSString * const kCOMPONENTS_KEY = @"com.dstrokis.Metrics.color.components";
-static NSString * const kR = @"r";
-static NSString * const kG = @"g";
-static NSString * const kB = @"b";
-static NSString * const kA = @"a";
+static NSString * const kCOLOR_KEY = @"com.dstrokis.Metrics.color";
 
 @interface MTSColorBox ()
+
+@property (nonatomic) UIColor *internalColor;
 
 @end
 
 @implementation MTSColorBox
 
-- (instancetype)initWithCGColorRef:(CGColorRef)value {
+- (instancetype)initWithUIColor:(UIColor *)color {
     self = [super init];
     if (self) {
-        _color = value;
-        _numComponents = CGColorGetNumberOfComponents(value);
+        _internalColor = color;
+        _numComponents = CGColorGetNumberOfComponents([color CGColor]);
         NSAssert(_numComponents == 4, @"Components not RGBA");
     }
     return self;
 }
 
+- (instancetype)initWithCGColorRef:(CGColorRef)value {
+    return [self initWithUIColor:[UIColor colorWithCGColor:value]];
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
-    
-    NSArray *keys = @[kR, kG, kB, kA];
-    CGFloat components[4];
-    int i = 0;
-    for (NSString *key in keys) {
-        CGFloat component = [aDecoder decodeDoubleForKey:key];
-        components[i] = component;
-        i++;
-    }
-    
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGColorRef color = CGColorCreate(colorSpace, components);
-    _numComponents = CGColorGetNumberOfComponents(color);
-    _color = color;
-    CGColorRelease(color);
-    CGColorSpaceRelease(colorSpace);
-    
-    return self;
+    UIColor *color = [aDecoder decodeObjectForKey:kCOLOR_KEY];
+    return [self initWithUIColor:color];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    const CGFloat *components = CGColorGetComponents(_color);
-    NSArray *keys = @[kR, kG, kB, kA];
-    int i = 0;
-    for (NSString *key in keys) {
-        [aCoder encodeDouble:components[i] forKey:key];
-        i++;
-    }
+    [aCoder encodeObject:[self internalColor] forKey:kCOLOR_KEY];
+}
+
+- (CGColorRef)color {
+    return [[self internalColor] CGColor];
 }
 
 @end

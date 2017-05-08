@@ -9,11 +9,18 @@
 @import Foundation;
 @import CoreGraphics;
 
+#if TARGET_OS_WATCH
+@import WatchKit;
+#else
+@import UIKit;
+#endif
+
 @interface MTSColorBox : NSObject <NSCoding>
 
-- (instancetype)initWithCGColorRef:(CGColorRef)value;
-
-@property (readonly) CGColorRef color;
 @property NSUInteger numComponents;
+
+- (instancetype)initWithUIColor:(UIColor *)color;
+- (instancetype)initWithCGColorRef:(CGColorRef)value;
+- (CGColorRef)color;
 
 @end
