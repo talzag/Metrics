@@ -103,6 +103,13 @@
     [graph executeQueryWithHealthStore:[self healthStore] usingCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
         XCTAssertNotNil(results);
         XCTAssertTrue([[results firstObject] isKindOfClass:[MTSQueryDataConfiguration class]]);
+        XCTAssertTrue([results count] == 2);
+        
+        XCTAssertTrue([[(MTSQueryDataConfiguration *)[results firstObject] fetchedDataPoints] count] == 1);
+        XCTAssertTrue([[(MTSQueryDataConfiguration *)[results lastObject] fetchedDataPoints] count] == 1);
+        
+        XCTAssertTrue([[[(MTSQueryDataConfiguration *)[results firstObject] fetchedDataPoints] firstObject] isEqual:@100]);
+        XCTAssertTrue([[[(MTSQueryDataConfiguration *)[results lastObject] fetchedDataPoints] firstObject] isEqual:@100]);
         
         [queryExpectation fulfill];
     }];
