@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F60a" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="1.0">
     <entity name="MTSGraph" representedClassName="MTSGraph" syncable="YES">
-        <attribute name="bottomColor" optional="YES" attributeType="Transformable" valueTransformerName="MTSColorTransformer" customClassName="MTSColorBox" syncable="YES"/>
+        <attribute name="bottomColor" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="UIColor" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="topColor" optional="YES" attributeType="Transformable" valueTransformerName="MTSColorTransformer" customClassName="MTSColorBox" syncable="YES"/>
+        <attribute name="topColor" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="UIColor" syncable="YES"/>
         <relationship name="query" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTSQuery" inverseName="graph" inverseEntity="MTSQuery" syncable="YES"/>
     </entity>
     <entity name="MTSQuery" representedClassName="MTSQuery" syncable="YES">
@@ -13,14 +13,14 @@
         <relationship name="graph" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTSGraph" inverseName="query" inverseEntity="MTSGraph" syncable="YES"/>
     </entity>
     <entity name="MTSQueryDataConfiguration" representedClassName="MTSQueryDataConfiguration" syncable="YES">
-        <attribute name="fetchedDataPoints" optional="YES" attributeType="Transformable" valueTransformerName="MTSArrayTransformer" customClassName="NSArray" syncable="YES"/>
+        <attribute name="fetchedDataPoints" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="NSArray" syncable="YES"/>
         <attribute name="healthKitTypeIdentifier" attributeType="String" syncable="YES"/>
         <attribute name="healthTypeDisplayName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="lineColor" optional="YES" attributeType="Transformable" valueTransformerName="MTSColorTransformer" customClassName="MTSColorBox" syncable="YES"/>
+        <attribute name="lineColor" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="UIColor" syncable="YES"/>
         <relationship name="query" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTSQuery" inverseName="dataTypeConfigurations" inverseEntity="MTSQuery" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MTSGraph" positionX="-378" positionY="-216" width="128" height="103"/>
+        <element name="MTSGraph" positionX="-378" positionY="-216" width="128" height="105"/>
         <element name="MTSQuery" positionX="-117" positionY="-49" width="128" height="103"/>
         <element name="MTSQueryDataConfiguration" positionX="106" positionY="53" width="128" height="120"/>
     </elements>

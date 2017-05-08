@@ -2,7 +2,7 @@
 //  MTSQueryDataConfiguration+CoreDataProperties.h
 //  Metrics
 //
-//  Created by Daniel Strokis on 5/6/17.
+//  Created by Daniel Strokis on 5/7/17.
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSArray *fetchedDataPoints;
 @property (nullable, nonatomic, copy) NSString *healthKitTypeIdentifier;
 @property (nullable, nonatomic, copy) NSString *healthTypeDisplayName;
-@property (nullable, nonatomic, retain) MTSColorBox *lineColor;
+@property (nullable, nonatomic, retain) UIColor *lineColor;
 @property (nullable, nonatomic, retain) MTSQuery *query;
 
 @end

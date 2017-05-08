@@ -193,8 +193,8 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <MTSQuery
             
             CGContextAddPath(context, graphPath);
 
-            MTSColorBox *lineColorBox = [config lineColor];
-            CGColorRef lineColor = [lineColorBox color];
+            UIColor *configColor = [config lineColor];
+            CGColorRef lineColor = [configColor CGColor];
             CGContextSetStrokeColorWithColor(context, lineColor);
             
             CGContextStrokePath(context);

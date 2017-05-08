@@ -88,9 +88,8 @@
         NSIndexPath*indexPath = [NSIndexPath indexPathForRow:i inSection:0];
         MTSColorPickerTableViewCell *cell = [[self tableView] cellForRowAtIndexPath: indexPath];
         
-        UIColor *selected = [[cell colorSwatchView] backgroundColor];
-        MTSColorBox *lineColor = [[MTSColorBox alloc] initWithCGColorRef:[selected CGColor]];
-        [config setLineColor:lineColor];
+        UIColor *selectedColor = [[cell colorSwatchView] backgroundColor];
+        [config setLineColor:selectedColor];
     }
 }
 

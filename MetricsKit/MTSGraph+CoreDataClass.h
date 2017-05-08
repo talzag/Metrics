@@ -10,7 +10,12 @@
 #import <CoreData/CoreData.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <HealthKit/HealthKit.h>
-#import "MTSColorBox.h"
+
+#if TARGET_OS_WATCH
+@import WatchKit;
+#else
+@import UIKit;
+#endif
 
 @class MTSQuery;
 

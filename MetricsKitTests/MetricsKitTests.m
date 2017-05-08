@@ -63,11 +63,8 @@
     MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
     
     [graph setTitle:@"Test Graph"];
-    
-    MTSColorBox *blueBox = [[MTSColorBox alloc] initWithCGColorRef:[[UIColor blueColor] CGColor]];
-    MTSColorBox *cyanBox = [[MTSColorBox alloc] initWithCGColorRef:[[UIColor cyanColor] CGColor]];
-    [graph setTopColor:cyanBox];
-    [graph setBottomColor:blueBox];
+    [graph setTopColor:[UIColor cyanColor]];
+    [graph setBottomColor:[UIColor blueColor]];
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate *now = [NSDate date];
@@ -100,7 +97,7 @@
             CGSize size = CGSizeMake(150, 100);
             CGRect frame = CGRectMake(0.0, 0.0, size.width, size.height);
             UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
-            MTSDrawGraph(UIGraphicsGetCurrentContext(), frame, results, [[graph topColor] color], [[graph bottomColor] color]);
+            MTSDrawGraph(UIGraphicsGetCurrentContext(), frame, results, [[graph topColor] CGColor], [[graph bottomColor] CGColor]);
             UIGraphicsEndImageContext();
             
             [expectation fulfill];
@@ -120,11 +117,8 @@
     MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
     
     [graph setTitle:@"Test Graph"];
-    
-    MTSColorBox *blueBox = [[MTSColorBox alloc] initWithCGColorRef:[[UIColor blueColor] CGColor]];
-    MTSColorBox *cyanBox = [[MTSColorBox alloc] initWithCGColorRef:[[UIColor cyanColor] CGColor]];
-    [graph setTopColor:cyanBox];
-    [graph setBottomColor:blueBox];
+    [graph setTopColor:[UIColor cyanColor]];
+    [graph setBottomColor:[UIColor blueColor]];
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate *now = [NSDate date];
@@ -139,7 +133,7 @@
         MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:context];
         [config setHealthKitTypeIdentifier:ident];
         [config setHealthTypeDisplayName:[healthTypes valueForKey:ident]];
-        [config setLineColor:[[MTSColorBox alloc] initWithCGColorRef:[[UIColor blueColor] CGColor]]];
+        [config setLineColor:[UIColor blueColor]];
         [config setFetchedDataPoints:@[]];
         [configs addObject:config];
     }
@@ -185,8 +179,8 @@
     NSArray <MTSGraph *>* results = [newContext executeFetchRequest:graphFetch error:nil];
     MTSGraph *fetchedGraph = [results firstObject];
     XCTAssertNotNil(fetchedGraph);
-    XCTAssertEqualObjects([fetchedGraph topColor], cyanBox);
-    XCTAssertEqualObjects([fetchedGraph bottomColor], blueBox);
+    XCTAssertEqualObjects([fetchedGraph topColor], [UIColor cyanColor]);
+    XCTAssertEqualObjects([fetchedGraph bottomColor], [UIColor blueColor]);
     XCTAssertEqualObjects([fetchedGraph query], [fetchResults firstObject]);
     XCTAssertEqualObjects([[fetchResults firstObject] graph], fetchedGraph);
 }

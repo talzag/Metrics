@@ -6,12 +6,17 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
+#if TARGET_OS_WATCH
+@import WatchKit;
+#else
+@import UIKit;
+#endif
+
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "MTSColorBox.h"
 #import "MTSQuery.h"
 
-@class MTSColorBox, NSArray, MTSQuery;
+@class NSArray, MTSQuery;
 
 NS_ASSUME_NONNULL_BEGIN
 
