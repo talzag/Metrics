@@ -27,6 +27,7 @@
 		E32DAB7F1EBB6F8D000604D8 /* MTSQueryDataConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = E32DAB7C1EBB6F8D000604D8 /* MTSQueryDataConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3336E681E52918300AD0BC2 /* MTSGraphCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */; };
 		E3336E6B1E5291FC00AD0BC2 /* MTSGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3336E6A1E5291FC00AD0BC2 /* MTSGraphViewController.m */; };
+		E351E7041EC0B39800D940B4 /* MTSGraphsTableViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E351E7031EC0B39800D940B4 /* MTSGraphsTableViewControllerTests.m */; };
 		E352E6501EAD310A006E8372 /* MTSDataSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E352E64F1EAD310A006E8372 /* MTSDataSelectionViewController.m */; };
 		E3594A421E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = E3594A411E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3784B701E46494D005F87BC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784B6F1E46494D005F87BC /* main.m */; };
@@ -226,6 +227,7 @@
 		E3336E671E52918300AD0BC2 /* MTSGraphCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphCreationViewController.m; sourceTree = "<group>"; };
 		E3336E691E5291FC00AD0BC2 /* MTSGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraphViewController.h; sourceTree = "<group>"; };
 		E3336E6A1E5291FC00AD0BC2 /* MTSGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphViewController.m; sourceTree = "<group>"; };
+		E351E7031EC0B39800D940B4 /* MTSGraphsTableViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphsTableViewControllerTests.m; sourceTree = "<group>"; };
 		E352E64E1EAD310A006E8372 /* MTSDataSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSDataSelectionViewController.h; sourceTree = "<group>"; };
 		E352E64F1EAD310A006E8372 /* MTSDataSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSDataSelectionViewController.m; sourceTree = "<group>"; };
 		E3594A411E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSQuantityTypeIdentifiers.h; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 		E3784B871E46494E005F87BC /* MetricsTests */ = {
 			isa = PBXGroup;
 			children = (
+				E351E7031EC0B39800D940B4 /* MTSGraphsTableViewControllerTests.m */,
 				E3784B881E46494E005F87BC /* MetricsTests.m */,
 				E37362201E6B9D240072DFBC /* MTSGraphViewTests.m */,
 				E3784B8A1E46494E005F87BC /* Info.plist */,
@@ -947,6 +950,7 @@
 			files = (
 				E30838731E993CCA00348B46 /* MTSGraphViewTests.m in Sources */,
 				E3784B891E46494E005F87BC /* MetricsTests.m in Sources */,
+				E351E7041EC0B39800D940B4 /* MTSGraphsTableViewControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
