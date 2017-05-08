@@ -32,6 +32,10 @@
     return YES;
 }
 
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    [self saveContext];
+}
+
 - (void)applicationWillTerminate:(UIApplication *)application {
     [self saveContext];
 }
