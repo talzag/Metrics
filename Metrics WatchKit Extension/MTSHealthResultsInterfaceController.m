@@ -22,35 +22,35 @@
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
     
-    NSDictionary *contextDict = (NSDictionary *)context;
-    
-    HKQuantityTypeIdentifier identifier = (HKQuantityTypeIdentifier)[contextDict objectForKey:@"identifier"];
-    HKHealthStore *healthStore = (HKHealthStore *)[contextDict objectForKey:@"healthStore"];
-    NSString *name = (NSString *)[contextDict objectForKey:@"name"];
-    
-    [[self typeInterfaceLabel] setText:name];
-    
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDate *now = [NSDate date];
-    NSDate *startDate = [calendar startOfDayForDate:now];
-    NSDate *endDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:startDate options:0];
-    
-    __weak MTSHealthResultsInterfaceController *this = self;
-    
-    [MTSHealthStoreManager queryHealthStore:healthStore
-                               forQuantityType:identifier
-                                      fromDate:startDate
-                                        toDate:endDate
-                        usingCompletionHandler:^(NSArray * _Nullable samples) {
-                            [this configureInterfaceTable:this.resultsInterfaceTable WithHealthSamples:samples];
-                        }];
-    
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateStyle:NSDateFormatterShortStyle];
-    [formatter setTimeStyle:NSDateFormatterShortStyle];
-    [formatter setLocale:[NSLocale currentLocale]];
-    [formatter setCalendar:[NSCalendar currentCalendar]];
-    [self setDateFormatter:formatter];
+//    NSDictionary *contextDict = (NSDictionary *)context;
+//    
+//    HKQuantityTypeIdentifier identifier = (HKQuantityTypeIdentifier)[contextDict objectForKey:@"identifier"];
+//    HKHealthStore *healthStore = (HKHealthStore *)[contextDict objectForKey:@"healthStore"];
+//    NSString *name = (NSString *)[contextDict objectForKey:@"name"];
+//    
+//    [[self typeInterfaceLabel] setText:name];
+//    
+//    NSCalendar *calendar = [NSCalendar currentCalendar];
+//    NSDate *now = [NSDate date];
+//    NSDate *startDate = [calendar startOfDayForDate:now];
+//    NSDate *endDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:startDate options:0];
+//    
+//    __weak MTSHealthResultsInterfaceController *this = self;
+//    
+//    [MTSHealthStoreManager queryHealthStore:healthStore
+//                               forQuantityType:identifier
+//                                      fromDate:startDate
+//                                        toDate:endDate
+//                        usingCompletionHandler:^(NSArray * _Nullable samples) {
+//                            [this configureInterfaceTable:this.resultsInterfaceTable WithHealthSamples:samples];
+//                        }];
+//    
+//    NSDateFormatter *formatter = [NSDateFormatter new];
+//    [formatter setDateStyle:NSDateFormatterShortStyle];
+//    [formatter setTimeStyle:NSDateFormatterShortStyle];
+//    [formatter setLocale:[NSLocale currentLocale]];
+//    [formatter setCalendar:[NSCalendar currentCalendar]];
+//    [self setDateFormatter:formatter];
 }
 
 - (void)configureInterfaceTable:(WKInterfaceTable *)table WithHealthSamples:(NSArray *)samples {

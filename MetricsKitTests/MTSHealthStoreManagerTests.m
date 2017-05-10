@@ -70,29 +70,4 @@
     }];
 }
 
-- (void)testThatItQueriesTheHealthStoreSuccessfully {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDate *now = [NSDate date];
-    NSDate *start = [calendar startOfDayForDate:now];
-    NSDate *end = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:start options:NSCalendarWrapComponents];
-    
-    XCTestExpectation *queryExpectation = [self expectationWithDescription:@"Health store query"];
-    [MTSHealthStoreManager queryHealthStore:[self healthStore]
-                            forQuantityType:HKQuantityTypeIdentifierActiveEnergyBurned
-                                   fromDate:start
-                                     toDate:end
-                     usingCompletionHandler:^(NSArray * _Nullable samples) {
-                         XCTAssertTrue([samples count] > 0);
-                         [queryExpectation fulfill];
-                     }];
-    
-    [self waitForExpectationsWithTimeout:10 handler:^(NSError * _Nullable error) {
-        if (error) {
-            XCTFail("Error while attempting to query health store: %@", error.localizedDescription);
-        }
-    }];
-}
-
-
-
 @end

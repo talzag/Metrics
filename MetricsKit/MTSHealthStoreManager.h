@@ -13,10 +13,4 @@
 
 + (void)requestReadAccessForHealthStore:(HKHealthStore * _Nonnull)healthStore completionHandler:(void (^ _Nonnull)(BOOL success, NSError * _Nullable error))completionHandler;
 
-+ (void)queryHealthStore:(HKHealthStore * _Nonnull)healthStore
-         forQuantityType:(HKQuantityTypeIdentifier _Nonnull)typeIdentifier
-                fromDate:(NSDate * _Nonnull)startDate
-                  toDate:(NSDate * _Nonnull)endDate
-  usingCompletionHandler:(void (^ _Nonnull)(NSArray * _Nullable samples)) completionHandler;
-
 @end
