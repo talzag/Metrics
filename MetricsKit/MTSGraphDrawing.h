@@ -18,6 +18,8 @@ extern NSString * const _Nonnull MTSGraphLineColorKey;
 extern NSString * const _Nonnull MTSGraphDataPointsKey;
 extern NSString * const _Nonnull MTSGraphDataIdentifierKey;
 
-void MTSDrawGraph(CGContextRef _Nonnull context, CGRect rect, NSArray <MTSQueryDataConfiguration *> * _Nullable dataPoints, CGColorRef _Nullable topColor, CGColorRef _Nullable bottomColor);
+void MTSDrawGraph(CGContextRef _Nonnull context, CGRect rect, MTSGraph * _Nonnull graph);
+
+// Add method to create map of points to view locations
 
 #endif /* MTSGraphDrawing_h */

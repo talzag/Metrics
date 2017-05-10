@@ -12,12 +12,6 @@
 IB_DESIGNABLE
 @interface MTSGraphView : UIView <NSCoding>
 
-@property (nonatomic) NSString *yAxisTitle;
-@property (nonatomic) NSString *xAxisTitle;
-
-@property (nonatomic) IBInspectable UIColor *topColor;
-@property (nonatomic) IBInspectable UIColor *bottomColor;
-
-@property (nonatomic) NSArray <MTSQueryDataConfiguration *> *dataPoints;
+@property (nonatomic) MTSGraph *graph;
 
 @end

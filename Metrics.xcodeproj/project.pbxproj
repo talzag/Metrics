@@ -217,7 +217,7 @@
 		E30C08371E7E30810083DB7B /* MTSGraphQueryableTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphQueryableTests.m; sourceTree = "<group>"; };
 		E30C08391E7E31BE0083DB7B /* MTSTestDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSTestDataStack.h; sourceTree = "<group>"; };
 		E30C083A1E7E31BE0083DB7B /* MTSTestDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSTestDataStack.m; sourceTree = "<group>"; };
-		E320E09D1E919BD60039628C /* MTSGraph+MTSQueryable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTSGraph+MTSQueryable.m"; sourceTree = "<group>"; };
+		E320E09D1E919BD60039628C /* MTSGraph+MTSQueryable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "MTSGraph+MTSQueryable.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E32660191EBE4BEB0013C3D0 /* MTSQueryDataConfiguration+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTSQueryDataConfiguration+CoreDataClass.h"; sourceTree = "<group>"; };
 		E326601A1EBE4BEB0013C3D0 /* MTSQueryDataConfiguration+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTSQueryDataConfiguration+CoreDataClass.m"; sourceTree = "<group>"; };
 		E326601B1EBE4BEB0013C3D0 /* MTSQueryDataConfiguration+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTSQueryDataConfiguration+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -277,7 +277,7 @@
 		E38AE19D1E78E9F0001ABE40 /* MTSGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MTSGraphView.m; path = MetricsKit/MTSGraphView.m; sourceTree = SOURCE_ROOT; };
 		E38AE19F1E78E9F0001ABE40 /* MTSHealthTypeTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSHealthTypeTransformer.h; sourceTree = "<group>"; };
 		E38AE1A01E78E9F0001ABE40 /* MTSHealthTypeTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSHealthTypeTransformer.m; sourceTree = "<group>"; };
-		E38AE1AC1E78EE71001ABE40 /* MTSGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraph.h; sourceTree = "<group>"; };
+		E38AE1AC1E78EE71001ABE40 /* MTSGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MTSGraph.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		E38AE1B81E7A342D001ABE40 /* MTSHealthTypeTransformerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSHealthTypeTransformerTests.m; sourceTree = "<group>"; };
 		E38AE1BA1E7A3444001ABE40 /* MTSHealthStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSHealthStoreManager.h; sourceTree = "<group>"; };
 		E38AE1BB1E7A3444001ABE40 /* MTSHealthStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSHealthStoreManager.m; sourceTree = "<group>"; };

@@ -204,13 +204,13 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <MTSQuery
     }
 }
 
-void MTSDrawGraph(CGContextRef context, CGRect rect, NSArray <MTSQueryDataConfiguration *> * _Nullable dataConfigurations, CGColorRef _Nullable topColor, CGColorRef _Nullable bottomColor) {
+void MTSDrawGraph(CGContextRef context, CGRect rect, MTSGraph *graph) {
     CGContextRetain(context);
     CGContextSaveGState(context);
 
     // draw background
     CGContextSaveGState(context);
-    drawGradient(context, rect, topColor, bottomColor);
+    drawGradient(context, rect, (__bridge CGColorRef)([graph topColor]), (__bridge CGColorRef)([graph bottomColor]));
     CGContextRestoreGState(context);
     
     // draw graph lines
@@ -218,10 +218,11 @@ void MTSDrawGraph(CGContextRef context, CGRect rect, NSArray <MTSQueryDataConfig
     drawGraphLines(context, rect);
     CGContextRestoreGState(context);
 
+    NSArray *dataPoints = [[[graph query] dataTypeConfigurations] allObjects];
     // plot data points
-    if ([dataConfigurations count]) {
+    if ([dataPoints count]) {
         CGContextSaveGState(context);
-        MTSGraphPlotDataPoints(context, rect, dataConfigurations);
+        MTSGraphPlotDataPoints(context, rect, dataPoints);
         CGContextRestoreGState(context);
     }
     

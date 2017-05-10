@@ -16,11 +16,7 @@
 
 @interface MTSGraph (MTSQueryable)
 
-- (void)executeQueryWithHealthStore:(HKHealthStore * _Nonnull)healthStore usingCompletionHandler:(void (^ _Nullable)(NSArray * _Nullable, NSError * _Nullable))completionHandler;
-
-- (void)graphDataFromQueryResults:(NSArray <NSArray<HKQuantitySample *> *>* _Nonnull)results
-                  withHealthStore:(HKHealthStore * _Nonnull)healthStore
-                completionHandler:(void (^ _Nonnull)(NSArray <MTSQueryDataConfiguration *> * _Nullable, NSError * _Nullable))completionHandler;
+- (void)executeQueryWithHealthStore:(HKHealthStore * _Nonnull)healthStore usingCompletionHandler:(void (^ _Nullable)(NSError * _Nullable))completionHandler;
 
 @end
 

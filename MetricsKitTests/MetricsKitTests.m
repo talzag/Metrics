@@ -89,15 +89,15 @@
     [context save:nil];
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"Complete data flow test"];
-    [graph executeQueryWithHealthStore:[self healthStore] usingCompletionHandler:^(NSArray * _Nullable results, NSError * _Nullable error) {
+    [graph executeQueryWithHealthStore:[self healthStore] usingCompletionHandler:^(NSError * _Nullable error) {
         MTSRealCalorieValue([self healthStore], [[graph query] startDate], [[graph query] endDate], ^(double calories, NSError *error) {
-            XCTAssertEqual([results count], 2);
+            XCTAssertEqual([[[graph query] dataTypeConfigurations] count], 2);
             XCTAssertEqual(calories, -100);
             
             CGSize size = CGSizeMake(150, 100);
             CGRect frame = CGRectMake(0.0, 0.0, size.width, size.height);
             UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
-            MTSDrawGraph(UIGraphicsGetCurrentContext(), frame, results, [[graph topColor] CGColor], [[graph bottomColor] CGColor]);
+            MTSDrawGraph(UIGraphicsGetCurrentContext(), frame, graph);
             UIGraphicsEndImageContext();
             
             [expectation fulfill];
@@ -210,14 +210,15 @@
     CGSize size = CGSizeMake(200, 150);
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
     
-    MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:[[self dataStack] managedObjectContext]];
-    [config setFetchedDataPoints:@[@0, @75, @25, @50, @100, @50, @75, @25, @0]];
+    NSManagedObjectContext *moc = [[self dataStack] managedObjectContext];
+    MTSGraph *graph = [[MTSGraph alloc] initWithContext:moc];
+    
     
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     [self measureBlock:^{
-        MTSDrawGraph(context, rect, @[config], NULL, NULL);
+        MTSDrawGraph(context, rect, graph);
     }];
     
     UIGraphicsEndImageContext();
@@ -227,14 +228,15 @@
     CGSize size = CGSizeMake(200, 150);
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
     
-    MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:[[self dataStack] managedObjectContext]];
-    [config setFetchedDataPoints:@[]];
+    NSManagedObjectContext *moc = [[self dataStack] managedObjectContext];
+    MTSGraph *graph = [[MTSGraph alloc] initWithContext:moc];
+    
     
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     [self measureBlock:^{
-        MTSDrawGraph(context, rect, @[config], NULL, NULL);
+        MTSDrawGraph(context, rect, graph);
     }];
     
     UIGraphicsEndImageContext();
@@ -244,17 +246,21 @@
     CGSize size = CGSizeMake(200, 150);
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
     
-    MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:[[self dataStack] managedObjectContext]];
-    [config setFetchedDataPoints:@[]];
+    NSManagedObjectContext *moc = [[self dataStack] managedObjectContext];
+    MTSGraph *graph = [[MTSGraph alloc] initWithContext:moc];
+    
     
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGColorRef cyan = [[UIColor cyanColor] CGColor];
-    CGColorRef blue = [[UIColor blueColor] CGColor];
+    UIColor *cyan = [UIColor cyanColor];
+    UIColor *blue = [UIColor blueColor];
+    
+    [graph setTopColor:cyan];
+    [graph setBottomColor:blue];
     
     [self measureBlock:^{
-        MTSDrawGraph(context, rect, @[config], cyan, blue);
+        MTSDrawGraph(context, rect, graph);
     }];
     
     UIGraphicsEndImageContext();
