@@ -10,7 +10,7 @@
 #import <MetricsKit/MetricsKit.h>
 
 IB_DESIGNABLE
-@interface MTSGraphView : UIView <NSCoding>
+@interface MTSGraphView : UIView
 
 @property (nonatomic) MTSGraph *graph;
 
