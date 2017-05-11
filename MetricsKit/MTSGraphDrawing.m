@@ -147,10 +147,10 @@ CGFloat MTSGraphPositionOnYAxisForValue(CGRect rect, CGFloat value, CGFloat maxV
     return MTSGraphHeight(rect) - ratio * height;
 }
 
-void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <MTSQueryDataConfiguration *> *dataPoints) {
+void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <MTSQuery *> *graphQueries) {
     CGFloat maxValue = 0.0;
-    for (MTSQueryDataConfiguration *config in dataPoints) {
-        NSArray *values = [config fetchedDataPoints];
+    for (MTSQuery *query in graphQueries) {
+        NSArray *values = [query fetchedDataPoints];
         for (NSNumber *value in values) {
             double floatValue = [value doubleValue];
             maxValue = floatValue > maxValue ? floatValue : maxValue;
@@ -159,10 +159,10 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <MTSQuery
 
     CGContextSetLineWidth(context, 2.0);
     
-    for (MTSQueryDataConfiguration *config in dataPoints) {
+    for (MTSQuery *query in graphQueries) {
         CGMutablePathRef graphPath = CGPathCreateMutable();
         
-        NSArray <NSNumber *>*values = [config fetchedDataPoints];
+        NSArray <NSNumber *>*values = [query fetchedDataPoints];
         NSInteger size = values.count;
         if (size) {
             if (size == 1) {
@@ -193,7 +193,7 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <MTSQuery
             
             CGContextAddPath(context, graphPath);
 
-            UIColor *configColor = [config lineColor];
+            UIColor *configColor = [query lineColor];
             CGColorRef lineColor = [configColor CGColor];
             CGContextSetStrokeColorWithColor(context, lineColor);
             
@@ -218,7 +218,7 @@ void MTSDrawGraph(CGContextRef context, CGRect rect, MTSGraph *graph) {
     drawGraphLines(context, rect);
     CGContextRestoreGState(context);
 
-    NSArray *dataPoints = [[[graph query] dataTypeConfigurations] allObjects];
+    NSArray *dataPoints = [[graph queries] allObjects];
     // plot data points
     if ([dataPoints count]) {
         CGContextSaveGState(context);

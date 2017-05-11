@@ -22,11 +22,11 @@
     [super viewDidLoad];
     
     [[self navigationItem] setTitle:[[self graph] title]];
-    [[self startDateLabel] setText:[[self dateFormatter] stringFromDate:[[[self graph] query] startDate]]];
-    [[self endDateLabel] setText:[[self dateFormatter] stringFromDate:[[[self graph] query] endDate]]];
+//    [[self startDateLabel] setText:[[self dateFormatter] stringFromDate:[[[self graph] query] startDate]]];
+//    [[self endDateLabel] setText:[[self dateFormatter] stringFromDate:[[[self graph] query] endDate]]];
     
     MTSGraph *graph = [self graph];
-    [graph executeQueryWithHealthStore:[self healthStore]
+    [graph executeQueriesWithHealthStore:[self healthStore]
                 usingCompletionHandler:^(NSError * _Nullable error) {
                     if (!error) {
                         dispatch_async(dispatch_get_main_queue(), ^{

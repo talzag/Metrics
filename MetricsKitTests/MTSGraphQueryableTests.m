@@ -80,36 +80,34 @@
     NSDate *start = [calendar startOfDayForDate:now];
     NSDate *end = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:start options:NSCalendarWrapComponents];
     
-    MTSQuery *query = [[MTSQuery alloc] initWithContext:context];
     NSSet *types = [NSSet setWithObjects: HKQuantityTypeIdentifierActiveEnergyBurned, HKQuantityTypeIdentifierBasalEnergyBurned, nil];
     NSDictionary *healthTypes = MTSQuantityTypeIdentifiers();
-    NSMutableSet *configs = [NSMutableSet set];
+    NSMutableSet *queries = [NSMutableSet set];
     for (HKQuantityTypeIdentifier ident in types) {
-        MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:context];
-        [config setHealthKitTypeIdentifier:ident];
-        [config setHealthTypeDisplayName:[healthTypes valueForKey:ident]];
-        [configs addObject:config];
+        MTSQuery *query = [[MTSQuery alloc] initWithContext:context];
+        [query setHealthKitTypeIdentifier:ident];
+        [query setHealthTypeDisplayName:[healthTypes valueForKey:ident]];
+        [queries addObject:query];
     }
-    [query setDataTypeConfigurations:[NSSet setWithSet:configs]];
-    [query setStartDate:start];
-    [query setEndDate:end];
     
     MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
-    [graph setQuery:query];
+    [graph setQueries:queries];
+    [graph setStartDate:start];
+    [graph setEndDate:end];
     
     [context save:nil];
     
     XCTestExpectation *queryExpectation = [self expectationWithDescription:@"Graph querying"];
-    [graph executeQueryWithHealthStore:[self healthStore] usingCompletionHandler:^(NSError * _Nullable error) {
-        NSArray <MTSQueryDataConfiguration *> *configs = [[[graph query] dataTypeConfigurations] allObjects];
-        XCTAssertNotNil(configs);
-        XCTAssertTrue([configs count] == 2);
+    [graph executeQueriesWithHealthStore:[self healthStore] usingCompletionHandler:^(NSError * _Nullable error) {
+        NSArray *queries = [[graph queries] allObjects];
+        XCTAssertNotNil(queries);
+        XCTAssertTrue([queries count] == 2);
         
-        XCTAssertTrue([[[configs firstObject] fetchedDataPoints] count] == 1);
-        XCTAssertTrue([[[configs lastObject] fetchedDataPoints] count] == 1);
+        XCTAssertTrue([[[queries firstObject] fetchedDataPoints] count] == 1);
+        XCTAssertTrue([[[queries lastObject] fetchedDataPoints] count] == 1);
         
-        XCTAssertTrue([[[[configs firstObject] fetchedDataPoints] firstObject] isEqual:@100]);
-        XCTAssertTrue([[[[configs lastObject] fetchedDataPoints] firstObject] isEqual:@100]);
+        XCTAssertTrue([[[[queries firstObject] fetchedDataPoints] firstObject] isEqual:@100]);
+        XCTAssertTrue([[[[queries lastObject] fetchedDataPoints] firstObject] isEqual:@100]);
         
         [queryExpectation fulfill];
     }];
@@ -129,7 +127,7 @@
     [context save:nil];
     
     XCTestExpectation *queryExpectation = [self expectationWithDescription:@"Graph querying with nil query"];
-    [graph executeQueryWithHealthStore:[self healthStore] usingCompletionHandler:^(NSError * _Nullable error) {
+    [graph executeQueriesWithHealthStore:[self healthStore] usingCompletionHandler:^(NSError * _Nullable error) {
         XCTAssertNotNil(error);
         XCTAssertEqualObjects([error domain], @"com.dstrokis.Metrics");
         XCTAssertEqual([error code], 1);
@@ -152,28 +150,26 @@
     NSDate *start = [calendar startOfDayForDate:now];
     NSDate *end = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:start options:NSCalendarWrapComponents];
     
-    MTSQuery *query = [[MTSQuery alloc] initWithContext:context];
     NSSet *types = [NSSet setWithObjects: HKQuantityTypeIdentifierActiveEnergyBurned, HKQuantityTypeIdentifierBasalEnergyBurned, nil];
     NSDictionary *healthTypes = MTSQuantityTypeIdentifiers();
-    NSMutableSet *configs = [NSMutableSet set];
+    NSMutableSet *queries = [NSMutableSet set];
     for (HKQuantityTypeIdentifier ident in types) {
-        MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:context];
-        [config setHealthKitTypeIdentifier:ident];
-        [config setHealthTypeDisplayName:[healthTypes valueForKey:ident]];
-        [configs addObject:config];
+        MTSQuery *query = [[MTSQuery alloc] initWithContext:context];
+        [query setHealthKitTypeIdentifier:ident];
+        [query setHealthTypeDisplayName:[healthTypes valueForKey:ident]];
+        [queries addObject:query];
     }
-    [query setDataTypeConfigurations:[NSSet setWithSet:configs]];
-    [query setStartDate:start];
-    [query setEndDate:end];
     
     MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
-    [graph setQuery:query];
+    [graph setQueries:queries];
+    [graph setStartDate:start];
+    [graph setEndDate:end];
     
     [context save:nil];
     HKHealthStore *healthStore = nil;
     
     XCTestExpectation *queryExpectation = [self expectationWithDescription:@"Graph querying with nil health store"];
-    [graph executeQueryWithHealthStore:healthStore usingCompletionHandler:^(NSError * _Nullable error) {
+    [graph executeQueriesWithHealthStore:healthStore usingCompletionHandler:^(NSError * _Nullable error) {
         XCTAssertNotNil(error);
         XCTAssertEqualObjects([error domain], @"com.dstrokis.Metrics");
         XCTAssertEqual([error code], 2);

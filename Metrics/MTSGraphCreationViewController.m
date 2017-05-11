@@ -18,7 +18,7 @@
 @property (nonatomic) NSDate *endDate;
 @property (nonatomic) UITextField *activeTextField;
 
-@property (nonatomic) NSArray <MTSQueryDataConfiguration *>*queryDataConfigurations;
+@property (nonatomic) NSArray *graphQueries;
 @property (nonatomic) NSDictionary <HKQuantityTypeIdentifier, NSString *> *healthTypeNameLookup;
 @property (nonatomic) UIDatePicker *datePicker;
 
@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setQueryDataConfigurations:[[[[self graph] query] dataTypeConfigurations] allObjects]];
+    [self setGraphQueries:[[[self graph] queries] allObjects]];
     [self setHealthTypeNameLookup:MTSQuantityTypeIdentifiers()];
     
     NSDate *date = [NSDate date];
@@ -76,34 +76,33 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    MTSQuery *query = [[self graph] query];
-    [query setStartDate: [self startDate]];
-    [query setEndDate:[self endDate]];
+    [[self graph] setStartDate:[self startDate]];
+    [[self graph] setEndDate:[self endDate]];
     
-    NSArray *configs = [self queryDataConfigurations];
+    NSArray *queries = [self graphQueries];
     NSInteger i;
-    for (i = 0; i < [configs count]; i++) {
-        MTSQueryDataConfiguration *config = [configs objectAtIndex:i];
+    for (i = 0; i < [queries count]; i++) {
+        MTSQuery *query = [queries objectAtIndex:i];
         
         NSIndexPath*indexPath = [NSIndexPath indexPathForRow:i inSection:0];
         MTSColorPickerTableViewCell *cell = [[self tableView] cellForRowAtIndexPath: indexPath];
         
         UIColor *selectedColor = [[cell colorSwatchView] backgroundColor];
-        [config setLineColor:selectedColor];
+        [query setLineColor:selectedColor];
     }
 }
 
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[[[self graph] query] dataTypeConfigurations] count];
+    return [[self graphQueries] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MTSColorPickerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"healthDataCell"];
     
-    MTSQueryDataConfiguration *config = [[self queryDataConfigurations] objectAtIndex:[indexPath row]];
-    NSString *value = [[self healthTypeNameLookup] objectForKey:[config healthKitTypeIdentifier]];
+    MTSQuery *query = [[self graphQueries] objectAtIndex:[indexPath row]];
+    NSString *value = [[self healthTypeNameLookup] objectForKey:[query healthKitTypeIdentifier]];
     
     [[cell textLabel] setText:value];
     

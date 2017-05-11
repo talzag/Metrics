@@ -101,8 +101,6 @@ static NSString * const cellIdentifier = @"GraphCell";
         [destination setHealthStore:[self healthStore]];
     } else if ([segue.identifier isEqualToString:@"selectHealthData"]) {
         MTSGraph *newGraph = [[MTSGraph alloc] initWithContext:[self managedObjectContext]];
-        MTSQuery *newQuery = [[MTSQuery alloc] initWithContext:[self managedObjectContext]];
-        [newGraph setQuery:newQuery];
         
         UINavigationController *navController = (UINavigationController *)[segue destinationViewController];
         MTSDataSelectionViewController *destination = [[navController viewControllers] firstObject];
@@ -132,7 +130,7 @@ static NSString * const cellIdentifier = @"GraphCell";
     
     MTSGraph *graph = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     
-    [graph executeQueryWithHealthStore:[self healthStore]
+    [graph executeQueriesWithHealthStore:[self healthStore]
                 usingCompletionHandler:^(NSError * _Nullable error) {
                     if (error) {
                         return;

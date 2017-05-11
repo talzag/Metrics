@@ -2,7 +2,7 @@
 //  MTSGraph+CoreDataProperties.m
 //  Metrics
 //
-//  Created by Daniel Strokis on 5/7/17.
+//  Created by Daniel Strokis on 5/11/17.
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
@@ -15,8 +15,13 @@
 }
 
 @dynamic bottomColor;
+@dynamic drawsIntermediateLines;
 @dynamic title;
 @dynamic topColor;
-@dynamic query;
+@dynamic xAxisTitle;
+@dynamic yAxisTitle;
+@dynamic endDate;
+@dynamic startDate;
+@dynamic queries;
 
 @end

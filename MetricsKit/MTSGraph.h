@@ -12,11 +12,10 @@
 #include <Foundation/Foundation.h>
 #include <HealthKit/HealthKit.h>
 #import "MTSGraph+CoreDataClass.h"
-#import "MTSQueryDataConfiguration.h"
 
 @interface MTSGraph (MTSQueryable)
 
-- (void)executeQueryWithHealthStore:(HKHealthStore * _Nonnull)healthStore usingCompletionHandler:(void (^ _Nullable)(NSError * _Nullable))completionHandler;
+- (void)executeQueriesWithHealthStore:(HKHealthStore * _Nonnull)healthStore usingCompletionHandler:(void (^ _Nullable)(NSError * _Nullable))completionHandler;
 
 @end
 

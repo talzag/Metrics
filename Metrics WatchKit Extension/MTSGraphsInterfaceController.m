@@ -31,7 +31,7 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     [[self graphInterfaceImage] setImage:image];
     
-    [graph executeQueryWithHealthStore:store usingCompletionHandler:^(NSError * _Nullable error) {
+    [graph executeQueriesWithHealthStore:store usingCompletionHandler:^(NSError * _Nullable error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (!error) {
                 MTSDrawGraph(context, screen, graph);

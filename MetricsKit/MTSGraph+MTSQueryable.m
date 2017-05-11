@@ -12,8 +12,8 @@
 
 @implementation MTSGraph (MTSQueryable)
 
-- (void)executeQueryWithHealthStore:(HKHealthStore * _Nonnull)healthStore usingCompletionHandler:(void (^ _Nullable)(NSError * _Nullable))completionHandler {
-    if (![self query]) {
+- (void)executeQueriesWithHealthStore:(HKHealthStore * _Nonnull)healthStore usingCompletionHandler:(void (^ _Nullable)(NSError * _Nullable))completionHandler {
+    if (![self queries] || ![[self queries] count]) {
         NSError *error = [NSError errorWithDomain:@"com.dstrokis.Metrics"
                                              code:1
                                          userInfo:@{ NSLocalizedDescriptionKey: @"Query cannot be nil" }];
@@ -29,17 +29,11 @@
         return;
     }
 
-    NSDate *start = [[self query] startDate];
-    NSDate *end = [[self query] endDate];
-    NSPredicate *predicate = [HKSampleQuery predicateForSamplesWithStartDate:start
-                                                                     endDate:end
-                                                                     options:HKQueryOptionNone];
-    
-    NSSet <MTSQueryDataConfiguration *>*dataConfigurations = [[self query] dataTypeConfigurations];
+    NSSet <MTSQuery *> *queries = [self queries];
     
     NSMutableArray <HKQuantityType *>*types = [NSMutableArray array];
-    for (MTSQueryDataConfiguration *config in dataConfigurations) {
-        HKQuantityType *type = [HKQuantityType quantityTypeForIdentifier:[config healthKitTypeIdentifier]];
+    for (MTSQuery *query in queries) {
+        HKQuantityType *type = [HKQuantityType quantityTypeForIdentifier:[query healthKitTypeIdentifier]];
         [types addObject:type];
     }
     
@@ -49,15 +43,20 @@
     [healthStore preferredUnitsForQuantityTypes:[NSSet setWithArray:types] completion:
      ^(NSDictionary<HKQuantityType *,HKUnit *> * _Nonnull preferredUnits, NSError * _Nullable error)
      {
-         dispatch_async(backgroundQueue, ^{
-             for (HKQuantityType *type in types)
+         dispatch_async(backgroundQueue, ^
+         {
+             for (MTSQuery *graphQuery in queries)
              {
+                 NSDate *start = [self startDate];
+                 NSDate *end = [self endDate];
+                 NSPredicate *predicate = [HKSampleQuery predicateForSamplesWithStartDate:start
+                                                                                  endDate:end
+                                                                                  options:HKQueryOptionNone];
+
+                 HKQuantityType *type = [HKQuantityType quantityTypeForIdentifier:[graphQuery healthKitTypeIdentifier]];
                  HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:type predicate:predicate limit:HKObjectQueryNoLimit sortDescriptors:nil resultsHandler:
                  ^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error)
                  {
-                     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF.healthKitTypeIdentifier == %@", [[query objectType] identifier]];
-                     MTSQueryDataConfiguration *dataConfig = [[dataConfigurations filteredSetUsingPredicate:pred] anyObject];
-                     
                      NSMutableArray *fetchedDataPoints = [NSMutableArray array];
                      
                      for (HKQuantitySample *sample in results)
@@ -70,7 +69,7 @@
                          [fetchedDataPoints addObject:amount];
                      }
                      
-                     [dataConfig setFetchedDataPoints:[NSArray arrayWithArray:fetchedDataPoints]];
+                     [graphQuery setFetchedDataPoints:fetchedDataPoints];
                      dispatch_group_leave(queriesGroup);
                  }];
                  
@@ -79,7 +78,6 @@
              }
              
              dispatch_group_wait(queriesGroup, DISPATCH_TIME_FOREVER);
-             NSLog(@"Finished executing health store queries");
              completionHandler(nil);
          });
      }];

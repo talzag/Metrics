@@ -71,27 +71,26 @@
     NSDate *start = [calendar startOfDayForDate:now];
     NSDate *end = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:start options:NSCalendarWrapComponents];
     
-    MTSQuery *query = [[MTSQuery alloc] initWithContext:context];
     NSSet *types = [NSSet setWithObjects: HKQuantityTypeIdentifierActiveEnergyBurned, HKQuantityTypeIdentifierBasalEnergyBurned, nil];
     NSDictionary *healthTypes = MTSQuantityTypeIdentifiers();
-    NSMutableSet *configs = [NSMutableSet set];
+    NSMutableSet *queries = [NSMutableSet set];
     for (HKQuantityTypeIdentifier ident in types) {
-        MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:context];
-        [config setHealthKitTypeIdentifier:ident];
-        [config setHealthTypeDisplayName:[healthTypes valueForKey:ident]];
-        [configs addObject:config];
+        MTSQuery *query = [[MTSQuery alloc] initWithContext:context];
+        [query setHealthKitTypeIdentifier:ident];
+        [query setHealthTypeDisplayName:[healthTypes valueForKey:ident]];
+        [queries addObject:query];
     }
-    [query setDataTypeConfigurations:[NSSet setWithSet:configs]];
-    [query setStartDate:start];
-    [query setEndDate:end];
-    [graph setQuery:query];
+    
+    [graph setQueries:queries];
+    [graph setStartDate:start];
+    [graph setEndDate:end];
     
     [context save:nil];
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"Complete data flow test"];
-    [graph executeQueryWithHealthStore:[self healthStore] usingCompletionHandler:^(NSError * _Nullable error) {
-        MTSRealCalorieValue([self healthStore], [[graph query] startDate], [[graph query] endDate], ^(double calories, NSError *error) {
-            XCTAssertEqual([[[graph query] dataTypeConfigurations] count], 2);
+    [graph executeQueriesWithHealthStore:[self healthStore] usingCompletionHandler:^(NSError * _Nullable error) {
+        MTSRealCalorieValue([self healthStore], [graph startDate], [graph endDate], ^(double calories, NSError *error) {
+            XCTAssertEqual([[graph queries] count], 2);
             XCTAssertEqual(calories, -100);
             
             CGSize size = CGSizeMake(150, 100);
@@ -125,23 +124,19 @@
     NSDate *start = [calendar startOfDayForDate:now];
     NSDate *end = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:start options:NSCalendarWrapComponents];
     
-    MTSQuery *query = [[MTSQuery alloc] initWithContext:context];
     NSSet *types = [NSSet setWithObjects: HKQuantityTypeIdentifierActiveEnergyBurned, HKQuantityTypeIdentifierBasalEnergyBurned, nil];
     NSDictionary *healthTypes = MTSQuantityTypeIdentifiers();
-    NSMutableSet *configs = [NSMutableSet set];
+    NSMutableSet *queries = [NSMutableSet set];
     for (HKQuantityTypeIdentifier ident in types) {
-        MTSQueryDataConfiguration *config = [[MTSQueryDataConfiguration alloc] initWithContext:context];
-        [config setHealthKitTypeIdentifier:ident];
-        [config setHealthTypeDisplayName:[healthTypes valueForKey:ident]];
-        [config setLineColor:[UIColor blueColor]];
-        [config setFetchedDataPoints:@[]];
-        [configs addObject:config];
+        MTSQuery *query = [[MTSQuery alloc] initWithContext:context];
+        [query setHealthKitTypeIdentifier:ident];
+        [query setHealthTypeDisplayName:[healthTypes valueForKey:ident]];
+        [queries addObject:query];
     }
-    NSSet *configSet = [NSSet setWithSet:configs];
-    [query setDataTypeConfigurations:configSet];
-    [query setStartDate:start];
-    [query setEndDate:end];
-    [graph setQuery:query];
+    
+    [graph setQueries:queries];
+    [graph setStartDate:start];
+    [graph setEndDate:end];
     
     NSError *error;
     [context save:&error];
@@ -150,30 +145,17 @@
     }
 
     graph = nil;
-    query = nil;
-    configSet = nil;
+    queries = nil;
     
     NSManagedObjectContext *newContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [newContext setPersistentStoreCoordinator:[context persistentStoreCoordinator]];
     context = nil;
     
     NSFetchRequest *queryFetch = [MTSQuery fetchRequest];
-    NSArray <MTSQuery *>*fetchResults = [newContext executeFetchRequest:queryFetch error:nil];
-    XCTAssertEqual([fetchResults count], 1);
-    XCTAssertTrue([[fetchResults firstObject] isKindOfClass:[MTSQuery class]]);
-    XCTAssertEqualObjects([[fetchResults firstObject] startDate], start);
-    XCTAssertEqualObjects([[fetchResults firstObject] endDate], end);
-    XCTAssertEqual([[[[fetchResults firstObject] dataTypeConfigurations] allObjects] count], 2);
+    NSArray <MTSQuery *>*queryFetchResults = [newContext executeFetchRequest:queryFetch error:nil];
+    XCTAssertEqual([queryFetchResults count], 2);
+    XCTAssertTrue([[queryFetchResults firstObject] isKindOfClass:[MTSQuery class]]);
     
-    NSComparator configComparator = ^NSComparisonResult(MTSQueryDataConfiguration *  _Nonnull obj1, MTSQueryDataConfiguration *  _Nonnull obj2) {
-        return [[obj1 healthKitTypeIdentifier] compare:[obj2 healthKitTypeIdentifier]];
-    };
-    NSArray *configArray = [[[fetchResults firstObject] dataTypeConfigurations] allObjects];
-    
-    NSArray <MTSQueryDataConfiguration *> *sortedA = [configArray sortedArrayUsingComparator:configComparator];
-    NSArray <MTSQueryDataConfiguration *> *sortedB = [[configs allObjects] sortedArrayUsingComparator:configComparator];
-    
-    XCTAssertEqualObjects([[sortedA firstObject] objectID], [[sortedB firstObject] objectID]);
     
     NSFetchRequest *graphFetch = [MTSGraph fetchRequest];
     NSArray <MTSGraph *>* results = [newContext executeFetchRequest:graphFetch error:nil];
@@ -181,8 +163,16 @@
     XCTAssertNotNil(fetchedGraph);
     XCTAssertEqualObjects([fetchedGraph topColor], [UIColor cyanColor]);
     XCTAssertEqualObjects([fetchedGraph bottomColor], [UIColor blueColor]);
-    XCTAssertEqualObjects([fetchedGraph query], [fetchResults firstObject]);
-    XCTAssertEqualObjects([[fetchResults firstObject] graph], fetchedGraph);
+    XCTAssertEqualObjects([[queryFetchResults firstObject] graph], fetchedGraph);
+    
+    NSComparator configComparator = ^NSComparisonResult(MTSQuery *  _Nonnull obj1, MTSQuery *  _Nonnull obj2) {
+        return [[obj1 healthKitTypeIdentifier] compare:[obj2 healthKitTypeIdentifier]];
+    };
+    
+    NSArray <MTSQuery *> *sortedA = [queryFetchResults sortedArrayUsingComparator:configComparator];
+    NSArray <MTSQuery *> *sortedB = [[[fetchedGraph queries] allObjects] sortedArrayUsingComparator:configComparator];
+    
+    XCTAssertEqualObjects([[sortedA firstObject] objectID], [[sortedB firstObject] objectID]);
 }
 
 - (void)testThatRealCalorieValueIsCalculated {

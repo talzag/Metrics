@@ -8,9 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "MTSQueryDataConfiguration+CoreDataClass.h"
 
-@class MTSGraph, NSSet, MTSQueryDataConfiguration;
+#if TARGET_OS_WATCH
+@import WatchKit;
+#else
+@import UIKit;
+#endif
+
+@class MTSGraph, NSSet;
 
 NS_ASSUME_NONNULL_BEGIN
 
