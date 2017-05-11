@@ -22,15 +22,16 @@
     [super viewDidLoad];
     
     [[self navigationItem] setTitle:[[self graph] title]];
-//    [[self startDateLabel] setText:[[self dateFormatter] stringFromDate:[[[self graph] query] startDate]]];
-//    [[self endDateLabel] setText:[[self dateFormatter] stringFromDate:[[[self graph] query] endDate]]];
+    [[self startDateLabel] setText:[[self dateFormatter] stringFromDate:[[self graph] startDate]]];
+    [[self endDateLabel] setText:[[self dateFormatter] stringFromDate:[[self graph] endDate]]];
     
     MTSGraph *graph = [self graph];
+    [[self graphView] setGraph:graph];
     [graph executeQueriesWithHealthStore:[self healthStore]
                 usingCompletionHandler:^(NSError * _Nullable error) {
                     if (!error) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [[self graphView] setGraph:graph];
+                            [[self graphView] setNeedsDisplay];
                         });
                     }
                 }];

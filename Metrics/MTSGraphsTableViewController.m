@@ -130,16 +130,7 @@ static NSString * const cellIdentifier = @"GraphCell";
     
     MTSGraph *graph = [[self fetchedResultsController] objectAtIndexPath:indexPath];
     
-    [graph executeQueriesWithHealthStore:[self healthStore]
-                usingCompletionHandler:^(NSError * _Nullable error) {
-                    if (error) {
-                        return;
-                    }
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [[cell graphView] setGraph:graph];
-                    });
-                }];
+   [[cell graphView] setGraph:graph];
     
     return cell;
 }

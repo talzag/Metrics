@@ -218,11 +218,11 @@ void MTSDrawGraph(CGContextRef context, CGRect rect, MTSGraph *graph) {
     drawGraphLines(context, rect);
     CGContextRestoreGState(context);
 
-    NSArray *dataPoints = [[graph queries] allObjects];
+    NSArray *queries = [[graph queries] allObjects];
     // plot data points
-    if ([dataPoints count]) {
+    if ([queries count]) {
         CGContextSaveGState(context);
-        MTSGraphPlotDataPoints(context, rect, dataPoints);
+        MTSGraphPlotDataPoints(context, rect, queries);
         CGContextRestoreGState(context);
     }
     
