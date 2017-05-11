@@ -29,10 +29,6 @@
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {
-    [self saveContext];
-}
-
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     [self saveContext];
 }

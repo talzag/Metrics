@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F60a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LaC-sQ-Lef">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F71b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LaC-sQ-Lef">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -316,13 +316,6 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bnc-p3-W4r">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="qAc-LB-JJ9"/>
-                                    <barButtonItem systemItem="edit" id="ed1-S5-UJQ"/>
-                                </items>
-                            </toolbar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OWA-Qo-s3p" customClass="MTSGraphView">
                                 <rect key="frame" x="16" y="72" width="343" height="183"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -350,12 +343,9 @@
                         <constraints>
                             <constraint firstItem="OWA-Qo-s3p" firstAttribute="leading" secondItem="gCO-Ei-OIi" secondAttribute="leadingMargin" id="1Po-ka-bnq"/>
                             <constraint firstAttribute="trailing" secondItem="OWA-Qo-s3p" secondAttribute="trailing" constant="16" id="3yN-hn-AnF"/>
-                            <constraint firstItem="5oC-SP-hbc" firstAttribute="top" secondItem="bnc-p3-W4r" secondAttribute="bottom" id="LsV-Il-OTS"/>
                             <constraint firstItem="5oC-SP-hbc" firstAttribute="top" secondItem="OWA-Qo-s3p" secondAttribute="bottom" id="SL1-7l-B0L"/>
-                            <constraint firstItem="bnc-p3-W4r" firstAttribute="leading" secondItem="gCO-Ei-OIi" secondAttribute="leading" id="VIq-ZS-Zjt"/>
                             <constraint firstItem="OWA-Qo-s3p" firstAttribute="leading" secondItem="gCO-Ei-OIi" secondAttribute="leading" id="Wuj-Av-KLs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kA4-B2-uwp" secondAttribute="trailing" id="WwD-Mc-FnW"/>
-                            <constraint firstAttribute="trailing" secondItem="bnc-p3-W4r" secondAttribute="trailing" id="bfv-H6-UWx"/>
                             <constraint firstItem="OWA-Qo-s3p" firstAttribute="top" secondItem="iTf-i0-9ae" secondAttribute="bottom" id="fPx-wb-r0N"/>
                             <constraint firstItem="kA4-B2-uwp" firstAttribute="leading" secondItem="gCO-Ei-OIi" secondAttribute="leadingMargin" id="kC0-CK-Bbv"/>
                             <constraint firstItem="OWA-Qo-s3p" firstAttribute="top" secondItem="iTf-i0-9ae" secondAttribute="bottom" constant="8" symbolic="YES" id="mZP-CM-MTv"/>
@@ -373,16 +363,12 @@
                                 <exclude reference="WwD-Mc-FnW"/>
                                 <exclude reference="kC0-CK-Bbv"/>
                                 <exclude reference="rWi-2a-Rn2"/>
-                                <exclude reference="VIq-ZS-Zjt"/>
-                                <exclude reference="bfv-H6-UWx"/>
-                                <exclude reference="LsV-Il-OTS"/>
                                 <exclude reference="SL1-7l-B0L"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=compact">
                             <mask key="subviews">
                                 <exclude reference="kA4-B2-uwp"/>
-                                <exclude reference="bnc-p3-W4r"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="Wuj-Av-KLs"/>
@@ -394,7 +380,6 @@
                         <variation key="heightClass=compact-widthClass=regular">
                             <mask key="subviews">
                                 <exclude reference="kA4-B2-uwp"/>
-                                <exclude reference="bnc-p3-W4r"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="Wuj-Av-KLs"/>
@@ -411,9 +396,6 @@
                                 <include reference="WwD-Mc-FnW"/>
                                 <include reference="kC0-CK-Bbv"/>
                                 <include reference="rWi-2a-Rn2"/>
-                                <include reference="VIq-ZS-Zjt"/>
-                                <include reference="bfv-H6-UWx"/>
-                                <include reference="LsV-Il-OTS"/>
                             </mask>
                         </variation>
                     </view>
@@ -428,7 +410,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8Q-og-5tv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1683.5082458770617" y="42.399999999999999"/>
+            <point key="canvasLocation" x="1686" y="44"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IZ6-jz-NyJ">
