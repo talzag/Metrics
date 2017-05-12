@@ -12,83 +12,6 @@
     </dependencies>
     <scenes>
         <!--New Graph-->
-        <scene sceneID="U0l-6L-rtt">
-            <objects>
-                <viewController id="pz1-3e-uPs" customClass="MTSDataSelectionViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ufd-Z9-Pfs"/>
-                        <viewControllerLayoutGuide type="bottom" id="NQK-ES-Van"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="po5-W9-zBJ">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zdE-hc-eCp">
-                                <rect key="frame" x="0.0" y="37" width="375" height="566"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="healthIdentifierCell" textLabel="ndT-DV-WFF" style="IBUITableViewCellStyleDefault" id="rZN-3c-5BW">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rZN-3c-5BW" id="SRZ-04-i0V">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ndT-DV-WFF">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="pz1-3e-uPs" id="KUA-gD-Fs7"/>
-                                    <outlet property="delegate" destination="pz1-3e-uPs" id="neq-9F-hJA"/>
-                                </connections>
-                            </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What data would you like to see?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFK-JV-cHT">
-                                <rect key="frame" x="16" y="8" width="251" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="zdE-hc-eCp" secondAttribute="trailing" id="2CH-hS-Dic"/>
-                            <constraint firstItem="lFK-JV-cHT" firstAttribute="leading" secondItem="po5-W9-zBJ" secondAttribute="leadingMargin" id="BLb-qr-BCr"/>
-                            <constraint firstItem="zdE-hc-eCp" firstAttribute="leading" secondItem="po5-W9-zBJ" secondAttribute="leading" id="PqH-ut-3Lr"/>
-                            <constraint firstItem="zdE-hc-eCp" firstAttribute="top" secondItem="lFK-JV-cHT" secondAttribute="bottom" constant="8" id="VWa-iT-AjH"/>
-                            <constraint firstItem="lFK-JV-cHT" firstAttribute="top" secondItem="Ufd-Z9-Pfs" secondAttribute="bottom" constant="8" id="wtd-Em-nbN"/>
-                            <constraint firstItem="NQK-ES-Van" firstAttribute="top" secondItem="zdE-hc-eCp" secondAttribute="bottom" id="z39-0P-7WO"/>
-                        </constraints>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="New Graph" id="yEV-ys-aNf">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="kDS-de-1ee">
-                            <connections>
-                                <action selector="cancel:" destination="pz1-3e-uPs" id="enK-xO-x34"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="vwS-Go-Otu">
-                            <connections>
-                                <segue destination="ewL-AG-Y3U" kind="show" identifier="createGraph" id="izH-Po-jod"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="tableView" destination="zdE-hc-eCp" id="4GH-uI-T6J"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yyL-bS-fXw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2624.8000000000002" y="-743.47826086956525"/>
-        </scene>
-        <!--New Graph-->
         <scene sceneID="1C1-hR-ooO">
             <objects>
                 <viewController id="ewL-AG-Y3U" customClass="MTSGraphCreationViewController" sceneMemberID="viewController">
@@ -164,7 +87,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NYE-Ut-Bwy">
                                                     <rect key="frame" x="279" y="0.0" width="88" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </view>
                                             </subviews>
@@ -233,8 +156,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vKH-iV-Hvj" customClass="MTSGraphView">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="188"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="183"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                     </subviews>
@@ -441,12 +364,61 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="pz1-3e-uPs" kind="relationship" relationship="rootViewController" id="Vuj-Q1-2ed"/>
+                        <segue destination="Krc-5I-thO" kind="relationship" relationship="rootViewController" id="4ql-Pw-jOz"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P5X-OQ-2Ek" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1685.5999999999999" y="-743.47826086956525"/>
+        </scene>
+        <!--Choose Data-->
+        <scene sceneID="2t6-Qi-KJA">
+            <objects>
+                <tableViewController id="Krc-5I-thO" customClass="MTSDataSelectionViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="CY0-AZ-SDF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="healthIdentifierCell" textLabel="3Sa-eh-YcS" style="IBUITableViewCellStyleDefault" id="m3D-VP-XYY">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m3D-VP-XYY" id="riA-6w-jLb">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Sa-eh-YcS">
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Krc-5I-thO" id="TSs-m7-KWH"/>
+                            <outlet property="delegate" destination="Krc-5I-thO" id="nUv-5Q-nc1"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Choose Data" id="Ugw-Du-QXg">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Pbl-WT-6Eh">
+                            <connections>
+                                <action selector="cancel:" destination="Krc-5I-thO" id="1Cm-si-wIe"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="iwH-Ht-NwF">
+                            <connections>
+                                <segue destination="ewL-AG-Y3U" kind="show" id="4hS-7u-Rpt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="APG-qk-FuY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2551" y="-747"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

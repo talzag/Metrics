@@ -14,7 +14,6 @@
 @property (strong, nonatomic) NSMutableSet <HKQuantityTypeIdentifier>*selectedHealthTypes;
 @property NSArray <NSDictionary <HKQuantityTypeIdentifier, NSString *> *> *healthCategories;
 @property (nonatomic) NSArray <NSString *>*healthTypeIconNames;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 

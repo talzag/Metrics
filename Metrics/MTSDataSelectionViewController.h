@@ -11,7 +11,7 @@
 
 #import <MetricsKit/MetricsKit.h>
 
-@interface MTSDataSelectionViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface MTSDataSelectionViewController : UITableViewController
 
 @property (nonatomic) MTSGraph *graph;
 
