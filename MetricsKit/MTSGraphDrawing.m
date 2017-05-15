@@ -160,45 +160,47 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <MTSQuery
     CGContextSetLineWidth(context, 2.0);
     
     for (MTSQuery *query in graphQueries) {
+        NSArray <NSNumber *> *values = [query fetchedDataPoints];
+        NSInteger size = values.count;
+        if (!size) {
+            continue;
+        }
+        
         CGMutablePathRef graphPath = CGPathCreateMutable();
         
-        NSArray <NSNumber *>*values = [query fetchedDataPoints];
-        NSInteger size = values.count;
-        if (size) {
-            if (size == 1) {
-                CGFloat startX = MTSGraphPositionOnXAxisAtIndex(rect, 0, size);
-                CGFloat endX = rect.size.width - MTSGraphRightMargin(rect);
+        if (size == 1) {
+            CGFloat startX = MTSGraphPositionOnXAxisAtIndex(rect, 0, size);
+            CGFloat endX = rect.size.width - MTSGraphRightMargin(rect);
+            
+            CGFloat y = MTSGraphPositionOnYAxisForValue(rect, [values[0] doubleValue], maxValue);
+            
+            CGPathMoveToPoint(graphPath, NULL, startX, y);
+            CGPathAddLineToPoint(graphPath, NULL, endX, y);
+            
+            const CGFloat dashes[] = { 4.0, 4.0 };
+            CGContextSetLineDash(context, 0, dashes, 2);
+        } else {
+            CGFloat startX = MTSGraphPositionOnXAxisAtIndex(rect, 0, size);
+            CGFloat startY = MTSGraphPositionOnYAxisForValue(rect, [[values firstObject] doubleValue], maxValue);
+            CGPathMoveToPoint(graphPath, NULL, startX, startY);
+            
+            for (int i = 1; i < size; i++) {
+                CGFloat x = MTSGraphPositionOnXAxisAtIndex(rect, i, size);
+                CGFloat y = MTSGraphPositionOnYAxisForValue(rect, [values[i] doubleValue], maxValue);
                 
-                CGFloat y = MTSGraphPositionOnYAxisForValue(rect, [values[0] doubleValue], maxValue);
-                
-                CGPathMoveToPoint(graphPath, NULL, startX, y);
-                CGPathAddLineToPoint(graphPath, NULL, endX, y);
-                
-                const CGFloat dashes[] = { 4.0, 4.0 };
-                CGContextSetLineDash(context, 0, dashes, 2);
-            } else {
-                CGFloat startX = MTSGraphPositionOnXAxisAtIndex(rect, 0, size);
-                CGFloat startY = MTSGraphPositionOnYAxisForValue(rect, [[values firstObject] doubleValue], maxValue);
-                CGPathMoveToPoint(graphPath, NULL, startX, startY);
-                
-                for (int i = 1; i < size; i++) {
-                    CGFloat x = MTSGraphPositionOnXAxisAtIndex(rect, i, size);
-                    CGFloat y = MTSGraphPositionOnYAxisForValue(rect, [values[i] doubleValue], maxValue);
-                    
-                    CGPathAddLineToPoint(graphPath, NULL, x, y);
-                }
-                
-                CGContextSetLineDash(context, 0, NULL, 0);
+                CGPathAddLineToPoint(graphPath, NULL, x, y);
             }
             
-            CGContextAddPath(context, graphPath);
-
-            UIColor *configColor = [query lineColor];
-            CGColorRef lineColor = [configColor CGColor];
-            CGContextSetStrokeColorWithColor(context, lineColor);
-            
-            CGContextStrokePath(context);
+            CGContextSetLineDash(context, 0, NULL, 0);
         }
+        
+        CGContextAddPath(context, graphPath);
+        
+        UIColor *configColor = [query lineColor];
+        CGColorRef lineColor = [configColor CGColor];
+        CGContextSetStrokeColorWithColor(context, lineColor);
+        
+        CGContextStrokePath(context);
         
         CGPathRelease(graphPath);
     }

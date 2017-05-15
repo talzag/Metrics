@@ -16,30 +16,54 @@
 @interface MTSGraphsTableViewControllerTests : XCTestCase
 
 @property MTSGraphsTableViewController *testController;
+@property MTSGraph *testGraph;
 
 @end
 
 @implementation MTSGraphsTableViewControllerTests
 
+- (UIApplication *)app {
+    return [UIApplication sharedApplication];
+}
+
+- (AppDelegate *)delegate {
+    return (AppDelegate *)[[self app] delegate];
+}
+
+- (NSManagedObjectContext *)context {
+    return [[[self delegate] persistentContainer] viewContext];
+}
+
 - (void)setUp {
     [super setUp];
     
-    UIApplication *app =  [UIApplication sharedApplication];
-    AppDelegate *delegate = (AppDelegate *)[app delegate];
-    NSManagedObjectContext *context = [[delegate persistentContainer] viewContext];
+    MTSGraph *graph = [[MTSGraph alloc] initWithContext:[self context]];
+    [self setTestGraph:graph];
     
     MTSGraphsTableViewController *controller = [MTSGraphsTableViewController new];
-    [controller setManagedObjectContext:context];
-    [controller setHealthStore:[delegate healthStore]];
+    [controller setManagedObjectContext:[self context]];
+    [controller setHealthStore:[[self delegate] healthStore]];
     
     [self setTestController:controller];
 }
 
 - (void)tearDown {
     [self setTestController:nil];
+    [[self context] deleteObject:[self testGraph]];
+    
     [super tearDown];
 }
 
+- (void)testThatItHandlesContextChanges {
+    
+}
 
+- (void)testThatDeletingATableViewCellDeletesAnObject {
+    
+}
+
+- (void)testThatItPreparesSegues {
+    
+}
 
 @end

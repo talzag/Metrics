@@ -21,7 +21,6 @@
     UIApplication *app =  [UIApplication sharedApplication];
     AppDelegate *delegate = (AppDelegate *)[app delegate];
     
-    XCTAssertNotNil([delegate persistentContainer]);
     XCTAssertNotNil([[delegate persistentContainer] viewContext]);
 }
 
@@ -65,6 +64,7 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"MTSGraph"];
     NSArray *results = [context executeFetchRequest:request error:nil];
     [context deleteObject:[results firstObject]];
+    [delegate saveContext];
 }
 
 @end
