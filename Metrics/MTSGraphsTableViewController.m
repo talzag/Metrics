@@ -129,8 +129,15 @@ static NSString * const cellIdentifier = @"GraphCell";
     MTSGraphTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
     MTSGraph *graph = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    [[cell graphView] setGraph:graph];
     
-   [[cell graphView] setGraph:graph];
+    [graph executeQueriesWithHealthStore:[self healthStore] usingCompletionHandler:^(NSError * _Nullable error) {
+        if (!error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[cell graphView] setNeedsDisplay];
+            });
+        }
+    }];
     
     return cell;
 }

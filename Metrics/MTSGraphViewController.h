@@ -12,10 +12,13 @@
 #import <MetricsKit/MetricsKit.h>
 #import "MTSGraphView.h"
 
-@interface MTSGraphViewController : UIViewController
+@interface MTSGraphViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic) HKHealthStore *healthStore;
 @property (nonatomic) MTSGraph *graph;
 @property (weak, nonatomic) IBOutlet MTSGraphView *graphView;
-@property (nonatomic) HKHealthStore *healthStore;
+@property (weak, nonatomic) IBOutlet UILabel *startDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *endDateLabel;
+@property (weak, nonatomic) IBOutlet UITableView *healthTypesTableView;
 
 @end

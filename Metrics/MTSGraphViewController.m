@@ -7,12 +7,13 @@
 //
 
 #import "MTSGraphViewController.h"
+#import "MTSColorPickerTableViewCell.h"
 
 @interface MTSGraphViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *startDateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *endDateLabel;
 @property (nonatomic) NSDateFormatter *dateFormatter;
+@property (nonatomic) NSArray *graphQueries;
+@property (nonatomic) NSDictionary <HKQuantityTypeIdentifier, NSString *> *healthTypeNameLookup;
 
 @end
 
@@ -24,17 +25,18 @@
     [[self navigationItem] setTitle:[[self graph] title]];
     [[self startDateLabel] setText:[[self dateFormatter] stringFromDate:[[self graph] startDate]]];
     [[self endDateLabel] setText:[[self dateFormatter] stringFromDate:[[self graph] endDate]]];
+    [self setGraphQueries:[[[self graph] queries] allObjects]];
+    [self setHealthTypeNameLookup:MTSQuantityTypeIdentifiers()];
     
     MTSGraph *graph = [self graph];
     [[self graphView] setGraph:graph];
-    [graph executeQueriesWithHealthStore:[self healthStore]
-                usingCompletionHandler:^(NSError * _Nullable error) {
-                    if (!error) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [[self graphView] setNeedsDisplay];
-                        });
-                    }
-                }];
+    [graph executeQueriesWithHealthStore:[self healthStore] usingCompletionHandler:^(NSError * _Nullable error) {
+        if (!error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[self graphView] setNeedsDisplay];
+            });
+        }
+    }];
 }
 
 - (NSDateFormatter *)dateFormatter {
@@ -44,6 +46,26 @@
         [_dateFormatter setLocale:[NSLocale currentLocale]];
     }
     return _dateFormatter;
+}
+
+// MARK: - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [[[self graph] queries] count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MTSColorPickerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"healthDataCell" forIndexPath:indexPath];
+    
+    MTSQuery *query = [[self graphQueries] objectAtIndex:[indexPath row]];
+    NSString *value = [[self healthTypeNameLookup] objectForKey:[query healthKitTypeIdentifier]];
+    
+    [[cell textLabel] setText:value];
+    
+    [[cell colorSwatchView] setBackgroundColor:[query lineColor]];
+    [cell setColorSelectionEnabled:NO];
+    
+    return cell;
 }
 
 @end

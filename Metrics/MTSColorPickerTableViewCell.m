@@ -60,6 +60,13 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self setOriginalSwatchFrame:[self colorSwatchView].frame];
+    [self setColorSelectionEnabled:YES];
+}
+
+- (void)setColorSelectionEnabled:(BOOL)colorSelectionEnabled {
+    _colorSelectionEnabled = colorSelectionEnabled;
+    
+    [self setUserInteractionEnabled:colorSelectionEnabled];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

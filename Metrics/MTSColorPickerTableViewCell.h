@@ -11,5 +11,6 @@
 @interface MTSColorPickerTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIView *colorSwatchView;
+@property (nonatomic, getter=isColorSelectionEnabled) BOOL colorSelectionEnabled;
 
 @end
