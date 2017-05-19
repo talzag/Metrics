@@ -13,6 +13,7 @@
 @implementation MTSGraph (MTSQueryable)
 
 - (void)executeQueriesWithHealthStore:(HKHealthStore * _Nonnull)healthStore usingCompletionHandler:(void (^ _Nullable)(NSError * _Nullable))completionHandler {
+    // Dates might be null early in the graph creation process
     if (![self startDate] || ![self endDate]) {
         return;
     }
@@ -20,7 +21,7 @@
     if (![self queries] || ![[self queries] count]) {
         NSError *error = [NSError errorWithDomain:@"com.dstrokis.Metrics"
                                              code:1
-                                         userInfo:@{ NSLocalizedDescriptionKey: @"Query cannot be nil" }];
+                                         userInfo:@{ NSLocalizedDescriptionKey: @"Queries cannot be nil" }];
         if (completionHandler) {
             completionHandler(error);
         }
