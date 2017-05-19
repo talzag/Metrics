@@ -13,11 +13,18 @@
 @implementation MTSGraph (MTSQueryable)
 
 - (void)executeQueriesWithHealthStore:(HKHealthStore * _Nonnull)healthStore usingCompletionHandler:(void (^ _Nullable)(NSError * _Nullable))completionHandler {
+    if (![self startDate] || ![self endDate]) {
+        return;
+    }
+    
     if (![self queries] || ![[self queries] count]) {
         NSError *error = [NSError errorWithDomain:@"com.dstrokis.Metrics"
                                              code:1
                                          userInfo:@{ NSLocalizedDescriptionKey: @"Query cannot be nil" }];
-        completionHandler(error);
+        if (completionHandler) {
+            completionHandler(error);
+        }
+        
         return;
     }
     
@@ -25,7 +32,10 @@
         NSError *error = [NSError errorWithDomain:@"com.dstrokis.Metrics"
                                              code:2
                                          userInfo:@{ NSLocalizedDescriptionKey: @"Health store cannot be nil" }];
-        completionHandler(error);
+        if (completionHandler) {
+            completionHandler(error);
+        }
+        
         return;
     }
 
@@ -51,34 +61,56 @@
                  NSDate *end = [self endDate];
                  NSPredicate *predicate = [HKSampleQuery predicateForSamplesWithStartDate:start
                                                                                   endDate:end
-                                                                                  options:HKQueryOptionNone];
-
+                                                                                  options:HKQueryOptionStrictStartDate | HKQueryOptionStrictEndDate];
+                 
                  HKQuantityType *type = [HKQuantityType quantityTypeForIdentifier:[graphQuery healthKitTypeIdentifier]];
-                 HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:type predicate:predicate limit:HKObjectQueryNoLimit sortDescriptors:nil resultsHandler:
-                 ^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error)
-                 {
+                 
+                 // TODO: Make interval adjustable based on query/view
+                 NSDateComponents *components = [NSDateComponents new];
+                 [components setDay:1];
+
+                 NSCalendar *calendar = [NSCalendar currentCalendar];
+                 NSDateComponents *anchorComponents = [calendar components:NSCalendarUnitMinute | NSCalendarUnitHour | NSCalendarUnitDay
+                                                                  fromDate:start];
+                 NSDate *anchorDate = [calendar dateFromComponents:anchorComponents];
+                 
+                 HKStatisticsCollectionQuery *query = [[HKStatisticsCollectionQuery alloc] initWithQuantityType:type
+                                                                                        quantitySamplePredicate:predicate
+                                                                                                        options:HKStatisticsOptionCumulativeSum
+                                                                                                     anchorDate:anchorDate
+                                                                                             intervalComponents:components];
+                 
+                 void(^initialResultsHandler)(HKStatisticsCollectionQuery *, HKStatisticsCollection *, NSError *);
+                 initialResultsHandler = ^(HKStatisticsCollectionQuery *query, HKStatisticsCollection *results, NSError *error) {
                      NSMutableArray *fetchedDataPoints = [NSMutableArray array];
                      
-                     for (HKQuantitySample *sample in results)
-                     {
-                         HKQuantityType *type = [sample quantityType];
-                         HKUnit *unit = [preferredUnits objectForKey:type];
+                     [results enumerateStatisticsFromDate:start toDate:end withBlock:^(HKStatistics * _Nonnull result, BOOL * _Nonnull stop) {
+                         HKQuantity *sum = [result sumQuantity];
                          
-                         double quantity = [[sample quantity] doubleValueForUnit:unit];
+                         HKQuantityType *type = [result quantityType];
+                         HKUnit *unit = [preferredUnits objectForKey:type];
+                         double quantity = [sum doubleValueForUnit:unit];
                          NSNumber *amount = [NSNumber numberWithDouble:quantity];
+                         
                          [fetchedDataPoints addObject:amount];
-                     }
+                     }];
                      
                      [graphQuery setFetchedDataPoints:fetchedDataPoints];
+                     
                      dispatch_group_leave(queriesGroup);
-                 }];
+                 };
                  
                  dispatch_group_enter(queriesGroup);
+                 
+                 [query setInitialResultsHandler:initialResultsHandler];
                  [healthStore executeQuery:query];
              }
              
              dispatch_group_wait(queriesGroup, DISPATCH_TIME_FOREVER);
-             completionHandler(nil);
+             
+             if (completionHandler) {
+                 completionHandler(nil);
+             }
          });
      }];
 }
