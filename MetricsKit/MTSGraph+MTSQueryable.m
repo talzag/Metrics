@@ -66,6 +66,13 @@
                  
                  HKQuantityType *type = [HKQuantityType quantityTypeForIdentifier:[graphQuery healthKitTypeIdentifier]];
                  
+                 HKStatisticsOptions options;
+                 if ([type aggregationStyle] == HKQuantityAggregationStyleDiscrete) {
+                     options = HKStatisticsOptionDiscreteAverage;
+                 } else {
+                     options = HKStatisticsOptionCumulativeSum;
+                 }
+                 
                  // TODO: Make interval adjustable based on query/view
                  NSDateComponents *components = [NSDateComponents new];
                  [components setDay:1];
@@ -77,7 +84,7 @@
                  
                  HKStatisticsCollectionQuery *query = [[HKStatisticsCollectionQuery alloc] initWithQuantityType:type
                                                                                         quantitySamplePredicate:predicate
-                                                                                                        options:HKStatisticsOptionCumulativeSum
+                                                                                                        options:options
                                                                                                      anchorDate:anchorDate
                                                                                              intervalComponents:components];
                  
