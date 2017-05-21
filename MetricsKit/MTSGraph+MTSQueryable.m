@@ -53,8 +53,7 @@
                                                                      endDate:end
                                                                      options:HKQueryOptionStrictStartDate | HKQueryOptionStrictEndDate];
     
-    // TODO: Make interval adjustable based on query/view
-    
+    // FIXME: Hourly isn't working
     // Create the interval components of the HKStatisticsCollectionQuery
     NSDateComponents *components = [NSDateComponents new];
     switch ([self queryInterval]) {
@@ -74,8 +73,18 @@
 
     // Create the anchor date for the HKStatisticsCollectionQuery
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *anchorComponents = [calendar components:NSCalendarUnitMinute | NSCalendarUnitHour | NSCalendarUnitDay
-                                                     fromDate:start];
+    NSCalendarUnit anchorCalendarUnits;
+    switch ([self queryInterval]) {
+        case MTSGraphQueryIntervalHour:
+            anchorCalendarUnits = NSCalendarUnitHour;
+            break;
+        case MTSGraphQueryIntervalDay:  /* fallthrough */
+        case MTSGraphQueryIntervalWeek: /* fallthrough */
+        default:
+            anchorCalendarUnits = NSCalendarUnitDay;
+            break;
+    }
+    NSDateComponents *anchorComponents = [calendar components:anchorCalendarUnits fromDate:start];
     NSDate *anchorDate = [calendar dateFromComponents:anchorComponents];
     
     // Grab reference to graph.queries
