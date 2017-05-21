@@ -184,19 +184,25 @@ CGFloat MTSGraphPositionOnYAxisForValue(CGRect rect, CGFloat value, CGFloat maxV
     return MTSGraphHeight(rect) - ratio * height;
 }
 
-void MTSGraphDataPointsLocationMap(CGRect rect, NSArray *dataPoints) {
-    
+void MTSGraphDataPointsLocationMap(CGRect rect, NSArray <NSNumber *> *dataPoints) {
+    // iterate over the dataPoints
 }
 
-void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <MTSQuery *> *graphQueries) {
+CGFloat MTSGraphQueryDataPointsMax(NSArray <MTSQuery *> *graphQueries) {
     CGFloat maxValue = 0.0;
     for (MTSQuery *query in graphQueries) {
-        NSArray *values = [query fetchedDataPoints];
+        NSArray <NSNumber *> *values = [query fetchedDataPoints];
         for (NSNumber *value in values) {
             double floatValue = [value doubleValue];
             maxValue = floatValue > maxValue ? floatValue : maxValue;
         }
     }
+    
+    return maxValue;
+}
+
+void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <MTSQuery *> *graphQueries) {
+    CGFloat maxValue = MTSGraphQueryDataPointsMax(graphQueries);
 
     CGContextSetLineWidth(context, 2.0);
     
@@ -273,7 +279,6 @@ void MTSDrawGraph(CGContextRef context, CGRect rect, MTSGraph *graph) {
         drawLabelsOnYAxis(context, rect, [graph yAxisLabels]);
         CGContextRestoreGState(context);
     }
-
     
     // plot data points
     if ([graph queries]) {

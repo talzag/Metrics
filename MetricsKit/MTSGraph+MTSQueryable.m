@@ -44,7 +44,6 @@
         
         return;
     }
-
     
     // Create predicate for the HKStatisticsCollectionQuery
     NSDate *start = [self startDate];
@@ -53,7 +52,6 @@
                                                                      endDate:end
                                                                      options:HKQueryOptionStrictStartDate | HKQueryOptionStrictEndDate];
     
-    // FIXME: Hourly isn't working
     // Create the interval components of the HKStatisticsCollectionQuery
     NSDateComponents *components = [NSDateComponents new];
     switch ([self queryInterval]) {
@@ -71,6 +69,9 @@
             break;
     }
 
+    // TODO: Create xAxisLabels here
+    
+    // FIXME: Hour isn't working
     // Create the anchor date for the HKStatisticsCollectionQuery
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSCalendarUnit anchorCalendarUnits;
