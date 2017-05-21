@@ -24,6 +24,7 @@ FOUNDATION_EXPORT const unsigned char MetricsKitVersionString[];
 #import <MetricsKit/MTSGraphDrawing.h>
 
 typedef NS_ENUM(NSUInteger, MTSGraphQueryInterval) {
+    MTSGraphQueryIntervalHour,
     MTSGraphQueryIntervalDay,
     MTSGraphQueryIntervalWeek
 };

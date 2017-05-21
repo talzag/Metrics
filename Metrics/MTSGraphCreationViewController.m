@@ -123,9 +123,11 @@
     switch ([sender selectedSegmentIndex]) {
         case 0: // Hourly
             [[self datePicker] setDatePickerMode:UIDatePickerModeTime];
+            [[self graph] setQueryInterval:MTSGraphQueryIntervalHour];
             break;
         case 1: // Daily
             [[self datePicker] setDatePickerMode:UIDatePickerModeDate];
+            [[self graph] setQueryInterval:MTSGraphQueryIntervalDay];
             break;
         default:
             break;
