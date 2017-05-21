@@ -7,7 +7,7 @@
 //
 
 #import "MTSQuery+CoreDataClass.h"
-#import "MTSGraph.h"
+#import "MTSGraph+MTSQueryable.h"
 @implementation MTSQuery
 
 @end

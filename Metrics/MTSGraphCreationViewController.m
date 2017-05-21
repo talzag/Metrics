@@ -121,11 +121,10 @@
 
 - (IBAction)timeUnitDidChange:(UISegmentedControl *)sender {
     switch ([sender selectedSegmentIndex]) {
-        case 0:
-            [[self datePicker] setDatePickerMode:UIDatePickerModeDateAndTime];
+        case 0: // Hourly
+            [[self datePicker] setDatePickerMode:UIDatePickerModeTime];
             break;
-        case 1: // fallthrough
-        case 2:
+        case 1: // Daily
             [[self datePicker] setDatePickerMode:UIDatePickerModeDate];
             break;
         default:

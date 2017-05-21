@@ -26,9 +26,8 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CfB-WJ-xgQ">
                                 <rect key="frame" x="16" y="20" width="343" height="29"/>
                                 <segments>
-                                    <segment title="Day"/>
-                                    <segment title="Week"/>
-                                    <segment title="Month"/>
+                                    <segment title="Hourly"/>
+                                    <segment title="Daily"/>
                                 </segments>
                                 <connections>
                                     <action selector="timeUnitDidChange:" destination="ewL-AG-Y3U" eventType="valueChanged" id="PXg-Zs-Zcc"/>

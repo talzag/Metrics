@@ -6,7 +6,7 @@
 //  Copyright © 2017 dstrokis. All rights reserved.
 //
 
-#import "MTSGraph.h"
+#import "MTSGraph+MTSQueryable.h"
 #import "MTSQuery.h"
 #import "MTSGraphDrawing.h"
 

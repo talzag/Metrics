@@ -16,7 +16,8 @@ FOUNDATION_EXPORT const unsigned char MetricsKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <MetricsKit/PublicHeader.h>
 
-#import <MetricsKit/MTSGraph.h>
+
+#import <MetricsKit/MTSGraph+MTSQueryable.h>
 #import <MetricsKit/MTSQuery.h>
 #import <MetricsKit/MTSHealthStoreManager.h>
 #import <MetricsKit/MTSQuantityTypeIdentifiers.h>

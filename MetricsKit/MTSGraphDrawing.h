@@ -12,7 +12,7 @@
 @import Foundation;
 @import CoreGraphics;
 
-#import "MTSGraph.h"
+#import "MTSGraph+MTSQueryable.h"
 #import "MTSQuery.h"
 
 extern NSString * const _Nonnull MTSGraphLineColorKey;
