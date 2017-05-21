@@ -133,6 +133,43 @@ void drawGraphLines(CGContextRef context, CGRect rect) {
     CGPathRelease(midPath);
 }
 
+void drawLabelsOnYAxis(CGContextRef context, CGRect rect, NSArray <NSString *> *labels) {
+    CGFloat x = rect.size.width - MTSGraphLeftMargin(rect);
+    CGFloat top = MTSGraphTopMargin(rect);
+    CGFloat bottom = MTSGraphHeight(rect);
+    
+    CGFloat labelSpacing = (bottom - top) / [labels count];
+    
+    NSInteger i;
+    for (i = 0; i < [labels count]; i++) {
+        NSString *label = labels[i];
+        
+        CGFloat y = i * labelSpacing;
+        CGPoint labelSpot = CGPointMake(x, y);
+        
+        [label drawAtPoint:labelSpot withAttributes:nil];
+    }
+}
+
+void drawLabelsOnXAxis(CGContextRef context, CGRect rect, NSArray <NSString *> *labels) {
+    CGFloat left = rect.size.width - MTSGraphLeftMargin(rect);
+    CGFloat right = rect.size.width - MTSGraphRightMargin(rect);
+    CGFloat y = MTSGraphHeight(rect);
+    
+    
+    CGFloat labelSpacing = (right - left) / [labels count];
+    
+    NSInteger i;
+    for (i = 0; i < [labels count]; i++) {
+        NSString *label = labels[i];
+        
+        CGFloat x = i * labelSpacing;
+        CGPoint labelSpot = CGPointMake(x, y);
+        
+        [label drawAtPoint:labelSpot withAttributes:nil];
+    }
+}
+
 CGFloat MTSGraphPositionOnXAxisAtIndex(CGRect rect, int index, NSUInteger numElements) {
     return MTSGraphColumnWidth(rect, numElements - 1) * index + MTSGraphLeftMargin(rect);
 }
@@ -145,6 +182,10 @@ CGFloat MTSGraphPositionOnYAxisForValue(CGRect rect, CGFloat value, CGFloat maxV
     CGFloat height = MTSGraphHeight(rect) - MTSGraphTopMargin(rect);
     CGFloat ratio = value / maxValue;
     return MTSGraphHeight(rect) - ratio * height;
+}
+
+void MTSGraphDataPointsLocationMap(CGRect rect, NSArray *dataPoints) {
+    
 }
 
 void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, NSArray <MTSQuery *> *graphQueries) {

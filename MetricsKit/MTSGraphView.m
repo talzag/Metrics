@@ -10,6 +10,10 @@
 
 @implementation MTSGraphView
 
+- (UIViewAutoresizing)autoresizingMask {
+    return UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+}
+
 - (void)setGraph:(MTSGraph *)graph {
     _graph = graph;
     [self setNeedsDisplay];
@@ -19,6 +23,19 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     MTSDrawGraph(context, rect, [self graph]);
+}
+
+- (void)needsRedraw:(NSNotification *)notification {
+    [self setNeedsDisplay];
+}
+
+// TODO: Finish implementing interactivity
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesMoved:touches withEvent:event];
 }
 
 @end

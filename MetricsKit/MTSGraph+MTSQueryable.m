@@ -93,12 +93,22 @@
                      NSMutableArray *fetchedDataPoints = [NSMutableArray array];
                      
                      [results enumerateStatisticsFromDate:start toDate:end withBlock:^(HKStatistics * _Nonnull result, BOOL * _Nonnull stop) {
-                         HKQuantity *sum = [result sumQuantity];
+                         
+                         HKQuantity *total;
+                         
+                         if (options == HKStatisticsOptionDiscreteAverage) {
+                             total = [result averageQuantity];
+                         } else {
+                             total = [result sumQuantity];
+                         }
                          
                          HKQuantityType *type = [result quantityType];
                          HKUnit *unit = [preferredUnits objectForKey:type];
-                         double quantity = [sum doubleValueForUnit:unit];
+                         double quantity = [total doubleValueForUnit:unit];
                          NSNumber *amount = [NSNumber numberWithDouble:quantity];
+                         
+                         // TODO: Save HKStatistics? Create custom class?:
+                         // custom class could hold the amount, the date, and unit (all of which conform to NSCoding/NSSecureCoding)
                          
                          [fetchedDataPoints addObject:amount];
                      }];
