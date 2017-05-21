@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *yAxisTitle;
 @property (nullable, nonatomic, retain) NSArray *xAxisLabels;
 @property (nullable, nonatomic, retain) NSArray *yAxisLabels;
-@property (nonatomic) int16_t queryInterval;
+@property (nonatomic) int32_t queryInterval;
 @property (nullable, nonatomic, retain) NSSet<MTSQuery *> *queries;
 
 @end

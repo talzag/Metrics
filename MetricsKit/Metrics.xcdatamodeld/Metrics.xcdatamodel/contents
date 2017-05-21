@@ -4,7 +4,7 @@
         <attribute name="bottomColor" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="UIColor" syncable="YES"/>
         <attribute name="drawsIntermediateLines" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="endDate" attributeType="Date" minDateTimeInterval="-1609441200" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="queryInterval" attributeType="Integer 16" minValueString="1" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="queryInterval" attributeType="Integer 32" minValueString="1" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="startDate" attributeType="Date" minDateTimeInterval="-1609441200" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="topColor" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="UIColor" syncable="YES"/>
