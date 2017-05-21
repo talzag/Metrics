@@ -260,13 +260,29 @@ void MTSDrawGraph(CGContextRef context, CGRect rect, MTSGraph *graph) {
     CGContextSaveGState(context);
     drawGraphLines(context, rect);
     CGContextRestoreGState(context);
-
-    NSArray *queries = [[graph queries] allObjects];
-    // plot data points
-    if ([queries count]) {
+    
+    // draw graph labels
+    if ([graph xAxisLabels]) {
         CGContextSaveGState(context);
-        MTSGraphPlotDataPoints(context, rect, queries);
+        drawLabelsOnXAxis(context, rect, [graph xAxisLabels]);
         CGContextRestoreGState(context);
+    }
+    
+    if ([graph yAxisLabels]) {
+        CGContextSaveGState(context);
+        drawLabelsOnYAxis(context, rect, [graph yAxisLabels]);
+        CGContextRestoreGState(context);
+    }
+
+    
+    // plot data points
+    if ([graph queries]) {
+        NSArray *queries = [[graph queries] allObjects];
+        if ([queries count]) {
+            CGContextSaveGState(context);
+            MTSGraphPlotDataPoints(context, rect, queries);
+            CGContextRestoreGState(context);
+        }
     }
     
     CGContextRelease(context);

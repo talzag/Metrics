@@ -52,6 +52,8 @@
                                                                      endDate:end
                                                                      options:HKQueryOptionStrictStartDate | HKQueryOptionStrictEndDate];
     
+    // TODO: Make interval adjustable based on query/view
+    
     // Create the interval components of the HKStatisticsCollectionQuery
     NSDateComponents *components = [NSDateComponents new];
     [components setDay:1];
@@ -98,10 +100,6 @@
                 } else {
                  options = HKStatisticsOptionCumulativeSum;
                 }
-
-                
-                // TODO: Make interval adjustable based on query/view
-                
                 
                 // Create HKStatisticsCollectionQuery
                 HKStatisticsCollectionQuery *query = [[HKStatisticsCollectionQuery alloc] initWithQuantityType:type quantitySamplePredicate:predicate options:options anchorDate:anchorDate intervalComponents:components];

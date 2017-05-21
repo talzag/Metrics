@@ -4,10 +4,13 @@
         <attribute name="bottomColor" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="UIColor" syncable="YES"/>
         <attribute name="drawsIntermediateLines" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="endDate" attributeType="Date" minDateTimeInterval="-1609441200" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="queryInterval" attributeType="Integer 16" minValueString="1" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="startDate" attributeType="Date" minDateTimeInterval="-1609441200" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="topColor" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="UIColor" syncable="YES"/>
+        <attribute name="xAxisLabels" optional="YES" attributeType="Transformable" customClassName="NSArray" syncable="YES"/>
         <attribute name="xAxisTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="yAxisLabels" optional="YES" attributeType="Transformable" customClassName="NSArray" syncable="YES"/>
         <attribute name="yAxisTitle" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="queries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MTSQuery" inverseName="graph" inverseEntity="MTSQuery" syncable="YES"/>
     </entity>
@@ -19,7 +22,7 @@
         <relationship name="graph" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MTSGraph" inverseName="queries" inverseEntity="MTSGraph" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MTSGraph" positionX="-378" positionY="-216" width="128" height="180"/>
+        <element name="MTSGraph" positionX="-378" positionY="-216" width="128" height="225"/>
         <element name="MTSQuery" positionX="-117" positionY="-49" width="128" height="120"/>
     </elements>
 </model>
