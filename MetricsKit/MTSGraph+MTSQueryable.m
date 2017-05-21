@@ -9,6 +9,7 @@
 #import "MTSGraph+MTSQueryable.h"
 #import "MTSQuery.h"
 #import "MTSGraphDrawing.h"
+#import "MTSGraphQueryInterval.h"
 
 @implementation MTSGraph (MTSQueryable)
 
@@ -56,7 +57,20 @@
     
     // Create the interval components of the HKStatisticsCollectionQuery
     NSDateComponents *components = [NSDateComponents new];
-    [components setDay:1];
+    switch ([self queryInterval]) {
+        case MTSGraphQueryIntervalHour:
+            [components setHour:1];
+            break;
+        case MTSGraphQueryIntervalDay:
+            [components setDay:1];
+            break;
+        case MTSGraphQueryIntervalWeek:
+            [components setDay:7];
+            break;
+        default:
+            [components setDay:1];
+            break;
+    }
 
     // Create the anchor date for the HKStatisticsCollectionQuery
     NSCalendar *calendar = [NSCalendar currentCalendar];

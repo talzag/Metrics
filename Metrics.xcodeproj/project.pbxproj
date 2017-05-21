@@ -90,6 +90,8 @@
 		E3E236B81EAFA1AE0085D118 /* MTSColorPickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E236B71EAFA1AE0085D118 /* MTSColorPickerTableViewCell.m */; };
 		E3F276F31E7EC83E007DE843 /* MTSRealCalorieValue.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F276F11E7EC83E007DE843 /* MTSRealCalorieValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3F276F51E7EC8E0007DE843 /* MTSRealCalorieValue.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F276F41E7EC8E0007DE843 /* MTSRealCalorieValue.m */; };
+		E3F3E3861ED24211002119F4 /* MTSGraphQueryInterval.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F3E3851ED24207002119F4 /* MTSGraphQueryInterval.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E3F3E3871ED24212002119F4 /* MTSGraphQueryInterval.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F3E3851ED24207002119F4 /* MTSGraphQueryInterval.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -285,6 +287,7 @@
 		E3E236B71EAFA1AE0085D118 /* MTSColorPickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSColorPickerTableViewCell.m; sourceTree = "<group>"; };
 		E3F276F11E7EC83E007DE843 /* MTSRealCalorieValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSRealCalorieValue.h; sourceTree = "<group>"; };
 		E3F276F41E7EC8E0007DE843 /* MTSRealCalorieValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSRealCalorieValue.m; sourceTree = "<group>"; };
+		E3F3E3851ED24207002119F4 /* MTSGraphQueryInterval.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTSGraphQueryInterval.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -514,6 +517,7 @@
 		E3B3B3F01E88BD0100707324 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E3F3E3851ED24207002119F4 /* MTSGraphQueryInterval.h */,
 				E3B3B3ED1E889CBC00707324 /* MTSQuery.h */,
 				E3B3B3D51E889C1700707324 /* MTSQuery+CoreDataClass.h */,
 				E3B3B3D61E889C1700707324 /* MTSQuery+CoreDataClass.m */,
@@ -557,6 +561,7 @@
 				E3F276F31E7EC83E007DE843 /* MTSRealCalorieValue.h in Headers */,
 				E3B3B3E11E889C1700707324 /* MTSQuery+CoreDataProperties.h in Headers */,
 				E3B3B3DD1E889C1700707324 /* MTSQuery+CoreDataClass.h in Headers */,
+				E3F3E3871ED24212002119F4 /* MTSGraphQueryInterval.h in Headers */,
 				E3B3B3D41E877DBC00707324 /* MTSGraphDrawing.h in Headers */,
 				E3B3B3EE1E889CBC00707324 /* MTSQuery.h in Headers */,
 				E3594A421E7C8C1D00494BDC /* MTSQuantityTypeIdentifiers.h in Headers */,
@@ -575,6 +580,7 @@
 				E3B3B3E21E889C1700707324 /* MTSQuery+CoreDataProperties.h in Headers */,
 				E3B3B3EF1E889CBC00707324 /* MTSQuery.h in Headers */,
 				E3B3B3DE1E889C1700707324 /* MTSQuery+CoreDataClass.h in Headers */,
+				E3F3E3861ED24211002119F4 /* MTSGraphQueryInterval.h in Headers */,
 				E320E0981E90477F0039628C /* MTSGraphDrawing.h in Headers */,
 				E3BC40261E82258500F0D44C /* MTSQuantityTypeIdentifiers.h in Headers */,
 				E3BC40271E82258500F0D44C /* MTSHealthStoreManager.h in Headers */,
