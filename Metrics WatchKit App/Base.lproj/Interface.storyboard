@@ -1,55 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="12118" systemVersion="16F43c" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="XnQ-IE-tok">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="12120" systemVersion="16F71b" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="muI-t0-j2p">
     <device id="watch42" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="12029"/>
     </dependencies>
     <scenes>
         <!--My Graphs-->
-        <scene sceneID="KP7-Nz-ORs">
+        <scene sceneID="qQH-4A-KO1">
             <objects>
-                <controller title="My Graphs" id="XnQ-IE-tok" customClass="MTSGraphsInterfaceController">
+                <controller identifier="graphsInterface" title="My Graphs" id="muI-t0-j2p" customClass="MTSGraphsInterfaceController">
                     <items>
-                        <imageView width="1" height="1" alignment="left" id="hkg-vI-hfd"/>
+                        <table alignment="left" pagingScroll="YES" id="MJf-UK-WaT">
+                            <items>
+                                <tableRow identifier="MTSGraphRowController" id="MC9-hk-CT6" customClass="MTSGraphRowController">
+                                    <group key="rootItem" width="1" height="87" alignment="left" id="Huo-pA-kIn">
+                                        <items>
+                                            <imageView height="1" alignment="left" id="pqV-eZ-gkP"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="graphImage" destination="pqV-eZ-gkP" id="idE-Zd-1PT"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
                     </items>
-                    <menu key="menu" id="hpz-0Z-fbv">
-                        <items>
-                            <menuItem title="New Graph" icon="add" id="cOi-bE-RG4"/>
-                        </items>
-                    </menu>
                     <connections>
-                        <outlet property="graphInterfaceImage" destination="hkg-vI-hfd" id="BXZ-mS-mMx"/>
+                        <outlet property="graphsInterfaceTable" destination="MJf-UK-WaT" id="RJX-XH-L0c"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="444"/>
-        </scene>
-        <!--Static Notification Interface Controller-->
-        <scene sceneID="AEw-b0-oYE">
-            <objects>
-                <notificationController id="YCC-NB-fut">
-                    <items>
-                        <label alignment="left" text="Alert Label" id="IdU-wH-bcW"/>
-                    </items>
-                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
-                    <connections>
-                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
-                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
-                    </connections>
-                </notificationController>
-            </objects>
-            <point key="canvasLocation" x="220" y="745"/>
-        </scene>
-        <!--Notification Controller-->
-        <scene sceneID="ZPc-GJ-vnh">
-            <objects>
-                <controller id="4sK-HA-Art" customClass="NotificationController"/>
-            </objects>
-            <point key="canvasLocation" x="478" y="746"/>
+            <point key="canvasLocation" x="-11.333333333333334" y="505.20512820512823"/>
         </scene>
     </scenes>
 </document>

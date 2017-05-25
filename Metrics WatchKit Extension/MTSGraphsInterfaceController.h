@@ -12,9 +12,12 @@
 
 #import <MetricsKit/MetricsKit.h>
 
-@interface MTSGraphsInterfaceController : WKInterfaceController
+@interface MTSGraphsInterfaceController : WKInterfaceController <NSFetchedResultsControllerDelegate>
 
-@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceImage *graphInterfaceImage;
-@property NSManagedObjectContext *managedObjectContext;
+@property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceTable *graphsInterfaceTable;
+
+@property (nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic) HKHealthStore *healthStore;
 
 @end

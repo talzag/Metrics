@@ -31,9 +31,7 @@
 		E3784B9F1E46494E005F87BC /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3784B9D1E46494E005F87BC /* Interface.storyboard */; };
 		E3784BA11E46494E005F87BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3784BA01E46494E005F87BC /* Assets.xcassets */; };
 		E3784BA81E46494E005F87BC /* Metrics WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E3784BA71E46494E005F87BC /* Metrics WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		E3784BB01E46494E005F87BC /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784BAF1E46494E005F87BC /* InterfaceController.m */; };
 		E3784BB31E46494E005F87BC /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784BB21E46494E005F87BC /* ExtensionDelegate.m */; };
-		E3784BB61E46494E005F87BC /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784BB51E46494E005F87BC /* NotificationController.m */; };
 		E3784BB91E46494E005F87BC /* ComplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3784BB81E46494E005F87BC /* ComplicationController.m */; };
 		E3784BBB1E46494E005F87BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3784BBA1E46494E005F87BC /* Assets.xcassets */; };
 		E3784BDC1E4684F8005F87BC /* MetricsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E3784BDA1E4684F8005F87BC /* MetricsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -53,6 +51,7 @@
 		E38AE1C51E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1C41E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m */; };
 		E39AC8021EB93E5600FAC553 /* MTSGraphsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E39AC8011EB93E5600FAC553 /* MTSGraphsTableViewController.m */; };
 		E39AC8051EBA1CD700FAC553 /* MTSGraphTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E39AC8041EBA1CD700FAC553 /* MTSGraphTableViewCell.m */; };
+		E3AD745E1ED33D7D0040FC0A /* MTSGraphRowController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3AD745D1ED33D7D0040FC0A /* MTSGraphRowController.m */; };
 		E3B3B3D21E877D8A00707324 /* MTSGraphDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B3B3D11E877D8A00707324 /* MTSGraphDrawing.m */; };
 		E3B3B3D41E877DBC00707324 /* MTSGraphDrawing.h in Headers */ = {isa = PBXBuildFile; fileRef = E3B3B3D31E877D9500707324 /* MTSGraphDrawing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3B3B3DD1E889C1700707324 /* MTSQuery+CoreDataClass.h in Headers */ = {isa = PBXBuildFile; fileRef = E3B3B3D51E889C1700707324 /* MTSQuery+CoreDataClass.h */; };
@@ -85,7 +84,6 @@
 		E3BC40281E82258500F0D44C /* MetricsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E3784BDA1E4684F8005F87BC /* MetricsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E3BC402F1E82285A00F0D44C /* MetricsKitNano.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3BC402D1E82258500F0D44C /* MetricsKitNano.framework */; };
 		E3BC40301E82285A00F0D44C /* MetricsKitNano.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E3BC402D1E82258500F0D44C /* MetricsKitNano.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E3BC40361E82335100F0D44C /* MTSHealthResultsInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3BC40351E82335100F0D44C /* MTSHealthResultsInterfaceController.m */; };
 		E3C6350F1E84BA1200A84052 /* MTSGraphsInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C6350E1E84BA1200A84052 /* MTSGraphsInterfaceController.m */; };
 		E3E236B81EAFA1AE0085D118 /* MTSColorPickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E236B71EAFA1AE0085D118 /* MTSColorPickerTableViewCell.m */; };
 		E3F276F31E7EC83E007DE843 /* MTSRealCalorieValue.h in Headers */ = {isa = PBXBuildFile; fileRef = E3F276F11E7EC83E007DE843 /* MTSRealCalorieValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -234,12 +232,8 @@
 		E3784BA21E46494E005F87BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E3784BA71E46494E005F87BC /* Metrics WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Metrics WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3784BAD1E46494E005F87BC /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		E3784BAE1E46494E005F87BC /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
-		E3784BAF1E46494E005F87BC /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
 		E3784BB11E46494E005F87BC /* ExtensionDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtensionDelegate.h; sourceTree = "<group>"; };
 		E3784BB21E46494E005F87BC /* ExtensionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtensionDelegate.m; sourceTree = "<group>"; };
-		E3784BB41E46494E005F87BC /* NotificationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
-		E3784BB51E46494E005F87BC /* NotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
 		E3784BB71E46494E005F87BC /* ComplicationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComplicationController.h; sourceTree = "<group>"; };
 		E3784BB81E46494E005F87BC /* ComplicationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComplicationController.m; sourceTree = "<group>"; };
 		E3784BBA1E46494E005F87BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -266,6 +260,8 @@
 		E39AC8011EB93E5600FAC553 /* MTSGraphsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphsTableViewController.m; sourceTree = "<group>"; };
 		E39AC8031EBA1CD700FAC553 /* MTSGraphTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraphTableViewCell.h; sourceTree = "<group>"; };
 		E39AC8041EBA1CD700FAC553 /* MTSGraphTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphTableViewCell.m; sourceTree = "<group>"; };
+		E3AD745C1ED33D7D0040FC0A /* MTSGraphRowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraphRowController.h; sourceTree = "<group>"; };
+		E3AD745D1ED33D7D0040FC0A /* MTSGraphRowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphRowController.m; sourceTree = "<group>"; };
 		E3B3B3D11E877D8A00707324 /* MTSGraphDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphDrawing.m; sourceTree = "<group>"; };
 		E3B3B3D31E877D9500707324 /* MTSGraphDrawing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MTSGraphDrawing.h; sourceTree = "<group>"; };
 		E3B3B3D51E889C1700707324 /* MTSQuery+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTSQuery+CoreDataClass.h"; sourceTree = "<group>"; };
@@ -279,8 +275,6 @@
 		E3B3B3ED1E889CBC00707324 /* MTSQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSQuery.h; sourceTree = "<group>"; };
 		E3BC402D1E82258500F0D44C /* MetricsKitNano.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MetricsKitNano.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3BC402E1E82258600F0D44C /* MetricsKitNano-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MetricsKitNano-Info.plist"; path = "/Users/dstrokis/Developer/Metrics/MetricsKitNano-Info.plist"; sourceTree = "<absolute>"; };
-		E3BC40341E82335100F0D44C /* MTSHealthResultsInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSHealthResultsInterfaceController.h; sourceTree = "<group>"; };
-		E3BC40351E82335100F0D44C /* MTSHealthResultsInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSHealthResultsInterfaceController.m; sourceTree = "<group>"; };
 		E3C6350D1E84BA1200A84052 /* MTSGraphsInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSGraphsInterfaceController.h; sourceTree = "<group>"; };
 		E3C6350E1E84BA1200A84052 /* MTSGraphsInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphsInterfaceController.m; sourceTree = "<group>"; };
 		E3E236B61EAFA1AE0085D118 /* MTSColorPickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSColorPickerTableViewCell.h; sourceTree = "<group>"; };
@@ -453,14 +447,10 @@
 			children = (
 				E3784BB11E46494E005F87BC /* ExtensionDelegate.h */,
 				E3784BB21E46494E005F87BC /* ExtensionDelegate.m */,
-				E3784BAE1E46494E005F87BC /* InterfaceController.h */,
-				E3784BAF1E46494E005F87BC /* InterfaceController.m */,
-				E3BC40341E82335100F0D44C /* MTSHealthResultsInterfaceController.h */,
-				E3BC40351E82335100F0D44C /* MTSHealthResultsInterfaceController.m */,
 				E3C6350D1E84BA1200A84052 /* MTSGraphsInterfaceController.h */,
 				E3C6350E1E84BA1200A84052 /* MTSGraphsInterfaceController.m */,
-				E3784BB41E46494E005F87BC /* NotificationController.h */,
-				E3784BB51E46494E005F87BC /* NotificationController.m */,
+				E3AD745C1ED33D7D0040FC0A /* MTSGraphRowController.h */,
+				E3AD745D1ED33D7D0040FC0A /* MTSGraphRowController.m */,
 				E3784BB71E46494E005F87BC /* ComplicationController.h */,
 				E3784BB81E46494E005F87BC /* ComplicationController.m */,
 				E3784BF81E46D017005F87BC /* Metrics WatchKit Extension.entitlements */,
@@ -933,12 +923,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3AD745E1ED33D7D0040FC0A /* MTSGraphRowController.m in Sources */,
 				E3784BB31E46494E005F87BC /* ExtensionDelegate.m in Sources */,
 				E3C6350F1E84BA1200A84052 /* MTSGraphsInterfaceController.m in Sources */,
 				E3784BB91E46494E005F87BC /* ComplicationController.m in Sources */,
-				E3784BB01E46494E005F87BC /* InterfaceController.m in Sources */,
-				E3784BB61E46494E005F87BC /* NotificationController.m in Sources */,
-				E3BC40361E82335100F0D44C /* MTSHealthResultsInterfaceController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

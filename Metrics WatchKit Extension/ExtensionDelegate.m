@@ -7,30 +7,19 @@
 //
 
 #import "ExtensionDelegate.h"
-#import "InterfaceController.h"
 #import "MTSGraphsInterfaceController.h"
 
 @implementation ExtensionDelegate
 
 - (void)applicationDidFinishLaunching {
-    MTSGraphsInterfaceController *graphsController = (MTSGraphsInterfaceController *)[[WKExtension sharedExtension] rootInterfaceController];
-    [graphsController setManagedObjectContext:[[self persistentContainer] viewContext]];
-    
-    // TODO: Implement delegate methods to enable access using iPhone
-//    if ([HKHealthStore isHealthDataAvailable]) {
-//        HKHealthStore *healthStore = [HKHealthStore new];
-//        
-//        [MTSHealthStoreManager requestReadAccessForHealthStore:healthStore completionHandler:^(BOOL success, NSError * _Nullable error) {
-//            if (success) {
-//                InterfaceController *controller = (InterfaceController *)[[WKExtension sharedExtension] rootInterfaceController];
-//                [controller setHealthStore:healthStore];
-//            }
-//        }];
-//    }
-}
-
-- (void)applicationDidBecomeActive {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    if ([HKHealthStore isHealthDataAvailable]) {
+        HKHealthStore *healthStore = [HKHealthStore new];
+        [MTSHealthStoreManager requestReadAccessForHealthStore:healthStore completionHandler:^(BOOL success, NSError * _Nullable error) {
+            if (!success) {
+                
+            }
+        }];
+    }
 }
 
 - (void)applicationWillResignActive {

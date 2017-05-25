@@ -15,5 +15,6 @@
 @interface ExtensionDelegate : NSObject <WKExtensionDelegate>
 
 @property (readonly, strong) NSPersistentContainer *persistentContainer;
+@property (nonatomic) MTSHealthStoreManager *healthStoreManager;
 
 @end

@@ -7,40 +7,110 @@
 //
 
 #import "MTSGraphsInterfaceController.h"
+#import "ExtensionDelegate.h"
+#import "MTSGraphRowController.h"
 
 @implementation MTSGraphsInterfaceController
 
 - (void)awakeWithContext:(id)ctx {
     [super awakeWithContext:ctx];
     
-    
+    ExtensionDelegate *delegate = (ExtensionDelegate *)[[WKExtension sharedExtension] delegate];
+    NSManagedObjectContext *context = [[delegate persistentContainer] viewContext];
+    [self setManagedObjectContext:context];
+    [self setHealthStore:[HKHealthStore new]];
 }
 
-- (void)willActivate {
-    MTSGraph *graph = [[MTSGraph alloc] initWithContext:[self managedObjectContext]];
-    HKHealthStore *store = [HKHealthStore new];
+- (void)configureInterfaceTable {
+    NSArray <MTSGraph *> *graphs = [[self  fetchedResultsController] fetchedObjects];
     
-    CGRect screen = [[WKInterfaceDevice currentDevice] screenBounds];
-    CGSize screenSize = screen.size;
+    [[self graphsInterfaceTable] setNumberOfRows:[graphs count] withRowType:@"MTSGraphRowController"];
     
-    UIGraphicsBeginImageContextWithOptions(screenSize, YES, 0.0);
+    NSInteger numRows = [[self graphsInterfaceTable] numberOfRows];
+    if (numRows == 0) {
+        return;
+    }
+    
+    NSInteger i;
+    for (i = 0; i < numRows; i++) {
+        [self configureRowControllerAtIndex:i];
+    }
+}
+
+- (void)configureRowControllerAtIndex:(NSInteger)index {
+    CGFloat width = CGRectGetWidth([self contentFrame]);
+    CGFloat height = CGRectGetHeight([self contentFrame]) / 2.0;
+    
+    MTSGraph *graph = [[self fetchedResultsController] objectAtIndexPath:[NSIndexPath indexPathWithIndex:index]];
+    MTSGraphRowController *controller = [[self graphsInterfaceTable] rowControllerAtIndex:index];
+    
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), YES, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    CGContextRetain(context);
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    [[self graphInterfaceImage] setImage:image];
-    
-    [graph executeQueriesWithHealthStore:store usingCompletionHandler:^(NSError * _Nullable error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (!error) {
-                MTSDrawGraph(context, screen, graph);
-            }
+    [graph executeQueriesWithHealthStore:[self healthStore] usingCompletionHandler:^(NSError * _Nullable error) {
+        if (!error) {
+            MTSDrawGraph(context, CGRectMake(0, 0, width, height), graph);
+            UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
             
-            CGContextRelease(context);
             UIGraphicsEndImageContext();
-        });
+            
+            [[controller graphImage] setImage:image];
+        }
     }];
+
+}
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    if (!_fetchedResultsController) {
+        NSFetchRequest *request = [MTSGraph fetchRequest];
+        [request setFetchBatchSize:10];
+        
+        NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:NO];
+        [request setSortDescriptors:@[sortDescriptor]];
+        
+        NSFetchedResultsController *controller = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                                                     managedObjectContext:[self managedObjectContext]
+                                                                                       sectionNameKeyPath:nil
+                                                                                                cacheName:nil];
+        
+        [controller setDelegate:self];
+        
+        NSError *error;
+        BOOL success = [controller performFetch:&error];
+        if (!success) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+        
+        _fetchedResultsController = controller;
+    }
+    
+    return _fetchedResultsController;
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    NSUInteger index = [indexPath indexAtPosition:0];
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:index];
+    
+    switch (type) {
+        case NSFetchedResultsChangeInsert:
+            [[self graphsInterfaceTable] insertRowsAtIndexes:indexSet withRowType:@"MTSGraphRowController"];
+            break;
+        case NSFetchedResultsChangeUpdate:
+            [self configureRowControllerAtIndex:index];
+            break;
+        case NSFetchedResultsChangeMove:
+            break;
+        case NSFetchedResultsChangeDelete:
+            [[self graphsInterfaceTable] removeRowsAtIndexes:indexSet];
+            break;
+        default:
+            break;
+    }
 }
 
 @end
