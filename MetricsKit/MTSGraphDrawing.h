@@ -20,7 +20,7 @@ extern NSString * const _Nonnull MTSGraphDataPointsKey;
 extern NSString * const _Nonnull MTSGraphDataIdentifierKey;
 
 void MTSDrawGraph(CGContextRef _Nonnull context, CGRect rect, MTSGraph * _Nonnull graph);
+NSDictionary * _Nullable MTSGraphDataPointsLocationMap(CGRect rect, MTSGraph * _Nonnull graph);
 
-// Add method to create map of points to view locations
 
 #endif /* MTSGraphDrawing_h */
