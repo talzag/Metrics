@@ -33,6 +33,10 @@ static NSString * const cellIdentifier = @"GraphCell";
     }
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [[self tableView] setNeedsDisplay];
+}
+
 #pragma mark - NSFetchedResultsController
 
 - (NSFetchedResultsController *)fetchedResultsController {

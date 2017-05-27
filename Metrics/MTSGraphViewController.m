@@ -48,6 +48,12 @@
     return _dateFormatter;
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    [[self graphView] setNeedsDisplayInRect:CGRectMake(0, 0, size.width, size.width)];
+}
+
 // MARK: - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
