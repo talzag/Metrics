@@ -15,6 +15,8 @@
 @property (nonatomic) NSArray *graphQueries;
 @property (nonatomic) NSDictionary <HKQuantityTypeIdentifier, NSString *> *healthTypeNameLookup;
 
+//@property (nonatomic) UITableView *samplesTableView;
+
 @end
 
 @implementation MTSGraphViewController
@@ -48,6 +50,21 @@
     return _dateFormatter;
 }
 
+//- (UITableView *)samplesTableView {
+//    if (!_samplesTableView) {
+//        CGRect tvFrame = [[self healthTypesTableView] frame];
+//        CGRect frame = CGRectMake(tvFrame.origin.x,
+//                                  CGRectGetHeight([[self view] frame]),
+//                                  tvFrame.size.width,
+//                                  tvFrame.size.height);
+//        
+//        _samplesTableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
+//        
+//    }
+//    
+//    return _samplesTableView;
+//}
+
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
@@ -72,6 +89,19 @@
     [cell setColorSelectionEnabled:NO];
     
     return cell;
+}
+
+// MARK: - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+//    [[self view] addSubview:[self samplesTableView]];
+//    
+//    CGRect frame = [tableView frame];
+//    [UIView animateWithDuration:0.4 animations:^{
+//        [[self samplesTableView] setFrame:frame];
+//    }];
 }
 
 @end

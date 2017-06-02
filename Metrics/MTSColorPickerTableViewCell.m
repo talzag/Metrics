@@ -65,16 +65,24 @@
 
 - (void)setColorSelectionEnabled:(BOOL)colorSelectionEnabled {
     _colorSelectionEnabled = colorSelectionEnabled;
-    
-    [self setUserInteractionEnabled:colorSelectionEnabled];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
+    if (![self isColorSelectionEnabled]) {
+        return;
+    }
+    
     [self setSwatchFrame:[self bounds] andLabelAlpha:0.0];
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [super touchesMoved:touches withEvent:event];
+    
+    if (![self isColorSelectionEnabled]) {
+        return;
+    }
+    
     UITouch *touch = [[touches sortedArrayUsingDescriptors:@[[self touchesSortDescriptor]]] firstObject];
     CGPoint location = [touch locationInView:self];
     
@@ -83,17 +91,23 @@
     [UIView animateWithDuration:0.25 animations:^{
         [[self colorSwatchView] setBackgroundColor:interpolatedColor];
     }];
-    
-    [super touchesMoved:touches withEvent:event];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
+    if (![self isColorSelectionEnabled]) {
+        return;
+    }
+    
     [self setSwatchFrame:[self originalSwatchFrame] andLabelAlpha:1.0];
 }
 
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesCancelled:touches withEvent:event];
+    if (![self isColorSelectionEnabled]) {
+        return;
+    }
+    
     [self setSwatchFrame:[self originalSwatchFrame] andLabelAlpha:1.0];
 }
 
