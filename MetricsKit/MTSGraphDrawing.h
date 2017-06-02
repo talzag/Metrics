@@ -22,5 +22,4 @@ extern NSString * const _Nonnull MTSGraphDataIdentifierKey;
 void MTSDrawGraph(CGContextRef _Nonnull context, CGRect rect, MTSGraph * _Nonnull graph);
 NSDictionary * _Nullable MTSGraphDataPointsLocationMap(CGRect rect, MTSGraph * _Nonnull graph);
 
-
 #endif /* MTSGraphDrawing_h */

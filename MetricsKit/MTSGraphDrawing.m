@@ -192,7 +192,7 @@ CGFloat MTSGraphPositionOnYAxisForValue(CGRect rect, CGFloat value, CGFloat maxV
     return MTSGraphHeight(rect) - ratio * height;
 }
 
-CGFloat MTSGraphQueryDataPointsMax(NSArray <MTSQuery *> *graphQueries) {
+CGFloat MTSGraphQueriesDataPointsMax(NSArray <MTSQuery *> *graphQueries) {
     CGFloat maxValue = 0.0;
     for (MTSQuery *query in graphQueries) {
         NSArray <NSNumber *> *values = [query fetchedDataPoints];
@@ -205,29 +205,57 @@ CGFloat MTSGraphQueryDataPointsMax(NSArray <MTSQuery *> *graphQueries) {
     return maxValue;
 }
 
+NSArray <NSString *> *MTSGraphYAxisLabels(MTSGraph *graph, CGFloat maxValue) {
+    NSString *halfway;
+    if (maxValue > 0) {
+        halfway = [NSString stringWithFormat:@"%.0f", maxValue * 0.5];
+    } else {
+        halfway = [NSString string];
+    }
+    
+    return @[
+            [NSString stringWithFormat:@"%.0f", 0.0],
+            halfway,
+            [NSString stringWithFormat:@"%.0f", maxValue]
+            ];
+}
+
+NSArray <NSValue *> *MTSQueryDataPointsLocationMap(CGRect rect, MTSQuery *query, CGFloat maxValue) {
+    NSArray <NSNumber *> *values = [query fetchedDataPoints];
+    NSInteger size = values.count;
+    if (!size) {
+        return nil;
+    }
+    
+    NSMutableArray *points = [NSMutableArray array];
+    
+    CGFloat startX = MTSGraphPositionOnXAxisAtIndex(rect, 0, size);
+    CGFloat startY = MTSGraphPositionOnYAxisForValue(rect, [[values firstObject] doubleValue], maxValue);
+    CGPoint startingPoint = CGPointMake(startX, startY);
+    NSValue *startingPointVal = [NSValue valueWithCGPoint:startingPoint];
+    [points addObject:startingPointVal];
+    
+    for (int i = 1; i < size; i++) {
+        CGFloat x = MTSGraphPositionOnXAxisAtIndex(rect, i, size);
+        CGFloat y = MTSGraphPositionOnYAxisForValue(rect, [values[i] doubleValue], maxValue);
+        
+        CGPoint point = CGPointMake(x, y);
+        NSValue *pointVal = [NSValue valueWithCGPoint:point];
+        
+        [points addObject:pointVal];
+    }
+
+    return points;
+}
 
 NSDictionary *MTSGraphDataPointsLocationMap(CGRect rect, MTSGraph *graph) {
-    NSMutableDictionary <NSString *, NSArray *>* map = [NSMutableDictionary dictionary];
+    NSMutableDictionary <NSString *, NSArray <NSValue *> *> *map = [NSMutableDictionary dictionary];
     
     NSArray <MTSQuery *> *graphQueries = [[graph queries] allObjects];
-    CGFloat maxValue = MTSGraphQueryDataPointsMax(graphQueries);
+    CGFloat maxValue = MTSGraphQueriesDataPointsMax(graphQueries);
     
     for (MTSQuery *query in graphQueries) {
-        NSArray <NSNumber *> *values = [query fetchedDataPoints];
-        NSInteger size = values.count;
-        if (!size) {
-            continue;
-        }
-
-        NSMutableArray *points = [NSMutableArray array];
-        for (int i = 1; i < size; i++) {
-            CGFloat x = MTSGraphPositionOnXAxisAtIndex(rect, i, size);
-            CGFloat y = MTSGraphPositionOnYAxisForValue(rect, [values[i] doubleValue], maxValue);
-            
-            CGPoint point = CGPointMake(x, y);
-            [points addObject:NSStringFromCGPoint(point)];
-        }
-        
+        NSArray *points = MTSQueryDataPointsLocationMap(rect, query, maxValue);
         [map setObject:points forKey:[query healthKitTypeIdentifier]];
     }
     
@@ -239,63 +267,31 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, MTSGraph *graph) 
         return;
     }
     
-    
     NSArray <MTSQuery *> *graphQueries = [[graph queries] allObjects];
-    CGFloat maxValue = MTSGraphQueryDataPointsMax(graphQueries);
+    CGFloat maxValue = MTSGraphQueriesDataPointsMax(graphQueries);
     
-    // Generate Y-axis labels if necessary
-    if (![graph yAxisLabels]) {
-        NSString *halfway;
-        if (maxValue > 0) {
-            halfway = [NSString stringWithFormat:@"%.0f", maxValue * 0.5];
-        } else {
-            halfway = [NSString string];
-        }
-        
-        NSArray <NSString *> *yAxisLabels = @[
-                                              [NSString stringWithFormat:@"%.0f", 0.0],
-                                              halfway,
-                                              [NSString stringWithFormat:@"%.0f", maxValue]
-                                              ];
-        [graph setYAxisLabels:yAxisLabels];
-    }
-    // Plot Y-axis labels
-    drawLabelsOnYAxis(context, rect, [graph yAxisLabels]);
+    NSArray *yAxisLabels = MTSGraphYAxisLabels(graph, maxValue);
+    drawLabelsOnYAxis(context, rect, yAxisLabels);
 
+    // Start drawing query results lines
     CGContextSetLineWidth(context, 2.0);
     
     for (MTSQuery *query in graphQueries) {
-        NSArray <NSNumber *> *values = [query fetchedDataPoints];
-        NSInteger size = values.count;
-        if (!size) {
+        NSArray <NSValue *> *points = MTSQueryDataPointsLocationMap(rect, query, maxValue);
+        if (!points || [points count] == 0) {
             continue;
         }
         
-        CGMutablePathRef graphPath = CGPathCreateMutable();
-    
-        CGFloat startX = MTSGraphPositionOnXAxisAtIndex(rect, 0, size);
-        CGFloat startY = MTSGraphPositionOnYAxisForValue(rect, [[values firstObject] doubleValue], maxValue);
+        CGMutablePathRef path = CGPathCreateMutable();
+        CGPoint startingPoint = [[points firstObject] CGPointValue];
+        CGPathMoveToPoint(path, NULL, startingPoint.x, startingPoint.y);
         
-//        if (size == 0) {
-//            CGFloat endX = rect.size.width - MTSGraphRightMargin(rect);
-//            
-//            CGPathMoveToPoint(graphPath, NULL, startX, startY);
-//            CGPathAddLineToPoint(graphPath, NULL, endX, startY);
-//            
-//            const CGFloat dashes[] = { 4.0, 4.0 };
-//            CGContextSetLineDash(context, 0, dashes, 2);
-//        }
-        
-        CGPathMoveToPoint(graphPath, NULL, startX, startY);
-        
-        for (int i = 1; i < size; i++) {
-            CGFloat x = MTSGraphPositionOnXAxisAtIndex(rect, i, size);
-            CGFloat y = MTSGraphPositionOnYAxisForValue(rect, [values[i] doubleValue], maxValue);
-            
-            CGPathAddLineToPoint(graphPath, NULL, x, y);
+        for (NSUInteger i = 1; i < [points count]; i++) {
+            CGPoint point = [[points objectAtIndex:i] CGPointValue];
+            CGPathAddLineToPoint(path, NULL, point.x, point.y);
         }
         
-        CGContextAddPath(context, graphPath);
+        CGContextAddPath(context, path);
         
         UIColor *configColor = [query lineColor];
         CGColorRef lineColor = [configColor CGColor];
@@ -303,7 +299,7 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, MTSGraph *graph) 
         
         CGContextStrokePath(context);
         
-        CGPathRelease(graphPath);
+        CGPathRelease(path);
     }
 }
 
