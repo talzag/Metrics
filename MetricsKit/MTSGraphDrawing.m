@@ -262,7 +262,7 @@ NSDictionary *MTSGraphDataPointsLocationMap(CGRect rect, MTSGraph *graph) {
     return map;
 }
 
-void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, MTSGraph *graph) {
+void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, MTSGraph *graph, BOOL drawPoints) {
     if (![graph queries] || [[graph queries] count] == 0) {
         return;
     }
@@ -289,6 +289,14 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, MTSGraph *graph) 
         for (NSUInteger i = 1; i < [points count]; i++) {
             CGPoint point = [[points objectAtIndex:i] CGPointValue];
             CGPathAddLineToPoint(path, NULL, point.x, point.y);
+            
+            if (drawPoints) {
+                CGMutablePathRef pointPath = CGPathCreateMutable();
+                CGPathMoveToPoint(pointPath, NULL, point.x, point.y);
+                CGPathAddArc(pointPath, NULL, point.x, point.y, 1.5, 0, 2 * M_PI, NO);
+                CGContextAddPath(context, pointPath);
+                CGPathRelease(pointPath);
+            }
         }
         
         CGContextAddPath(context, path);
@@ -303,7 +311,7 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, MTSGraph *graph) 
     }
 }
 
-void MTSDrawGraph(CGContextRef context, CGRect rect, MTSGraph *graph) {
+void MTSDrawGraph(CGContextRef context, CGRect rect, MTSGraph *graph, BOOL drawPoints) {
     CGContextRetain(context);
     CGContextSaveGState(context);
 
@@ -319,7 +327,7 @@ void MTSDrawGraph(CGContextRef context, CGRect rect, MTSGraph *graph) {
     
     // plot data points
     CGContextSaveGState(context);
-    MTSGraphPlotDataPoints(context, rect, graph);
+    MTSGraphPlotDataPoints(context, rect, graph, drawPoints);
     CGContextRestoreGState(context);
     
     CGContextRelease(context);

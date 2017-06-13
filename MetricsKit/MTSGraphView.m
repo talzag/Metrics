@@ -22,7 +22,12 @@
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    MTSDrawGraph(context, rect, [self graph]);
+    BOOL drawPoints = NO;
+    if ([self traitCollection].verticalSizeClass == UIUserInterfaceSizeClassCompact) {
+        drawPoints = YES;
+    }
+    
+    MTSDrawGraph(context, rect, [self graph], drawPoints);
 }
 
 - (void)needsRedraw:(NSNotification *)notification {

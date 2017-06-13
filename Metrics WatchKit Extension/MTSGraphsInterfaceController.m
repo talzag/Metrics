@@ -49,7 +49,7 @@
     
     [graph executeQueriesWithHealthStore:[self healthStore] usingCompletionHandler:^(NSError * _Nullable error) {
         if (!error) {
-            MTSDrawGraph(context, CGRectMake(0, 0, width, height), graph);
+            MTSDrawGraph(context, CGRectMake(0, 0, width, height), graph, NO);
             UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
             
             UIGraphicsEndImageContext();

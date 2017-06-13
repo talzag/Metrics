@@ -19,7 +19,7 @@ extern NSString * const _Nonnull MTSGraphLineColorKey;
 extern NSString * const _Nonnull MTSGraphDataPointsKey;
 extern NSString * const _Nonnull MTSGraphDataIdentifierKey;
 
-void MTSDrawGraph(CGContextRef _Nonnull context, CGRect rect, MTSGraph * _Nonnull graph);
+void MTSDrawGraph(CGContextRef _Nonnull context, CGRect rect, MTSGraph * _Nonnull graph, BOOL drawPoints);
 NSDictionary * _Nullable MTSGraphDataPointsLocationMap(CGRect rect, MTSGraph * _Nonnull graph);
 
 #endif /* MTSGraphDrawing_h */
