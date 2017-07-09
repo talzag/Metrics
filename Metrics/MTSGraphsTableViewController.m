@@ -14,7 +14,7 @@
 
 @interface MTSGraphsTableViewController () <NSFetchedResultsControllerDelegate>
 
-@property (strong, nonatomic) NSFetchedResultsController <MTSGraph *>*fetchedResultsController;
+@property (strong, nonatomic) NSFetchedResultsController <MTSGraph *> *fetchedResultsController;
 
 @end
 
@@ -31,10 +31,6 @@ static NSString * const cellIdentifier = @"GraphCell";
     if (error) {
         NSLog(@"%@", [error description]);
     }
-}
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    [[self tableView] setNeedsDisplay];
 }
 
 #pragma mark - NSFetchedResultsController
@@ -146,7 +142,6 @@ static NSString * const cellIdentifier = @"GraphCell";
     return cell;
 }
 
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         MTSGraph *graph = [[self fetchedResultsController] objectAtIndexPath:indexPath];

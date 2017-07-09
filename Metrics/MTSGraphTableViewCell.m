@@ -14,4 +14,8 @@
 
 @implementation MTSGraphTableViewCell
 
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [[self graphView] setNeedsDisplay];
+}
+
 @end

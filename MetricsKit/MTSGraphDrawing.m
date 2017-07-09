@@ -290,7 +290,8 @@ void MTSGraphPlotDataPoints(CGContextRef context, CGRect rect, MTSGraph *graph, 
             CGPoint point = [[points objectAtIndex:i] CGPointValue];
             CGPathAddLineToPoint(path, NULL, point.x, point.y);
             
-            if (drawPoints) {
+            NSNumber *datum = [[query fetchedDataPoints] objectAtIndex:i];
+            if ([datum doubleValue] && drawPoints) {
                 CGMutablePathRef pointPath = CGPathCreateMutable();
                 CGPathMoveToPoint(pointPath, NULL, point.x, point.y);
                 CGPathAddArc(pointPath, NULL, point.x, point.y, 1.5, 0, 2 * M_PI, NO);
