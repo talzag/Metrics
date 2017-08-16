@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E30500511F44E3EA00E7C1B1 /* MTSSamplesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E30500501F44E3EA00E7C1B1 /* MTSSamplesTableViewController.m */; };
+		E30500541F44F2DF00E7C1B1 /* MTSSamplesPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E30500531F44F2DF00E7C1B1 /* MTSSamplesPresentationController.m */; };
 		E30838731E993CCA00348B46 /* MTSGraphViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E37362201E6B9D240072DFBC /* MTSGraphViewTests.m */; };
 		E30C08361E7E2B690083DB7B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3784BF51E46CF66005F87BC /* HealthKit.framework */; };
 		E30C08381E7E30810083DB7B /* MTSGraphQueryableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E30C08371E7E30810083DB7B /* MTSGraphQueryableTests.m */; };
@@ -199,6 +201,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E305004F1F44E3EA00E7C1B1 /* MTSSamplesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSSamplesTableViewController.h; sourceTree = "<group>"; };
+		E30500501F44E3EA00E7C1B1 /* MTSSamplesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSSamplesTableViewController.m; sourceTree = "<group>"; };
+		E30500521F44F2DF00E7C1B1 /* MTSSamplesPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSSamplesPresentationController.h; sourceTree = "<group>"; };
+		E30500531F44F2DF00E7C1B1 /* MTSSamplesPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSSamplesPresentationController.m; sourceTree = "<group>"; };
 		E30C08371E7E30810083DB7B /* MTSGraphQueryableTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSGraphQueryableTests.m; sourceTree = "<group>"; };
 		E30C08391E7E31BE0083DB7B /* MTSTestDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSTestDataStack.h; sourceTree = "<group>"; };
 		E30C083A1E7E31BE0083DB7B /* MTSTestDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSTestDataStack.m; sourceTree = "<group>"; };
@@ -387,6 +393,10 @@
 				E39AC8041EBA1CD700FAC553 /* MTSGraphTableViewCell.m */,
 				E3336E691E5291FC00AD0BC2 /* MTSGraphViewController.h */,
 				E3336E6A1E5291FC00AD0BC2 /* MTSGraphViewController.m */,
+				E30500521F44F2DF00E7C1B1 /* MTSSamplesPresentationController.h */,
+				E30500531F44F2DF00E7C1B1 /* MTSSamplesPresentationController.m */,
+				E305004F1F44E3EA00E7C1B1 /* MTSSamplesTableViewController.h */,
+				E30500501F44E3EA00E7C1B1 /* MTSSamplesTableViewController.m */,
 				E352E64E1EAD310A006E8372 /* MTSDataSelectionViewController.h */,
 				E352E64F1EAD310A006E8372 /* MTSDataSelectionViewController.m */,
 				E3336E661E52918300AD0BC2 /* MTSGraphCreationViewController.h */,
@@ -889,6 +899,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E30500511F44E3EA00E7C1B1 /* MTSSamplesTableViewController.m in Sources */,
 				E3336E6B1E5291FC00AD0BC2 /* MTSGraphViewController.m in Sources */,
 				E3822C3F1E981ABE007CD419 /* MTSGraphView.m in Sources */,
 				E39AC8021EB93E5600FAC553 /* MTSGraphsTableViewController.m in Sources */,
@@ -896,6 +907,7 @@
 				E39AC8051EBA1CD700FAC553 /* MTSGraphTableViewCell.m in Sources */,
 				E352E6501EAD310A006E8372 /* MTSDataSelectionViewController.m in Sources */,
 				E3784B701E46494D005F87BC /* main.m in Sources */,
+				E30500541F44F2DF00E7C1B1 /* MTSSamplesPresentationController.m in Sources */,
 				E3336E681E52918300AD0BC2 /* MTSGraphCreationViewController.m in Sources */,
 				E3E236B81EAFA1AE0085D118 /* MTSColorPickerTableViewCell.m in Sources */,
 			);
