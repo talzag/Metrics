@@ -89,6 +89,10 @@
     
     samplesTableViewController.transitioningDelegate = presentationController;
     
+    MTSQuery *query = [[self graphQueries] objectAtIndex:[indexPath row]];
+    NSArray *samples = [query fetchedDataPoints];
+    [samplesTableViewController setSamples:samples];
+    
     [self presentViewController:samplesTableViewController animated:YES completion:nil];
 }
 

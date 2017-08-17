@@ -155,7 +155,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vKH-iV-Hvj" customClass="MTSGraphView">
-                                            <rect key="frame" x="-3" y="-10" width="377" height="184"/>
+                                            <rect key="frame" x="-3" y="-11" width="377" height="183"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>

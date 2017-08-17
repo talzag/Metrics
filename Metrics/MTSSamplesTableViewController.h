@@ -10,4 +10,6 @@
 
 @interface MTSSamplesTableViewController : UITableViewController
 
+@property NSArray *samples;
+
 @end
