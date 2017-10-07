@@ -96,7 +96,7 @@
             CGSize size = CGSizeMake(150, 100);
             CGRect frame = CGRectMake(0.0, 0.0, size.width, size.height);
             UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
-            MTSDrawGraph(UIGraphicsGetCurrentContext(), frame, graph);
+            MTSDrawGraph(UIGraphicsGetCurrentContext(), frame, graph, YES);
             UIGraphicsEndImageContext();
             
             [expectation fulfill];
@@ -208,7 +208,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     [self measureBlock:^{
-        MTSDrawGraph(context, rect, graph);
+        MTSDrawGraph(context, rect, graph, YES);
     }];
     
     UIGraphicsEndImageContext();
@@ -226,7 +226,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     [self measureBlock:^{
-        MTSDrawGraph(context, rect, graph);
+        MTSDrawGraph(context, rect, graph, YES);
     }];
     
     UIGraphicsEndImageContext();
@@ -250,7 +250,7 @@
     [graph setBottomColor:blue];
     
     [self measureBlock:^{
-        MTSDrawGraph(context, rect, graph);
+        MTSDrawGraph(context, rect, graph, YES);
     }];
     
     UIGraphicsEndImageContext();

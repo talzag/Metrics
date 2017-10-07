@@ -49,14 +49,15 @@
     NSManagedObjectContext *context = [[delegate persistentContainer] viewContext];
     
     // Insert object into managed object context so that save: will be called
-    [NSEntityDescription insertNewObjectForEntityForName:@"MTSGraph" inManagedObjectContext:[[delegate persistentContainer] viewContext]];
-    
+    MTSGraph *graph  = [[MTSGraph alloc] initWithContext:context];
+    [graph setStartDate:[NSDate date]];
+    [graph setEndDate:[NSDate date]];
     
     XCTestExpectation *didSaveExpectation = [self expectationForNotification:NSManagedObjectContextDidSaveNotification
-                              object:[[delegate persistentContainer] viewContext]
-                             handler:nil];
+                                                                      object:[[delegate persistentContainer] viewContext]
+                                                                     handler:nil];
     [[XCUIDevice sharedDevice] pressButton:XCUIDeviceButtonHome];
-    XCTWaiterResult result = [XCTWaiter waitForExpectations:@[didSaveExpectation] timeout:1];
+    XCTWaiterResult result = [XCTWaiter waitForExpectations:@[didSaveExpectation] timeout:2];
     
     XCTAssertTrue(result == XCTWaiterResultCompleted);
     

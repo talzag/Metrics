@@ -22,7 +22,7 @@
     
     NSSet *shareTypes;
     
-#ifdef TESTING
+#ifdef DEBUG
     HKQuantityType *activeEnergy = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierActiveEnergyBurned];
     HKQuantityType *dietaryEnery = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierDietaryEnergyConsumed];
     HKQuantityType *baseEnergy = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierBasalEnergyBurned];
@@ -31,7 +31,9 @@
 #endif
     
     [healthStore requestAuthorizationToShareTypes:shareTypes readTypes:readTypes completion:^(BOOL success, NSError * _Nullable error) {
-        completionHandler(success, error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionHandler(success, error);
+        });
     }];
 }
 

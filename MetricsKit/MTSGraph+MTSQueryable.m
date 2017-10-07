@@ -18,13 +18,20 @@
    
     // Dates might be null early in the graph creation process
     if (![self startDate] || ![self endDate]) {
+        NSError *error = [NSError errorWithDomain:@"com.dstrokis.Metrics"
+                                             code:1
+                                         userInfo:@{ NSLocalizedDescriptionKey: @"Queries must have start and end dates" }];
+        if (completionHandler) {
+            completionHandler(error);
+        }
+        
         return;
     }
     
     // Call completion handler with error if queries are nil
     if (![self queries] || ![[self queries] count]) {
         NSError *error = [NSError errorWithDomain:@"com.dstrokis.Metrics"
-                                             code:1
+                                             code:2
                                          userInfo:@{ NSLocalizedDescriptionKey: @"Queries cannot be nil" }];
         if (completionHandler) {
             completionHandler(error);
@@ -36,7 +43,7 @@
     // Call completion handler with error if healthStore is nil
     if (!healthStore) {
         NSError *error = [NSError errorWithDomain:@"com.dstrokis.Metrics"
-                                             code:2
+                                             code:3
                                          userInfo:@{ NSLocalizedDescriptionKey: @"Health store cannot be nil" }];
         if (completionHandler) {
             completionHandler(error);
@@ -85,7 +92,8 @@
             anchorCalendarUnits = NSCalendarUnitDay;
             break;
     }
-    NSDateComponents *anchorComponents = [calendar components:anchorCalendarUnits fromDate:start];
+    NSDateComponents *anchorComponents = [calendar components:anchorCalendarUnits
+                                                     fromDate:start];
     NSDate *anchorDate = [calendar dateFromComponents:anchorComponents];
     
     // Grab reference to graph.queries
@@ -106,7 +114,8 @@
     dispatch_group_t queriesGroup = dispatch_group_create();
     
     // Get preferred units for every HKQuantityType being queried
-    [healthStore preferredUnitsForQuantityTypes:types completion: ^(NSDictionary<HKQuantityType *,HKUnit *> * _Nonnull preferredUnits, NSError * _Nullable error) {
+    [healthStore preferredUnitsForQuantityTypes:types
+                                     completion: ^(NSDictionary<HKQuantityType *,HKUnit *> * _Nonnull preferredUnits, NSError * _Nullable error) {
         dispatch_async(backgroundQueue, ^ {
             // Iterate over graph queries
             for (MTSQuery *graphQuery in queries) {

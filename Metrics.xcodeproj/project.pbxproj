@@ -53,6 +53,7 @@
 		E38AE1C51E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = E38AE1C41E7A37C2001ABE40 /* MTSQuantityTypeIdentifiers.m */; };
 		E39AC8021EB93E5600FAC553 /* MTSGraphsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E39AC8011EB93E5600FAC553 /* MTSGraphsTableViewController.m */; };
 		E39AC8051EBA1CD700FAC553 /* MTSGraphTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E39AC8041EBA1CD700FAC553 /* MTSGraphTableViewCell.m */; };
+		E3AB64331F890F7F00ACEFB2 /* MetricsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3784BD81E4684F8005F87BC /* MetricsKit.framework */; };
 		E3AD745E1ED33D7D0040FC0A /* MTSGraphRowController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3AD745D1ED33D7D0040FC0A /* MTSGraphRowController.m */; };
 		E3B3B3D21E877D8A00707324 /* MTSGraphDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B3B3D11E877D8A00707324 /* MTSGraphDrawing.m */; };
 		E3B3B3D41E877DBC00707324 /* MTSGraphDrawing.h in Headers */ = {isa = PBXBuildFile; fileRef = E3B3B3D31E877D9500707324 /* MTSGraphDrawing.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -304,6 +305,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3AB64331F890F7F00ACEFB2 /* MetricsKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

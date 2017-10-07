@@ -103,11 +103,8 @@
         XCTAssertNotNil(queries);
         XCTAssertTrue([queries count] == 2);
         
-        XCTAssertTrue([[[queries firstObject] fetchedDataPoints] count] == 1);
-        XCTAssertTrue([[[queries lastObject] fetchedDataPoints] count] == 1);
-        
-        XCTAssertTrue([[[[queries firstObject] fetchedDataPoints] firstObject] isEqual:@100]);
-        XCTAssertTrue([[[[queries lastObject] fetchedDataPoints] firstObject] isEqual:@100]);
+        XCTAssertEqual([[[[queries firstObject] fetchedDataPoints] firstObject] integerValue] , 100);
+        XCTAssertEqual([[[[queries lastObject] fetchedDataPoints] firstObject] integerValue] , 100);
         
         [queryExpectation fulfill];
     }];
@@ -119,11 +116,10 @@
     }];
 }
 
-- (void)testThatItWillReturnAnErrorIfQueryIsNull {
+- (void)testThatItWillReturnAnErrorIfStartDateIsNull {
     NSManagedObjectContext *context = [[self dataStack] managedObjectContext];
-    
     MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
-    
+    [graph setEndDate:[NSDate date]];
     [context save:nil];
     
     XCTestExpectation *queryExpectation = [self expectationWithDescription:@"Graph querying with nil query"];
@@ -131,6 +127,53 @@
         XCTAssertNotNil(error);
         XCTAssertEqualObjects([error domain], @"com.dstrokis.Metrics");
         XCTAssertEqual([error code], 1);
+        
+        [queryExpectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:15 handler:^(NSError * _Nullable error) {
+        if (error) {
+            XCTFail(@"Error attempting to execute graphy query.");
+        }
+    }];
+}
+
+- (void)testThatItWillReturnAnErrorIfEndDateIsNull {
+    NSManagedObjectContext *context = [[self dataStack] managedObjectContext];
+    MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
+    [graph setStartDate:[NSDate date]];
+    [context save:nil];
+    
+    XCTestExpectation *queryExpectation = [self expectationWithDescription:@"Graph querying with nil query"];
+    [graph executeQueriesWithHealthStore:[self healthStore] usingCompletionHandler:^(NSError * _Nullable error) {
+        XCTAssertNotNil(error);
+        XCTAssertEqualObjects([error domain], @"com.dstrokis.Metrics");
+        XCTAssertEqual([error code], 1);
+        
+        [queryExpectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:15 handler:^(NSError * _Nullable error) {
+        if (error) {
+            XCTFail(@"Error attempting to execute graphy query.");
+        }
+    }];
+}
+
+- (void)testThatItWillReturnAnErrorIfQueryIsNull {
+    NSManagedObjectContext *context = [[self dataStack] managedObjectContext];
+    
+    MTSGraph *graph = [[MTSGraph alloc] initWithContext:context];
+    [graph setStartDate:[NSDate date]];
+    [graph setEndDate:[NSDate date]];
+    
+    [context save:nil];
+    
+    XCTestExpectation *queryExpectation = [self expectationWithDescription:@"Graph querying with nil query"];
+    [graph executeQueriesWithHealthStore:[self healthStore] usingCompletionHandler:^(NSError * _Nullable error) {
+        XCTAssertNotNil(error);
+        XCTAssertEqualObjects([error domain], @"com.dstrokis.Metrics");
+        XCTAssertEqual([error code], 2);
         
         [queryExpectation fulfill];
     }];
@@ -172,7 +215,7 @@
     [graph executeQueriesWithHealthStore:healthStore usingCompletionHandler:^(NSError * _Nullable error) {
         XCTAssertNotNil(error);
         XCTAssertEqualObjects([error domain], @"com.dstrokis.Metrics");
-        XCTAssertEqual([error code], 2);
+        XCTAssertEqual([error code], 3);
         
         [queryExpectation fulfill];
     }];
